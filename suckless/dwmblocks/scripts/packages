@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+packages=$(pacman -Q | wc -l)
+
+echo  $packages

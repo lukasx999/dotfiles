@@ -1,0 +1,11 @@
+#!/bin/sh
+
+caps=$(xset q | grep "Caps Lock" | awk '{print $4}')
+
+#echo $caps
+
+if [ $caps == "on" ]; then
+  echo  CAPS
+else
+  echo  caps
+fi

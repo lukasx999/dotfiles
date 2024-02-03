@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}')
+
+output=$((volume*100))
+vol=${output//.}
+
+if [[ $vol < 10 ]] || [[ $vol = 10 ]] then
+  echo  $vol% && exit
+fi
+
+if [[ $vol > 50 ]] || [[ $vol = 100 ]] then
+  echo  $vol% && exit
+fi
+
+if [[ $vol > 10 ]] && [[ $vol < 50 ]] || [[ $vol = 50 ]] then
+  echo  $vol% && exit
+fi

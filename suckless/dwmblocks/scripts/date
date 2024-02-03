@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+date=$(date +'%d.%m.%Y')
+echo  $date

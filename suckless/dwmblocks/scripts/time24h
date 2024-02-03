@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+date=$(date '+%R')
+echo  $date

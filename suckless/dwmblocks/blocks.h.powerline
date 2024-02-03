@@ -1,0 +1,30 @@
+//Modify this file to change what commands output to your statusbar, and recompile using the make command.
+static const Block blocks[] = {
+	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
+	//{"Mem: ", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,		0},
+	//{"", "date '+%b %d (%a) %I:%M%p'",					5,		0},
+  //{"CPU: ", "~/suckless/dwmblocks/scripts/cpu_perc", 1, 0},
+  //{"MostIntProg: ", "~/suckless/dwmblocks/scripts/cpu_usage_program", 1, 0},
+
+  {"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/endline", 999, 0},
+  {"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/cpu", 1, 0},
+  {"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/cpu_temp", 1, 0},
+  {"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/memperc", 1, 0},
+  //{"Swap: ", "~/suckless/dwmblocks/scripts/swapperc", 1, 0},
+  {"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/freestorage", 1, 0},
+  //{"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/network", 1, 0},
+  {"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/packages", 5, 0},
+  {"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/updates", 999, 0},
+  //{"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/keymap", 999, 0},
+  //{"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/capslock", 1, 0},
+  //{"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/shell", 999, 0},
+  {"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/volume", 1, 1},
+  {"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/kernelinfo", 999, 0},
+  {"^b#81a1c1^^c#2e3440^", "~/suckless/dwmblocks/scripts/weather", 60, 0},
+  {"^b#2e3440^^c#81a1c1^ ", "~/suckless/dwmblocks/scripts/date", 999, 0},
+  {"^b#81a1c1^^c#2e3440^ ", "~/suckless/dwmblocks/scripts/time24h", 60, 0},
+};
+
+//sets delimiter between status commands. NULL character ('\0') means no delimiter.
+static char delim[] = " "; //  
+static unsigned int delimLen = 5; //5

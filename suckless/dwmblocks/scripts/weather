@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+#temp=$(curl --silent wttr.in | awk 'NR==4' | awk '{print $5}')
+
+temp=$(curl -s 'wttr.in/?format=1' | awk '{print $2}')
+
+echo  $temp
