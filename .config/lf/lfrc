@@ -4,6 +4,10 @@ set shell sh
 set hidden true
 set ignorecase true
 set icons true
+set drawbox true
+#set ignorecase true
+#set preview true
+
 
 set previewer ~/.config/lf/lfimg/preview
 set cleaner ~/.config/lf/lfimg/cleaner
@@ -29,6 +33,12 @@ set scrolloff 10
 
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
+
+
+
+map <esc> quit
+
+
 
 # use enter for shell commands
 map <enter> shell
