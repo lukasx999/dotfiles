@@ -1,3 +1,5 @@
+jetbrainsmono nerd font mono
+redshift
 picom-ftlabs-git
 yay / paru
 dwm-flexipatch
@@ -9,3 +11,5 @@ kitty
 librewolf
 zsh
   zsh plugins (.zshrc)
+tmux
+  tpm (github)

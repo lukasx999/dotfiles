@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+
+#chosen=$(echo -e "dwm\ndmenu\ndwmblocks" | dmenu -p "which config?")
+
+alacritty -e /home/lukas/suckless/dwm
+
+
+
+
+

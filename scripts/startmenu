@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+selection=$(echo -e "Terminal\nWeb\nCode\nScreenshot\nIncVol\nDecVol\nMuteVol\nSelWall" | dmenu)
+
+[ "$selection" = "Terminal" ] && alacritty
+[ "$selection" = "Web" ] && google-chrome-stable
+[ "$selection" = "Code" ] && code
+[ "$selection" = "Screenshot" ] && flameshot
+[ "$selection" = "IncVol" ] && ~/scripts/chvol inc
+[ "$selection" = "DecVol" ] && ~/scripts/chvol dec
+[ "$selection" = "MuteVol" ] && ~/scripts/chvol mute
+[ "$selection" = "SelWall" ] && ~/scripts/selwallpaper

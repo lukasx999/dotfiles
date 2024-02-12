@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+chosen=$(nsxiv -ot ~/Pictures/wallpapers/*) 
+
+xwallpaper --zoom $chosen &&
+echo "xwallpaper --zoom $chosen" > ~/.setwallpaper &&
+#dunstify "Wallpaper Changed!" ||
+#dunstify "Error!"
+
+
+

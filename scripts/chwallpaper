@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+chosenwp=$(ls ~/Pictures/wallpapers | dmenu -p "ChWall:" -l 10 -g 2) &&
+xwallpaper --zoom ~/Pictures/wallpapers/$chosenwp &&
+echo "xwallpaper --zoom ~/Pictures/wallpapers/$chosenwp" > ~/.setwallpaper &&
+dunstify "Wallpaper Changed!" ||
+dunstify "Error!"
+
+
+

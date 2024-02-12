@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+while [ 1 ]; do
+current=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}')
+perc=$((current*100))
+out=${perc//.}%
+selection=$(echo -e "Increase\nDecrease\nMute\nExit" | dmenu -p $out)
+
+case $selection in
+
+"Increase")
+~/scripts/chvol inc
+;;
+
+"Decrease")
+~/scripts/chvol dec
+;;
+
+"Mute")
+~/scripts/chvol mute
+;;
+
+
+"Exit")
+exit
+;;
+
+*)
+  exit
+  ;;
+
+
+esac
+
+done

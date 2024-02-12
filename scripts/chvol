@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+opt=$1
+vol=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}')
+incvol=$((vol+0.1))
+
+if [ $opt = "inc" ]; then
+
+wpctl set-volume @DEFAULT_AUDIO_SINK@ $incvol && pkill -RTMIN+1 dwmblocks
+fi
+
+
+
+
+decvol=$((vol-0.1))
+
+if [ $opt = "dec" ]; then
+wpctl set-volume @DEFAULT_AUDIO_SINK@ $decvol && pkill -RTMIN+1 dwmblocks
+fi
+
+
+
+if [ $opt = "mute" ]; then
+wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && pkill -RTMIN+1 dwmblocks
+fi
+

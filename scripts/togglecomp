@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+pidof picom && pkill picom || picom -b
