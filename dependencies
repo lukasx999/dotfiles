@@ -1,7 +1,11 @@
 picom-ftlabs-git
+yay / paru
 dwm-flexipatch
 dmenu
 dwmblocks
 neovim
+  xsel (for accessing + register)
 kitty
-code
+librewolf
+zsh
+  zsh plugins (.zshrc)
