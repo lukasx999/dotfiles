@@ -1,0 +1,31 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+
+  bg: #363a4f;
+  bg-alt: #464b64;
+  fg: #8aadf4;
+  fg-alt: #b7bdf8;
+
+  background-color: @bg;
+  text-color: @fg;
+}
+
+
+
+element.selected.normal {
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+element.selected.active {
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+element.alternate.normal {
+    background-color: @bg;
+    text-color:       @fg;
+}
