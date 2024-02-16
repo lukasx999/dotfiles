@@ -259,7 +259,7 @@ screens = [
                     fontsize = 35,
                     padding = 5,
                     text = "󰣇",
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal)},
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(run)},
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.GroupBox(

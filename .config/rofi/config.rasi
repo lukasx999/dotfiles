@@ -25,8 +25,8 @@ show-icons: true;
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
 /*	sorting-method: "normal";*/
-/*	case-sensitive: false;*/
-/*	cycle: true;*/
+case-sensitive: false;
+cycle: true;
 /*	sidebar-mode: false;*/
 /*	hover-select: false;*/
 /*	eh: 1;*/
@@ -166,7 +166,6 @@ show-icons: true;
 
 
 
-//@theme "catppuccin_macchiato"
 @theme "/dev/null"
 
 * {
@@ -177,8 +176,8 @@ show-icons: true;
 
   bg: #363a4f;
   bg-alt: #464b64;
-  fg: #8aadf4;
-  fg-alt: #c6a0f6;
+  fg: #cad3f5;
+  fg-alt: #8aadf4;
 
   background-color: @bg;
   text-color: @fg;
@@ -191,11 +190,12 @@ show-icons: true;
 window {
     background-color: @bg;
     border:           1;
+    fullscreen: false;
     padding:          5;
-    //transparency: "real";
+    transparency: "real";
 }
 mainbox {
-    border:  0;
+    border:  3;
     padding: 0;
     children: [inputbar, listview];
 }
@@ -207,24 +207,39 @@ message {
 textbox {
     text-color: @fg;
 }
+scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-width: 8px ;
+    padding:      5;
+    handle-color: @bg-alt;
+}
 listview {
-    fixed-height: 0;
+    columns: 2;
+    scrollbar: false;
+    scrollbar-width: 0;
+    cycle: true;
+    fixed-height: false;
+    dynamic: false;
     border:       2px dash 0px 0px ;
     //border-color: @separatorcolor;
-    spacing:      2px ;
+    spacing:      5px ;
     scrollbar:    true;
     padding:      2px 0px 0px ;
-    //lines: 0;
+    lines: 6;
+    require-input: false;
 }
 element {
     border:  0;
-    padding: 1px ;
+    padding: 3px ;
     children: [element-icon, element-text];
 }
 element-text {
     background-color: inherit;
     text-color:       inherit;
-    padding: 10px 0;
+    padding: 10px 10px;
+    vertical-align: 0.5;
+    //highlight: underline red;
 }
 element-text selected {
   text-color: @fg-alt;
@@ -232,6 +247,7 @@ element-text selected {
 
 element-icon {
   padding: 10px 10px;
+  size: 1.25em;
 }
 
 element.normal.normal {
@@ -250,12 +266,6 @@ element.selected.active {
     background-color: @bg-alt;
     text-color:       @fg-alt;
 }
-scrollbar {
-    width:        4px ;
-    border:       0;
-    handle-width: 8px ;
-    padding:      0;
-}
 mode-switcher {
     border:       2px dash 0px 0px ;
     //border-color: @separatorcolor;
@@ -265,10 +275,10 @@ button.selected {
     text-color:       @fg-alt;
 }
 inputbar {
-    spacing:    0;
+    spacing:    3;
     background-color: @bg-alt;
     text-color: @fg;
-    padding:    1px ;
+    padding:    3px ;
     children: [prompt, entry];
 }
 case-indicator {
@@ -279,17 +289,16 @@ entry {
     spacing:    0;
     text-color: @fg;
     background-color: inherit;
-    padding: 12px 3px;
+    padding: 12px 5px;
+    cursor-color: @fg;
+    cursor-width: 8px;
+    blink: false;
 }
 prompt {
     spacing:    0;
     text-color: @fg;
     background-color: inherit;
     padding: 12px;
-}
-inputbar {
-    //children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-    children:   [ prompt,entry ];
 }
 textbox-prompt-colon {
     expand:     false;
