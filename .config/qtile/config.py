@@ -171,6 +171,7 @@ layouts = [
      #layout.MonadWide(),
      #layout.RatioTile(),
      layout.Tile(
+        add_after_last = True,
         border_normal = '#363a4f',
         border_focus = '#8aadf4',
         border_width=2,
@@ -248,15 +249,7 @@ screens = [
             [
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    decorations = [
-                        RectDecoration(
-                            colour="#464d64",
-                            radius=5,
-                            filled=True,
-                            padding_y=5,
-                            padding_x=0)
-                            ],
-                    fontsize = 35,
+                    fontsize = 45,
                     padding = 5,
                     text = "󰣇",
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(run)},
@@ -287,10 +280,12 @@ screens = [
                     padding = 5,
                     ),
                 widget.Prompt(),
+                widget.TextBox(" ", padding = 0),
                 widget.WindowName(
+                    **deco,
                     format = ' {name}',
                     foreground = '#f4dbd6',
-                    #empty_group_string="Desktop",
+                    empty_group_string=" Desktop",
                     width = bar.CALCULATED,
                     max_chars = 130,
                     parse_text = txtparse,
