@@ -15,10 +15,12 @@ unclutter --timeout 5 --jitter 20 --start-hidden &
 xinput set-prop 9 'libinput Accel Speed' -0.6 &
 #xwallpaper --zoom ~/Pictures/wallpapers/wallpaper6.jpg &
 #redshift -l 48.210033:16.363449 &
+conky -d &
+redshift &
 
-#redshift &
-
-dwmblocks &
-exec dwm
+#dwmblocks &
+#exec dwm
 
 #exec awesome
+
+exec qtile start

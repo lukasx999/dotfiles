@@ -1,4 +1,4 @@
-jetbrainsmono nerd font mono
+jetbrainsmono nerd font
 papirus icons
 redshift
 picom-ftlabs-git
@@ -14,6 +14,12 @@ tmux
   tpm (github)
 bluez
 Qtile
-  Qtile extra (AUR/PIP)
+  Qtile extra (via AUR/PIP)
 dunst
 rofi
+platformio-core
+lxappearance
+conky
+bat
+wine
+lf

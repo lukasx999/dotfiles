@@ -36,6 +36,7 @@ from qtile_extras.widget.decorations import BorderDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 
+#setting default programs
 
 mod = "mod4"
 #terminal = guess_terminal()
@@ -44,6 +45,29 @@ browser = "google-chrome-stable"
 togglecomp = "/home/lukas/scripts/togglecomp"
 chwallpaper = "/home/lukas/scripts/selwallpaper"
 run = "rofi -show drun"
+
+
+
+#custom functions
+
+@lazy.function #minimize all windows
+def minimize_all(qtile):
+    for win in qtile.current_group.windows:
+        if hasattr(win, "toggle_minimize"):
+            win.toggle_minimize()
+
+
+@lazy.function #toggle between 2 layouts
+def toggle_max(qtile):
+    current_layout_name = qtile.current_group.layout.name
+    if current_layout_name == 'tile':
+        qtile.current_group.layout = 'max'
+    elif current_layout_name == 'max':
+        qtile.current_group.layout = 'tile'
+
+
+
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -60,8 +84,8 @@ keys = [
     Key([mod], "k", lazy.layout.previous(), desc="Move window focus to previous window"),
     #Key([mod], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     #Key([mod], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod], "Period", lazy.screen.next_group(), desc="Move to the group on the right"),
-    Key([mod], "Comma", lazy.screen.prev_group(), desc="Move to the group on the left"),
+    Key([mod], "Period", lazy.screen.next_group(skip_empty=True), desc="Move to the group on the right"),
+    Key([mod], "Comma", lazy.screen.prev_group(skip_empty=True), desc="Move to the group on the left"),
     Key([mod], "l", lazy.layout.increase_ratio(), desc="Increase master window space"),
     Key([mod], "h", lazy.layout.decrease_ratio(), desc="Decrease master window space"),
 
@@ -73,10 +97,17 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+
+    #Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    #Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    #Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    #Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+
+    #Key([mod, "control"], "l", lazy.window.move_floating(25, 0), desc="toggle max layout"),
+    #Key([mod, "control"], "h", lazy.window.move_floating(-25, 0), desc="toggle max layout"),
+    #Key([mod, "control"], "k", lazy.window.move_floating(0, -25), desc="toggle max layout"),
+    #Key([mod, "control"], "j", lazy.window.move_floating(0, 25), desc="toggle max layout"),
+
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -95,6 +126,7 @@ keys = [
     Key([mod], "q", lazy.spawn(browser), desc="Launch browser"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
@@ -102,10 +134,15 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key([mod], "Space", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "b", lazy.hide_show_bar("top"), desc="Toggle bar"),
+
+    #custom functions
+    Key([mod], "m", minimize_all(), desc="Minimize all windows"),
+    Key([mod], "n", toggle_max(), desc="toggle max layout"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -120,6 +157,10 @@ for vt in range(1, 8):
             desc=f"Switch to VT{vt}",
         )
     )
+
+
+
+
 
 
 
@@ -182,31 +223,24 @@ layouts = [
         ratio_increment = 0.05, #0.05
         master_lenght = 1,
         expand = True,
+        shift_windows = False,
          ),
-    layout.Max(),
+    layout.Max(
+        border_normal = "#363a4f",
+        border_focus = "#8aadf4",
+        border_width = 0,
+        margin = 10,
+        only_focused = True,
+        ),
     layout.Floating(
-        #border_normal = "#ffffff",
-        #border_focus = "#ffffff",
-        #border_width = 2,
+        border_normal = "#363a4f",
+        border_focus = "#8aadf4",
+        border_width = 2,
         fullscreen_border_width = 0,
         max_border_width = 0,
         ),
-    layout.Columns(
-        border_focus_stack=["#d75f5f", "#8f3d3d"],
-        border_normal = '#363a4f',
-        border_focus = '#8aadf4',
-        border_width=2,
-        num_columns = 2,
-        margin = 20,
-        single_border_width = 0,
-        margin_on_single = 10,
-        ),
-    layout.MonadTall(
-        border_normal = '#363a4f',
-        border_focus = '#8aadf4',
-        border_width=2,
-        margin=10,
-        ),
+    #layout.Columns(),
+    #layout.MonadTall(),
      #layout.TreeTab(),
      #layout.VerticalTile(),
      #layout.Zoomy(),
@@ -232,6 +266,7 @@ widget_defaults = dict(
     font="JetBrainsMono Nerd Font Mono",
     fontsize=18,
     background = '#363a4f',
+    opacity = 0,
     foreground = '#cad3f5',
     #padding=3,
     padding=15,
@@ -257,14 +292,21 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.GroupBox(
                     **deco,
+                    hide_unused = False,
+                    center_aligned = True,
+                    disable_drag = True,
                     fontsize = 20,
+                    #spacing = 0,
                     padding = 5,
                     rounded = True,
-                    highlight_method = 'text', #block, line, text
                     active = '#cad3f5',
-                    highlight_color = '#494d64',
                     inactive = '#363a4f',
+                    #block_highlight_text_color =
+                    highlight_method = 'text', #block, line, text
+                    highlight_color = '#494d64',
                     this_current_screen_border = '#8aadf4',
+                    this_screen_border = '#494d64',
+                    use_mouse_wheel = True,
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.CurrentLayoutIcon(
@@ -338,7 +380,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
             ],
             36, #36 -- bar height
-            opacity = 1,
+            #opacity = 0.5,
             #margin = 10,
             margin = [10, 10, 0, 10],
             #border_width=[0, 0, 1, 0],
@@ -380,7 +422,12 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+    ],
+    border_normal = "#363a4f",
+    border_focus = "#8aadf4",
+    border_width = 2,
+    fullscreen_border_width = 0,
+    max_border_width = 0,
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"

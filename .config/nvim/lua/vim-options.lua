@@ -2,11 +2,15 @@ local keymap = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, expr = true, silent = true }
 
+vim.g.localvimrc_sandbox = 0 --disable lvimrc sandboxing
 
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
+
+vim.cmd("set scrolloff=10") --keep cursor centered
+
 vim.g.mapleader = " " --set leader to space
 
 vim.wo.number = true
@@ -28,7 +32,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
-
 --keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", expr_opts) --remap j and k to gj and gk
 --keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 
@@ -39,7 +42,23 @@ keymap("n", "k", "gk", {})
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 --open a terminal (:vertical resize -50<CR>)
-keymap("n", "<leader>t", ":vsp<CR>:term<CR><C-w><C-r>", {silent = true})
+keymap("n", "<leader>t", ":vsp<CR>:term<CR><C-w><C-r>i", {silent = true})
+--vim.keymap.set('n', '<C-t>', ":ToggleTerm<CR>", {silent = true})
+
+--some other stuff
+keymap("n", "<leader>o", "o<Esc>", {silent = true})
+keymap("n", "<leader><Space>", "/<++><CR>xxxxi", {silent = true}) --placeholders
+
+--spellcheck
+keymap("n", "<leader>s", ":setlocal spell! spelllang=en_us<CR>", {silent = true})
+
+
+--[[
+vim.o.path = vim.o.path .. ' , ' ..
+'usr/local/include,' ..
+'usr/include,'
+]]
+
 
 
 --[[

@@ -21,8 +21,10 @@ fi
 alias lf='lfcd'
 
 
-bindkey -s '^o' 'lf\n'
-
+#bindkey -s '^o' 'lf\n'
+bindkey -s '^y' 'lf\n'
+bindkey -s '^x' 'nvim\n'
+bindkey -s '^a' 'tmux\n'
 
 
 xset r rate 300 50
@@ -43,13 +45,18 @@ export BROWSER="librewolf"
 
 #Ω
 #∮
-#Σ
+#∮
 #Δ
 #δ
 #∇
 
+#nord theme:
+#PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}∇ %b%f"
+#catppuccin theme:
+PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}Σ %b%f"
 
-PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}∇ %b%f"
+
+
 #PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}φ %b%f"
 #PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}ψ %b%f"
 #PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}∮ %b%f"
@@ -69,16 +76,21 @@ _comp_options+=(globdots) #include hidden files
 
 
 alias ltspice='wine ~/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe'
+#platformio core
+alias PIO_UPL='pio run --upload-port /dev/ttyACM0 -t upload'
+alias PIO_MON='pio run --upload-port /dev/ttyACM0 -t monitor'
+alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port /dev/ttyACM0 -t monitor'
+
 
 
 #alias sudo='sudo -E'
 
 #alias pac='pacman'
-alias rm='rm -v'
-alias mv='mv -v'
+alias rm='rm -vi'
+alias mv='mv -vi'
+alias cp='cp -vi'
 alias mkdir='mkdir -v'
 alias weather='curl wttr.in'
-alias nv='neovide'
 alias ls='ls -h --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias ll='ls -l'
@@ -91,7 +103,7 @@ alias pipes='~/XSoftware/pipes.sh/pipes.sh'
 alias qlobe='clear; for ((;;)); do for i in {1..360}; do tput cup 0 0; ruby ~/XSoftware/qlobe/src/qlobe.rb $i; sleep 0.1; done; done;'
 alias shark='~/XSoftware/display3d/target/release/display3d ~/XSoftware/display3d/resources/blahaj.obj -t 0,0,5.5'
 alias tock='~/XSoftware/tock/target/release/tock'
-
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
@@ -102,3 +114,4 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

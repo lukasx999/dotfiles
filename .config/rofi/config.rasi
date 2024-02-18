@@ -1,5 +1,5 @@
 configuration {
-modes: "window,drun,run,ssh";
+modes: "window,drun,run";
 font: "JetBrainsMono Nerd Font Mono 14";
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -174,7 +174,7 @@ cycle: true;
   padding: 0;
   spacing: 0;
 
-  bg: #363a4f;
+  bg: #363a4f; //last 2 digits are alpha value 7f is 127
   bg-alt: #464b64;
   fg: #cad3f5;
   fg-alt: #8aadf4;
@@ -188,6 +188,7 @@ cycle: true;
 
 
 window {
+    //width: 45%;
     background-color: @bg;
     border:           1;
     fullscreen: false;
@@ -215,7 +216,7 @@ scrollbar {
     handle-color: @bg-alt;
 }
 listview {
-    columns: 2;
+    columns: 1;
     scrollbar: false;
     scrollbar-width: 0;
     cycle: true;
