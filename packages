@@ -24,6 +24,7 @@ bat
 wine
   wine-mono
 lf
+thunar
 git
 ueberzug
 nsxiv
@@ -34,3 +35,4 @@ pipewire
   wireplumber
   pipewire-audio
   pipewire-pulse
+  pavucontrol
