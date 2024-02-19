@@ -1,38 +1,85 @@
-jetbrainsmono nerd font
+
+### This is a list of packages I regularly use
+### Not all of them are required, to get my configs to work
+### The sole purpose of this list, is to make a reinstallation of my system easier
+
+
+
+### Special Characters:
+
+"" Quotes imply, that the name stated is not the actual name of the package, but rather a name of the program. This is because some programs require a more complex installation progress (eg nvidia drivers)
+
+() Parenthesis imply, that a package is optional. I dont use it, but still prefer it being installed on my system
+
+* An Asterisk implies a subcategory of dependencies, to get my config to work
+
+
+
+
+
+### Core OS Utils
+
+Qtile
+  * Qtile extra (via AUR/PIP)
+dunst
+rofi
+lxappearance
+conky-lua-nv
+slock (Install not required)
+pipewire
+  * wireplumber
+  * pipewire-audio
+  * pipewire-pulse
+  * pavucontrol
+"nvidia proprietary drivers"
+"jetbrainsmono nerd font"
 papirus icons
 redshift
 picom-ftlabs-git
 yay / paru
-neovim
-  xsel (for accessing + register)
-  neovide
-kitty
-librewolf
-zsh
-  zsh plugins (.zshrc)
-tmux
-  tpm (github)
-bluez
-Qtile
-  Qtile extra (via AUR/PIP)
-dunst
-rofi
-platformio-core
-lxappearance
-conky
-bat
 wine
-  wine-mono
-lf
-thunar
+  * wine-mono
 git
-ueberzug
 nsxiv
-xsecurelock
-slock
+(thunar)
+
+
+
+### Terminal Applications
+
+kitty
+zsh
+  * "zsh plugins" (see ~/.zshrc)
+neovim
+  * xsel (for accessing + register)
+  * neovide
+bluez
+  * bluez-utils
+bat
+lf
+  * ueberzug
+("tpm" for tmux)
+
+
+
+### General Applications
+
+librewolf-bin
+google-chrome-stable
+chromium
+vscodium-bin
+visual-studio-code-bin
+platformio-core
 steam
-pipewire
-  wireplumber
-  pipewire-audio
-  pipewire-pulse
-  pavucontrol
+"LTspice XVII" via wine
+openrgb-git
+flameshot
+arandr
+firefox
+gimp
+
+
+
+
+
+
