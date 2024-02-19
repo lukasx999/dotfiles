@@ -42,6 +42,7 @@ mod = "mod4"
 #terminal = guess_terminal()
 terminal = "kitty"
 browser = "google-chrome-stable"
+browser_alt = "librewolf"
 togglecomp = "/home/lukas/scripts/togglecomp"
 chwallpaper = "/home/lukas/scripts/selwallpaper"
 run = "rofi -show drun"
@@ -115,17 +116,18 @@ keys = [
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
 
-    #Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    #Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    #Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    #Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
     #Key([mod, "control"], "l", lazy.window.move_floating(25, 0), desc="toggle max layout"),
     #Key([mod, "control"], "h", lazy.window.move_floating(-25, 0), desc="toggle max layout"),
     #Key([mod, "control"], "k", lazy.window.move_floating(0, -25), desc="toggle max layout"),
     #Key([mod, "control"], "j", lazy.window.move_floating(0, 25), desc="toggle max layout"),
 
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    #Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -136,6 +138,9 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
+
+    # Launching Programs
+
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "y", lazy.spawn(run), desc="Launch run prompt"),
     Key([mod], "e", lazy.spawn(screenshot), desc="Take screenshot"),
@@ -162,8 +167,10 @@ keys = [
     #custom functions
     Key([mod], "m", minimize_all(), desc="Minimize all windows"),
     Key([mod], "n", toggle_max(), desc="toggle max layout"),
+
     #scratchpads
-    Key([mod], "w", lazy.group['scratchpad'].dropdown_toggle('term'), desc="toggle scratchpad"),
+    Key([mod], "w", lazy.group['scratchpad'].dropdown_toggle('term'), desc="toggle scratchpad (terminal)"),
+    Key([mod], "t", lazy.group['scratchpad'].dropdown_toggle('web'), desc="toggle scratchpad (web)"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -235,16 +242,31 @@ for i in groups:
 groups.append(ScratchPad('scratchpad', [
         DropDown(
             "term",
-            "kitty",
+            terminal, # "kitty"
             x=0.05,
             y=0.02,
             opacity=1,
             width=0.90,
             height=0.6,
-            on_focus_lost_hide=False,),
+            on_focus_lost_hide=False,
+            ),
+        DropDown(
+            "web",
+            browser_alt, # "librewolf"
+            x=0.05,
+            y=0.02,
+            opacity=1,
+            width=0.90,
+            height=0.6,
+            on_focus_lost_hide=False,
+            ),
     ]))
 
 
+layout_default = {
+    "border_normal": '#363a4f',
+    "border_focus": '#8aadf4',
+    }
 
 
 layouts = [
@@ -254,11 +276,11 @@ layouts = [
      #layout.MonadWide(),
      #layout.RatioTile(),
      layout.Tile(
+         **layout_default,
+        #margin = 10,
+        margin = [5, 10, 5, 10],
+        border_width = 2,
         add_after_last = True,
-        border_normal = '#363a4f',
-        border_focus = '#8aadf4',
-        border_width=2,
-        margin = 10,
         margin_on_single = True,
         border_on_single = False,
         ratio = 0.5,
@@ -268,15 +290,14 @@ layouts = [
         shift_windows = False,
          ),
     layout.Max(
-        border_normal = "#363a4f",
-        border_focus = "#8aadf4",
+        **layout_default,
         border_width = 0,
         margin = 10,
         only_focused = True,
         ),
     layout.Floating(
         border_normal = "#363a4f",
-        border_focus = "#8aadf4",
+        border_focus = "#7dc4e4",
         border_width = 2,
         fullscreen_border_width = 0,
         max_border_width = 0,
@@ -294,10 +315,12 @@ deco = {
         RectDecoration(
             colour="#464d64",
             radius=13,
-            clip=True, ###
+            clip=False, # Line mode in groupbox wont work unless this is False
             filled=True,
             padding_y=5,
             padding_x=0,
+            extrawidth=0,
+            group=False,
             line_colour = '#5b6078',
             line_width = 1,
             )
@@ -335,17 +358,23 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.GroupBox(
                     **deco,
+                    fmt = '{}',
+                    toggle = True,
+                    borderwidth = 3,
                     hide_unused = False,
                     center_aligned = True,
                     disable_drag = True,
                     fontsize = 20,
-                    #spacing = 0,
+                    spacing = 3,
                     padding = 5,
                     rounded = True,
+                    fontshadow = '#5b6078',
                     active = '#cad3f5',
                     inactive = '#363a4f',
-                    #block_highlight_text_color =
+                    #block_highlight_text_color = '#8aadf4',
                     highlight_method = 'text', #block, line, text
+                    urgent_alert_method = 'text',
+                    urgent_text = '#ee99a0',
                     highlight_color = '#494d64',
                     this_current_screen_border = '#8aadf4',
                     this_screen_border = '#494d64',
@@ -382,6 +411,7 @@ screens = [
                     **deco,
                     foreground = '#7dc4e4',
                     format = ' {freq_current}GHz {load_percent}%',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.ThermalSensor(
@@ -475,7 +505,7 @@ floating_layout = layout.Floating(
         #Match(title="Friends List"),  # GPG key password entry
     ],
     border_normal = "#363a4f",
-    border_focus = "#8aadf4",
+    border_focus = "#7dc4e4",
     border_width = 2,
     fullscreen_border_width = 0,
     max_border_width = 0,
