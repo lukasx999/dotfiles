@@ -25,7 +25,7 @@
 # SOFTWARE.
 
 from libqtile import bar, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -45,6 +45,8 @@ browser = "google-chrome-stable"
 togglecomp = "/home/lukas/scripts/togglecomp"
 chwallpaper = "/home/lukas/scripts/selwallpaper"
 run = "rofi -show drun"
+lock = "slock"
+screenshot = "flameshot gui"
 
 
 
@@ -65,7 +67,20 @@ def toggle_max(qtile):
     elif current_layout_name == 'max':
         qtile.current_group.layout = 'tile'
 
+@lazy.function
+def window_to_prev_group(qtile):
+    i = qtile.groups.index(qtile.current_group)
+    if qtile.current_window is not None and i != 0:
+        qtile.current_window.togroup(qtile.groups[i - 1].name, switch_group=True)
+        #qtile.current_screen.toggle_group(qtile.groups[i - 1])
 
+
+@lazy.function
+def window_to_next_group(qtile):
+    i = qtile.groups.index(qtile.current_group)
+    if qtile.current_window is not None and i != 8: #6
+        qtile.current_window.togroup(qtile.groups[i + 1].name, switch_group=True)
+        #qtile.current_screen.toggle_group(qtile.groups[i + 1])
 
 
 
@@ -84,8 +99,10 @@ keys = [
     Key([mod], "k", lazy.layout.previous(), desc="Move window focus to previous window"),
     #Key([mod], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     #Key([mod], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod], "Period", lazy.screen.next_group(skip_empty=True), desc="Move to the group on the right"),
-    Key([mod], "Comma", lazy.screen.prev_group(skip_empty=True), desc="Move to the group on the left"),
+    Key([mod], "Period", lazy.screen.next_group(skip_empty=False), desc="Move to the group on the right"),
+    Key([mod], "Comma", lazy.screen.prev_group(skip_empty=False), desc="Move to the group on the left"),
+    Key([mod, "shift"], "Period", window_to_next_group(), desc="Move window to the group on the left"),
+    Key([mod, "shift"], "Comma", window_to_prev_group(), desc="Move window to the group on the left"),
     Key([mod], "l", lazy.layout.increase_ratio(), desc="Increase master window space"),
     Key([mod], "h", lazy.layout.decrease_ratio(), desc="Decrease master window space"),
 
@@ -121,9 +138,11 @@ keys = [
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "y", lazy.spawn(run), desc="Launch run prompt"),
+    Key([mod], "e", lazy.spawn(screenshot), desc="Take screenshot"),
     Key([mod, "shift"], "e", lazy.spawn(togglecomp), desc="Toggle compositor"),
     Key([mod, "shift"], "w", lazy.spawn(chwallpaper), desc="Change wallpaper"),
     Key([mod], "q", lazy.spawn(browser), desc="Launch browser"),
+    Key([mod, "shift", "control"], "l", lazy.spawn(lock), desc="Lock the screen"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
@@ -143,6 +162,8 @@ keys = [
     #custom functions
     Key([mod], "m", minimize_all(), desc="Minimize all windows"),
     Key([mod], "n", toggle_max(), desc="toggle max layout"),
+    #scratchpads
+    Key([mod], "w", lazy.group['scratchpad'].dropdown_toggle('term'), desc="toggle scratchpad"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -163,11 +184,14 @@ for vt in range(1, 8):
 
 
 
-
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
+
+
+
+
 
 #group_layouts = ["monadtall", "monadtall", "tile", "tile", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
@@ -204,6 +228,24 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+
+#Scratchpads
+
+groups.append(ScratchPad('scratchpad', [
+        DropDown(
+            "term",
+            "kitty",
+            x=0.05,
+            y=0.02,
+            opacity=1,
+            width=0.90,
+            height=0.6,
+            on_focus_lost_hide=False,),
+    ]))
+
+
+
 
 layouts = [
      #layout.Stack(num_stacks=2),
@@ -252,6 +294,7 @@ deco = {
         RectDecoration(
             colour="#464d64",
             radius=13,
+            clip=True, ###
             filled=True,
             padding_y=5,
             padding_x=0,
@@ -422,6 +465,14 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+
+        #custom rules
+        Match(wm_class="pavucontrol"),  # ssh-askpass
+        Match(wm_class="pcmanfm"),  # ssh-askpass
+        Match(wm_class="thunar"),  # ssh-askpass
+        Match(wm_class="lxappearance"),  # ssh-askpass
+        Match(title="Steam Settings"),  # GPG key password entry
+        #Match(title="Friends List"),  # GPG key password entry
     ],
     border_normal = "#363a4f",
     border_focus = "#8aadf4",
