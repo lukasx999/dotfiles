@@ -1,0 +1,5 @@
+Elden Ring Patcher (for FPS removing FPS Cap, etc)
+    https://github.com/gurrgur/er-patcher 
+
+enable "split_lock_detect=off" Kernel Boot Parameter for FPS Cap Fix in certain games
+    cat /proc/cmdline
