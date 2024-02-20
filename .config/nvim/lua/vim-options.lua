@@ -17,6 +17,11 @@ vim.wo.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 
+-- options for nvim tree
+--vim.opt.termguicolors = true
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
+
 keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts) --remove search highlighting when pressing ESC
 
 

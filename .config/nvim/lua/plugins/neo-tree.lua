@@ -8,8 +8,8 @@ return {
     },
 
     config = function()
-      vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left <CR>', {silent = true}) --Neotree show file explorer
-      vim.keymap.set('n', '<C-m>', ':Neotree toggle <CR>', {silent = true}) --Neotree show file explorer
+      --vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left <CR>', {silent = true}) --Neotree show file explorer
+      --vim.keymap.set('n', '<C-m>', ':Neotree toggle <CR>', {silent = true}) --Neotree show file explorer
 
 require('neo-tree').setup {
 

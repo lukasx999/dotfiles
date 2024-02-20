@@ -194,6 +194,7 @@ for vt in range(1, 8):
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
+#group_labels = ["○", "○", "○", "○", "○", "○", "○", "○", "○",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 
 
@@ -278,7 +279,7 @@ layouts = [
      layout.Tile(
          **layout_default,
         #margin = 10,
-        margin = [5, 10, 5, 10],
+        margin = [10, 10, 5, 10],
         border_width = 2,
         add_after_last = True,
         margin_on_single = True,
@@ -317,7 +318,7 @@ deco = {
             radius=13,
             clip=False, # Line mode in groupbox wont work unless this is False
             filled=True,
-            padding_y=5,
+            padding_y=5, #5
             padding_x=0,
             extrawidth=0,
             group=False,
@@ -329,11 +330,12 @@ deco = {
 
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Mono",
+    font="JetBrainsMono Nerd Font",
     #fontshadow = '#363a4f',
     fontsize=18,
     background = '#363a4f',
-    opacity = 0,
+    #background = '#00000000',
+    #opacity = 1,
     foreground = '#cad3f5',
     #padding=3,
     padding=15,
@@ -351,32 +353,38 @@ screens = [
             [
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    fontsize = 45,
+                    fontsize = 30,
                     padding = 5,
                     text = "󰣇", #  󰣇
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(run)},
+                    mouse_callbacks = {
+                        'Button1': lambda: qtile.cmd_spawn(run),
+                        'Button2': lambda: qtile.cmd_spawn(terminal),
+                        },
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.GroupBox(
                     **deco,
                     fmt = '{}',
                     toggle = True,
-                    borderwidth = 3, # 3
+                    borderwidth = 3, # 3 width of line
                     hide_unused = False,
                     center_aligned = True,
                     disable_drag = True,
-                    fontsize = 20, # 20
-                    spacing = 3,
-                    padding = 5,
+                    fontsize = 15, # 20
+                    spacing = 0, # 5
+                    padding = 10, # 5
+                    margin = 5, # only for line mode
                     rounded = True,
                     fontshadow = '#5b6078',
                     active = '#cad3f5',
                     inactive = '#363a4f',
-                    #block_highlight_text_color = '#8aadf4',
-                    highlight_method = 'text', #block, line, text
+                    block_highlight_text_color = '#8aadf4',
+                    highlight_method = 'line', #block, line, text
                     urgent_alert_method = 'text',
                     urgent_text = '#ed8796',# #ee99a0
-                    highlight_color = '#494d64',
+                    #highlight_color = '#494d64',
+                    highlight_color = '#00000000',
+                    #highlight_color = '#393a4f', ### for line mode
                     this_current_screen_border = '#8aadf4',
                     this_screen_border = '#494d64',
                     use_mouse_wheel = True,
@@ -404,15 +412,17 @@ screens = [
                         empty_group_string=" Desktop",
                         width = bar.CALCULATED,
                         max_chars = 130,
-                        parse_text = txtparse,),
+                        parse_text = txtparse,
+                        mouse_callbacks = {'Button2': lazy.window.kill()},
+                        ),
                     ],
                     #**deco,
                     start_opened = False,
                     text_closed = '', # 
                     text_open = '', # 
                     foreground = '#cad3f5',
-                    padding = 8,
-                    fontsize = 35,
+                    padding = 12,
+                    fontsize = 20,
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.TaskList(
@@ -442,6 +452,7 @@ screens = [
                     window_name_location = False,
                     highlight_method = "block", #border, block
                     #icon_size = 3,
+                    mouse_callbacks = {'Button2': lazy.window.kill()},
                     ),
                 widget.Spacer(),
                 widget.Systray(),
@@ -449,7 +460,7 @@ screens = [
                 widget.CPU(
                     **deco,
                     foreground = '#7dc4e4',
-                    format = ' {freq_current}GHz {load_percent}%',
+                    format = '  {freq_current}GHz {load_percent}%',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
                     ),
                 widget.TextBox(" ", padding = 0),
@@ -466,7 +477,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.NvidiaSensors(
                     **deco,
-                    format = ' {temp}°C',
+                    format = '  {temp}°C',
                     foreground = '#7dc4e4',
                     foreground_alert = '#ed8796',
                     threshold = 70,
@@ -519,15 +530,10 @@ screens = [
                 widget.TextBox(" ", padding = 0),
             ],
             36, #36 -- bar height
-            #opacity = 0.5,
-            #margin = 10,
             margin = [10, 10, 0, 10],
-            #border_width=[0, 0, 1, 0],
-            border_width=[0, 0, 3, 0],
+            #border_width=[0, 0, 3, 0],
+            background = "#00000000",
             border_color="#494d64",
-            #border_color="#b7bdf8",
-            #border_width = 10,
-            #border_color= '#494d64',
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
