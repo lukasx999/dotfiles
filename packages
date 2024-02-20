@@ -17,7 +17,7 @@
 
 
 
-### Core OS Utils
+### OS Utils
 
 Qtile
   * Qtile extra (via AUR/PIP)
@@ -33,6 +33,7 @@ pipewire
   * pavucontrol
 "nvidia proprietary drivers"
 "jetbrainsmono nerd font"
+"phinger cursor set"
 papirus icons
 redshift
 picom-ftlabs-git
@@ -42,6 +43,9 @@ wine
 git
 nsxiv
 (thunar)
+neofetch
+gotop
+htop
 
 
 
