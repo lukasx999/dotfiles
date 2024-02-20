@@ -322,7 +322,7 @@ deco = {
             extrawidth=0,
             group=False,
             line_colour = '#5b6078',
-            line_width = 1,
+            line_width = 1, # 1
             )
             ],
         }
@@ -330,6 +330,7 @@ deco = {
 
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font Mono",
+    #fontshadow = '#363a4f',
     fontsize=18,
     background = '#363a4f',
     opacity = 0,
@@ -352,7 +353,7 @@ screens = [
                 widget.TextBox(
                     fontsize = 45,
                     padding = 5,
-                    text = "󰣇",
+                    text = "󰣇", #  󰣇
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(run)},
                     ),
                 widget.TextBox(" ", padding = 0),
@@ -360,11 +361,11 @@ screens = [
                     **deco,
                     fmt = '{}',
                     toggle = True,
-                    borderwidth = 3,
+                    borderwidth = 3, # 3
                     hide_unused = False,
                     center_aligned = True,
                     disable_drag = True,
-                    fontsize = 20,
+                    fontsize = 20, # 20
                     spacing = 3,
                     padding = 5,
                     rounded = True,
@@ -374,7 +375,7 @@ screens = [
                     #block_highlight_text_color = '#8aadf4',
                     highlight_method = 'text', #block, line, text
                     urgent_alert_method = 'text',
-                    urgent_text = '#ee99a0',
+                    urgent_text = '#ed8796',# #ee99a0
                     highlight_color = '#494d64',
                     this_current_screen_border = '#8aadf4',
                     this_screen_border = '#494d64',
@@ -395,14 +396,52 @@ screens = [
                     ),
                 widget.Prompt(),
                 widget.TextBox(" ", padding = 0),
-                widget.WindowName(
-                    **deco,
-                    format = ' {name}',
+                widget.WidgetBox(widgets=[
+                    widget.WindowName(
+                        **deco,
+                        format = ' {name}',
+                        foreground = '#f4dbd6',
+                        empty_group_string=" Desktop",
+                        width = bar.CALCULATED,
+                        max_chars = 130,
+                        parse_text = txtparse,),
+                    ],
+                    #**deco,
+                    start_opened = False,
+                    text_closed = '', # 
+                    text_open = '', # 
+                    foreground = '#cad3f5',
+                    padding = 8,
+                    fontsize = 35,
+                    ),
+                widget.TextBox(" ", padding = 0),
+                widget.TaskList(
+                    #**deco,
                     foreground = '#f4dbd6',
-                    empty_group_string=" Desktop",
-                    width = bar.CALCULATED,
-                    max_chars = 130,
-                    parse_text = txtparse,
+                    border = '#464d64',
+                    unfocused_border = '#363a4f',
+                    theme_mode = "preferred",
+                    #theme_path = "/usr/share/icons/Papirus",
+                    fontsize = 20,
+                    icon_size = 25, #30
+                    padding_y = 2,
+                    padding_x = 0,
+                    spacing = 10,
+                    rounded = True,
+                    txt_floating = '🗗',
+                    txt_maximized = '🗖',
+                    txt_minimized = '🗕',
+                    markup_focused = "", # "{}"
+                    markup_normal = "",
+                    markup_floating = "🗗",
+                    markup_minimized = "🗕",
+                    markup_maximized = "🗖",
+                    urgent_alert_method = 'border',
+                    urgent_border = '#ed8796',
+                    #title_width_method = 'uniform',
+                    window_name_location = False,
+                    highlight_method = "block", #border, block
+                    #icon_size = 3,
                     ),
                 widget.Spacer(),
                 widget.Systray(),
@@ -417,9 +456,23 @@ screens = [
                 widget.ThermalSensor(
                     **deco,
                     foreground = '#c6a0f6',
+                    foreground_alert = '#ed8796',
                     format = ' {temp:.1f}{unit}',
                     tag_sensor = "Package id 0",
+                    threshold = 70,
+                    update_interval = 2,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch sensors")},
                     ),
+                widget.TextBox(" ", padding = 0),
+                widget.NvidiaSensors(
+                    **deco,
+                    format = ' {temp}°C',
+                    foreground = '#7dc4e4',
+                    foreground_alert = '#ed8796',
+                    threshold = 70,
+                    update_interval = 2,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch nvidia-smi")},
+                        ),
                 widget.TextBox(" ", padding = 0),
                 widget.Memory(
                     **deco,
@@ -427,6 +480,7 @@ screens = [
                     format = ' {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
                     measure_mem = 'G',
                     measure_swap = 'G',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.Net(
@@ -438,6 +492,18 @@ screens = [
                     update_intervall = 1,
                     #interface = 'None',
                     ),
+                widget.TextBox(" ", padding = 0),
+                widget.CheckUpdates(
+                    **deco,
+                    #foreground = '#91d7e3',
+                    colour_have_updates = '#91d7e3',
+                    colour_no_updates = '#cad3f5',
+                    display_format = ' {updates}',
+                    distro = 'Arch_yay', #'Arch'
+                    no_update_string = ' 0', #comment out to disappear
+                    execute = 'kitty -e watch pacman --version',
+                    update_interval = 60,
+                ),
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
@@ -501,6 +567,7 @@ floating_layout = layout.Floating(
         Match(wm_class="pcmanfm"),  # ssh-askpass
         Match(wm_class="thunar"),  # ssh-askpass
         Match(wm_class="lxappearance"),  # ssh-askpass
+        Match(wm_class="VirtualBox Manager"),  # ssh-askpass
         Match(title="Steam Settings"),  # GPG key password entry
         #Match(title="Friends List"),  # GPG key password entry
     ],
