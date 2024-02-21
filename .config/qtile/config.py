@@ -234,11 +234,9 @@ groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
-
-
-
-
 group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
+
+
 
 
 
@@ -323,7 +321,6 @@ layouts = [
      #layout.Bsp(),
      #layout.Matrix(),
      #layout.MonadWide(),
-     #layout.RatioTile(),
      layout.Tile(
          **layout_default,
         #margin                 = 10,
@@ -334,7 +331,7 @@ layouts = [
         border_on_single        = False,
         ratio                   = 0.5,
         ratio_increment         = 0.05, #0.05
-        master_lenght           = 1,
+        master_lenght           = 1, # Number of master clients
         expand                  = True,
         shift_windows           = False,
          ),
@@ -345,14 +342,17 @@ layouts = [
         only_focused            = True,
         ),
     layout.Floating(
-        border_normal           = colors["grey"], #363a4f
+        border_normal           = colors["grey"],       #363a4f
         border_focus            = colors["blue_light"], #7dc4e4
         border_width            = 2,
         fullscreen_border_width = 0,
         max_border_width        = 0,
         ),
-     #layout.Columns(),
-     #layout.MonadTall(),
+     layout.Columns(
+         margin_on_single = 100,
+         ),
+     layout.MonadTall(),
+     layout.RatioTile(),
      #layout.TreeTab(),
      #layout.VerticalTile(),
      #layout.Zoomy(),
@@ -372,7 +372,7 @@ layouts = [
 deco = {
     "decorations": [
         RectDecoration(
-            colour      = colors["grey_light"], #464d64
+            colour      = colors["grey_light"],   #464d64
             line_colour = colors["grey_lighter"], #5b6078
             radius      = 13,
             clip        = False, # Line mode in groupbox wont work unless this is False
@@ -388,12 +388,12 @@ deco = {
 
 
 widget_defaults = dict(
-    #background = '#00000000',
     #fontshadow = '#363a4f',
     font       = "JetBrainsMono Nerd Font",
     fontsize   = 18,
-    background = colors["grey"], #363a4f
     foreground = colors["white"], #cad3f5
+    background = colors["grey"],  #363a4f
+    #background = '#00000000',
     #opacity   = 1,
     #padding   = 3,
     padding    = 15,
@@ -440,12 +440,12 @@ screens = [
                     highlight_color            = '#00000000',
                     use_mouse_wheel            = True,
                     fontshadow                 = colors["grey_lighter"], #5b6078
-                    active                     = colors["white"], #cad3f5
-                    inactive                   = colors["grey"], #363a4f
-                    block_highlight_text_color = colors["blue"], #8aadf4
-                    urgent_text                = colors["red"], #ed8796
-                    this_current_screen_border = colors["blue"], #8aadf4
-                    this_screen_border         = colors["grey_light"], #494d64
+                    active                     = colors["white"],        #cad3f5
+                    inactive                   = colors["grey"],         #363a4f
+                    block_highlight_text_color = colors["blue"],         #8aadf4
+                    urgent_text                = colors["red"],          #ed8796
+                    this_current_screen_border = colors["blue"],         #8aadf4
+                    this_screen_border         = colors["grey_light"],   #494d64
                     ),
 
                 widget.TextBox(" ", padding = 0),
@@ -468,8 +468,8 @@ screens = [
                     #**deco,
                     foreground           = colors["skin_light"], #f4dbd6
                     border               = colors["grey_light"], #464d64
-                    unfocused_border     = colors["grey"], #363a4f
-                    urgent_border        = colors["red"], #ed8796
+                    unfocused_border     = colors["grey"],       #363a4f
+                    urgent_border        = colors["red"],        #ed8796
                     theme_mode           = "preferred",
                     theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
                     fontsize             = 20,
@@ -494,7 +494,6 @@ screens = [
                     mouse_callbacks      = {'Button2': lazy.window.kill()},
                     ),
 
-                widget.Spacer(),
                 widget.Systray(),
 
                 widget.TextBox(" ", padding = 0),
@@ -508,8 +507,8 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.ThermalSensor(
                     **deco,
-                    foreground       = colors["purple"], #c6a0f6
-                    foreground_alert = colors["red"], #ed8796
+                    foreground       = colors["blue"], #c6a0f6
+                    foreground_alert = colors["red"],    #ed8796
                     format           = ' {temp:.1f}{unit}',
                     tag_sensor       = "Package id 0",
                     threshold        = 70,
@@ -521,8 +520,8 @@ screens = [
                 widget.NvidiaSensors(
                     **deco,
                     format           = '  {temp}°C',
-                    foreground       = colors["blue_light"], #7dc4e4
-                    foreground_alert = colors["red"], #ed8796
+                    foreground       = colors["purple"], #7dc4e4
+                    foreground_alert = colors["red"],        #ed8796
                     threshold        = 70,
                     update_interval  = 2,
                     mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch nvidia-smi")},
@@ -531,8 +530,8 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.Memory(
                     **deco,
-                    foreground   = colors["blue_lighter"], #91d7e3
-                    format       = ' {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                    foreground   = colors["purple_light"], #91d7e3
+                    format       = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
                     measure_mem  = 'G',
                     measure_swap = 'G',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
@@ -552,11 +551,11 @@ screens = [
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
-                    colour_have_updates = colors["blue_lighter"], #91d7e3
-                    colour_no_updates   = colors["white"], #cad3f5
+                    colour_have_updates = colors["orange"], #91d7e3
+                    colour_no_updates   = colors["white"],        #cad3f5
                     display_format      = ' {updates}',
                     distro              = 'Arch_yay', #'Arch'
-                    no_update_string    = ' 0', #comment out to disappear
+                    no_update_string    = '  0', #comment out to disappear
                     execute             = 'kitty -e watch pacman --version',
                     update_interval     = 60,
                 ),
@@ -564,15 +563,15 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
-                    foreground = colors["red"], #ed8796
-                    format     = " %d.%m.%Y",
+                    foreground = colors["red_light"], #ed8796
+                    format     = "  %d.%m.%Y",
                     ),
 
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
-                    foreground = colors["orange"], #f5a97f
-                    format     = ' %H:%M',
+                    foreground = colors["red"], #f5a97f
+                    format     = '  %H:%M',
                     ),
 
                 widget.TextBox(" ", padding = 0),
@@ -638,7 +637,7 @@ floating_layout    = layout.Floating(
         Match(title    = "Steam Settings"),  # GPG key password entry
         #Match(title   = "Friends List"),  # GPG key password entry
     ],
-    border_normal           = colors["grey"], #363a4f
+    border_normal           = colors["grey"],       #363a4f
     border_focus            = colors["blue_light"], #7dc4e4
     border_width            = 2,
     fullscreen_border_width = 0,
