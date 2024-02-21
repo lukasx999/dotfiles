@@ -25,18 +25,26 @@
 #               |_|                       
 
 
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+from libqtile.utils import guess_terminal, send_notification
 
 #adding qtile extra repo (install from AUR/PIP)
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
-from qtile_extras.widget.decorations import BorderDecoration
-from qtile_extras.widget.decorations import PowerLineDecoration
+#from qtile_extras.widget.decorations import BorderDecoration
+#from qtile_extras.widget.decorations import PowerLineDecoration
 
-from colorschemes import colors
+from colorschemes import colors # colorschemes.py
+
+
+
+
+# for window swallowing
+#import psutil
+#from libqtile.utils import logger
+#from libqtile.backend import base
 
 
 
@@ -49,16 +57,16 @@ from colorschemes import colors
 
 
 
-mod = "mod4"
-#terminal = guess_terminal()
-terminal = "kitty"
-browser = "google-chrome-stable"
+#terminal   = guess_terminal()
+mod         = "mod4" # SUPER
+terminal    = "kitty"
+browser     = "google-chrome-stable"
 browser_alt = "librewolf"
-togglecomp = "/home/lukas/scripts/togglecomp"
+togglecomp  = "/home/lukas/scripts/togglecomp"
 chwallpaper = "/home/lukas/scripts/selwallpaper"
-run = "rofi -show drun"
-lock = "slock"
-screenshot = "flameshot gui"
+run         = "rofi -show drun"
+lock        = "slock"
+screenshot  = "flameshot gui"
 
 
 
@@ -104,6 +112,9 @@ def window_to_prev_group(qtile):
 
 
 
+
+
+
 #    _              _     _           _     
 #   | | _____ _   _| |__ (_)_ __   __| |___ 
 #   | |/ / _ \ | | | '_ \| | '_ \ / _` / __|
@@ -116,11 +127,11 @@ keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
-    #Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    #Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    #Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    #Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    #Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    #Key([mod], "h", lazy.layout.left(),                           desc="Move focus to left"),
+    #Key([mod], "l", lazy.layout.right(),                          desc="Move focus to right"),
+    #Key([mod], "j", lazy.layout.down(),                           desc="Move focus down"),
+    #Key([mod], "k", lazy.layout.up(),                             desc="Move focus up"),
+    #Key([mod], "space", lazy.layout.next(),                       desc="Move window focus to other window"),
 
     # Basic bindings for tile layout
 
@@ -301,10 +312,8 @@ groups.append(ScratchPad('scratchpad', [
 
 
 layout_default = {
-    #"border_normal": '#363a4f',
-    #"border_focus": '#8aadf4',
-    "border_normal": colors["grey"],
-    "border_focus":  colors["blue"],
+    "border_normal": colors["grey"], #363a4f
+    "border_focus":  colors["blue"], #8aadf4
 
     }
 
@@ -336,10 +345,8 @@ layouts = [
         only_focused            = True,
         ),
     layout.Floating(
-        #border_normal          = "#363a4f",
-        #border_focus           = "#7dc4e4",
-        border_normal           = colors["grey"],
-        border_focus            = colors["blue_light"],
+        border_normal           = colors["grey"], #363a4f
+        border_focus            = colors["blue_light"], #7dc4e4
         border_width            = 2,
         fullscreen_border_width = 0,
         max_border_width        = 0,
@@ -365,9 +372,8 @@ layouts = [
 deco = {
     "decorations": [
         RectDecoration(
-            #colour      = "#464d64",
-            #line_colour = '#5b6078',
-            colour      = colors["grey_light"],
+            colour      = colors["grey_light"], #464d64
+            line_colour = colors["grey_lighter"], #5b6078
             radius      = 13,
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
@@ -375,7 +381,6 @@ deco = {
             padding_x   = 0,
             extrawidth  = 0,
             group       = False,
-            line_colour = colors["grey_lighter"],
             line_width  = 1, # 1
             )
             ],
@@ -383,14 +388,12 @@ deco = {
 
 
 widget_defaults = dict(
-    #background = '#363a4f',
-    #foreground = '#cad3f5',
     #background = '#00000000',
     #fontshadow = '#363a4f',
     font       = "JetBrainsMono Nerd Font",
     fontsize   = 18,
-    background = colors["grey"],
-    foreground = colors["white"],
+    background = colors["grey"], #363a4f
+    foreground = colors["white"], #cad3f5
     #opacity   = 1,
     #padding   = 3,
     padding    = 15,
@@ -416,15 +419,9 @@ screens = [
                         'Button2': lambda: qtile.cmd_spawn(terminal),
                         },
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.GroupBox(
-                    #fontshadow = '#5b6078',
-                    #active = '#cad3f5',
-                    #inactive = '#363a4f',
-                    #block_highlight_text_color = '#8aadf4',
-                    #urgent_text = '#ed8796',# #ee99a0
-                    #this_current_screen_border = '#8aadf4',
-                    #this_screen_border = '#494d64',
                     **deco,
                     fmt                        = '{}',
                     toggle                     = True,
@@ -442,20 +439,20 @@ screens = [
                     #highlight_color           = '#494d64',
                     highlight_color            = '#00000000',
                     use_mouse_wheel            = True,
-                    fontshadow                 = colors["grey_lighter"],
-                    active                     = colors["white"],
-                    inactive                   = colors["grey"],
-                    block_highlight_text_color = colors["blue"],
-                    urgent_text                = colors["red"],
-                    this_current_screen_border = colors["blue"],
-                    this_screen_border         = colors["grey_light"],
+                    fontshadow                 = colors["grey_lighter"], #5b6078
+                    active                     = colors["white"], #cad3f5
+                    inactive                   = colors["grey"], #363a4f
+                    block_highlight_text_color = colors["blue"], #8aadf4
+                    urgent_text                = colors["red"], #ed8796
+                    this_current_screen_border = colors["blue"], #8aadf4
+                    this_screen_border         = colors["grey_light"], #494d64
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.CurrentLayoutIcon(
                     decorations = [
                         RectDecoration(
-                            #colour   = "#464d64",
-                            colour    = colors["grey_light"],
+                            colour    = colors["grey_light"], #464d64
                             radius    = 5,
                             filled    = True,
                             padding_y = 5,
@@ -466,39 +463,13 @@ screens = [
                     ),
                 widget.Prompt(),
 
-                #widget.TextBox(" ", padding = 0),
-                #widget.WidgetBox(widgets=[
-                    #widget.WindowName(
-                        #**deco,
-                        #format = ' {name}',
-                        #foreground = '#f4dbd6',
-                        #empty_group_string=" Desktop",
-                        #width = bar.CALCULATED,
-                        #max_chars = 130,
-                        #parse_text = txtparse,
-                        #mouse_callbacks = {'Button2': lazy.window.kill()},
-                        #),
-                    #],
-                    ##**deco,
-                    #start_opened = False,
-                    #text_closed = '', # 
-                    #text_open = '', # 
-                    #foreground = '#cad3f5',
-                    #padding = 12,
-                    #fontsize = 20,
-                    #),
-
                 widget.TextBox(" ", padding = 0),
                 widget.TaskList(
                     #**deco,
-                    #foreground          = '#f4dbd6',
-                    #border              = '#464d64',
-                    #unfocused_border    = '#363a4f',
-                    #urgent_border       = '#ed8796',
-                    foreground           = colors["skin_light"],
-                    border               = colors["grey_light"],
-                    unfocused_border     = colors["grey"],
-                    urgent_border        = colors["red"],
+                    foreground           = colors["skin_light"], #f4dbd6
+                    border               = colors["grey_light"], #464d64
+                    unfocused_border     = colors["grey"], #363a4f
+                    urgent_border        = colors["red"], #ed8796
                     theme_mode           = "preferred",
                     theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
                     fontsize             = 20,
@@ -522,100 +493,95 @@ screens = [
                     #icon_size           = 3,
                     mouse_callbacks      = {'Button2': lazy.window.kill()},
                     ),
+
                 widget.Spacer(),
                 widget.Systray(),
+
                 widget.TextBox(" ", padding = 0),
                 widget.CPU(
                     **deco,
-                    #foreground = '#7dc4e4',
-                    foreground = colors["blue_light"],
+                    foreground = colors["blue_light"], #7dc4e4
                     format     = '  {freq_current}GHz {load_percent}%',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.ThermalSensor(
                     **deco,
-                    #foreground = '#c6a0f6',
-                    #foreground_alert = '#ed8796',
-                    foreground       = colors["purple"],
-                    foreground_alert = colors["red"],
+                    foreground       = colors["purple"], #c6a0f6
+                    foreground_alert = colors["red"], #ed8796
                     format           = ' {temp:.1f}{unit}',
                     tag_sensor       = "Package id 0",
                     threshold        = 70,
                     update_interval  = 2,
                     mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch sensors")},
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.NvidiaSensors(
                     **deco,
-                    #foreground = '#7dc4e4',
-                    #foreground_alert = '#ed8796',
                     format           = '  {temp}°C',
-                    foreground       = colors["blue_light"],
-                    foreground_alert = colors["red"],
+                    foreground       = colors["blue_light"], #7dc4e4
+                    foreground_alert = colors["red"], #ed8796
                     threshold        = 70,
                     update_interval  = 2,
                     mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch nvidia-smi")},
                         ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.Memory(
                     **deco,
-                    #foreground = '#91d7e3',
-                    foreground   = colors["blue_lighter"],
+                    foreground   = colors["blue_lighter"], #91d7e3
                     format       = ' {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
                     measure_mem  = 'G',
                     measure_swap = 'G',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.Net(
                     **deco,
-                    #foreground = '#eed49f',
-                    foreground       = colors["yellow"],
+                    foreground       = colors["yellow"], #eed49f
                     format           = '{down:3.0f}{down_suffix:<2}↓↑{up:3.0f}{up_suffix:<2}',
                     prefix           = 'M',
                     update_intervall = 1,
                     #interface       = 'None',
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
-                    #colour_have_updates = '#91d7e3',
-                    #colour_no_updates = '#cad3f5',
-                    colour_have_updates = colors["blue_lighter"],
-                    colour_no_updates   = colors["white"],
+                    colour_have_updates = colors["blue_lighter"], #91d7e3
+                    colour_no_updates   = colors["white"], #cad3f5
                     display_format      = ' {updates}',
                     distro              = 'Arch_yay', #'Arch'
                     no_update_string    = ' 0', #comment out to disappear
                     execute             = 'kitty -e watch pacman --version',
                     update_interval     = 60,
                 ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
-                    #foreground = '#ed8796',
-                    foreground = colors["red"],
+                    foreground = colors["red"], #ed8796
                     format     = " %d.%m.%Y",
                     ),
+
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
-                    #foreground = '#f5a97f',
-                    foreground = colors["orange"],
+                    foreground = colors["orange"], #f5a97f
                     format     = ' %H:%M',
                     ),
+
                 widget.TextBox(" ", padding = 0),
             ],
             36, #36 -- bar height
-            #background = "#00000000",
-            #border_color="#494d64",
             margin       = [10, 10, 0, 10],
             border_width = [0, 0, 3, 0],
-            background   = colors["transparent"],
-            border_color = colors["grey_light"],
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            background   = colors["transparent"], #00000000
+            border_color = colors["grey_light"], #494d64
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -665,16 +631,15 @@ floating_layout    = layout.Floating(
         #custom rules
         Match(wm_class = "pavucontrol"),  # ssh-askpass
         Match(wm_class = "pcmanfm"),  # ssh-askpass
+        Match(wm_class = "openrgb"),  # ssh-askpass
         Match(wm_class = "thunar"),  # ssh-askpass
         Match(wm_class = "lxappearance"),  # ssh-askpass
         Match(wm_class = "VirtualBox Manager"),  # ssh-askpass
         Match(title    = "Steam Settings"),  # GPG key password entry
         #Match(title   = "Friends List"),  # GPG key password entry
     ],
-    #border_normal = "#363a4f",
-    #border_focus = "#7dc4e4",
-    border_normal           = colors["grey"],
-    border_focus            = colors["blue_light"],
+    border_normal           = colors["grey"], #363a4f
+    border_focus            = colors["blue_light"], #7dc4e4
     border_width            = 2,
     fullscreen_border_width = 0,
     max_border_width        = 0,

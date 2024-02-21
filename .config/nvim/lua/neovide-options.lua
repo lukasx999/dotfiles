@@ -1,4 +1,4 @@
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h16" --neovide Font
+vim.o.guifont = "JetBrainsMono Nerd Font:h16" --neovide Font
 vim.opt.linespace = 0
 vim.g.neovide_scale_factor = 1.0
 vim.g.neovide_padding_top = 20

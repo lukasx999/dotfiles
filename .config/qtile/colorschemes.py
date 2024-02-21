@@ -7,10 +7,6 @@
 #    \___\___/|_|\___/|_|  |___/
 
 
-#colors = macchiato
-colors = mocha
-
-# Usage: background = colors["blue"],
 
 # Catppuccin Macchiato
 macchiato = {
@@ -78,4 +74,15 @@ mocha = {
     #"green":            "#a3be8c",
     #"purple":           "#b48ead",
 #}
+
+
+
+
+colors = mocha
+#colors = macchiato
+
+# Usage: background = colors["blue"],
+
+
+
 
