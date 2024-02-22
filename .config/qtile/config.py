@@ -233,6 +233,7 @@ for vt in range(1, 8):
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
+#group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
 
@@ -349,7 +350,11 @@ layouts = [
         max_border_width        = 0,
         ),
      layout.Columns(
-         margin_on_single = 100,
+         **layout_default,
+        margin                  = [10, 10, 5, 10],
+        border_width            = 2,
+        margin_on_single        = 10,
+        border_on_single        = False,
          ),
      layout.MonadTall(),
      layout.RatioTile(),
@@ -377,7 +382,7 @@ deco = {
             radius      = 13,
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
-            padding_y   = 5, #5
+            padding_y   = 5, #3
             padding_x   = 0,
             extrawidth  = 0,
             group       = False,
@@ -409,10 +414,95 @@ screens = [
     Screen(
         top=bar.Bar(
             [
+
+                ########
+                # Left #
+                ########
+
+
+                widget.TextBox(" ", padding = 0),
+                widget.CPU(
+                    **deco,
+                    foreground = colors["blue_light"], #7dc4e4
+                    format     = '  {freq_current}GHz {load_percent}%',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
+                    ),
+
+                widget.TextBox(" ", padding = 0),
+                widget.ThermalSensor(
+                    **deco,
+                    foreground       = colors["blue"], #c6a0f6
+                    foreground_alert = colors["red"],    #ed8796
+                    format           = ' {temp:.1f}{unit}',
+                    tag_sensor       = "Package id 0",
+                    threshold        = 70,
+                    update_interval  = 2,
+                    mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch sensors")},
+                    ),
+
+                widget.TextBox(" ", padding = 0),
+                widget.NvidiaSensors(
+                    **deco,
+                    format           = '  {temp}°C',
+                    foreground       = colors["purple"], #7dc4e4
+                    foreground_alert = colors["red"],        #ed8796
+                    threshold        = 70,
+                    update_interval  = 2,
+                    mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch nvidia-smi")},
+                        ),
+                widget.TextBox(" ", padding = 0),
+                widget.Memory(
+                    **deco,
+                    foreground   = colors["purple_light"], #91d7e3
+                    format       = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                    measure_mem  = 'G',
+                    measure_swap = 'G',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
+                    ),
+                widget.Prompt(),
+                widget.TextBox(" ", padding = 0),
+                widget.TaskList(
+                    #**deco,
+                    foreground           = colors["skin_light"], #f4dbd6
+                    #border               = colors["grey_light"], #464d64
+                    border               = colors["transparent"], #464d64
+                    #background               = colors["transparent"], #464d64
+                    unfocused_border     = colors["grey"],       #363a4f
+                    urgent_border        = colors["red"],        #ed8796
+                    theme_mode           = "preferred",
+                    theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
+                    fontsize             = 20,
+                    icon_size            = 25, #30
+                    padding_y            = 2,
+                    padding_x            = 0,
+                    spacing              = 10,
+                    rounded              = True,
+                    txt_floating         = '🗗',
+                    txt_maximized        = '🗖',
+                    txt_minimized        = '🗕',
+                    markup_focused       = "", # "{}"
+                    markup_normal        = "",
+                    markup_floating      = "🗗",
+                    markup_minimized     = "🗕",
+                    markup_maximized     = "🗖",
+                    urgent_alert_method  = 'border',
+                    #title_width_method  = 'uniform',
+                    window_name_location = False,
+                    highlight_method     = "block", #border, block
+                    #icon_size           = 3,
+                    mouse_callbacks      = {'Button2': lazy.window.kill()},
+                    ),
+
+
+
+                ##########
+                # Center #
+                ##########
+
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    fontsize = 30,
-                    padding  = 5,
+                    fontsize = 20,
+                    padding  = 10,
                     text     = "󰣇", #  󰣇
                     mouse_callbacks = {
                         'Button1': lambda: qtile.cmd_spawn(run),
@@ -447,7 +537,6 @@ screens = [
                     this_current_screen_border = colors["blue"],         #8aadf4
                     this_screen_border         = colors["grey_light"],   #494d64
                     ),
-
                 widget.TextBox(" ", padding = 0),
                 widget.CurrentLayoutIcon(
                     decorations = [
@@ -461,124 +550,47 @@ screens = [
                     scale   = 0.5,
                     padding = 5,
                     ),
-                widget.Prompt(),
 
                 widget.TextBox(" ", padding = 0),
-                widget.TaskList(
-                    #**deco,
-                    foreground           = colors["skin_light"], #f4dbd6
-                    border               = colors["grey_light"], #464d64
-                    unfocused_border     = colors["grey"],       #363a4f
-                    urgent_border        = colors["red"],        #ed8796
-                    theme_mode           = "preferred",
-                    theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
-                    fontsize             = 20,
-                    icon_size            = 25, #30
-                    padding_y            = 2,
-                    padding_x            = 0,
-                    spacing              = 10,
-                    rounded              = True,
-                    txt_floating         = '🗗',
-                    txt_maximized        = '🗖',
-                    txt_minimized        = '🗕',
-                    markup_focused       = "", # "{}"
-                    markup_normal        = "",
-                    markup_floating      = "🗗",
-                    markup_minimized     = "🗕",
-                    markup_maximized     = "🗖",
-                    urgent_alert_method  = 'border',
-                    #title_width_method  = 'uniform',
-                    window_name_location = False,
-                    highlight_method     = "block", #border, block
-                    #icon_size           = 3,
-                    mouse_callbacks      = {'Button2': lazy.window.kill()},
-                    ),
+                widget.Spacer(),
+
+
+                #########
+                # Right #
+                #########
+
+
 
                 widget.Systray(),
-
-                widget.TextBox(" ", padding = 0),
-                widget.CPU(
-                    **deco,
-                    foreground = colors["blue_light"], #7dc4e4
-                    format     = '  {freq_current}GHz {load_percent}%',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
-                    ),
-
-                widget.TextBox(" ", padding = 0),
-                widget.ThermalSensor(
-                    **deco,
-                    foreground       = colors["blue"], #c6a0f6
-                    foreground_alert = colors["red"],    #ed8796
-                    format           = ' {temp:.1f}{unit}',
-                    tag_sensor       = "Package id 0",
-                    threshold        = 70,
-                    update_interval  = 2,
-                    mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch sensors")},
-                    ),
-
-                widget.TextBox(" ", padding = 0),
-                widget.NvidiaSensors(
-                    **deco,
-                    format           = '  {temp}°C',
-                    foreground       = colors["purple"], #7dc4e4
-                    foreground_alert = colors["red"],        #ed8796
-                    threshold        = 70,
-                    update_interval  = 2,
-                    mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch nvidia-smi")},
-                        ),
-
-                widget.TextBox(" ", padding = 0),
-                widget.Memory(
-                    **deco,
-                    foreground   = colors["purple_light"], #91d7e3
-                    format       = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
-                    measure_mem  = 'G',
-                    measure_swap = 'G',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
-                    ),
-
-                widget.TextBox(" ", padding = 0),
-                widget.Net(
-                    **deco,
-                    foreground       = colors["yellow"], #eed49f
-                    format           = '{down:3.0f}{down_suffix:<2}↓↑{up:3.0f}{up_suffix:<2}',
-                    prefix           = 'M',
-                    update_intervall = 1,
-                    #interface       = 'None',
-                    ),
-
                 widget.TextBox(" ", padding = 0),
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
                     colour_have_updates = colors["orange"], #91d7e3
-                    colour_no_updates   = colors["white"],        #cad3f5
+                    colour_no_updates   = colors["white"],  #cad3f5
                     display_format      = ' {updates}',
                     distro              = 'Arch_yay', #'Arch'
                     no_update_string    = '  0', #comment out to disappear
                     execute             = 'kitty -e watch pacman --version',
                     update_interval     = 60,
                 ),
-
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
                     foreground = colors["red_light"], #ed8796
                     format     = "  %d.%m.%Y",
                     ),
-
                 widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
                     foreground = colors["red"], #f5a97f
                     format     = '  %H:%M',
                     ),
-
                 widget.TextBox(" ", padding = 0),
             ],
             36, #36 -- bar height
             margin       = [10, 10, 0, 10],
-            border_width = [0, 0, 3, 0],
+            #border_width = [0, 0, 3, 0],
             background   = colors["transparent"], #00000000
             border_color = colors["grey_light"], #494d64
         ),
