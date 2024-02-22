@@ -65,7 +65,8 @@ browser_alt = "librewolf"
 togglecomp  = "/home/lukas/scripts/togglecomp"
 chwallpaper = "/home/lukas/scripts/selwallpaper"
 run         = "rofi -show drun"
-lock        = "slock"
+#lock        = "slock"
+lock        = "betterlockscreen -l blur"
 screenshot  = "flameshot gui"
 
 
@@ -111,7 +112,9 @@ def window_to_prev_group(qtile):
 
 
 
-
+#@hook.subscribe.startup_once # Autostart script
+#def autostart_once():
+    #subprocess.run('/home/lukas/.config/qtile/autostart.sh')
 
 
 
@@ -633,7 +636,7 @@ screens = [
                         ),
                 #widget.TextBox(" ", padding = 0),
             ],
-            40, #36 -- bar height
+            36, #36 -- bar height -- 40 for transparency
             margin       = [5, 5, 0, 5],
             #border_width = [0, 0, 3, 0],
             background   = colors["transparent"], #00000000

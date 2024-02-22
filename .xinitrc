@@ -1,7 +1,17 @@
+#!/bin/sh
+
+
+
+#      _       _ _            
+#__  _(_)_ __ (_) |_ _ __ ___ 
+#\ \/ / | '_ \| | __| '__/ __|
+# >  <| | | | | | |_| | | (__ 
+#/_/\_\_|_| |_|_|\__|_|  \___|
+
+
+
 source ~/.setwallpaper
 
-#compfy -b &
-#pulseaudio --start &
 
 #[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 dunst &
@@ -20,7 +30,6 @@ redshift &
 
 #dwmblocks &
 #exec dwm
-
 #exec awesome
 
 exec qtile start

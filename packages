@@ -5,15 +5,6 @@
 
 
 
-### Special Characters:
-
-"" Quotes imply, that the name stated is not the actual name of the package, but rather a name of the program. This is because some programs require a more complex installation progress (eg nvidia drivers)
-
-() Parenthesis imply, that a package is optional. I dont use it, but still prefer it being installed on my system
-
-* An Asterisk implies a subcategory of dependencies, to get my config to work
-
-
 
 
 
@@ -25,7 +16,15 @@ dunst
 rofi
 lxappearance
 conky-lua-nv
-slock (Install not required)
+#slock (Install not required)
+betterlockscreen (AUR)
+  * i3lock-color (AUR)
+  * ImageMagick
+ly (display manager)
+#sddm
+# * "catppuccin sddm theme"
+xorg
+  * xorg-xinit
 pipewire
   * wireplumber
   * pipewire-audio
@@ -59,7 +58,9 @@ neovim
   * neovide
 bluez
   * bluez-utils
-bat
+eza (ls replacement)
+bat (cat replacement)
+cava
 lf
   * ueberzug
 ("tpm" for tmux)
@@ -78,12 +79,8 @@ steam
 "LTspice XVII" via wine
 openrgb-git
 flameshot
-arandr
+#arandr
 firefox
 gimp
-
-
-
-
 
 
