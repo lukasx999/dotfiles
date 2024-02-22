@@ -126,52 +126,51 @@ def window_to_prev_group(qtile):
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
-    #Key([mod], "h", lazy.layout.left(),                           desc="Move focus to left"),
-    #Key([mod], "l", lazy.layout.right(),                          desc="Move focus to right"),
-    #Key([mod], "j", lazy.layout.down(),                           desc="Move focus down"),
-    #Key([mod], "k", lazy.layout.up(),                             desc="Move focus up"),
-    #Key([mod], "space", lazy.layout.next(),                       desc="Move window focus to other window"),
 
-    # Basic bindings for tile layout
+
+
+    # Switching between windows
 
     Key([mod], "j", lazy.layout.next(),                            desc="Move window focus to next window"),
     Key([mod], "k", lazy.layout.previous(),                        desc="Move window focus to previous window"),
-    #Key([mod], "h", lazy.layout.grow_left(),                      desc="Grow window to the left"),
-    #Key([mod], "l", lazy.layout.grow_right(),                     desc="Grow window to the right"),
+    Key([mod], "h", lazy.layout.left(),                            desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(),                           desc="Move focus to right"),
+    #Key([mod], "j", lazy.layout.down(),                           desc="Move focus down"),
+    #Key([mod], "k", lazy.layout.up(),                             desc="Move focus up"),
+
+    # Moving to next/prev group
+
     Key([mod], "Period", lazy.screen.next_group(skip_empty=False), desc="Move to the group on the right"),
     Key([mod], "Comma", lazy.screen.prev_group(skip_empty=False),  desc="Move to the group on the left"),
     Key([mod, "shift"], "Period", window_to_next_group(),          desc="Move window to the group on the left"),
     Key([mod, "shift"], "Comma", window_to_prev_group(),           desc="Move window to the group on the left"),
-    Key([mod], "l", lazy.layout.increase_ratio(),                  desc="Increase master window space"),
-    Key([mod], "h", lazy.layout.decrease_ratio(),                  desc="Decrease master window space"),
 
-    # Moving and Resizing windows
 
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
+    # Moving windows
+
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(),           desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(),          desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(),           desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(),             desc="Move window up"),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
+
+    # Resizing windows
+
     Key([mod, "control"], "h", lazy.layout.grow_left(),            desc="Grow window to the left"),
     Key([mod, "control"], "l", lazy.layout.grow_right(),           desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(),            desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(),              desc="Grow window up"),
-    #Key([mod], "n", lazy.layout.normalize(),                      desc="Reset all window sizes"),
+    Key([mod], "n", lazy.layout.normalize(),                       desc="Reset all window sizes"),
+
+    # For Tile layout
+    #Key([mod], "l", lazy.layout.increase_ratio(),                  desc="Increase master window space"),
+    #Key([mod], "h", lazy.layout.decrease_ratio(),                  desc="Decrease master window space"),
+
+
 
     # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+    #Key([mod, "shift"], "Return", lazy.layout.toggle_split(),      desc="Toggle between split and unsplit sides of stack"),
+
+
 
     # Launching Programs
 
@@ -183,44 +182,37 @@ keys = [
     Key([mod], "q", lazy.spawn(browser),                           desc="Launch browser"),
     Key([mod, "shift", "control"], "l", lazy.spawn(lock),          desc="Lock the screen"),
 
-    # Toggle between different layouts as defined below
+    # Closing windows
+
+    Key([mod, "shift"], "c", lazy.window.kill(),                   desc="Kill focused window"),
+
+    # Toggling between layouts
 
     Key([mod], "Tab", lazy.next_layout(),                          desc="Toggle between layouts"),
     Key([mod, "shift"], "Tab", lazy.prev_layout(),                 desc="Toggle between layouts"),
-    Key([mod, "shift"], "c", lazy.window.kill(),                   desc="Kill focused window"),
-    Key(
-        [mod],
-        "a",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
+
+    # Toggling layouts
+
+    Key([mod], "a", lazy.window.toggle_fullscreen(),               desc="Toggle fullscreen on the focused window"),
     Key([mod], "Space", lazy.window.toggle_floating(),             desc="Toggle floating on the focused window"),
+    Key([mod], "s", toggle_max(),                                  desc="toggle max layout"),
+    Key([mod], "m", minimize_all(),                                desc="Minimize all windows"),
+
+    # Qtile Management
+
     Key([mod, "control"], "r", lazy.reload_config(),               desc="Reload the config"),
     Key([mod, "shift"], "q", lazy.shutdown(),                      desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(),                               desc="Spawn a command using a prompt widget"),
     Key([mod], "b", lazy.hide_show_bar("top"),                     desc="Toggle bar"),
 
-    # Custom functions
-    Key([mod], "m", minimize_all(),                                desc="Minimize all windows"),
-    Key([mod], "n", toggle_max(),                                  desc="toggle max layout"),
-
     # Scratchpads
+
     Key([mod], "w", lazy.group['scratchpad'].dropdown_toggle('term'), desc="toggle scratchpad (terminal)"),
     Key([mod], "t", lazy.group['scratchpad'].dropdown_toggle('web'),  desc="toggle scratchpad (web)"),
 ]
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
+
+
 
 
 #     __ _ _ __ ___  _   _ _ __  ___ 
@@ -312,8 +304,7 @@ groups.append(ScratchPad('scratchpad', [
 
 layout_default = {
     "border_normal": colors["grey"], #363a4f
-    "border_focus":  colors["blue"], #8aadf4
-
+    "border_focus":  colors["purple"], #8aadf4
     }
 
 
@@ -325,7 +316,7 @@ layouts = [
      layout.Tile(
          **layout_default,
         #margin                 = 10,
-        margin                  = [10, 10, 5, 10],
+        margin                  = [5, 5, 5, 5],
         border_width            = 2,
         add_after_last          = True,
         margin_on_single        = True,
@@ -351,13 +342,21 @@ layouts = [
         ),
      layout.Columns(
          **layout_default,
-        margin                  = [10, 10, 5, 10],
+        margin                  = [5, 5, 5, 5],
         border_width            = 2,
         margin_on_single        = 10,
+        grow_amount             = 10,
         border_on_single        = False,
+        insert_position         = 1,
+        num_columns             = 2,
+        split                   = True,
+        fair                    = False,
+        wrap_focus_columns      = True,
+        wrap_focus_rows         = True,
+        wrap_focus_stacks       = True,
          ),
-     layout.MonadTall(),
-     layout.RatioTile(),
+     #layout.MonadTall(),
+     #layout.RatioTile(),
      #layout.TreeTab(),
      #layout.VerticalTile(),
      #layout.Zoomy(),
@@ -379,7 +378,7 @@ deco = {
         RectDecoration(
             colour      = colors["grey_light"],   #464d64
             line_colour = colors["grey_lighter"], #5b6078
-            radius      = 13,
+            radius      = 13, # 13
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
             padding_y   = 5, #3
@@ -415,23 +414,25 @@ screens = [
         top=bar.Bar(
             [
 
+
+
+
                 ########
                 # Left #
                 ########
 
-
                 widget.TextBox(" ", padding = 0),
                 widget.CPU(
                     **deco,
-                    foreground = colors["blue_light"], #7dc4e4
-                    format     = '  {freq_current}GHz {load_percent}%',
+                    foreground      = colors["blue_light"], #7dc4e4
+                    format          = '  {freq_current}GHz {load_percent}%',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
                     ),
 
                 widget.TextBox(" ", padding = 0),
                 widget.ThermalSensor(
                     **deco,
-                    foreground       = colors["blue"], #c6a0f6
+                    foreground       = colors["blue"],   #c6a0f6
                     foreground_alert = colors["red"],    #ed8796
                     format           = ' {temp:.1f}{unit}',
                     tag_sensor       = "Package id 0",
@@ -445,7 +446,7 @@ screens = [
                     **deco,
                     format           = '  {temp}°C',
                     foreground       = colors["purple"], #7dc4e4
-                    foreground_alert = colors["red"],        #ed8796
+                    foreground_alert = colors["red"],    #ed8796
                     threshold        = 70,
                     update_interval  = 2,
                     mouse_callbacks  = {'Button1': lambda: qtile.cmd_spawn("kitty -e watch nvidia-smi")},
@@ -453,20 +454,23 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.Memory(
                     **deco,
-                    foreground   = colors["purple_light"], #91d7e3
-                    format       = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
-                    measure_mem  = 'G',
-                    measure_swap = 'G',
+                    foreground      = colors["purple_light"], #91d7e3
+                    format          = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                    measure_mem     = 'G',
+                    measure_swap    = 'G',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
                     ),
                 widget.Prompt(),
+                #widget.GlobalMenu(
+                    #fontsize = 10, 
+                    #),
                 widget.TextBox(" ", padding = 0),
                 widget.TaskList(
                     #**deco,
                     foreground           = colors["skin_light"], #f4dbd6
-                    #border               = colors["grey_light"], #464d64
+                    #border              = colors["grey_light"], #464d64
                     border               = colors["transparent"], #464d64
-                    #background               = colors["transparent"], #464d64
+                    #background          = colors["transparent"], #464d64
                     unfocused_border     = colors["grey"],       #363a4f
                     urgent_border        = colors["red"],        #ed8796
                     theme_mode           = "preferred",
@@ -495,6 +499,7 @@ screens = [
 
 
 
+
                 ##########
                 # Center #
                 ##########
@@ -511,7 +516,7 @@ screens = [
                     ),
 
                 widget.TextBox(" ", padding = 0),
-                widget.GroupBox(
+                widget.GroupBox( # GroupBox2
                     **deco,
                     fmt                        = '{}',
                     toggle                     = True,
@@ -550,19 +555,35 @@ screens = [
                     scale   = 0.5,
                     padding = 5,
                     ),
+                #widget.Visualiser(
+                        #autostart = True,
+                        #channels = 'mono', # mono, stereo
+                        #hide = True,
+                        #),
 
                 widget.TextBox(" ", padding = 0),
                 widget.Spacer(),
+
+
 
 
                 #########
                 # Right #
                 #########
 
-
-
                 widget.Systray(),
                 widget.TextBox(" ", padding = 0),
+                widget.Bluetooth(
+                    adapter_format       = '{name}',
+                    default_text         = ' {connected_devices}',
+                    symbol_connected     = '*',
+                    symbol_paired        = '-',
+                    symbol_powered       = ('*', '-'),
+                    symbol_unknown       = '?',
+                    separator            = ', ',
+                    show_menu_icons      = True,
+                    hide_unnamed_devices = False,
+                        ),
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
@@ -575,6 +596,16 @@ screens = [
                     update_interval     = 60,
                 ),
                 widget.TextBox(" ", padding = 0),
+                widget.Wttr(
+                    **deco,
+                    foreground      = colors["yellow"],
+                    format          = '  %f', # 1
+                    lang            = 'en',
+                    units           = 'm',
+                    update_interval = 600,
+                    user_agent      = 'Qtile',
+                    ),
+                widget.TextBox(" ", padding = 0),
                 widget.Clock(
                     **deco,
                     foreground = colors["red_light"], #ed8796
@@ -586,10 +617,24 @@ screens = [
                     foreground = colors["red"], #f5a97f
                     format     = '  %H:%M',
                     ),
-                widget.TextBox(" ", padding = 0),
+                widget.AnalogueClock(
+                    hour_colour        = colors["white"],
+                    minute_colour      = colors["white"],
+                    face_border_colour = colors["white"],
+                    margin             = 2,
+                    face_border_width  = 1,
+                    #face_shape         = 'square', # square, circle
+                    face_shape         = None,
+                    update_interval    = 1,
+                    hour_size          = 2,
+                    hour_length        = 0.6,
+                    minute_length      = 0.95,
+                    second_size        = 0,
+                        ),
+                #widget.TextBox(" ", padding = 0),
             ],
-            36, #36 -- bar height
-            margin       = [10, 10, 0, 10],
+            40, #36 -- bar height
+            margin       = [5, 5, 0, 5],
             #border_width = [0, 0, 3, 0],
             background   = colors["transparent"], #00000000
             border_color = colors["grey_light"], #494d64
@@ -625,7 +670,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules  = []  # type: list
 follow_mouse_focus = True
-bring_front_click  = False
+bring_front_click  = False # False "floating_only"
 floats_kept_above  = True
 cursor_warp        = False
 floating_layout    = layout.Floating(
