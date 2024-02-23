@@ -32,6 +32,7 @@ pipewire
   * pavucontrol
 "nvidia proprietary drivers"
 "jetbrainsmono nerd font"
+"powerline fonts"
 "phinger cursor set"
 papirus icons
 redshift
@@ -61,6 +62,8 @@ bluez
 eza (ls replacement)
 bat (cat replacement)
 cava
+shell-color-scripts
+powerlevel10k
 lf
   * ueberzug
 ("tpm" for tmux)

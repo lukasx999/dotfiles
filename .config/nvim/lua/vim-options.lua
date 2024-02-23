@@ -48,6 +48,7 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 --open a terminal (:vertical resize -50<CR>)
 keymap("n", "<leader>t", ":vsp<CR>:term<CR><C-w><C-r>i", {silent = true})
+
 --vim.keymap.set('n', '<C-t>', ":ToggleTerm<CR>", {silent = true})
 
 --some other stuff

@@ -2,8 +2,9 @@
 
 chosen=$(nsxiv -ot ~/Pictures/wallpapers/*) 
 
-xwallpaper --zoom $chosen &&
-echo "xwallpaper --zoom $chosen" > ~/.setwallpaper &&
+xwallpaper --zoom $chosen &
+betterlockscreen -u $chosen &
+echo "xwallpaper --zoom $chosen &\nbetterlockscreen -u $chosen &" > ~/.setwallpaper &
 #dunstify "Wallpaper Changed!" ||
 #dunstify "Error!"
 

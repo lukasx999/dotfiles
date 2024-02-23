@@ -158,8 +158,18 @@ keys = [
 
     # Resizing windows
 
-    Key([mod, "control"], "h", lazy.layout.grow_left(),            desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(),           desc="Grow window to the right"),
+    Key([mod, "control"], "h",
+        lazy.layout.grow_left(),
+        lazy.layout.decrease_ratio(),
+        desc="Grow window to the left"
+        ),
+
+    Key([mod, "control"], "l",
+        lazy.layout.grow_right(),
+        lazy.layout.increase_ratio(),
+        desc="Grow window to the right"
+        ),
+
     Key([mod, "control"], "j", lazy.layout.grow_down(),            desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(),              desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(),                       desc="Reset all window sizes"),
@@ -227,10 +237,11 @@ keys = [
 
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
-group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
-#group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
+#group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
+group_labels = ["", "", "", "", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
-group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
+#group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
+group_layouts = ["columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns"]
 
 
 
@@ -240,7 +251,7 @@ for i in range(len(group_names)):
     groups.append(
         Group(
             name=group_names[i],
-            #layout=group_layouts[i].lower(),
+            layout=group_layouts[i].lower(),
             label=group_labels[i],
         ))
 
@@ -316,6 +327,22 @@ layouts = [
      #layout.Bsp(),
      #layout.Matrix(),
      #layout.MonadWide(),
+     layout.Columns(
+         **layout_default,
+        #margin                  = [5, 5, 5, 5],
+        margin                  = 10,
+        border_width            = 2,
+        margin_on_single        = 10,
+        grow_amount             = 10,
+        border_on_single        = False,
+        insert_position         = 1,
+        num_columns             = 2,
+        split                   = True,
+        fair                    = False,
+        wrap_focus_columns      = True,
+        wrap_focus_rows         = True,
+        wrap_focus_stacks       = True,
+         ),
      layout.Tile(
          **layout_default,
         #margin                 = 10,
@@ -343,21 +370,6 @@ layouts = [
         fullscreen_border_width = 0,
         max_border_width        = 0,
         ),
-     layout.Columns(
-         **layout_default,
-        margin                  = [5, 5, 5, 5],
-        border_width            = 2,
-        margin_on_single        = 10,
-        grow_amount             = 10,
-        border_on_single        = False,
-        insert_position         = 1,
-        num_columns             = 2,
-        split                   = True,
-        fair                    = False,
-        wrap_focus_columns      = True,
-        wrap_focus_rows         = True,
-        wrap_focus_stacks       = True,
-         ),
      #layout.MonadTall(),
      #layout.RatioTile(),
      #layout.TreeTab(),
@@ -375,16 +387,23 @@ layouts = [
 #   |_.__/ \__,_|_|   
 
 
+endofbar = {
+    "padding":     0,
+    "fontsize":    32, # 50 for slash, 28 for rounded edge
+    "background":  colors["transparent"],
+    "foreground":  colors["grey"],
+    }
+
 
 deco = {
     "decorations": [
         RectDecoration(
             colour      = colors["grey_light"],   #464d64
             line_colour = colors["grey_lighter"], #5b6078
-            radius      = 13, # 13
+            radius      = 12, # 13 -- 12 for 40 bar height
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
-            padding_y   = 5, #3
+            padding_y   = 7, #5 -- 7 for 40 bar height
             padding_x   = 0,
             extrawidth  = 0,
             group       = False,
@@ -405,6 +424,7 @@ widget_defaults = dict(
     #padding   = 3,
     padding    = 15,
 )
+
 extension_defaults = widget_defaults.copy()
 
 def txtparse(text):
@@ -424,6 +444,10 @@ screens = [
                 # Left #
                 ########
 
+                widget.TextBox(
+                    **endofbar,
+                    text = "", # 
+                    ),
                 widget.TextBox(" ", padding = 0),
                 widget.CPU(
                     **deco,
@@ -468,12 +492,17 @@ screens = [
                     #fontsize = 10, 
                     #),
                 widget.TextBox(" ", padding = 0),
+                widget.TextBox(
+                    **endofbar,
+                    text = "", # 
+                    ),
+                widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                 widget.TaskList(
                     #**deco,
                     foreground           = colors["skin_light"], #f4dbd6
-                    #border              = colors["grey_light"], #464d64
-                    border               = colors["transparent"], #464d64
-                    #background          = colors["transparent"], #464d64
+                    border              = colors["grey_light"], #464d64
+                    #border               = colors["transparent"], #464d64
+                    background          = colors["transparent"], #464d64
                     unfocused_border     = colors["grey"],       #363a4f
                     urgent_border        = colors["red"],        #ed8796
                     theme_mode           = "preferred",
@@ -507,6 +536,10 @@ screens = [
                 # Center #
                 ##########
 
+                widget.TextBox(
+                    **endofbar,
+                    text = "", # 
+                    ),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     fontsize = 20,
@@ -565,7 +598,11 @@ screens = [
                         #),
 
                 widget.TextBox(" ", padding = 0),
-                widget.Spacer(),
+                widget.TextBox(
+                    **endofbar,
+                    text = "", # 
+                    ),
+                widget.Spacer(background = "#00000000"),
 
 
 
@@ -574,6 +611,10 @@ screens = [
                 # Right #
                 #########
 
+                widget.TextBox(
+                    **endofbar,
+                    text = "", # 
+                        ),
                 widget.Systray(),
                 widget.TextBox(" ", padding = 0),
                 widget.Bluetooth(
@@ -592,7 +633,7 @@ screens = [
                     #foreground = '#91d7e3',
                     colour_have_updates = colors["orange"], #91d7e3
                     colour_no_updates   = colors["white"],  #cad3f5
-                    display_format      = ' {updates}',
+                    display_format      = '  {updates}',
                     distro              = 'Arch_yay', #'Arch'
                     no_update_string    = '  0', #comment out to disappear
                     execute             = 'kitty -e watch pacman --version',
@@ -620,27 +661,32 @@ screens = [
                     foreground = colors["red"], #f5a97f
                     format     = '  %H:%M',
                     ),
-                widget.AnalogueClock(
-                    hour_colour        = colors["white"],
-                    minute_colour      = colors["white"],
-                    face_border_colour = colors["white"],
-                    margin             = 2,
-                    face_border_width  = 1,
-                    #face_shape         = 'square', # square, circle
-                    face_shape         = None,
-                    update_interval    = 1,
-                    hour_size          = 2,
-                    hour_length        = 0.6,
-                    minute_length      = 0.95,
-                    second_size        = 0,
-                        ),
-                #widget.TextBox(" ", padding = 0),
+                #widget.AnalogueClock(
+                    #hour_colour        = colors["white"],
+                    #minute_colour      = colors["white"],
+                    #face_border_colour = colors["white"],
+                    #margin             = 2,
+                    #face_border_width  = 1,
+                    ##face_shape         = 'square', # square, circle
+                    #face_shape         = None,
+                    #update_interval    = 1,
+                    #hour_size          = 2,
+                    #hour_length        = 0.6,
+                    #minute_length      = 0.95,
+                    #second_size        = 0,
+                        #),
+                widget.TextBox(" ", padding = 0),
+                widget.TextBox(
+                    **endofbar,
+                    text = "", # 
+                    ),
             ],
-            36, #36 -- bar height -- 40 for transparency
+            40, #36 -- bar height -- 40 for transparency
             margin       = [5, 5, 0, 5],
-            #border_width = [0, 0, 3, 0],
             background   = colors["transparent"], #00000000
-            border_color = colors["grey_light"], #494d64
+            #border_color = colors["grey_light"], #494d64
+            #border_width = [0, 0, 3, 0],
+
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling

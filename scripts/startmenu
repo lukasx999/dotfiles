@@ -1,8 +1,8 @@
-#!/bin/zsh
+#!/bin/sh
 
-selection=$(echo -e "Terminal\nWeb\nCode\nScreenshot\nIncVol\nDecVol\nMuteVol\nSelWall" | dmenu)
+selection=$(echo -e "Terminal\nWeb\nCode\nScreenshot\nIncVol\nDecVol\nMuteVol\nSelWall" | rofi -dmenu)
 
-[ "$selection" = "Terminal" ] && alacritty
+[ "$selection" = "Terminal" ] && kitty
 [ "$selection" = "Web" ] && google-chrome-stable
 [ "$selection" = "Code" ] && code
 [ "$selection" = "Screenshot" ] && flameshot
