@@ -238,7 +238,7 @@ keys = [
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
-group_labels = ["", "", "", "", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
+group_labels = ["", "󰖟", "", "󰓓", "󰙯", "󰏃", "󰏃", "󰏃", "󰏃",] #    
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
 group_layouts = ["columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns"]
@@ -329,10 +329,11 @@ layouts = [
      #layout.MonadWide(),
      layout.Columns(
          **layout_default,
-        #margin                  = [5, 5, 5, 5],
-        margin                  = 10,
+        margin                  = [10, 10, 0, 10],
+        #margin                  = 10,
         border_width            = 2,
-        margin_on_single        = 10,
+        #margin_on_single        = 10,
+        margin_on_single        = [10, 10, 0, 10],
         grow_amount             = 10,
         border_on_single        = False,
         insert_position         = 1,
@@ -496,39 +497,7 @@ screens = [
                     **endofbar,
                     text = "", # 
                     ),
-                widget.TextBox(" ", padding = 0, background = colors["transparent"]),
-                widget.TaskList(
-                    #**deco,
-                    foreground           = colors["skin_light"], #f4dbd6
-                    border              = colors["grey_light"], #464d64
-                    #border               = colors["transparent"], #464d64
-                    background          = colors["transparent"], #464d64
-                    unfocused_border     = colors["grey"],       #363a4f
-                    urgent_border        = colors["red"],        #ed8796
-                    theme_mode           = "preferred",
-                    theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
-                    fontsize             = 20,
-                    icon_size            = 25, #30
-                    padding_y            = 2,
-                    padding_x            = 0,
-                    spacing              = 10,
-                    rounded              = True,
-                    txt_floating         = '🗗',
-                    txt_maximized        = '🗖',
-                    txt_minimized        = '🗕',
-                    markup_focused       = "", # "{}"
-                    markup_normal        = "",
-                    markup_floating      = "🗗",
-                    markup_minimized     = "🗕",
-                    markup_maximized     = "🗖",
-                    urgent_alert_method  = 'border',
-                    #title_width_method  = 'uniform',
-                    window_name_location = False,
-                    highlight_method     = "block", #border, block
-                    #icon_size           = 3,
-                    mouse_callbacks      = {'Button2': lazy.window.kill()},
-                    ),
-
+                widget.Spacer(background = "#00000000"),
 
 
 
@@ -684,10 +653,85 @@ screens = [
             40, #36 -- bar height -- 40 for transparency
             margin       = [5, 5, 0, 5],
             background   = colors["transparent"], #00000000
+            reserve      = True,
             #border_color = colors["grey_light"], #494d64
             #border_width = [0, 0, 3, 0],
-
         ),
+
+        #bottom=bar.Gap(size = 0,)
+        bottom=bar.Bar(
+                [
+
+                ########
+                # Left #
+                ########
+
+                widget.TextBox(" ", padding = 0, background = colors["transparent"]),
+                widget.WindowName(
+                        fontsize = 15,
+                        format = ' {name}',
+                        foreground = colors["white"],
+                        padding = 5,
+                        background = colors["grey"],
+                        #empty_group_string="Desktop",
+                        empty_group_string=" Desktop",
+                        width = bar.CALCULATED,
+                        max_chars = 30, # 130
+                        parse_text = txtparse,
+                        ),
+                    widget.TextBox(" ", padding = 0, background = colors["transparent"]),
+                    widget.WindowCount(
+                        fontsize = 15,
+                        padding = 5,
+                        background = colors["grey"],
+                        ),
+                    widget.TextBox(" ", padding = 0, background = colors["transparent"]),
+                    widget.TaskList(
+                        #**deco,
+                        foreground           = colors["skin_light"], #f4dbd6
+                        border               = colors["grey_light"], #464d64
+                        #border               = colors["transparent"], #464d64
+                        background           = colors["transparent"], #464d64
+                        unfocused_border     = colors["grey"],       #363a4f
+                        urgent_border        = colors["red"],        #ed8796
+                        theme_mode           = "preferred",
+                        theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
+                        fontsize             = 20,
+                        icon_size            = 20, #25
+                        padding_y            = 2,
+                        padding_x            = 0,
+                        spacing              = 10,
+                        rounded              = True,
+                        txt_floating         = '🗗',
+                        txt_maximized        = '🗖',
+                        txt_minimized        = '🗕',
+                        markup_focused       = "", # "{}"
+                        markup_normal        = "",
+                        markup_floating      = "🗗",
+                        markup_minimized     = "🗕",
+                        markup_maximized     = "🗖",
+                        urgent_alert_method  = 'border',
+                        #title_width_method  = 'uniform',
+                        window_name_location = False,
+                        highlight_method     = "block", #border, block
+                        #icon_size           = 3,
+                        mouse_callbacks      = {'Button2': lazy.window.kill()},
+                        ),
+
+                ##########
+                # Center #
+                ##########
+
+                    widget.Spacer(background = "#00000000"),
+
+
+                 ],
+                20, # 40
+                #margin       = [5, 5, 0, 5],
+                margin = 5,
+                background   = colors["transparent"], #00000000
+                ),
+
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
