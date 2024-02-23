@@ -216,7 +216,12 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(),               desc="Reload the config"),
     Key([mod, "shift"], "q", lazy.shutdown(),                      desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(),                               desc="Spawn a command using a prompt widget"),
-    Key([mod], "b", lazy.hide_show_bar("top"),                     desc="Toggle bar"),
+
+    Key([mod], "b",
+        lazy.hide_show_bar("top"),
+        lazy.hide_show_bar("bottom"),
+        desc="Toggle all bars"
+        ),
 
     # Scratchpads
 
@@ -329,11 +334,11 @@ layouts = [
      #layout.MonadWide(),
      layout.Columns(
          **layout_default,
-        margin                  = [10, 10, 0, 10],
-        #margin                  = 10,
+        #margin                  = [10, 10, 0, 10],
+        margin                  = 10,
         border_width            = 2,
-        #margin_on_single        = 10,
-        margin_on_single        = [10, 10, 0, 10],
+        margin_on_single        = 10,
+        #margin_on_single        = [10, 10, 0, 10],
         grow_amount             = 10,
         border_on_single        = False,
         insert_position         = 1,
@@ -391,7 +396,7 @@ layouts = [
 endofbar = {
     "padding":     0,
     "fontsize":    32, # 50 for slash, 28 for rounded edge
-    "background":  colors["transparent"],
+    "background":  colors["semi_transparent"],
     "foreground":  colors["grey"],
     }
 
@@ -446,8 +451,12 @@ screens = [
                 ########
 
                 widget.TextBox(
-                    **endofbar,
-                    text = "", # 
+                    #**endofbar,
+                    padding   =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge
+                    foreground =   colors["grey"],
+                    text = "", #   
+                    background = colors["transparent"],
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.CPU(
@@ -483,7 +492,8 @@ screens = [
                 widget.Memory(
                     **deco,
                     foreground      = colors["purple_light"], #91d7e3
-                    format          = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                    #format          = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                    format          = '  {MemUsed:.0f}{mm}',
                     measure_mem     = 'G',
                     measure_swap    = 'G',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
@@ -497,7 +507,7 @@ screens = [
                     **endofbar,
                     text = "", # 
                     ),
-                widget.Spacer(background = "#00000000"),
+                widget.Spacer(background = colors["semi_transparent"]),
 
 
 
@@ -507,7 +517,7 @@ screens = [
 
                 widget.TextBox(
                     **endofbar,
-                    text = "", # 
+                    text = "", #   
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
@@ -569,9 +579,9 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     **endofbar,
-                    text = "", # 
+                    text = "", #   
                     ),
-                widget.Spacer(background = "#00000000"),
+                widget.Spacer(background = colors["semi_transparent"]),
 
 
 
@@ -646,8 +656,12 @@ screens = [
                         #),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    **endofbar,
-                    text = "", # 
+                    #**endofbar,
+                    text = "", #  
+                    padding   =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge
+                    foreground =   colors["grey"],
+                    background = colors["transparent"],
                     ),
             ],
             40, #36 -- bar height -- 40 for transparency
@@ -669,7 +683,7 @@ screens = [
                 widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                 widget.WindowName(
                         fontsize = 15,
-                        format = ' {name}',
+                        format = '  {name}',
                         foreground = colors["white"],
                         padding = 5,
                         background = colors["grey"],
