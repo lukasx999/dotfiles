@@ -34,7 +34,7 @@ from libqtile.utils import guess_terminal, send_notification
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 #from qtile_extras.widget.decorations import BorderDecoration
-#from qtile_extras.widget.decorations import PowerLineDecoration
+from qtile_extras.widget.decorations import PowerLineDecoration
 
 from colorschemes import colors # colorschemes.py
 
@@ -409,12 +409,12 @@ deco = {
             radius      = 12, # 13 -- 12 for 40 bar height
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
-            padding_y   = 7, #5 -- 7 for 40 bar height
+            padding_y   = 5, #5 -- 7 for 40 bar height
             padding_x   = 0,
             extrawidth  = 0,
             group       = False,
-            line_width  = 1, # 1
-            )
+            line_width  = 0, # 1
+            ),
             ],
         }
 
@@ -422,7 +422,7 @@ deco = {
 widget_defaults = dict(
     #fontshadow = '#363a4f',
     font       = "JetBrainsMono Nerd Font",
-    fontsize   = 18,
+    fontsize   = 16, # 18 for 40 bar height
     foreground = colors["white"], #cad3f5
     background = colors["grey"],  #363a4f
     #background = '#00000000',
@@ -531,8 +531,28 @@ screens = [
                     ),
 
                 widget.TextBox(" ", padding = 0),
+                widget.TextBox(
+                    text = "", #   
+                    foreground = colors["grey_light"],
+                    padding = 0,
+                    fontsize = 20,
+                    ),
                 widget.GroupBox( # GroupBox2
-                    **deco,
+                    #**deco,
+                    decorations = [
+                        RectDecoration(
+                            colour      = colors["grey_light"],   #464d64
+                            line_colour = colors["grey_lighter"], #5b6078
+                            radius      = 0, # 13 -- 12 for 40 bar height
+                            clip        = False, # Line mode in groupbox wont work unless this is False
+                            filled      = True,
+                            padding_y   = 5, #5 -- 7 for 40 bar height
+                            padding_x   = 0,
+                            extrawidth  = 0,
+                            group       = False,
+                            line_width  = 0, # 1
+                            ),
+                            ],
                     fmt                        = '{}',
                     toggle                     = True,
                     borderwidth                = 3, # 3 width of line
@@ -556,6 +576,12 @@ screens = [
                     urgent_text                = colors["red"],          #ed8796
                     this_current_screen_border = colors["blue"],         #8aadf4
                     this_screen_border         = colors["grey_light"],   #494d64
+                    ),
+                widget.TextBox(
+                    text = "", #   
+                    foreground = colors["grey_light"],
+                    padding = 0,
+                    fontsize = 20,
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.CurrentLayoutIcon(
@@ -664,7 +690,7 @@ screens = [
                     background = colors["transparent"],
                     ),
             ],
-            40, #36 -- bar height -- 40 for transparency
+            36, #36 -- bar height -- 40 for transparency
             margin       = [5, 5, 0, 5],
             background   = colors["transparent"], #00000000
             reserve      = True,
