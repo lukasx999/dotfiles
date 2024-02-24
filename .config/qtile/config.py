@@ -132,20 +132,20 @@ def new_client(client):
 
 @hook.subscribe.client_new
 def game_launched(client):
-    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend":
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War":
         client.togroup("5", switch_group=True)
         qtile.spawn(comp_off)
 
 @hook.subscribe.client_killed
 def game_closed(client):
-    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend":
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War":
         #qtile.current_screen.set_group(qtile.current_screen.previous_group)
         qtile.current_screen.set_group(qtile.current_screen.toggle_group("4"))
         qtile.spawn(comp_on)
 
 @hook.subscribe.client_focus # DOES NOT WORK ON DESKTOP
 def client_focus(client):
-    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend":
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War":
         qtile.spawn(comp_off)
     else:
         qtile.spawn(comp_on)
@@ -265,6 +265,7 @@ keys = [
         lazy.hide_show_bar("bottom"),
         desc="Toggle all bars"
         ),
+    Key([mod], "v", lazy.hide_show_bar("bottom"),                  desc="Spawn a command using a prompt widget"),
 
     # Scratchpads
 
@@ -495,10 +496,10 @@ screens = [
 
                 widget.TextBox(
                     #**endofbar,
-                    padding   =  0,
+                    padding    =  0,
                     fontsize   = 32, # 50 for slash, 28 for rounded edge
                     foreground =   colors["grey"],
-                    text = "", #   
+                    text       = "", #   
                     background = colors["transparent"],
                     ),
                 widget.TextBox(" ", padding = 0),
@@ -564,9 +565,9 @@ screens = [
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    fontsize = 20,
-                    padding  = 10,
-                    text     = "󰣇", #  󰣇
+                    fontsize        = 20,
+                    padding         = 10,
+                    text            = "󰣇", #  󰣇
                     mouse_callbacks = {
                         'Button1': lambda: qtile.cmd_spawn(run),
                         'Button2': lambda: qtile.cmd_spawn(terminal),
@@ -575,10 +576,10 @@ screens = [
 
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    text = "", #   
+                    text       = "", #   
                     foreground = colors["grey_light"],
-                    padding = 0,
-                    fontsize = 20,
+                    padding    = 0,
+                    fontsize   = 20,
                     ),
                 widget.GroupBox( # GroupBox2
                     #**deco,
@@ -621,10 +622,10 @@ screens = [
                     this_screen_border         = colors["grey_light"],   #494d64
                     ),
                 widget.TextBox(
-                    text = "", #   
+                    text       = "", #   
                     foreground = colors["grey_light"],
-                    padding = 0,
-                    fontsize = 20,
+                    padding    = 0,
+                    fontsize   = 20,
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.CurrentLayoutIcon(
@@ -726,10 +727,10 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     #**endofbar,
-                    text = "", #  
-                    padding   =  0,
-                    fontsize   = 32, # 50 for slash, 28 for rounded edge
-                    foreground =   colors["grey"],
+                    text       = "", #     
+                    padding    =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge -- 32
+                    foreground = colors["grey"],
                     background = colors["transparent"],
                     ),
             ],
@@ -751,21 +752,20 @@ screens = [
 
                 widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                 widget.WindowName(
-                        fontsize = 15,
-                        format = '  {name}',
-                        foreground = colors["white"],
-                        padding = 5,
-                        background = colors["grey"],
-                        #empty_group_string="Desktop",
-                        empty_group_string="  Desktop",
-                        width = bar.CALCULATED,
-                        max_chars = 30, # 130
-                        parse_text = txtparse,
+                        fontsize           = 15,
+                        format             = '  {name}',
+                        foreground         = colors["white"],
+                        padding            = 5,
+                        background         = colors["grey"],
+                        empty_group_string = "  Desktop",
+                        width              = bar.CALCULATED,
+                        max_chars          = 30, # 130
+                        parse_text         = txtparse,
                         ),
                     widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                     widget.WindowCount(
-                        fontsize = 15,
-                        padding = 5,
+                        fontsize   = 15,
+                        padding    = 5,
                         background = colors["grey"],
                         ),
                     widget.TextBox(" ", padding = 0, background = colors["transparent"]),
@@ -811,8 +811,8 @@ screens = [
                  ],
                 20, # 40
                 #margin       = [5, 5, 0, 5],
-                margin = 5,
-                background   = colors["transparent"], #00000000
+                margin     = 5,
+                background = colors["transparent"], #00000000
                 ),
 
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy

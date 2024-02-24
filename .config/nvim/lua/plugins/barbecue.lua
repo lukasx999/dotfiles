@@ -1,5 +1,3 @@
-return {}
---[[
 return {
 
   "utilyre/barbecue.nvim",
@@ -43,4 +41,3 @@ end
 
 }
 
-]]
