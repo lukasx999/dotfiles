@@ -69,6 +69,9 @@ run         = "rofi -show drun"
 lock        = "betterlockscreen -l blur"
 screenshot  = "flameshot gui"
 
+comp_on     = "picom -b"
+comp_off    = "pkill picom"
+
 
 
 #     __                  _   _                 
@@ -90,10 +93,10 @@ def minimize_all(qtile):
 @lazy.function # Toggle between 2 layouts
 def toggle_max(qtile):
     current_layout_name = qtile.current_group.layout.name
-    if current_layout_name == 'tile':
+    if current_layout_name == 'columns':
         qtile.current_group.layout = 'max'
     elif current_layout_name == 'max':
-        qtile.current_group.layout = 'tile'
+        qtile.current_group.layout = 'columns'
 
 
 @lazy.function # Move window to next group
@@ -110,6 +113,46 @@ def window_to_prev_group(qtile):
         qtile.current_window.togroup(qtile.groups[i - 1].name, switch_group=True)
         #qtile.current_screen.toggle_group(qtile.groups[i - 1])
 
+
+
+
+@hook.subscribe.client_new # Move specific windows to groups when they are launched
+def new_client(client):
+    if client.name == "Steam":
+        client.togroup("4")
+    if client.name == "Friends - Discord":
+        client.togroup("6")
+
+
+
+# Gaming
+
+# when a game launches, move to to WS5 and disable compositor
+# when the games gets closed, switch back to Steam on WS4 and turn on comp again
+
+@hook.subscribe.client_new
+def game_launched(client):
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend":
+        client.togroup("5", switch_group=True)
+        qtile.spawn(comp_off)
+
+@hook.subscribe.client_killed
+def game_closed(client):
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend":
+        #qtile.current_screen.set_group(qtile.current_screen.previous_group)
+        qtile.current_screen.set_group(qtile.current_screen.toggle_group("4"))
+        qtile.spawn(comp_on)
+
+@hook.subscribe.client_focus # DOES NOT WORK ON DESKTOP
+def client_focus(client):
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend":
+        qtile.spawn(comp_off)
+    else:
+        qtile.spawn(comp_on)
+
+@hook.subscribe.layout_change
+def layout_change(layout, group):
+    qtile.spawn(comp_on)
 
 
 #@hook.subscribe.startup_once # Autostart script
@@ -243,7 +286,7 @@ keys = [
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
-group_labels = ["", "󰖟", "", "󰓓", "󰙯", "󰏃", "󰏃", "󰏃", "󰏃",] #    
+group_labels = ["", "", "", "󰓓", "󰊗", "󰙯", "󰏃", "󰏃", "󰏃",] #      󰖟
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
 group_layouts = ["columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns"]
@@ -714,7 +757,7 @@ screens = [
                         padding = 5,
                         background = colors["grey"],
                         #empty_group_string="Desktop",
-                        empty_group_string=" Desktop",
+                        empty_group_string="  Desktop",
                         width = bar.CALCULATED,
                         max_chars = 30, # 130
                         parse_text = txtparse,
