@@ -1,0 +1,87 @@
+#!/bin/sh
+
+
+
+#     __                     
+#    / _|_   _ _________   _ 
+#   | |_| | | |_  /_  / | | |
+#   |  _| |_| |/ / / /| |_| |
+#   |_|  \__,_/___/___|\__, |
+#                      |___/ 
+
+
+
+# Usage: $ fuzzy <dir>
+# default dir: /
+
+# Allows you to fuzzy find all files on the system on then opens files with corresponding programs
+
+# ToDo:
+# Icons
+
+
+
+dir=$1
+[[ "$dir" = "" ]] && dir="/"
+
+
+# using fzf
+# -type f doesnt show symlinks
+selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+# using fzy
+#selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | fzy)
+
+
+
+# loading dirs first, then executing fzf
+#list=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/')
+#selection=$(echo $list | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+
+
+
+
+
+[[ "$selection" = "" ]] && return 0
+
+filetype=$(file $selection | awk '{print $2}') # type of file (2nd column of find)
+dirpath=$(echo $selection | rev | cut -d'/' -f2- | rev) # full path without last element (ie.: /etc/pacman.conf -> /etc)
+
+filename=$(basename -- "$selection") # file name without full path
+extension="${filename##*.}" # file extension (no .)
+filename="${filename%.*}"
+
+
+
+
+
+#symlinks
+#[[ "$filetype" = "symbolic" ]] && cd $selection && return 0
+
+# directories
+[[ "$filetype" = "directory" ]] && cd $selection && return 0
+
+# images
+[[ "$filetype" = "PNG" ]] || [[ "$filetype" = "JPEG" ]] && cd $dirpath && $IMGVIEWER $selection && return 0
+
+# file extensions (txt)
+[[ "$extension" = "c" ]] || [[ "$extension" = "py" ]] || [[ "$extension" = "cpp" ]] || [[ "$extension" = "sh" ]] && cd $dirpath && $EDITOR $selection && return 0
+
+# pdfs
+[[ "$extension" = "pdf" ]] && cd $dirpath && $PDFVIEWER $selection && return 0
+
+# text files
+#[[ "$filetype" = "Unicode" ]] || [[ "$filetype" = "Python" ]] || [[ "$filetype" = "ASCII" ]] || [[ "$filetype" = "POSIX" ]] || [[ "$filetype" = "Paul" ]] && cd $dirpath && $EDITOR $selection
+[[ "$filetype" = "Unicode" ]] || [[ "$filetype" = "Python" ]] || [[ "$filetype" = "ASCII" ]] && cd $dirpath && $EDITOR $selection && return 0
+
+# shell scripts
+shebang=$(cat $selection | sed 1q | grep \#!)
+[[ "$shebang" != "" ]] && cd $dirpath && $EDITOR $selection && return 0
+
+# executables
+[[ -x "$selection" ]] && $selection && return 0
+
+
+
+

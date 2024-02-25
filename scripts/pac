@@ -1,0 +1,15 @@
+#!/bin/sh
+
+selection=$(echo -e "Install\nUpgrade\nRemove\nUpdate" | fzy)
+
+#[[ "$selection" = "Install" ]] && pacman -Slq | fzf --multi --preview 'pacman -Si {1}'
+[[ "$selection" = "Install" ]] && pacman -Slq | fzf
+[[ "$selection" = "Remove" ]] && pacman -Qq | fzf --multi --preview 'pacman -Qi {1}'
+[[ "$selection" = "Update" ]] && echo "Update"
+[[ "$selection" = "Upgrade" ]] && pacman -Qu | fzf --multi --preview 'pacman -Qi {1}'
+
+all=$(pacman -Slq)
+installed=$(pacman -Qq)
+
+diff=$(diff <$all <$installed)
+echo $diff
