@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+
+
+
+while [ 1 ]; do
+
+list=$(tree -fai -L 8 --noreport / 2>/dev/null | grep -vEi '/proc/|/dev/|>|/tmp/|cache|/sys/')
+echo $list > fuzzylist
+echo "done"
+
+# check if new files have been created
+filecount=$(echo $list | wc -l)
+diff=$((filecount-filecountold))
+echo $diff
+
+filecountold=$filecount
+
+
+
+
+#size=$(df | grep /dev/sda3 | awk '{print $3}')
+#sizediff=$((size-sizeold))
+#echo $sizediff
+#sizeold=$size
+
+
+
+
+sleep 10; done

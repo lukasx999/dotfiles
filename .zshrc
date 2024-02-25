@@ -61,7 +61,23 @@ export BROWSER="librewolf"
 
 #for fzy finder
 export IMGVIEWER="nsxiv"
+#export FZF_DEFAULT_OPTS="--color='fg:#cad3f5,bg:#363a4f,fg+:#8aadf4,bg+:#464d64,pointer:#ed8796,prompt:#8aadf4,spinner:#8aadf4,info:#b7bdf8,border:#cad3f5,label:#cad3f5' --preview='head -$LINES {}' --border=rounded --border-label='╢ fuzzy ╟' --info=default --separator='─' --scrollbar='' --prompt='->' --pointer='->'"
 
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#363a4f,bg:#24273a,spinner:#c6a0f6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#8aadf4,pointer:#ed8796 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+--color=border:#464d64,label:#464d64,gutter:#363a4f \
+--border=rounded \
+--preview-window '-3' \
+--border-label='╢ fuzzy ╟' \
+--info=default \
+--separator='─' \
+--scrollbar='' \
+--prompt='->' \
+--pointer='->'"
+
+#--preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null' \
 
 # xsecurelock settings
 #export XSECURELOCK_AUTH_CURSOR_BLINK=0
@@ -122,7 +138,7 @@ alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port
 #alias pac='pacman'
 #alias cat='bat -pp'
 #alias fzy='~/scripts/fuzzyfinder'
-alias fuzzy='source ~/scripts/fuzzy'
+alias fuzzy='source ~/scripts/fuzzyfinder/fuzzy'
 alias vim='nvim'
 alias vi='/bin/vim'
 alias cat='bat --paging=never -n'
