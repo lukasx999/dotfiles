@@ -70,34 +70,35 @@ conky.config = {
 --${color3}Info:$color ${scroll 32 Conky $conky_version - $sysname $nodename $kernel $machine}
 
 conky.text = [[
-
 ${alignc}${voffset 26}${color3}${font Raleway:bold:size=40}${time %H:%M}${font}
 ${alignc}${voffset 5}${color6}${font Raleway:size=14}${time %A, %B %d}
 ${font JetBrainsMono Nerd Font}
 ${alignc}${color3}$nodename ${color4}$kernel ${color3}$machine
-${voffset 6}${alignc}${color6}${font3}󱦟 ${uptime}
 
-${voffset 18}${goto 12}${color3}${font3} CPU ${voffset -2}${hr}
-${goto 12}${color6}${font}󰓅 Use: ${color2}${alignr}${cpu}%
-${goto 12}${color6}${font}󰞱 Freq: ${color2}${alignr}${freq_g}GHz
-${goto 12}${color6}${font} Temp: ${color2}${alignr}${exec sensors | grep -A 0 'Package id 0' | cut -c17-23}
-${voffset 14}${goto 12}${font3}${color7} RAM ${voffset -2}${hr}
-${goto 12}${color6}${font}󰣖 Use: ${color2}${alignr}${mem}/${memmax}
-${goto 12}${color6}${font}󰓡 Swap: ${color2}${alignr}${swap}/${swapmax}
-${goto 12}${voffset 14}${color5}${font4}󰾲 GPU ${voffset -2}${hr}
-${goto 12}${color6}${font}󰓅 Use:${color2}${alignr}${nvidia gpuutil}%
-${goto 12}${color6}${font}󰣖 Mem:${color2}${alignr}${nvidia memused}M/${nvidia memmax}M
-${goto 12}${color6}${font} Temp:${color2}${alignr}${nvidia temp}ºC
-${goto 12}${voffset 14}${color8}${font4} Disk ${voffset -2}${hr}
-${goto 12}${color6}${font}󰋊 Size: ${color2}${alignr}${fs_used /}/${fs_size /}
-${goto 12}${color6}${font}󰈙 Read: ${color2}${alignr}${diskio_read}
-${goto 12}${color6}${font}󰏫 Write: ${color2}${alignr}${diskio_write}
-${goto 12}${voffset 14}${color4}${font3}󱂇 Processes ${voffset -2}${hr}
+${color2}$hr
 
-${color8}Name                PID    CPU%   MEM%
-${color2}${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
-${color2}${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
-${color2}${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
-${color2}${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
+${color6}Uptime:${color2} $uptime
+${color6}Frequency (in MHz):${color2} $freq
+${color6}Frequency (in GHz):${color2} $freq_g
+${color6}RAM Usage:${color2} $mem/$memmax - $memperc% ${membar 4}
+${color6}Swap Usage:${color2} $swap/$swapmax - $swapperc% ${swapbar 4}
+${color6}CPU Usage:${color2} $cpu% ${cpubar 4}
+${color6}Processes:${color2} $processes  ${color6}Running:${color2} $running_processes
+
+${color2}$hr
+
+${color7}File systems:
+  ${color6}/: ${color2}${fs_used /} / ${fs_size /} ${fs_bar 6 /}
+${color7}Networking:
+  ${color6}Up:  ${color2} ${upspeed}${color2}
+  ${color6}Down:${color2} ${downspeed}
+
+${color2}$hr
+
+${color8} Name                PID    CPU%   MEM%
+${color2} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+${color2} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+${color2} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+${color2} ${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
 
 ]]

@@ -132,20 +132,20 @@ def new_client(client):
 
 @hook.subscribe.client_new
 def game_launched(client):
-    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War":
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War" or client.name == "ELDEN RING":
         client.togroup("5", switch_group=True)
         qtile.spawn(comp_off)
 
 @hook.subscribe.client_killed
 def game_closed(client):
-    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War":
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War" or client.name == "ELDEN RING":
         #qtile.current_screen.set_group(qtile.current_screen.previous_group)
         qtile.current_screen.set_group(qtile.current_screen.toggle_group("4"))
         qtile.spawn(comp_on)
 
 @hook.subscribe.client_focus # DOES NOT WORK ON DESKTOP
 def client_focus(client):
-    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War":
+    if client.name == "ULTRAKILL" or client.name == "Wizard of Legend" or client.name == "God of War" or client.name == "ELDEN RING":
         qtile.spawn(comp_off)
     else:
         qtile.spawn(comp_on)
@@ -506,7 +506,7 @@ screens = [
                 widget.CPU(
                     **deco,
                     foreground      = colors["blue_light"], #7dc4e4
-                    format          = '  {freq_current}GHz {load_percent}%',
+                    format          = '  {freq_current}GHz {load_percent}%', # 
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
                     ),
 
@@ -525,7 +525,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.NvidiaSensors(
                     **deco,
-                    format           = '  {temp}°C',
+                    format           = '  {temp}°C', #  󰾲
                     foreground       = colors["purple"], #7dc4e4
                     foreground_alert = colors["red"],    #ed8796
                     threshold        = 70,
@@ -537,7 +537,7 @@ screens = [
                     **deco,
                     foreground      = colors["purple_light"], #91d7e3
                     #format          = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
-                    format          = '  {MemUsed:.0f}{mm}',
+                    format          = '  {MemUsed:.0f}{mm}', # 
                     measure_mem     = 'G',
                     measure_swap    = 'G',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},

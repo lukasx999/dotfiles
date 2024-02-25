@@ -52,6 +52,7 @@ htop
 ### Terminal Applications
 
 kitty
+fzf
 zsh
   * "zsh plugins" (see ~/.zshrc)
 neovim

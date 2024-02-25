@@ -1,3 +1,18 @@
+
+
+#            _              
+#    _______| |__  _ __ ___ 
+#   |_  / __| '_ \| '__/ __|
+#    / /\__ \ | | | | | (__ 
+#   /___|___/_| |_|_|  \___|
+
+
+
+colorscript random
+
+
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -8,9 +23,10 @@ fi
 
 # Created by newuser for 5.9
 
-#colorscript random
 
-setopt auto_cd
+setopt auto_cd # cding into dirs by just typing the name
+
+bindkey -v # enable vi mode
 
 #lf
 LFCD="/home/lukas/.config/lf/lfcd.sh"
@@ -25,11 +41,17 @@ alias lf='lfcd'
 bindkey -s '^y' 'lf\n'
 bindkey -s '^x' 'nvim\n'
 bindkey -s '^a' 'tmux\n'
+bindkey -s '^f' 'fuzzy\n'
 
 
-xset r rate 300 50
-xinput set-prop 9 'libinput Accel Speed' -0.6
-setxkbmap de
+#xset r rate 300 50 # fast scrolling in vim
+#xinput set-prop 9 'libinput Accel Speed' -0.6
+#setxkbmap de
+
+alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.6 && setxkbmap de'
+
+
+
 
 #default apps
 export EDITOR="nvim"
@@ -37,31 +59,43 @@ export SUDO_EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="librewolf"
 
+#for fzy finder
+export IMGVIEWER="nsxiv"
 
 
-#export PATH=$PATH:~/scripts
+# xsecurelock settings
+#export XSECURELOCK_AUTH_CURSOR_BLINK=0
+#export XSECURELOCK_AUTH_TIMEOUT=15
+#export XSECURELOCK_BLANK_TIMEOUT=-1
+#export XSECURELOCK_AUTH_FOREGROUND_COLOR='#cad3f5'
+#export XSECURELOCK_AUTH_BACKGROUND_COLOR='#464b64'
+#export XSECURELOCK_BACKGROUND_COLOR='#363a4f'
+#export XSECURELOCK_FONT='JetBrainsMono Nerd Font Mono'
+#export XSECURELOCK_PASSWORD_PROMPT="asterisks" #asterisks, cursor, time, time_hex
+#export XSECURELOCK_SHOW_DATETIME=1
+#export XSECURELOCK_SHOW_HOSTNAME=1
+#export XSECURELOCK_SHOW_USERNAME=1
+#export XSECURELOCK_SHOW_KEYBOARD_LAYOUT=1
+#export XSECURELOCK_DATETIME_FORMAT='%d.%m.%Y - %R'
+
+
 
 #symbols:
-
 #Ω
-#∮
 #∮
 #Δ
 #δ
 #∇
-
-#nord theme:
-#PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}∇ %b%f"
-#catppuccin theme:
-PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}Σ %b%f"
+#φ
+#ψ
 
 
 
-#PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}φ %b%f"
-#PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}ψ %b%f"
-#PROMPT="%F{#eceff4}%B%1~ %F{#81a1c1}∮ %b%f"
-#PROMPT="%F{#81a1c1}%BΔ %F{#eceff4}%1~ %F{#81a1c1}∇ %b%f"
-#PROMPT="%F{#81a1c1}%B∮ %F{#eceff4}%1~ %F{#81a1c1}∮ %b%f"
+# setting PS1
+PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
+
+
+
 
 
 #enable colors
@@ -77,25 +111,33 @@ _comp_options+=(globdots) #include hidden files
 
 alias ltspice='wine ~/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe'
 #platformio core
-alias PIO_UPL='pio run --upload-port /dev/ttyACM0 -t upload'
+alias PIO_UP='pio run --upload-port /dev/ttyACM0 -t upload'
 alias PIO_MON='pio run --upload-port /dev/ttyACM0 -t monitor'
 alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port /dev/ttyACM0 -t monitor'
 
 
 
-#alias sudo='sudo -E'
+#alias sudo='sudo -E' # preserve enviroment when running sudo
 
 #alias pac='pacman'
+#alias cat='bat -pp'
+#alias fzy='~/scripts/fuzzyfinder'
+alias fuzzy='source ~/scripts/fuzzy'
+alias vim='nvim'
+alias vi='/bin/vim'
+alias cat='bat --paging=never -n'
+alias eza='eza -F --icons=auto --group-directories-first'
+alias ls='eza'
+#alias ls='ls -F --color=auto --group-directories-first'
 alias rm='rm -vi'
 alias mv='mv -vi'
 alias cp='cp -vi'
 alias mkdir='mkdir -v'
 alias weather='curl wttr.in'
-alias ls='ls -h --color=auto --group-directories-first'
 alias grep='grep --color=auto'
-alias ll='ls -l'
-alias la='ls -a'
-alias lla='ls -al'
+alias ll='ls -lh'
+alias la='ls -A'
+alias lla='ls -Al'
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
 
@@ -105,10 +147,12 @@ alias shark='~/XSoftware/display3d/target/release/display3d ~/XSoftware/display3
 alias tock='~/XSoftware/tock/target/release/tock'
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
-source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
+
+# plugins
+#source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-#source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+#source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

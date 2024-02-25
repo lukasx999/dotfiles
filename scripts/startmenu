@@ -1,8 +1,9 @@
 #!/bin/sh
 
-selection=$(echo -e "Terminal\nWeb\nCode\nScreenshot\nIncVol\nDecVol\nMuteVol\nSelWall" | rofi -dmenu)
+selection=$(echo -e "Terminal\nChange Appearance\nWeb\nCode\nScreenshot\nIncVol\nDecVol\nMuteVol\nSelWall" | rofi -dmenu)
 
 [ "$selection" = "Terminal" ] && kitty
+[ "$selection" = "Change Appearance" ] && lxappearance 
 [ "$selection" = "Web" ] && google-chrome-stable
 [ "$selection" = "Code" ] && code
 [ "$selection" = "Screenshot" ] && flameshot
