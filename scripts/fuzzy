@@ -19,6 +19,13 @@
 
 # ToDo:
 # Icons
+# Sort Files
+# add better filtering
+# fix /home/ and . issue
+# show most recent files first
+# show "startpage": user can put in their most used files that will be shown at startup -- maybe at file list like $config and then run diff?
+# -type f takes a bit longer at startup and then gets faster -- maybe run the script silently at boot?
+# bat error "#filter: ..." no such file or directory
 
 
 
@@ -31,10 +38,13 @@ config=$(echo -e "\
 #search in .\n\
 #search in /\n\
 #search in ~\n\
-#toggle filter\n\
-#filter on\n\
-#filter off\
+#filter: default\n\
+#filter: none\n\
+#filter: only dirs\
 ") # possibly "\" ?
+
+
+
 
 
 
@@ -43,11 +53,27 @@ dir=$1
 [[ "$dir" = "" ]] && dir="/"
 
 filter=$2
-[[ "$filter" = "" ]] && filter="filter"
+[[ "$filter" = "" ]] && filter="default"
 
-[[ "$filter" = "filter" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
 
-[[ "$filter" = "all" ]] && selection=$(cat <(find $dir 2>/dev/null) <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+# -type f for regular files --- 50 is max char limit
+
+[[ "$filter" = "default" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount -type f 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+[[ "$filter" = "none" ]] && selection=$(cat <(find $dir 2>/dev/null) <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+[[ "$filter" = "onlydir" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount -type d 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+
+
+
+
+
+# show most recent files first
+
+#[[ "$filter" = "default" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount -type f -printf '%T@ %p\n' 2>/dev/null | sort -k 1nr | sed 's/^[^ ]* //' | tr '\0' '\n' | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
 
 
 
@@ -82,8 +108,9 @@ filter=$2
 # file error msg
 
 
+# old code:
 
-
+#[[ "$filter" = "filter" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
 
 
 #selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}' | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
@@ -146,12 +173,19 @@ shebang=$(cat $selection | sed 1q | grep \#!)
 [[ "$selection" = "#search in ~" ]] && fuzzy ~ $filter && return 0
 
 
-# toggle filter
-[[ "$selection" = "#toggle filter" ]] && [[ "$filter" = "filter" ]] && fuzzy $dir all && return 0
-[[ "$selection" = "#toggle filter" ]] && [[ "$filter" = "all" ]] && fuzzy $dir filter && return 0
+# filters
 
-[[ "$selection" = "#filter on" ]] && fuzzy $dir filter && return 0
-[[ "$selection" = "#filter off" ]] && fuzzy $dir all && return 0
+[[ "$selection" = "#filter: none" ]] && fuzzy $dir none && return 0
+[[ "$selection" = "#filter: default" ]] && fuzzy $dir default && return 0
+[[ "$selection" = "#filter: only dirs" ]] && fuzzy $dir onlydir && return 0
+
+
+
+#[[ "$selection" = "filter: toggle (default <-> none)" ]] && [[ "$filter" = "default" ]] && fuzzy $dir none && return 0
+#[[ "$selection" = "filter: toggle (default <-> none)" ]] && [[ "$filter" = "none" ]] && fuzzy $dir default && return 0
+
+
+
 
 
 
