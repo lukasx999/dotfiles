@@ -11,5 +11,5 @@ selection=$(echo -e "Install\nUpgrade\nRemove\nUpdate" | fzy)
 all=$(pacman -Slq)
 installed=$(pacman -Qq)
 
-diff=$(diff <$all <$installed)
+diff=$(diff <($all) <($installed))
 echo $diff

@@ -11,8 +11,9 @@
 
 
 
-# Usage: $ fuzzy <dir>
+# Usage: $ fuzzy <dir> <filter>
 # default dir: /
+# if the filter flag is selected, no filters will be applied (longer loading time)
 
 # Allows you to fuzzy find all files on the system on then opens files with corresponding programs
 
@@ -21,24 +22,76 @@
 
 
 
+
+
+#config=$(echo -e "#search in cwd\n#search in /\n#toggle filter\n#filter on\n#filter off") # possibly "\" ?
+
+
+config=$(echo -e "\
+#search in .\n\
+#search in /\n\
+#search in ~\n\
+#toggle filter\n\
+#filter on\n\
+#filter off\
+") # possibly "\" ?
+
+
+
+
 dir=$1
 [[ "$dir" = "" ]] && dir="/"
 
+filter=$2
+[[ "$filter" = "" ]] && filter="filter"
+
+[[ "$filter" = "filter" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+[[ "$filter" = "all" ]] && selection=$(cat <(find $dir 2>/dev/null) <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+
+
+
+# PROBLEM: using full path instead of . will add more chars and therefore limit search results
+
+#[[ "$dir" != "/home/lukas" ]] && [[ "$filter" = "filter" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+# compensating for /home/lukas => 10 extra chars
+#[[ "$dir" = "/home/lukas" ]] && [[ "$filter" = "filter" ]] && selection=$(cat <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{60,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+
+
+
+#config=$(echo -e "#cwd") # possibly "\" ?
+
+
+
 
 # using fzf
-# -type f doesnt show symlinks
-selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+# -type f doesnt show symlinks --- grep -x: only select when entire lines matches regex                          ==> <== this determines how long the maximum file name should be
+
+
+#config=$(echo -e "#cwd") # possibly "\" ?
+
+###!!!
+
+#selection=$(cat <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+
+###!!!
+
+# file error msg
+
+
+
+
+
+
+#selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}' | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+#selection=$(cat <(echo $filter) <(echo $config) | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
+#selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}' | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
 
 # using fzy
 #selection=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | fzy)
-
-
-
-# loading dirs first, then executing fzf
-#list=$(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/')
-#selection=$(echo $list | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null')
-
-
 
 
 
@@ -51,7 +104,6 @@ dirpath=$(echo $selection | rev | cut -d'/' -f2- | rev) # full path without last
 filename=$(basename -- "$selection") # file name without full path
 extension="${filename##*.}" # file extension (no .)
 filename="${filename%.*}"
-
 
 
 
@@ -82,6 +134,24 @@ shebang=$(cat $selection | sed 1q | grep \#!)
 # executables
 [[ -x "$selection" ]] && $selection && return 0
 
+
+
+
+
+# settings
+
+# switch to current working dir
+[[ "$selection" = "#search in ." ]] && fuzzy . $filter && return 0
+[[ "$selection" = "#search in /" ]] && fuzzy / $filter && return 0
+[[ "$selection" = "#search in ~" ]] && fuzzy ~ $filter && return 0
+
+
+# toggle filter
+[[ "$selection" = "#toggle filter" ]] && [[ "$filter" = "filter" ]] && fuzzy $dir all && return 0
+[[ "$selection" = "#toggle filter" ]] && [[ "$filter" = "all" ]] && fuzzy $dir filter && return 0
+
+[[ "$selection" = "#filter on" ]] && fuzzy $dir filter && return 0
+[[ "$selection" = "#filter off" ]] && fuzzy $dir all && return 0
 
 
 
