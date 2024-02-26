@@ -4,7 +4,7 @@ set shell sh
 set hidden true
 set ignorecase true
 set icons true
-set drawbox true
+set drawbox true 
 #set ignorecase true
 #set preview true
 

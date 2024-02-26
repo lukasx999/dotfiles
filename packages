@@ -13,6 +13,7 @@
 Qtile
   * Qtile extra (via AUR/PIP)
 dunst
+network-manager-applet
 rofi
 lxappearance
 conky-lua-nv
@@ -75,6 +76,7 @@ lf
 
 librewolf-bin
 google-chrome-stable
+firefox
 chromium
 vscodium-bin
 visual-studio-code-bin
@@ -88,5 +90,6 @@ flameshot
 #arandr
 firefox
 gimp
+
 
 
