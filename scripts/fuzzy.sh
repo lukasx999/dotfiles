@@ -39,7 +39,7 @@
 #                                    | |_| | | |_  /_  / | | | / __| '_ \ 
 #                                    |  _| |_| |/ / / /| |_| |_\__ \ | | |
 #                                    |_|  \__,_/___/___|\__, (_)___/_| |_|
-#                                                    |___/             
+#                                                       |___/             
 #
 #
 #
@@ -226,7 +226,7 @@ filename="${filename%.*}"
 [[ "$filetype" = "Unicode" ]] || [[ "$filetype" = "Python" ]] || [[ "$filetype" = "ASCII" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # shell scripts
-shebang=$(command cat $selection 2>/dev/null | sed 1q | grep \#!)
+shebang=$(command cat $selection 2>/dev/null | sed 1q | grep ^\#!)
 [[ "$shebang" != "" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # executables
