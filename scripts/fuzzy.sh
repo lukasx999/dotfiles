@@ -74,6 +74,12 @@
 
 
 
+# FEATURES: 
+# * filtering
+# * icons
+# * shows recently editited files or user defined list
+# * colors
+
 
 
 #config=$(echo -e "#search in cwd\n#search in /\n#toggle filter\n#filter on\n#filter off") # possibly "\" ?
@@ -103,8 +109,10 @@ ${Yellow}#search in .\n\
 #search in /\n\
 #search in ~\n\
 #filter: default\n\
-#filter: none\n\
-#filter: only dirs${NC}\
+#filter: advanced\n\
+#filter: icons\n\
+#filter: only dirs\n\
+#filter: none${NC}\
 ") # possibly "\" ?
 
 
@@ -147,7 +155,23 @@ filter=$2
 # type f will not show dirs such as / or /etc
 
 
-[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+
+
+
+
+[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/' | grep -vE '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+
+
+
+[[ "$filter" = "advanced" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/var/|/opt/|/proc/|/dev/|/tmp/|cache|/sys/' | grep -vE '/[^/]{20,}$|/[^/]{20,}/') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+
+
+
+[[ "$filter" = "icons" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 6 -mount 2>/dev/null | grep -vEi '/opt/|/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{30,}' | xargs -L 1 eza -d --icons=always 2>/dev/null) <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | cut -d" " -f 2- | sed "s@^~@/home/$USER@g")
+
 
 
 
@@ -157,6 +181,8 @@ filter=$2
 
 
 [[ "$filter" = "onlydir" ]] && selection=$(cat <(echo $recent | sed 1q) <(find $dir -maxdepth 8 -mount -type d 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+
 
 
 
@@ -254,6 +280,8 @@ shebang=$(command cat $selection 2>/dev/null | sed 1q | grep ^\#!)
 
 [[ "$selection" = "#filter: none" ]] && fuzzy $dir none && return 0
 [[ "$selection" = "#filter: default" ]] && fuzzy $dir default && return 0
+[[ "$selection" = "#filter: advanced" ]] && fuzzy $dir advanced && return 0
+[[ "$selection" = "#filter: icons" ]] && fuzzy $dir icons && return 0
 [[ "$selection" = "#filter: only dirs" ]] && fuzzy $dir onlydir && return 0
 
 
