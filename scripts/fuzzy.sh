@@ -160,12 +160,18 @@ filter=$2
 
 
 
-[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/' | grep -vE '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++{print}' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
 
 
 
 
-[[ "$filter" = "advanced" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/var/|/opt/|/proc/|/dev/|/tmp/|cache|/sys/' | grep -vE '/[^/]{20,}$|/[^/]{20,}/') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+
+
+
+
+[[ "$filter" = "advanced" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|/[^/]{20,}$|/[^/]{20,}/|.{50,} | xargs -L 1 eza -d --icons=always 2>/dev/null') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
 
 
 
@@ -186,6 +192,8 @@ filter=$2
 
 
 
+# TIME TEST
+#[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++{print}' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | sed "s;^~;/home/$USER;g" 1>&2>/dev/null)
 
 
 
@@ -222,6 +230,13 @@ filter=$2
 
 
 #[[ "$filter" = "onlydir" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount -type d 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null' | sed "s@^~@/home/$USER@g")
+
+
+# -type d,f,l -size +1k
+
+
+
+
 
 
 
