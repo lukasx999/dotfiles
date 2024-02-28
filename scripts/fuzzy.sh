@@ -114,16 +114,22 @@ ${Yellow}#search in .\n\
 
 recent=$(echo -e "\
 ${Red}/home/$USER/scripts/fuzzy.sh${NC}\n\
-${Cyan}/home/$USER/scripts\n\
-/home/$USER/.zshrc\n\
-/home/$USER/.xinitrc\n\
-/home/$USER/.config\n\
-/home/$USER/.config/qtile/config.py\n\
-/home/$USER/.config/nvim\n\
-/home/$USER/.config/picom${NC}\
+${Cyan}/home/$USER/scripts${NC}\n\
+${Cyan}/home/$USER/.zshrc${NC}\n\
+${Cyan}/home/$USER/.xinitrc${NC}\n\
+${Cyan}/home/$USER/.config${NC}\n\
+${Cyan}/home/$USER/.config/qtile/config.py${NC}\n\
+${Cyan}/home/$USER/.config/nvim${NC}\n\
+${Cyan}/home/$USER/.config/picom${NC}\
 ")
 
+ignore=$(echo $recent | sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
+
+
+
 #recent=$(find $dir -type f -maxdepth 8 -mount -printf "%T@ %p\n" 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}' | sort -n | tail -n 50 | cut -d' ' -f 2-)
+
+
 
 
 
@@ -141,7 +147,7 @@ filter=$2
 # type f will not show dirs such as / or /etc
 
 
-[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
+[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
 
 
 
