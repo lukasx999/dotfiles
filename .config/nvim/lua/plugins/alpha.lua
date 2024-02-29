@@ -84,11 +84,11 @@ return {
 
      -- Set menu
      dashboard.section.buttons.val = {
-         dashboard.button( "e", "  > New file" , ":ene<CR>"),
-         dashboard.button( "<C-p>", "󰈞  > Find file", ":Telescope find_files<CR>"),
-         dashboard.button( "<leader>ff", "  > Recent"   , ":Telescope oldfiles<CR>"),
-         dashboard.button( "c", "  > Config" , ":cd ~/.config/nvim<CR>"),
-         dashboard.button( "q", "󰅚  > Quit", ":qa<CR>"),
+         dashboard.button( "e", "  -> New file" , ":ene<CR>"),
+         dashboard.button( "<C-p>", "󰈞  -> Find file", ":Telescope find_files<CR>"),
+         dashboard.button( "<leader>ff", "  -> Recent"   , ":Telescope oldfiles<CR>"),
+         dashboard.button( "c", "  -> Config" , ":cd ~/.config/nvim<CR>"),
+         dashboard.button( "q", "󰅚  -> Quit", ":qa<CR>"),
      }
 
 

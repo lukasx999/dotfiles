@@ -367,7 +367,7 @@ groups.append(ScratchPad('scratchpad', [
 
 layout_default = {
     "border_normal": colors["grey"], #363a4f
-    "border_focus":  colors["purple"], #8aadf4
+    "border_focus":  colors["purple_light"], #8aadf4
     }
 
 
@@ -499,7 +499,7 @@ screens = [
                     padding    =  0,
                     fontsize   = 32, # 50 for slash, 28 for rounded edge
                     foreground =   colors["grey"],
-                    text       = "", #   
+                    text       = "", #   
                     background = colors["transparent"],
                     ),
                 widget.TextBox(" ", padding = 0),
@@ -664,19 +664,19 @@ screens = [
                     **endofbar,
                     text = "", # 
                         ),
-                widget.Systray(),
+                #widget.Systray(),
                 widget.TextBox(" ", padding = 0),
-                widget.Bluetooth(
-                    adapter_format       = '{name}',
-                    default_text         = ' {connected_devices}',
-                    symbol_connected     = '*',
-                    symbol_paired        = '-',
-                    symbol_powered       = ('*', '-'),
-                    symbol_unknown       = '?',
-                    separator            = ', ',
-                    show_menu_icons      = True,
-                    hide_unnamed_devices = False,
-                        ),
+                #widget.Bluetooth(
+                    #adapter_format       = '{name}',
+                    #default_text         = ' {connected_devices}',
+                    #symbol_connected     = '*',
+                    #symbol_paired        = '-',
+                    #symbol_powered       = ('*', '-'),
+                    #symbol_unknown       = '?',
+                    #separator            = ', ',
+                    #show_menu_icons      = True,
+                    #hide_unnamed_devices = False,
+                        #),
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
@@ -727,7 +727,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     #**endofbar,
-                    text       = "", #     
+                    text       = "", #     
                     padding    =  0,
                     fontsize   = 32, # 50 for slash, 28 for rounded edge -- 32
                     foreground = colors["grey"],
@@ -750,23 +750,40 @@ screens = [
                 # Left #
                 ########
 
-                widget.TextBox(" ", padding = 0, background = colors["transparent"]),
+                widget.TextBox(
+                    #**endofbar,
+                    padding    =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge
+                    foreground =   colors["grey"],
+                    text       = "", #   
+                    background = colors["transparent"],
+                    ),
+                #widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                 widget.WindowName(
                         fontsize           = 15,
-                        format             = '  {name}',
+                        format             = '   {name}',
                         foreground         = colors["white"],
                         padding            = 5,
                         background         = colors["grey"],
-                        empty_group_string = "  Desktop",
+                        empty_group_string = "   Desktop",
                         width              = bar.CALCULATED,
                         max_chars          = 30, # 130
                         parse_text         = txtparse,
                         ),
+                widget.TextBox(
+                    #**endofbar,
+                    padding    =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge
+                    foreground =   colors["grey"],
+                    background = colors["transparent"],
+                    text = "", #   
+                    ),
                     widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                     widget.WindowCount(
                         fontsize   = 15,
                         padding    = 5,
-                        background = colors["grey"],
+                        #background = colors["grey"],
+                        background = colors["transparent"],
                         ),
                     widget.TextBox(" ", padding = 0, background = colors["transparent"]),
                     widget.TaskList(
@@ -775,6 +792,7 @@ screens = [
                         border               = colors["grey_light"], #464d64
                         #border               = colors["transparent"], #464d64
                         background           = colors["transparent"], #464d64
+                        #background           = colors["grey"], #464d64
                         unfocused_border     = colors["grey"],       #363a4f
                         urgent_border        = colors["red"],        #ed8796
                         theme_mode           = "preferred",
@@ -808,11 +826,54 @@ screens = [
                     widget.Spacer(background = "#00000000"),
 
 
+
+
+                #########
+                # Right #
+                #########
+
+                widget.TextBox(
+                    #**endofbar,
+                    padding    =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge
+                    foreground =   colors["grey"],
+                    text       = "", #   
+                    background = colors["transparent"],
+                    ),
+                widget.Systray(),
+                widget.Bluetooth(
+                    adapter_format       = '{name}',
+                    default_text         = ' {connected_devices}',
+                    symbol_connected     = '*',
+                    symbol_paired        = '-',
+                    symbol_powered       = ('*', '-'),
+                    symbol_unknown       = '?',
+                    separator            = ', ',
+                    show_menu_icons      = True,
+                    hide_unnamed_devices = False,
+                        ),
+                widget.TextBox(
+                    #**endofbar,
+                    text       = "", #     
+                    padding    =  0,
+                    fontsize   = 32, # 50 for slash, 28 for rounded edge -- 32
+                    foreground = colors["grey"],
+                    background = colors["transparent"],
+                    ),
+
+
+
+
+
+
                  ],
-                20, # 40
+                36, # 20
                 #margin       = [5, 5, 0, 5],
-                margin     = 5,
-                background = colors["transparent"], #00000000
+                #margin     = 5,
+                #background = colors["transparent"], #00000000
+                margin       = [0, 5, 5, 5],
+                background   = colors["transparent"], #00000000
+                reserve      = True,
                 ),
 
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
@@ -866,6 +927,7 @@ floating_layout    = layout.Floating(
         Match(wm_class = "openrgb"),  # ssh-askpass
         Match(wm_class = "thunar"),  # ssh-askpass
         Match(wm_class = "lxappearance"),  # ssh-askpass
+        Match(wm_class = "nsxiv"),  # ssh-askpass
         Match(wm_class = "VirtualBox Manager"),  # ssh-askpass
         Match(title    = "Steam Settings"),  # GPG key password entry
         #Match(title   = "Friends List"),  # GPG key password entry
