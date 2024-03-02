@@ -116,6 +116,17 @@ def window_to_prev_group(qtile):
 
 
 
+
+@hook.subscribe.focus_change #Bring all floating windows of the group to front
+def float_to_front(qtile):
+    for window in qtile.currentGroup.windows:
+        if window.floating:
+            window.cmd_bring_to_front()
+
+
+
+
+
 @hook.subscribe.client_new # Move specific windows to groups when they are launched
 def new_client(client):
     if client.name == "Steam":
@@ -177,8 +188,12 @@ keys = [
 
     # Switching between windows
 
-    Key([mod], "j", lazy.layout.next(),                            desc="Move window focus to next window"),
-    Key([mod], "k", lazy.layout.previous(),                        desc="Move window focus to previous window"),
+    #Key([mod], "j", lazy.layout.next(),                            desc="Move window focus to next window"),
+    #Key([mod], "k", lazy.layout.previous(),                        desc="Move window focus to previous window"),
+
+    Key([mod], "j", lazy.group.next_window(),                      desc="Move window focus to next window"),
+    Key([mod], "k", lazy.group.prev_window(),                      desc="Move window focus to previous window"),
+
     Key([mod], "h", lazy.layout.left(),                            desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(),                           desc="Move focus to right"),
     #Key([mod], "j", lazy.layout.down(),                           desc="Move focus down"),
@@ -287,7 +302,8 @@ keys = [
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
-group_labels = ["", "", "", "󰓓", "󰊗", "󰙯", "󰏃", "󰏃", "󰏃",] #      󰖟
+group_labels = ["", "", "", "󰓓", "󰊗", "󰙯", "", "", "",] #      󰖟 󰏃
+#group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_layouts = ["tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile", "tile"]
 group_layouts = ["columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns"]
@@ -380,7 +396,7 @@ layouts = [
          **layout_default,
         #margin                  = [10, 10, 0, 10],
         margin                  = 10,
-        border_width            = 2,
+        border_width            = 1, #2
         margin_on_single        = 10,
         #margin_on_single        = [10, 10, 0, 10],
         grow_amount             = 10,
@@ -450,14 +466,14 @@ deco = {
         RectDecoration(
             colour      = colors["grey_light"],   #464d64
             line_colour = colors["grey_lighter"], #5b6078
-            radius      = 12, # 13 -- 12 for 40 bar height
+            radius      = 10, # 13 -- 12 for 40 bar height -- 12
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
-            padding_y   = 5, #5 -- 7 for 40 bar height
-            padding_x   = 0,
+            padding_y   = 6, #5 -- 7 for 40 bar height
+            padding_x   = 2, #0
             extrawidth  = 0,
             group       = False,
-            line_width  = 0, # 1
+            line_width  = 1, # 1
             ),
             ],
         }
@@ -470,7 +486,7 @@ widget_defaults = dict(
     foreground = colors["white"], #cad3f5
     background = colors["grey"],  #363a4f
     #background = '#00000000',
-    #opacity   = 1,
+    #opacity   = 0,
     #padding   = 3,
     padding    = 15,
 )
@@ -543,14 +559,43 @@ screens = [
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e htop")},
                     ),
                 widget.Prompt(),
-                #widget.GlobalMenu(
-                    #fontsize = 10, 
-                    #),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     **endofbar,
-                    text = "", # 
+                    text = "", #   
                     ),
+                    widget.TaskList(
+                        #**deco,
+                        foreground           = colors["skin_light"], #f4dbd6
+                        border               = colors["grey_light"], #464d64
+                        #border               = colors["transparent"], #464d64
+                        background           = colors["transparent"], #464d64
+                        #background           = colors["grey"], #464d64
+                        unfocused_border     = colors["grey"],       #363a4f
+                        urgent_border        = colors["red"],        #ed8796
+                        theme_mode           = "preferred",
+                        theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
+                        fontsize             = 20,
+                        icon_size            = 20, #25
+                        padding_y            = 2,
+                        padding_x            = 0,
+                        spacing              = 10,
+                        rounded              = True,
+                        txt_floating         = '🗗',
+                        txt_maximized        = '🗖',
+                        txt_minimized        = '🗕',
+                        markup_focused       = "", # "{}"
+                        markup_normal        = "",
+                        markup_floating      = "🗗",
+                        markup_minimized     = "🗕",
+                        markup_maximized     = "🗖",
+                        urgent_alert_method  = 'border',
+                        #title_width_method  = 'uniform',
+                        window_name_location = False,
+                        highlight_method     = "block", #border, block
+                        #icon_size           = 3,
+                        mouse_callbacks      = {'Button2': lazy.window.kill()},
+                        ),
                 widget.Spacer(background = colors["semi_transparent"]),
 
 
@@ -610,7 +655,7 @@ screens = [
                     rounded                    = True,
                     highlight_method           = 'line', #block, line, text
                     urgent_alert_method        = 'text',
-                    #highlight_color           = '#494d64',
+                    #highlight_color           = '#494d647f',
                     highlight_color            = '#00000000',
                     use_mouse_wheel            = True,
                     fontshadow                 = colors["grey_lighter"], #5b6078
@@ -640,12 +685,6 @@ screens = [
                     scale   = 0.5,
                     padding = 5,
                     ),
-                #widget.Visualiser(
-                        #autostart = True,
-                        #channels = 'mono', # mono, stereo
-                        #hide = True,
-                        #),
-
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     **endofbar,
@@ -662,21 +701,18 @@ screens = [
 
                 widget.TextBox(
                     **endofbar,
-                    text = "", # 
+                    text = "", #   
                         ),
                 #widget.Systray(),
+                widget.StatusNotifier(
+                    # NM APPLET DOESNT WORK
+                    background = colors["grey"],
+                    menu_offset_y = 15,
+                    opacity = 0.9,
+                    hide_after = 0.5,
+                    icon_theme = "Papirus",
+                    ),
                 widget.TextBox(" ", padding = 0),
-                #widget.Bluetooth(
-                    #adapter_format       = '{name}',
-                    #default_text         = ' {connected_devices}',
-                    #symbol_connected     = '*',
-                    #symbol_paired        = '-',
-                    #symbol_powered       = ('*', '-'),
-                    #symbol_unknown       = '?',
-                    #separator            = ', ',
-                    #show_menu_icons      = True,
-                    #hide_unnamed_devices = False,
-                        #),
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
@@ -710,20 +746,6 @@ screens = [
                     foreground = colors["red"], #f5a97f
                     format     = '  %H:%M',
                     ),
-                #widget.AnalogueClock(
-                    #hour_colour        = colors["white"],
-                    #minute_colour      = colors["white"],
-                    #face_border_colour = colors["white"],
-                    #margin             = 2,
-                    #face_border_width  = 1,
-                    ##face_shape         = 'square', # square, circle
-                    #face_shape         = None,
-                    #update_interval    = 1,
-                    #hour_size          = 2,
-                    #hour_length        = 0.6,
-                    #minute_length      = 0.95,
-                    #second_size        = 0,
-                        #),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
                     #**endofbar,
@@ -743,143 +765,11 @@ screens = [
         ),
 
         #bottom=bar.Gap(size = 0,)
-        bottom=bar.Bar(
-                [
-
-                ########
-                # Left #
-                ########
-
-                widget.TextBox(
-                    #**endofbar,
-                    padding    =  0,
-                    fontsize   = 32, # 50 for slash, 28 for rounded edge
-                    foreground =   colors["grey"],
-                    text       = "", #   
-                    background = colors["transparent"],
-                    ),
-                #widget.TextBox(" ", padding = 0, background = colors["transparent"]),
-                widget.WindowName(
-                        fontsize           = 15,
-                        format             = '   {name}',
-                        foreground         = colors["white"],
-                        padding            = 5,
-                        background         = colors["grey"],
-                        empty_group_string = "   Desktop",
-                        width              = bar.CALCULATED,
-                        max_chars          = 30, # 130
-                        parse_text         = txtparse,
-                        ),
-                widget.TextBox(
-                    #**endofbar,
-                    padding    =  0,
-                    fontsize   = 32, # 50 for slash, 28 for rounded edge
-                    foreground =   colors["grey"],
-                    background = colors["transparent"],
-                    text = "", #   
-                    ),
-                    widget.TextBox(" ", padding = 0, background = colors["transparent"]),
-                    widget.WindowCount(
-                        fontsize   = 15,
-                        padding    = 5,
-                        #background = colors["grey"],
-                        background = colors["transparent"],
-                        ),
-                    widget.TextBox(" ", padding = 0, background = colors["transparent"]),
-                    widget.TaskList(
-                        #**deco,
-                        foreground           = colors["skin_light"], #f4dbd6
-                        border               = colors["grey_light"], #464d64
-                        #border               = colors["transparent"], #464d64
-                        background           = colors["transparent"], #464d64
-                        #background           = colors["grey"], #464d64
-                        unfocused_border     = colors["grey"],       #363a4f
-                        urgent_border        = colors["red"],        #ed8796
-                        theme_mode           = "preferred",
-                        theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
-                        fontsize             = 20,
-                        icon_size            = 20, #25
-                        padding_y            = 2,
-                        padding_x            = 0,
-                        spacing              = 10,
-                        rounded              = True,
-                        txt_floating         = '🗗',
-                        txt_maximized        = '🗖',
-                        txt_minimized        = '🗕',
-                        markup_focused       = "", # "{}"
-                        markup_normal        = "",
-                        markup_floating      = "🗗",
-                        markup_minimized     = "🗕",
-                        markup_maximized     = "🗖",
-                        urgent_alert_method  = 'border',
-                        #title_width_method  = 'uniform',
-                        window_name_location = False,
-                        highlight_method     = "block", #border, block
-                        #icon_size           = 3,
-                        mouse_callbacks      = {'Button2': lazy.window.kill()},
-                        ),
-
-                ##########
-                # Center #
-                ##########
-
-                    widget.Spacer(background = "#00000000"),
-
-
-
-
-                #########
-                # Right #
-                #########
-
-                widget.TextBox(
-                    #**endofbar,
-                    padding    =  0,
-                    fontsize   = 32, # 50 for slash, 28 for rounded edge
-                    foreground =   colors["grey"],
-                    text       = "", #   
-                    background = colors["transparent"],
-                    ),
-                widget.Systray(),
-                widget.Bluetooth(
-                    adapter_format       = '{name}',
-                    default_text         = ' {connected_devices}',
-                    symbol_connected     = '*',
-                    symbol_paired        = '-',
-                    symbol_powered       = ('*', '-'),
-                    symbol_unknown       = '?',
-                    separator            = ', ',
-                    show_menu_icons      = True,
-                    hide_unnamed_devices = False,
-                        ),
-                widget.TextBox(
-                    #**endofbar,
-                    text       = "", #     
-                    padding    =  0,
-                    fontsize   = 32, # 50 for slash, 28 for rounded edge -- 32
-                    foreground = colors["grey"],
-                    background = colors["transparent"],
-                    ),
-
-
-
-
-
-
-                 ],
-                36, # 20
-                #margin       = [5, 5, 0, 5],
-                #margin     = 5,
-                #background = colors["transparent"], #00000000
-                margin       = [0, 5, 5, 5],
-                background   = colors["transparent"], #00000000
-                reserve      = True,
-                ),
 
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
+         x11_drag_polling_rate = 60,
     ),
 ]
 

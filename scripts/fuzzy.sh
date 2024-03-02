@@ -70,6 +70,7 @@
 # add better filtering
 # fix /home/ and . issue
 # bugged previews for # commands
+# flickering
 
 
 
@@ -78,6 +79,15 @@
 # * icons
 # * shows recently editited files or user defined list
 # * colors
+
+
+# DEPENDENCIES:
+# * fzf
+# * kitty, sixel, iterm (for images)
+# * bat (for text previews)
+# * eza (for icons)
+# * xsel (for copying to clipboard)
+
 
 
 
@@ -107,8 +117,10 @@ config=$(echo -e "\
 ${Yellow}#search in .\n\
 #search in /\n\
 #search in ~\n\
+#run with fzy\n\
+#show a compact prompt\n\
+#copy the file path\n\
 #filter: default\n\
-#filter: advanced\n\
 #filter: icons\n\
 #filter: only dirs\n\
 #filter: none${NC}\
@@ -133,13 +145,32 @@ ${Cyan}/home/$USER/.config/picom${NC}\
 ignore=$(echo $recent | sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
 
 
+
+
+
 dir=$1
 [[ "$dir" = "" ]] && dir="/"
 
 filter=$2
+#[[ "$filter" = "" ]] && filter="default"
+#[[ "$filter" = "" ]] && filter="compact"
 [[ "$filter" = "" ]] && filter="default"
 
 
+
+
+
+
+function fuzzyfind(){
+
+input=$(</dev/stdin)
+
+[[ $1 ]] || echo $input | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null'
+
+
+[[ $1 = "compact" ]] && echo $input | fzf --ansi --scroll-off=5 --preview-window=right --height 60% --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' 
+
+}
 
 
 
@@ -148,7 +179,51 @@ filter=$2
 # type f will not show dirs such as / or /etc
 
 
-[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
+
+
+
+[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
+
+
+
+[[ "$filter" = "compact" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --height 60% --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
+
+
+
+[[ "$filter" = "explore" ]] && selection=$(cat <(echo " ..") <(find $dir -maxdepth 1 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}' | sed "s;^\./;;" | grep -Evx "^\." | xargs -L 1 eza -d --icons=always 2>/dev/null) | awk '!a[$0]++' | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | cut -d" " -f 2- | sed "s;^;$PWD/;" | sed "s;^~;/home/$USER;g")
+
+
+
+
+
+
+
+[[ $selection = "" ]] && return 0
+
+
+[[ $selection =~ ".* -> .*" ]] && selection=$(echo $selection | cut -d" " -f 3-) # symlinks
+
+
+[[ "$filter" = "explore" ]] && [[ $selection = ".." ]] && cd .. && fuzzy . explore && return 0
+
+[[ $selection = ".." ]] || [[ "$filter" = "explore" ]] && [[ $(file $selection | awk '{print $2}') = "directory" ]] && cd $selection && fuzzy . explore && return 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[ "$filter" = "copypath" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fuzzyfind | sed "s;^~;/home/$USER;g" | tr -d '\n' | xsel -b)
+
+[[ "$filter" = "copypath" ]] && echo $selection && return 0
+
 
 
 
@@ -163,8 +238,8 @@ filter=$2
 
 
 
+[[ "$filter" = "fzy" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzy | sed "s;^~;/home/$USER;g")
 
-[[ "$filter" = "advanced" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 8 -mount 2>/dev/null | grep -vEi '/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|/[^/]{20,}$|/[^/]{20,}/|.{50,} | xargs -L 1 eza -d --icons=always 2>/dev/null') <(echo $config) | awk '!a[$0]++{print}' | grep -Evx "$ignore" | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
 
 
 
@@ -227,6 +302,7 @@ filter=$2
 
 
 
+#[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
 
 
 
@@ -254,7 +330,7 @@ filename="${filename%.*}"
 [[ "$filetype" = "PNG" ]] || [[ "$filetype" = "JPEG" ]] && cd $dirpath && $IMGVIEWER $selection && return 0
 
 # file extensions (txt)
-[[ "$extension" = "c" ]] || [[ "$extension" = "py" ]] || [[ "$extension" = "cpp" ]] || [[ "$extension" = "sh" ]] && cd $dirpath && $EDITOR $selection && return 0
+[[ "$extension" = "c" ]] || [[ "$extension" = "py" ]] || [[ "$extension" = "lua" ]] || [[ "$extension" = "cpp" ]] || [[ "$extension" = "sh" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # pdfs
 [[ "$extension" = "pdf" ]] && cd $dirpath && $PDFVIEWER $selection && return 0
@@ -285,7 +361,9 @@ shebang=$(command cat $selection 2>/dev/null | sed 1q | grep ^\#!)
 
 [[ "$selection" = "#filter: none" ]] && fuzzy $dir none && return 0
 [[ "$selection" = "#filter: default" ]] && fuzzy $dir default && return 0
-[[ "$selection" = "#filter: advanced" ]] && fuzzy $dir advanced && return 0
+[[ "$selection" = "#run with fzy" ]] && fuzzy $dir fzy && return 0
+[[ "$selection" = "#show a compact prompt" ]] && fuzzy $dir compact && return 0
+[[ "$selection" = "#copy the file path" ]] && fuzzy $dir copypath && return 0
 [[ "$selection" = "#filter: icons" ]] && fuzzy $dir icons && return 0
 [[ "$selection" = "#filter: only dirs" ]] && fuzzy $dir onlydir && return 0
 

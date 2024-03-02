@@ -53,6 +53,7 @@ htop
 ### Terminal Applications
 
 kitty
+tldr
 fzf, fzy (fuzzyfinders)
 zsh
   * "zsh plugins" (see ~/.zshrc)
