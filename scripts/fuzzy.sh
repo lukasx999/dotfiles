@@ -139,7 +139,8 @@ ${Cyan}/home/$USER/.xinitrc${NC}\n\
 ${Cyan}/home/$USER/.config${NC}\n\
 ${Cyan}/home/$USER/.config/qtile/config.py${NC}\n\
 ${Cyan}/home/$USER/.config/nvim${NC}\n\
-${Cyan}/home/$USER/.config/picom/picom.conf${NC}\
+${Cyan}/home/$USER/.config/picom/picom.conf${NC}\n\
+${Cyan}/home/$USER/.config/rofi/config.rasi${NC}\
 ")
 
 ignore=$(echo $recent | sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")

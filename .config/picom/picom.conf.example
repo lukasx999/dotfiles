@@ -12,7 +12,7 @@ shadow = true;
 
 # The blur radius for shadows, in pixels. (defaults to 12)
 # shadow-radius = 12
-shadow-radius = 8;
+shadow-radius = 7;
 
 # The opacity of shadows. (0.0 - 1.0, defaults to 0.75)
 # shadow-opacity = .75
@@ -46,7 +46,6 @@ shadow-offset-y = -7;
 shadow-exclude = [
   "name = 'Notification'",
   "class_g = 'Conky'",
-  "class_g = 'xsecurelock'",
   "class_g ?= 'Notify-osd'",
   "class_g = 'Cairo-clock'",
   "_GTK_FRAME_EXTENTS@:c"
@@ -62,8 +61,9 @@ shadow-exclude = [
 #
 # shadow-exclude-reg = ""
 
-# Crop shadow of a window fully on a particular Xinerama screen to the screen.
-# xinerama-shadow-crop = false
+# Crop shadow of a window fully on a particular monitor to that monitor. This is
+# currently implemented using the X RandR extension.
+# crop-shadow-to-monitor = false
 
 
 #################################
@@ -88,9 +88,7 @@ fade-out-step = 0.03;
 # fade-delta = 10
 
 # Specify a list of conditions of windows that should not be faded.
- fade-exclude = [
-  "class_g = 'xsecurelock'",
- ]
+# fade-exclude = []
 
 # Do not fade on window open/close.
 # no-fading-openclose = false
@@ -106,11 +104,11 @@ fade-out-step = 0.03;
 
 # Opacity of inactive windows. (0.1 - 1.0, defaults to 1.0)
 # inactive-opacity = 1
-inactive-opacity = 1;
+inactive-opacity = 0.95;
 
 # Opacity of window titlebars and borders. (0.1 - 1.0, disabled by default)
 # frame-opacity = 1.0
-frame-opacity = 1.0;
+frame-opacity = 0.9;
 
 # Let inactive opacity set by -i override the '_NET_WM_WINDOW_OPACITY' values of windows.
 # inactive-opacity-override = true
@@ -120,7 +118,7 @@ inactive-opacity-override = false;
 # active-opacity = 1.0
 
 # Dim inactive windows. (0.0 - 1.0, defaults to 0.0)
- inactive-dim = 0.0
+# inactive-dim = 0.0
 
 # Specify a list of conditions of windows that should never be considered focused.
 # focus-exclude = []
@@ -162,28 +160,28 @@ rounded-corners-exclude = [
 
 # Parameters for background blurring, see the *BLUR* section for more information.
 # blur-method =
- blur-size = 12
+# blur-size = 12
 #
- blur-deviation = false
+# blur-deviation = false
 #
- blur-strength = 5
+# blur-strength = 5
 
 # Blur background of semi-transparent / ARGB windows.
 # Bad in performance, with driver-dependent behavior.
 # The name of the switch may change without prior notifications.
 #
- blur-background = true
+# blur-background = false
 
 # Blur background of windows when the window frame is not opaque.
 # Implies:
 #    blur-background
 # Bad in performance, with driver-dependent behavior. The name may change.
 #
- blur-background-frame = false
+# blur-background-frame = false
 
 
 # Use fixed blur strength rather than adjusting according to window opacity.
- blur-background-fixed = false
+# blur-background-fixed = false
 
 
 # Specify the blur convolution kernel, with the following format:
@@ -210,21 +208,22 @@ blur-background-exclude = [
 # dbus = true
 
 # Daemonize process. Fork to background after initialization. Causes issues with certain (badly-written) drivers.
- daemon = false
+# daemon = false
 
-# Specify the backend to use: `xrender`, `glx`, or `xr_glx_hybrid`.
+# Specify the backend to use: `xrender`, `glx`, `egl` or `xr_glx_hybrid`.
 # `xrender` is the default one.
 #
 # backend = "glx"
-#backend = "xrender";
 backend = "glx";
+
+# Use higher precision during rendering, and apply dither when presenting the
+# rendered screen. Reduces banding artifacts, but might cause performance
+# degradation. Only works with OpenGL.
+dithered-present = false;
 
 # Enable/disable VSync.
 # vsync = false
 vsync = true;
-
-# Enable remote control via D-Bus. See the *D-BUS API* section below for more details.
-# dbus = false
 
 # Try to detect WM windows (a non-override-redirect window with no
 # child that has 'WM_STATE') and mark them as active.
@@ -324,8 +323,6 @@ use-damage = true;
 # with GLX backend for some users.
 #
 # xrender-sync-fence = false
-#xrender-sync-fence = false
-
 
 # GLX backend: Use specified GLSL fragment shader for rendering window
 # contents. Read the man page for a detailed explanation of the interface.

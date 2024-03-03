@@ -41,10 +41,6 @@ from colorschemes import colors # colorschemes.py
 
 
 
-# for window swallowing
-#import psutil
-#from libqtile.utils import logger
-#from libqtile.backend import base
 
 
 
@@ -60,7 +56,9 @@ from colorschemes import colors # colorschemes.py
 #terminal   = guess_terminal()
 mod         = "mod4" # SUPER
 terminal    = "kitty"
-browser     = "google-chrome-stable"
+#terminal    = "alacritty"
+#browser     = "google-chrome-stable"
+browser     = "firefox"
 browser_alt = "librewolf"
 togglecomp  = "/home/lukas/scripts/togglecomp"
 chwallpaper = "/home/lukas/scripts/selwallpaper"
@@ -164,6 +162,15 @@ def client_focus(client):
 @hook.subscribe.layout_change
 def layout_change(layout, group):
     qtile.spawn(comp_on)
+
+
+
+
+
+
+
+
+
 
 
 #@hook.subscribe.startup_once # Autostart script
@@ -396,7 +403,7 @@ layouts = [
          **layout_default,
         #margin                  = [10, 10, 0, 10],
         margin                  = 10,
-        border_width            = 1, #2
+        border_width            = 2, #2
         margin_on_single        = 10,
         #margin_on_single        = [10, 10, 0, 10],
         grow_amount             = 10,
@@ -564,38 +571,39 @@ screens = [
                     **endofbar,
                     text = "", #   
                     ),
-                    widget.TaskList(
-                        #**deco,
-                        foreground           = colors["skin_light"], #f4dbd6
-                        border               = colors["grey_light"], #464d64
-                        #border               = colors["transparent"], #464d64
-                        background           = colors["transparent"], #464d64
-                        #background           = colors["grey"], #464d64
-                        unfocused_border     = colors["grey"],       #363a4f
-                        urgent_border        = colors["red"],        #ed8796
-                        theme_mode           = "preferred",
-                        theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
-                        fontsize             = 20,
-                        icon_size            = 20, #25
-                        padding_y            = 2,
-                        padding_x            = 0,
-                        spacing              = 10,
-                        rounded              = True,
-                        txt_floating         = '🗗',
-                        txt_maximized        = '🗖',
-                        txt_minimized        = '🗕',
-                        markup_focused       = "", # "{}"
-                        markup_normal        = "",
-                        markup_floating      = "🗗",
-                        markup_minimized     = "🗕",
-                        markup_maximized     = "🗖",
-                        urgent_alert_method  = 'border',
-                        #title_width_method  = 'uniform',
-                        window_name_location = False,
-                        highlight_method     = "block", #border, block
-                        #icon_size           = 3,
-                        mouse_callbacks      = {'Button2': lazy.window.kill()},
-                        ),
+                widget.TextBox(" ", padding = 0, background = colors["semi_transparent"]),
+                widget.TaskList(
+                    #**deco,
+                    foreground           = colors["skin_light"], #f4dbd6
+                    border               = colors["grey_light"], #464d64
+                    #border               = colors["transparent"], #464d64
+                    background           = colors["semi_transparent"], #464d64
+                    #background           = colors["grey"], #464d64
+                    unfocused_border     = colors["grey"],       #363a4f
+                    urgent_border        = colors["red"],        #ed8796
+                    theme_mode           = "preferred",
+                    theme_path           = "/usr/share/icons/Papirus/64x64/apps/",
+                    fontsize             = 20,
+                    icon_size            = 20, #25
+                    padding_y            = 2,
+                    padding_x            = 0,
+                    spacing              = 10,
+                    rounded              = True,
+                    txt_floating         = '🗗',
+                    txt_maximized        = '🗖',
+                    txt_minimized        = '🗕',
+                    markup_focused       = "", # "{}"
+                    markup_normal        = "",
+                    markup_floating      = "🗗",
+                    markup_minimized     = "🗕",
+                    markup_maximized     = "🗖",
+                    urgent_alert_method  = 'border',
+                    #title_width_method  = 'uniform',
+                    window_name_location = False,
+                    highlight_method     = "block", #border, block
+                    #icon_size           = 3,
+                    mouse_callbacks      = {'Button2': lazy.window.kill()},
+                    ),
                 widget.Spacer(background = colors["semi_transparent"]),
 
 
@@ -605,8 +613,19 @@ screens = [
                 ##########
 
                 widget.TextBox(
-                    **endofbar,
+                    text       = "", #   
+                    foreground = colors["grey_lighter"],
+                    background = colors["semi_transparent"],
+                    padding    = 0,
+                    fontsize   = 32,
+                    ),
+                widget.TextBox(
+                    #**endofbar,
                     text = "", #   
+                    foreground = colors["grey"],
+                    background = colors["grey_lighter"],
+                    padding    = 0,
+                    fontsize   = 32,
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
@@ -648,7 +667,7 @@ screens = [
                     hide_unused                = False,
                     center_aligned             = True,
                     disable_drag               = True,
-                    fontsize                   = 15, # 20
+                    fontsize                   = 17, # 20 -- 15
                     spacing                    = 0, # 5
                     padding                    = 10, # 5
                     margin                     = 5, # only for line mode
@@ -661,7 +680,7 @@ screens = [
                     fontshadow                 = colors["grey_lighter"], #5b6078
                     active                     = colors["white"],        #cad3f5
                     inactive                   = colors["grey"],         #363a4f
-                    block_highlight_text_color = colors["blue"],         #8aadf4
+                    block_highlight_text_color = colors["blue_light"],         #8aadf4
                     urgent_text                = colors["red"],          #ed8796
                     this_current_screen_border = colors["blue"],         #8aadf4
                     this_screen_border         = colors["grey_light"],   #494d64
@@ -687,8 +706,19 @@ screens = [
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    **endofbar,
+                    #**endofbar,
                     text = "", #   
+                    foreground = colors["grey"],
+                    background = colors["grey_lighter"],
+                    padding    = 0,
+                    fontsize   = 32,
+                    ),
+                widget.TextBox(
+                    text       = "", #   
+                    foreground = colors["grey_lighter"],
+                    background = colors["semi_transparent"],
+                    padding    = 0,
+                    fontsize   = 32,
                     ),
                 widget.Spacer(background = colors["semi_transparent"]),
 

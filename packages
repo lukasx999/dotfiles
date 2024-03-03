@@ -47,6 +47,8 @@ nsxiv
 neofetch
 gotop
 htop
+fancontrol-gui (AUR)
+devour (window swallowing)
 
 
 
@@ -70,6 +72,8 @@ powerlevel10k
 lf
   * ueberzug
 ("tpm" for tmux)
+imagemagick
+ucollage
 
 
 
@@ -91,6 +95,32 @@ flameshot
 #arandr
 firefox
 gimp
+
+
+
+
+
+
+# Kernel boot parameters
+
+split_lock_detect=off # For removing 30fps cap in games (God of War)
+nvidia-drm.modeset=1 # For Prop NVIDIA drivers
+acpi_enforce_resourced=lax # for fan control (see arch wiki lmsensors gigabyte mbs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
