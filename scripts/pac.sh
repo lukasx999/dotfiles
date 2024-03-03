@@ -10,13 +10,12 @@ Upgrade\
 ")
 
 
-optionselect=$(echo $actions | fzy)
+optionselect=$(echo $actions | fzf --height 5%)
 
-
-[[ $optionselect = "Install" ]] && pacman -Q | fzf
-[[ $optionselect = "Remove" ]] && pacman -Q | fzf
-[[ $optionselect = "Update" ]] && pacman -Q | fzf
-[[ $optionselect = "Upgrade" ]] && pacman -Q | fzf
+[[ $optionselect = "Install" ]] && pacman -Slq | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+[[ $optionselect = "Remove" ]] && pacman -Qq | fzf -m --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
+[[ $optionselect = "Update" ]] && sudo pacman -Sy
+[[ $optionselect = "Upgrade" ]] && sudo pacman -Syu
 
 
 

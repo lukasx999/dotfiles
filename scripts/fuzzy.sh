@@ -139,7 +139,7 @@ ${Cyan}/home/$USER/.xinitrc${NC}\n\
 ${Cyan}/home/$USER/.config${NC}\n\
 ${Cyan}/home/$USER/.config/qtile/config.py${NC}\n\
 ${Cyan}/home/$USER/.config/nvim${NC}\n\
-${Cyan}/home/$USER/.config/picom${NC}\
+${Cyan}/home/$USER/.config/picom/picom.conf${NC}\
 ")
 
 ignore=$(echo $recent | sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
@@ -190,7 +190,7 @@ input=$(</dev/stdin)
 
 
 
-[[ "$filter" = "explore" ]] && selection=$(cat <(echo " ..") <(find $dir -maxdepth 1 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}' | sed "s;^\./;;" | grep -Evx "^\." | xargs -L 1 eza -d --icons=always 2>/dev/null) | awk '!a[$0]++' | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | cut -d" " -f 2- | sed "s;^;$PWD/;" | sed "s;^~;/home/$USER;g")
+[[ "$filter" = "explore" ]] && selection=$(cat <(echo " ..") <(find $dir -maxdepth 1 2>/dev/null | sed "s;^\./;;" | grep -Evx "^\." | xargs -L 1 eza -d --icons=always 2>/dev/null) | awk '!a[$0]++' | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | cut -d" " -f 2- | sed "s;^;$PWD/;" | sed "s;^~;/home/$USER;g")
 
 
 
