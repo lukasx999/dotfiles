@@ -37,7 +37,8 @@ pipewire
 "phinger cursor set"
 papirus icons
 redshift
-picom-ftlabs-git
+#picom-ftlabs-git
+picom-simpleanims-next-git (AUR)
 yay / paru
 wine
   * wine-mono
@@ -59,6 +60,7 @@ tldr
 fzf, fzy (fuzzyfinders)
 zsh
   * "zsh plugins" (see ~/.zshrc)
+dash (symlink to /bin/sh)
 neovim
   * xsel (for accessing + register)
   * neovide
@@ -74,6 +76,7 @@ lf
 ("tpm" for tmux)
 imagemagick
 ucollage
+edex-ui-bin
 
 
 

@@ -136,6 +136,7 @@ ${Red}/home/$USER/scripts/fuzzy.sh${NC}\n\
 ${Cyan}/home/$USER/scripts${NC}\n\
 ${Cyan}/home/$USER/.zshrc${NC}\n\
 ${Cyan}/home/$USER/.xinitrc${NC}\n\
+${Cyan}/home/$USER/.dotfiles/packages${NC}\n\
 ${Cyan}/home/$USER/.config${NC}\n\
 ${Cyan}/home/$USER/.config/qtile/config.py${NC}\n\
 ${Cyan}/home/$USER/.config/nvim${NC}\n\
@@ -183,7 +184,11 @@ input=$(</dev/stdin)
 
 
 
-[[ "$filter" = "default" ]] && selection=$(cat <(echo $recent) <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
+
+[[ "$filter" = "default" ]] && selection=$(< <(echo $recent) < <(find $dir -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') < <(echo $config) | awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -Evx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | sed "s;^~;/home/$USER;g")
+
+
+
 
 
 
@@ -193,13 +198,6 @@ input=$(</dev/stdin)
 
 [[ "$filter" = "explore" ]] && selection=$(cat <(echo " ..") <(find $dir -maxdepth 1 2>/dev/null | sed "s;^\./;;" | grep -Evx "^\." | xargs -L 1 eza -d --icons=always 2>/dev/null) | awk '!a[$0]++' | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs /home/$USER/scripts/fzf-preview.sh && echo {} | sed "s;^~;/home/$USER;g" | xargs file | grep -vE "cannot open" | cut -d" " -f 2- && echo "" && echo {} | sed "s;^~;/home/$USER;g" | xargs bat -p --color=always 2>/dev/null' | cut -d" " -f 2- | sed "s;^;$PWD/;" | sed "s;^~;/home/$USER;g")
 
-
-
-
-
-
-
-[[ $selection = "" ]] && return 0
 
 
 [[ $selection =~ ".* -> .*" ]] && selection=$(echo $selection | cut -d" " -f 3-) # symlinks
@@ -258,6 +256,7 @@ input=$(</dev/stdin)
 [[ "$filter" = "onlydir" ]] && selection=$(cat <(echo $recent | sed 1q) <(find $dir -maxdepth 8 -mount -type d 2>/dev/null | grep -vEi '/proc/|/dev/|/tmp/|cache|/sys/' | grep -iwExv '.{50,}') <(echo $config) | awk '!a[$0]++{print}' | sed "s@^\.@$PWD@g" | sed "s@/home/$USER@~@g" | fzf --ansi --scroll-off=5 --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s@^~@/home/$USER@g" | xargs file | cut -d" " -f 2- && echo "" && echo {} | sed "s@^~@/home/$USER@g" | xargs bat -p --color=always 2>/dev/null' | sed "s@^~@/home/$USER@g")
 
 
+[[ $selection ]] || return 0
 
 
 
