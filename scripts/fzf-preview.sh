@@ -27,17 +27,20 @@ if [[ ! $type =~ image/ ]]; then
     exit
   fi
 
-#  # Sometimes bat is installed as batcat.
-#  if command -v batcat > /dev/null; then
-#    batname="batcat"
-#  elif command -v bat > /dev/null; then
-#    batname="bat"
-#  else
-#    cat "$1"
-#    exit
-#  fi
+  # Sometimes bat is installed as batcat.
+  if command -v batcat > /dev/null; then
+    batname="batcat"
+  elif command -v bat > /dev/null; then
+    batname="bat"
+  else
+    #cat "$1"
+    exit
+  fi
 
   #${batname} --style="${BAT_STYLE:-numbers}" --color=always --pager=never -- "$file"
+  #file $file
+  #echo $file | sed "s;^~;/home/$USER;g" | xargs file | cut -d" " -f 2-
+  #${batname} -p --color=always $file
   exit
 fi
 

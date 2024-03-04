@@ -64,13 +64,14 @@
 # Allows you to fuzzy find all files on the system and then opens files with corresponding programs
 
 # Issues:
-# Icons
-# Sort Files
-# Show most recent files
-# add better filtering
-# fix /home/ and . issue
-# bugged previews for # commands
-# flickering
+# * Move file previews over to fzf-preview.sh
+# * Icons
+# * Sort Files
+# * Show most recent files
+# * add better filtering
+# * fix /home/ and . issue
+# * bugged previews for # commands
+# * flickering
 
 
 
