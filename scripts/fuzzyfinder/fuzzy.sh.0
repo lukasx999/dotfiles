@@ -1,39 +1,15 @@
 #!/bin/sh
 #
-#                              :h-                                  Nhy`               
-#                             -mh.                           h.    `Ndho               
-#                             hmh+                          oNm.   oNdhh               
-#                            `Nmhd`                        /NNmd  /NNhhd               
-#                            -NNhhy                      `hMNmmm`+NNdhhh               
-#                            .NNmhhs              ```....`..-:/./mNdhhh+               
-#                             mNNdhhh-     `.-::///+++////++//:--.`-/sd`               
-#                             oNNNdhhdo..://++//++++++/+++//++///++/-.`                
-#                        y.   `mNNNmhhhdy+/++++//+/////++//+++///++////-` `/oos:       
-#                   .    Nmy:  :NNNNmhhhhdy+/++/+++///:.....--:////+++///:.`:s+        
-#                   h-   dNmNmy oNNNNNdhhhhy:/+/+++/-         ---:/+++//++//.`         
-#                   hd+` -NNNy`./dNNNNNhhhh+-://///    -+oo:`  ::-:+////++///:`        
-#                   /Nmhs+oss-:++/dNNNmhho:--::///    /mmmmmo  ../-///++///////.       
-#                    oNNdhhhhhhhs//osso/:---:::///    /yyyyso  ..o+-//////////:/.      
-#                     /mNNNmdhhhh/://+///::://////     -:::- ..+sy+:////////::/:/.     
-#                       /hNNNdhhs--:/+++////++/////.      ..-/yhhs-/////////::/::/`    
-#                         .ooo+/-::::/+///////++++//-/ossyyhhhhs/:///////:::/::::/:    
-#                         -///:::::::////++///+++/////:/+ooo+/::///////.::://::---+`   
-#                         /////+//++++/////+////-..//////////::-:::--`.:///:---:::/:   
-#                         //+++//++++++////+++///::--                 .::::-------::   
-#                         :/++++///////////++++//////.                -:/:----::../-   
-#                         -/++++//++///+//////////////               .::::---:::-.+`   
-#                         `////////////////////////////:.            --::-----...-/    
-#                          -///://////////////////////::::-..      :-:-:-..-::.`.+`    
-#                           :/://///:///::://::://::::::/:::::::-:---::-.-....``/- -   
-#                             ::::://::://::::::::::::::----------..-:....`.../- -+oo/ 
-#                              -/:::-:::::---://:-::-::::----::---.-.......`-/.      ``
-#                             s-`::--:::------:////----:---.-:::...-.....`./:          
-#                            yMNy.`::-.--::..-dmmhhhs-..-.-.......`.....-/:`           
-#                           oMNNNh. `-::--...:NNNdhhh/.--.`..``.......:/-              
-#                          :dy+:`      .-::-..NNNhhd+``..`...````.-::-`                
-#                                          .-:mNdhh:.......--::::-`                    
-#                                             yNh/..------..`                          
-#                                                              
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #
 #
 #
@@ -53,6 +29,27 @@
 #
 #
 #
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 
 
 
@@ -61,19 +58,7 @@
 
 # Usage: $ fuzzy <dir> <filter>
 
-# Allows you to fuzzy find all files on the system and then opens files with corresponding programs
-
-# Issues:
-# * PROBLEM: using full path instead of . will add more chars and therefore limit search results
-# * Move file previews over to fzf-preview.sh
-# * Icons
-# * Sort Files
-# * Show most recent files
-# * add better filtering
-# * fix /home/ and . issue
-# * bugged previews for # commands
-# * flickering
-
+# Allows you to fuzzy find all files on the system (or specified dir) and then opens files with corresponding programs
 
 
 # FEATURES: 
@@ -91,6 +76,17 @@
 # * eza (for icons)
 # * xsel (for copying to clipboard)
 
+
+# Issues:
+# * PROBLEM: using full path instead of . will add more chars and therefore limit search results
+# * Move file previews over to fzf-preview.sh
+# * Icons
+# * Sort Files
+# * Show most recent files
+# * add better filtering
+# * fix /home/ and . issue
+# * bugged previews for # commands
+# * flickering
 
 
 
@@ -161,9 +157,7 @@ filter=$2
 [[ "$filter" ]] || filter="default"
 
 
-
-
-[[ "$filter" = "default" ]] && selection=$(< <(<<< "$recent") < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi '/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}') < <(<<< "$config") awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
+[[ "$filter" = "default" ]] && selection=$(< <(<<< "$recent") < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi "^$PWD$|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") < <(<<< "$config") awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
 
 
 

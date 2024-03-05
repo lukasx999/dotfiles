@@ -2,15 +2,15 @@
 
 
 
-#      _       _ _            
-#__  _(_)_ __ (_) |_ _ __ ___ 
-#\ \/ / | '_ \| | __| '__/ __|
-# >  <| | | | | | |_| | | (__ 
-#/_/\_\_|_| |_|_|\__|_|  \___|
+#         _       _ _            
+#   __  _(_)_ __ (_) |_ _ __ ___ 
+#   \ \/ / | '_ \| | __| '__/ __|
+#    >  <| | | | | | |_| | | (__ 
+#   /_/\_\_|_| |_|_|\__|_|  \___|
 
 
 
-source ~/.setwallpaper
+. ~/.setwallpaper
 
 
 #[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
@@ -27,6 +27,7 @@ xinput set-prop 9 'libinput Accel Speed' -0.6 &
 #redshift -l 48.210033:16.363449 &
 conky -d &
 redshift &
+nm-applet &
 
 #dwmblocks &
 #exec dwm

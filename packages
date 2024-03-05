@@ -60,6 +60,8 @@ tldr
 fzf, fzy (fuzzyfinders)
 zsh
   * "zsh plugins" (see ~/.zshrc)
+    * fast syntax highlighting
+    * autocompletions
 dash (symlink to /bin/sh)
 neovim
   * xsel (for accessing + register)

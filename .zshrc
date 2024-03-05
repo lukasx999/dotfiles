@@ -10,7 +10,9 @@
 
 colorscript random
 
-
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -27,6 +29,9 @@ fi
 setopt auto_cd # cding into dirs by just typing the name
 
 bindkey -v # enable vi mode
+KEYTIMEOUT=1 # instantly switch to normal mode (no delay)
+
+
 
 #lf
 LFCD="/home/lukas/.config/lf/lfcd.sh"
@@ -50,6 +55,8 @@ bindkey -s '^f' 'fuzzy\n'
 
 alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.6 && setxkbmap de'
 
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#MANROFFOPT="-c"
 
 
 
@@ -59,25 +66,44 @@ export SUDO_EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="librewolf"
 
-#for fzy finder
+
+export BAT_THEME="base16-256"
+
+#for fuzzy finder
+
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+
 export IMGVIEWER="nsxiv"
+export PDFVIEWER="mupdf"
 #export FZF_DEFAULT_OPTS="--color='fg:#cad3f5,bg:#363a4f,fg+:#8aadf4,bg+:#464d64,pointer:#ed8796,prompt:#8aadf4,spinner:#8aadf4,info:#b7bdf8,border:#cad3f5,label:#cad3f5' --preview='head -$LINES {}' --border=rounded --border-label='╢ fuzzy ╟' --info=default --separator='─' --scrollbar='' --prompt='->' --pointer='->'"
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#363a4f,bg:#24273a,spinner:#c6a0f6,hl:#ed8796 \
 --color=fg:#cad3f5,header:#ed8796,info:#8aadf4,pointer:#ed8796 \
---color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+--color=marker:#f5a97f,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
 --color=border:#464d64,label:#464d64,gutter:#363a4f \
 --border=rounded \
 --preview-window '-3' \
 --border-label='╢ fuzzy ╟' \
 --info=default \
+--marker='' \
 --separator='─' \
 --scrollbar='' \
 --prompt='->' \
 --pointer='->'"
 
+
+alias fuzzy='source ~/scripts/fuzzyfinder/fuzzy.sh'
+alias exp='fuzzy . explore'
+
+
 #--preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null' \
+
+
+
+
+
 
 # xsecurelock settings
 #export XSECURELOCK_AUTH_CURSOR_BLINK=0
@@ -138,7 +164,6 @@ alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port
 #alias pac='pacman'
 #alias cat='bat -pp'
 #alias fzy='~/scripts/fuzzyfinder'
-alias fuzzy='source ~/scripts/fuzzyfinder/fuzzy'
 alias vim='nvim'
 alias vi='/bin/vim'
 alias cat='bat --paging=never -n'
@@ -166,7 +191,8 @@ alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/mas
 
 # plugins
 #source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 #source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

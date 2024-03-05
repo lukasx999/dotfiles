@@ -1,7 +1,7 @@
 #!/bin/sh
 
-name=$1
+name="$1"
 
-[[ $name ]] || exit
+[[ "$name" ]] || exit
 
-touch $name && chmod +x $name && echo -e "#!/bin/sh\n\n" >> $name && $EDITOR $name
+touch "$name" && chmod +x "$name" && echo -e "#!/bin/sh\n\n" >> "$name" && $EDITOR "$name"
