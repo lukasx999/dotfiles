@@ -67,9 +67,11 @@ run         = "rofi -show drun"
 lock        = "betterlockscreen -l blur"
 screenshot  = "flameshot gui"
 
-comp_on     = "picom -b"
-comp_off    = "pkill picom"
+#comp_on     = "picom -b"
+#comp_off    = "pkill picom"
 
+comp_on     = ""
+comp_off    = ""
 
 
 #     __                  _   _                 
@@ -138,6 +140,10 @@ def new_client(client):
 
 # when a game launches, move to to WS5 and disable compositor
 # when the games gets closed, switch back to Steam on WS4 and turn on comp again
+
+
+
+
 
 @hook.subscribe.client_new
 def game_launched(client):
@@ -528,7 +534,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.CPU(
                     **deco,
-                    foreground      = colors["blue_light"], #7dc4e4
+                    foreground      = colors["blue"], #7dc4e4
                     format          = '  {freq_current}GHz {load_percent}%', # 
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("kitty -e gotop")},
                     ),
@@ -536,7 +542,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.ThermalSensor(
                     **deco,
-                    foreground       = colors["blue"],   #c6a0f6
+                    foreground       = colors["blue_light"],   #c6a0f6
                     foreground_alert = colors["red"],    #ed8796
                     format           = ' {temp:.1f}{unit}',
                     tag_sensor       = "Package id 0",
@@ -549,7 +555,7 @@ screens = [
                 widget.NvidiaSensors(
                     **deco,
                     format           = '  {temp}°C', #  󰾲
-                    foreground       = colors["purple"], #7dc4e4
+                    foreground       = colors["blue_lighter"], #7dc4e4
                     foreground_alert = colors["red"],    #ed8796
                     threshold        = 70,
                     update_interval  = 2,
@@ -558,7 +564,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.Memory(
                     **deco,
-                    foreground      = colors["purple_light"], #91d7e3
+                    foreground      = colors["cyan"], #91d7e3
                     #format          = '  {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
                     format          = '  {MemUsed:.0f}{mm}', # 
                     measure_mem     = 'G',
@@ -568,8 +574,19 @@ screens = [
                 widget.Prompt(),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
-                    **endofbar,
+                    #**endofbar,
                     text = "", #   
+                    foreground = colors["grey"],
+                    background = colors["grey_light"],
+                    padding    = 0,
+                    fontsize   = 32,
+                    ),
+                widget.TextBox(
+                    text       = "", #   
+                    foreground = colors["grey_light"],
+                    background = colors["semi_transparent"],
+                    padding    = 0,
+                    fontsize   = 32,
                     ),
                 widget.TextBox(" ", padding = 0, background = colors["semi_transparent"]),
                 widget.TaskList(
@@ -614,7 +631,7 @@ screens = [
 
                 widget.TextBox(
                     text       = "", #   
-                    foreground = colors["grey_lighter"],
+                    foreground = colors["grey_light"],
                     background = colors["semi_transparent"],
                     padding    = 0,
                     fontsize   = 32,
@@ -623,7 +640,7 @@ screens = [
                     #**endofbar,
                     text = "", #   
                     foreground = colors["grey"],
-                    background = colors["grey_lighter"],
+                    background = colors["grey_light"],
                     padding    = 0,
                     fontsize   = 32,
                     ),
@@ -709,13 +726,13 @@ screens = [
                     #**endofbar,
                     text = "", #   
                     foreground = colors["grey"],
-                    background = colors["grey_lighter"],
+                    background = colors["grey_light"],
                     padding    = 0,
                     fontsize   = 32,
                     ),
                 widget.TextBox(
                     text       = "", #   
-                    foreground = colors["grey_lighter"],
+                    foreground = colors["grey_light"],
                     background = colors["semi_transparent"],
                     padding    = 0,
                     fontsize   = 32,
@@ -730,8 +747,19 @@ screens = [
                 #########
 
                 widget.TextBox(
-                    **endofbar,
+                    text       = "", #   
+                    foreground = colors["grey_light"],
+                    background = colors["semi_transparent"],
+                    padding    = 0,
+                    fontsize   = 32,
+                    ),
+                widget.TextBox(
+                    #**endofbar,
                     text = "", #   
+                    foreground = colors["grey"],
+                    background = colors["grey_light"],
+                    padding    = 0,
+                    fontsize   = 32,
                         ),
                 #widget.Systray(),
                 widget.StatusNotifier(
@@ -746,7 +774,7 @@ screens = [
                 widget.CheckUpdates(
                     **deco,
                     #foreground = '#91d7e3',
-                    colour_have_updates = colors["orange"], #91d7e3
+                    colour_have_updates = colors["yellow"], #91d7e3
                     colour_no_updates   = colors["white"],  #cad3f5
                     display_format      = '  {updates}',
                     distro              = 'Arch_yay', #'Arch'
@@ -757,7 +785,7 @@ screens = [
                 widget.TextBox(" ", padding = 0),
                 widget.Wttr(
                     **deco,
-                    foreground      = colors["yellow"],
+                    foreground      = colors["orange"],
                     format          = '  %f', # 1
                     lang            = 'en',
                     units           = 'm',

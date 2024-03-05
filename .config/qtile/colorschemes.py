@@ -52,9 +52,10 @@ mocha = {
     "grey_lighter":          "#585b70",
     "grey_light":            "#45475a",
     "grey":                  "#313244",
+    "grey_dark":             "#1e1e2e",
     "transparent":           "#00000000",
-    "semi_transparent":      "#3132447f", # hex 127
-    #"semi_transparent":      "#00000000", # hex 127
+    #"semi_transparent":      "#3132447f", # hex 127
+    "semi_transparent":      "#00000000", # hex 127
     }
 
 
