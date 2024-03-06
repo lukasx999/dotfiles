@@ -1,0 +1,14 @@
+#!/bin/sh
+
+
+var="foo"
+
+echo $var
+
+$var <<input
+foo
+bar
+baz
+input
+
+echo $var

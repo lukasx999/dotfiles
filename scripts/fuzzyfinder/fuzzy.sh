@@ -1,55 +1,23 @@
 #!/bin/sh
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#                          _/_/                                                        _/       
-#                       _/      _/    _/  _/_/_/_/  _/_/_/_/  _/    _/        _/_/_/  _/_/_/    
-#                    _/_/_/_/  _/    _/      _/        _/    _/    _/      _/_/      _/    _/   
-#                     _/      _/    _/    _/        _/      _/    _/          _/_/  _/    _/    
-#                    _/        _/_/_/  _/_/_/_/  _/_/_/_/    _/_/_/  _/  _/_/_/    _/    _/     
-#                                                               _/                              
-#                                                          _/_/                                 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+
+
+
+
+########################################################################################################
+#                                                                                                      #
+#                                                                                                      #
+#                                                                                                      #
+#                     _/_/                                                        _/                   #
+#                  _/      _/    _/  _/_/_/_/  _/_/_/_/  _/    _/        _/_/_/  _/_/_/                #
+#               _/_/_/_/  _/    _/      _/        _/    _/    _/      _/_/      _/    _/               #
+#                _/      _/    _/    _/        _/      _/    _/          _/_/  _/    _/                #
+#               _/        _/_/_/  _/_/_/_/  _/_/_/_/    _/_/_/  _/  _/_/_/    _/    _/                 #
+#                                                          _/                                          #
+#                                                     _/_/                                             #
+#                                                                                                      #
+#                                                                                                      #
+#                                                                                                      #
+########################################################################################################
 
 
 
@@ -78,6 +46,7 @@
 
 
 # Issues:
+# * when txt file is already opened it will show the prompt twice
 # * PROBLEM: using full path instead of . will add more chars and therefore limit search results
 # * Move file previews over to fzf-preview.sh
 # * Icons
@@ -143,7 +112,12 @@ ${Cyan}/home/$USER/.config/picom/picom.conf${NC}\n\
 ${Cyan}/home/$USER/.config/rofi/config.rasi${NC}\
 ")
 
-ignore=$(<<< "$recent" | sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
+ignore=$(<<< "$recent" sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
+
+
+
+
+
 
 
 
@@ -157,7 +131,18 @@ filter=$2
 [[ "$filter" ]] || filter="default"
 
 
-[[ "$filter" = "default" ]] && selection=$(< <(<<< "$recent") < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi "^$PWD$|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") < <(<<< "$config") awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
+
+
+
+
+
+[[ "$filter" = "default" ]] && selection=$(<<< "$recent" < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi "^$PWD$|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 60% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
+
+
+
+
+
+
 
 
 
@@ -224,19 +209,20 @@ filename="${filename%.*}"
 [[ "$filetype" = "directory" ]] && cd $selection && return 0
 
 # images
-[[ "$filetype" = "PNG" ]] || [[ "$filetype" = "JPEG" ]] && cd $dirpath && $IMGVIEWER $selection && return 0
+[[ "$filetype" =~ "PNG|JPEG|JPG" ]] && cd $dirpath && $IMGVIEWER $selection && return 0
 
 # file extensions (txt)
-[[ "$extension" = "c" ]] || [[ "$extension" = "py" ]] || [[ "$extension" = "lua" ]] || [[ "$extension" = "cpp" ]] || [[ "$extension" = "sh" ]] && cd $dirpath && $EDITOR $selection && return 0
+[[ "$extension" =~ "c|py|lua|cpp|sh|hs|rs|go" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # pdfs
 [[ "$extension" = "pdf" ]] && cd $dirpath && $PDFVIEWER $selection && return 0
 
 # text files
-[[ "$filetype" = "Unicode" ]] || [[ "$filetype" = "Python" ]] || [[ "$filetype" = "ASCII" ]] && cd $dirpath && $EDITOR $selection && return 0
+[[ "$filetype" =~ "Unicode|Python|ASCII" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # shell scripts
 shebang=$(command cat $selection 2>/dev/null sed 1q | grep ^\#!) #cmd cat instead of < because of errors with settings
+
 [[ "$shebang" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # executables
@@ -247,15 +233,11 @@ shebang=$(command cat $selection 2>/dev/null sed 1q | grep ^\#!) #cmd cat instea
 
 
 # settings
-
-# switch to current working dir
 [[ "$selection" = "#search in ." ]] && fuzzy . $filter && return 0
 [[ "$selection" = "#search in /" ]] && fuzzy / $filter && return 0
 [[ "$selection" = "#search in ~" ]] && fuzzy ~ $filter && return 0
 
-
 # filters
-
 [[ "$selection" = "#filter: none" ]] && fuzzy $dir none && return 0
 [[ "$selection" = "#filter: default" ]] && fuzzy $dir default && return 0
 [[ "$selection" = "#run with fzy" ]] && fuzzy $dir fzy && return 0
