@@ -43,6 +43,7 @@
 # * bat (for text previews)
 # * eza (for icons)
 # * xsel (for copying to clipboard)
+# * fd
 
 
 # Issues:
@@ -128,15 +129,18 @@ dir=$1
 [[ "$dir" ]] || dir="/"
 
 filter=$2
-[[ "$filter" ]] || filter="default"
+#[[ "$filter" ]] || filter="default"
+[[ "$filter" ]] || filter="fd"
 
 
 
+# -u ... unrestricted -a always absolute path (even in .) -d id maxdepth -g is glob matching -c is color always/never/auto -j 14 is threads
+
+[[ "$filter" = "fd" ]] && selection=$(<<< "$recent" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
 
 
 
-
-[[ "$filter" = "default" ]] && selection=$(<<< "$recent" < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi "^$PWD$|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 60% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
+[[ "$filter" = "default" ]] && selection=$(<<< "$recent" < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 60% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
 
 
 

@@ -48,6 +48,8 @@ nsxiv
 neofetch
 gotop
 htop
+emacs
+"doom emacs"
 fancontrol-gui (AUR)
 devour (window swallowing)
 
@@ -73,6 +75,8 @@ bat (cat replacement)
 cava
 shell-color-scripts
 powerlevel10k
+ripgrep
+fd (find)
 lf
   * ueberzug
 ("tpm" for tmux)
@@ -100,6 +104,7 @@ flameshot
 #arandr
 firefox
 gimp
+libreoffice
 
 
 
