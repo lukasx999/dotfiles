@@ -26,6 +26,7 @@ ly (display manager)
 # * "catppuccin sddm theme"
 xorg
   * xorg-xinit
+xzoom
 pipewire
   * wireplumber
   * pipewire-audio

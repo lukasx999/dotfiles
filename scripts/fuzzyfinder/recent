@@ -1,0 +1,4 @@
+/usr/bin/xinit
+/home/lukas/.bashrc
+/home/lukas/scripts/fuzzyfinder/fuzzy.sh
+/home/lukas/.dotfiles/

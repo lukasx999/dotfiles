@@ -47,15 +47,16 @@
 
 
 # Issues:
+# * recent file has two duplicated entries
 # * when txt file is already opened it will show the prompt twice
 # * PROBLEM: using full path instead of . will add more chars and therefore limit search results
-# * Move file previews over to fzf-preview.sh
+# / Move file previews over to fzf-preview.sh
 # * Icons
 # * Sort Files
-# * Show most recent files
-# * add better filtering
+# / Show most recent files
+# / add better filtering
 # * fix /home/ and . issue
-# * bugged previews for # commands
+# / bugged previews for # commands
 # * flickering
 
 
@@ -89,6 +90,7 @@ ${Yellow}#search in .\n\
 #run with fzy\n\
 #show a compact prompt\n\
 #copy the file path\n\
+#clear history\n\
 #filter: default\n\
 #filter: icons\n\
 #filter: only dirs\n\
@@ -100,21 +102,15 @@ ${Yellow}#search in .\n\
 
 # Add your most used dirs/files here, to make them show up on start
 
-recent=$(echo -e "\
-${Red}/home/$USER/scripts/fuzzyfinder/fuzzy.sh${NC}\n\
-${Cyan}/home/$USER/scripts${NC}\n\
-${Cyan}/home/$USER/.zshrc${NC}\n\
-${Cyan}/home/$USER/.xinitrc${NC}\n\
-${Cyan}/home/$USER/.dotfiles/packages${NC}\n\
-${Cyan}/home/$USER/.config${NC}\n\
-${Cyan}/home/$USER/.config/qtile/config.py${NC}\n\
-${Cyan}/home/$USER/.config/nvim${NC}\n\
-${Cyan}/home/$USER/.config/picom/picom.conf${NC}\n\
-${Cyan}/home/$USER/.config/rofi/config.rasi${NC}\
+list=$(echo -e "\
+${Red}$HOME/scripts/fuzzyfinder/fuzzy.sh${NC}\n\
+${Cyan}$HOME/.zshrc${NC}\n\
+${Cyan}$HOME/.xinitrc${NC}\n\
+${Cyan}$HOME/.config/qtile/config.py${NC}\
 ")
 
-ignore=$(<<< "$recent" sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
-
+ignore=$(<<< "$list" sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
+# grep -vx "$ignore"
 
 
 
@@ -134,9 +130,31 @@ filter=$2
 
 
 
+recentpath="$HOME/scripts/fuzzyfinder/recent"
+
+
+
+
+recent=$(tac "$recentpath")
+# grep -vxE "^$"
+
+
+
 # -u ... unrestricted -a always absolute path (even in .) -d id maxdepth -g is glob matching -c is color always/never/auto -j 14 is threads
 
-[[ "$filter" = "fd" ]] && selection=$(<<< "$recent" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
+
+
+[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< "$recent" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
+
+
+
+#[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< "$recent" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
+
+
+
+
+
+
 
 
 
@@ -189,7 +207,8 @@ filter=$2
 
 
 
-
+<<< $recent | awk '!a[$0]++' | tac > $recentpath
+[[ "$selection" ]] && <<< $selection >> $recentpath
 
 
 
@@ -247,6 +266,7 @@ shebang=$(command cat $selection 2>/dev/null sed 1q | grep ^\#!) #cmd cat instea
 [[ "$selection" = "#run with fzy" ]] && fuzzy $dir fzy && return 0
 [[ "$selection" = "#show a compact prompt" ]] && fuzzy $dir compact && return 0
 [[ "$selection" = "#copy the file path" ]] && fuzzy $dir copypath && return 0
+[[ "$selection" = "#clear history" ]] && <<< "" > $recentpath && return 0
 [[ "$selection" = "#filter: icons" ]] && fuzzy $dir icons && return 0
 [[ "$selection" = "#filter: only dirs" ]] && fuzzy $dir onlydir && return 0
 
