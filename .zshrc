@@ -14,6 +14,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -42,11 +43,6 @@ fi
 alias lf='lfcd'
 
 
-#bindkey -s '^o' 'lf\n'
-bindkey -s '^y' 'lf\n'
-bindkey -s '^x' 'nvim\n'
-bindkey -s '^a' 'tmux\n'
-bindkey -s '^f' 'fuzzy\n'
 
 
 #xset r rate 300 50 # fast scrolling in vim
@@ -61,10 +57,26 @@ alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.
 
 
 #default apps
-export EDITOR="nvim"
-export SUDO_EDITOR="nvim"
+
+#export EDITOR="nvim"
+export EDITOR="$HOME/scripts/nvide.sh"
+#export SUDO_EDITOR="nvim"
+export SUDO_EDITOR="$HOME/scripts/nvide.sh"
 export TERMINAL="kitty"
 export BROWSER="librewolf"
+
+
+
+
+# Keybinds
+bindkey -s '^x' '$EDITOR\n'
+#bindkey -s '^o' 'lf\n'
+bindkey -s '^y' 'lf\n'
+bindkey -s '^f' 'fuzzy\n'
+
+
+
+
 
 
 export BAT_THEME="base16-256"
@@ -164,6 +176,7 @@ alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port
 #alias pac='pacman'
 #alias cat='bat -pp'
 #alias fzy='~/scripts/fuzzyfinder'
+alias neovide='devour neovide --no-fork 2>/dev/null'
 alias vim='nvim'
 alias vi='/bin/vim'
 alias cat='bat --paging=never -n'
