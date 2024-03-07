@@ -58,6 +58,7 @@
 # * fix /home/ and . issue
 # / bugged previews for # commands
 # * flickering
+# * fd not showing CWD and ~
 
 
 
@@ -130,7 +131,7 @@ filter=$2
 
 
 
-recentpath="$HOME/scripts/fuzzyfinder/recent"
+recentpath="$HOME/scripts/fuzzyfinder/.recent"
 
 
 
@@ -140,16 +141,14 @@ recent=$(tac "$recentpath")
 
 
 
-# -u ... unrestricted -a always absolute path (even in .) -d id maxdepth -g is glob matching -c is color always/never/auto -j 14 is threads
+
+# With colors
+#[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< $(echo -e "$recent" | xargs -L 1 fd -uagp -c always) <<< "~" <<< "$dir" < <(fd -uag -d 7 -c always "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{80,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
 
 
 
-[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< "$recent" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
-
-
-
-#[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< "$recent" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
-
+# Without colors
+[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< "$recent" <<< "~" <<< "$dir" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
 
 
 
@@ -207,7 +206,7 @@ recent=$(tac "$recentpath")
 
 
 
-<<< $recent | awk '!a[$0]++' | tac > $recentpath
+#<<< $recent | awk '!a[$0]++' | grep -Ev "^#.*" | tac > $recentpath
 [[ "$selection" ]] && <<< $selection >> $recentpath
 
 
@@ -223,8 +222,6 @@ dirpath=$(<<< $selection rev | cut -d'/' -f2- | rev) # full path without last el
 filename=$(basename -- "$selection") # file name without full path
 extension="${filename##*.}" # file extension (no .)
 filename="${filename%.*}"
-
-
 
 
 
