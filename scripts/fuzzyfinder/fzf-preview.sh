@@ -27,12 +27,19 @@ function textpreview(){
   $2 -p --color=always $1 2>/dev/null
 }
 
+function filesize(){
+  echo $1 | sed "s.^~./home/$USER.g" | xargs du -hc 2>/dev/null | tail -n 1 | awk '{print $1}'
+}
+
+
+
 
 
 
 if [[ ! $type =~ image/ ]]; then
   if [[ $type =~ =binary ]]; then
     fileinfo "$file"
+    filesize "$file"
     #file "$1"
     exit
   fi
@@ -55,6 +62,7 @@ if [[ ! $type =~ image/ ]]; then
   fi
 
   fileinfo "$file"
+  filesize "$file"
   echo ""
   textpreview "$file" "${batname}"
   #echo $file | sed "s;^~;/home/$USER;g" | xargs file | cut -d" " -f 2-
@@ -63,9 +71,6 @@ if [[ ! $type =~ image/ ]]; then
   #file $file
   exit
 fi
-
-
-
 
 
 
@@ -94,6 +99,7 @@ if [[ $KITTY_WINDOW_ID ]]; then
   kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="$dim@0x0" "$file" | sed '$d' | sed $'$s/$/\e[m/'
   echo ""
   fileinfo "$file"
+  filesize "$file"
 
 # 2. Use chafa with Sixel output
 elif command -v chafa > /dev/null; then

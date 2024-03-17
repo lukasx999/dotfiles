@@ -1,0 +1,56 @@
+#!/bin/env bash
+
+clipboardpath="$HOME/.clipboard"
+
+while [ 1 ]; do
+
+#echo -e "$(xsel -b)" >> $clipboardpath &&
+
+
+
+echo -e "$(xclip -o -sel c)" >> $clipboardpath
+awk -i inplace '!a[$0]++' $clipboardpath
+
+
+
+
+#file+=$(echo -e '\n')
+#file+=$(printf "\n")
+#file+=$'\n'
+
+
+#file=$(command cat "$clipboardpath")
+#
+#for i in $file; do
+  #echo $i > $clipboardpath
+#done
+  #
+#xclip -o >> $clipboardpath
+
+#file+=$(xclip -o)
+#echo $file > $clipboardpath
+#echo $file
+
+
+
+
+
+#tac $clipboardpath
+
+
+
+
+#echo $reverse > $clipboardpath
+
+#awk -i inplace '!a[$1]++' $clipboardpath
+
+#echo $(cat $clipboardpath | awk '!a[$0]++') > $clipboardpath
+
+#cat $clipboardpath | uniq > $clipboardpath
+
+#cat $clipboardpath | awk '!a[$0]++' | uniq > $clipboardpath
+
+
+#tac $clipboardpath | awk '!a[$0]++' | uniq > $clipboardpath
+
+done

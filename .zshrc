@@ -26,11 +26,16 @@ fi
 
 # Created by newuser for 5.9
 
-
+setopt interactive_comments
 setopt auto_cd # cding into dirs by just typing the name
 
-bindkey -v # enable vi mode
-KEYTIMEOUT=1 # instantly switch to normal mode (no delay)
+#bindkey -v # enable vi mode
+#KEYTIMEOUT=1 # instantly switch to normal mode (no delay)
+
+
+# set up zoxide
+eval "$(zoxide init zsh)"
+
 
 
 
@@ -59,11 +64,12 @@ alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.
 #default apps
 
 #export EDITOR="nvim"
-export EDITOR="$HOME/scripts/nvide.sh"
 #export SUDO_EDITOR="nvim"
+export EDITOR="$HOME/scripts/nvide.sh"
 export SUDO_EDITOR="$HOME/scripts/nvide.sh"
 export TERMINAL="kitty"
 export BROWSER="librewolf"
+
 
 
 
@@ -90,6 +96,7 @@ export IMGVIEWER="nsxiv"
 export PDFVIEWER="mupdf"
 #export FZF_DEFAULT_OPTS="--color='fg:#cad3f5,bg:#363a4f,fg+:#8aadf4,bg+:#464d64,pointer:#ed8796,prompt:#8aadf4,spinner:#8aadf4,info:#b7bdf8,border:#cad3f5,label:#cad3f5' --preview='head -$LINES {}' --border=rounded --border-label='╢ fuzzy ╟' --info=default --separator='─' --scrollbar='' --prompt='->' --pointer='->'"
 
+#--bind 'ctrl-j:down'
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#363a4f,bg:#24273a,spinner:#c6a0f6,hl:#ed8796 \
 --color=fg:#cad3f5,header:#ed8796,info:#8aadf4,pointer:#ed8796 \
@@ -102,12 +109,13 @@ export FZF_DEFAULT_OPTS=" \
 --marker='' \
 --separator='─' \
 --scrollbar='' \
---prompt='->' \
---pointer='->'"
+--prompt='=>' \
+--pointer=''"
 
 
-alias fuzzy='source ~/scripts/fuzzyfinder/fuzzy.sh'
-alias exp='fuzzy . explore'
+alias fuzzy='source ~/scripts/fuzzyfinder/fuzzy'
+#. ~/scripts/fuzzyfinder/z.sh
+#alias exp='fuzzy . explore'
 
 
 #--preview='file {} && echo "" && bat -p --color=always {} 2>/dev/null' \
@@ -134,6 +142,30 @@ alias exp='fuzzy . explore'
 
 
 
+
+# Load colors
+autoload -U colors && colors
+
+# Tab complete
+autoload -U compinit
+zstyle '*:completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots) #include hidden files
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+
+
+
+
+
+
 #symbols:
 #Ω
 #∮
@@ -146,21 +178,14 @@ alias exp='fuzzy . explore'
 
 
 # setting PS1
-PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
+#PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
+
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
 
+#PS1="%B%{$fg[white]%}[%{$fg[blue]%}%n%{$fg[grey]%}@%{$fg[cyan]%}%M %{$fg[red]%}%~%{$fg[white]%}]%{$reset_color%}$%b "
 
 
-
-#enable colors
-autoload -U colors && colors
-
-#Tab complete
-autoload -U compinit
-zstyle '*:completion:*' menu select
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots) #include hidden files
 
 
 alias ltspice='wine ~/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe'
@@ -177,7 +202,10 @@ alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port
 #alias cat='bat -pp'
 #alias fzy='~/scripts/fuzzyfinder'
 alias neovide='devour neovide --no-fork 2>/dev/null'
+
 alias vim='nvim'
+alias vim=$EDITOR
+
 alias vi='/bin/vim'
 alias cat='bat --paging=never -n'
 alias eza='eza -F --icons=auto --group-directories-first'
@@ -202,15 +230,74 @@ alias tock='~/XSoftware/tock/target/release/tock'
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+# vi mode config
+function zvm_config() {
+  ZVM_VI_EDITOR=$EDITOR # vi mode editor for vv in normal mode
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+  ZVM_KEYTIMEOUT=0.4
+
+  ZVM_INIT_MODE=sourcing
+}
+
+
+function fuzzyfinder() {
+  fuzzy
+}
+
+
+# keybinds
+function zvm_after_lazy_keybindings() {
+  zvm_define_widget fuzzyfinder
+  #bindkey -M vicmd '^F' fuzzyfinder 
+
+  #zvm_bindkey vicmd '^F' fuzzyfinder
+}
+
+
+
+
+
+
+
+
+
 # plugins
 #source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+bindkey -s '^x' '$EDITOR\n'
+bindkey -s '^y' 'lf\n'
+bindkey -s '^f' 'fuzzy\n'
+bindkey -s '^g' 'fuzzy / def\n'
+
+
+
 #source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
-#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+
+
+
 

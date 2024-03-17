@@ -29,7 +29,8 @@ macchiato = {
     "grey_light":       "#494d64",
     "grey":             "#363a4f",
     "transparent":      "#00000000",
-    "semi_transparent": "#363a4f7f",
+    #"semi_transparent": "#363a4f7f",
+    "semi_transparent":      "#00000000", # hex 127
     }
 
 # Catppuccin Mocha

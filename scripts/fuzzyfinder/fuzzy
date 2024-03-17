@@ -1,23 +1,7 @@
+#!/bin/env bash
 #!/bin/sh
-
-
-
-
-########################################################################################################
-#                                                                                                      #
-#                                                                                                      #
-#                                                                                                      #
-#                     _/_/                                                        _/                   #
-#                  _/      _/    _/  _/_/_/_/  _/_/_/_/  _/    _/        _/_/_/  _/_/_/                #
-#               _/_/_/_/  _/    _/      _/        _/    _/    _/      _/_/      _/    _/               #
-#                _/      _/    _/    _/        _/      _/    _/          _/_/  _/    _/                #
-#               _/        _/_/_/  _/_/_/_/  _/_/_/_/    _/_/_/  _/  _/_/_/    _/    _/                 #
-#                                                          _/                                          #
-#                                                     _/_/                                             #
-#                                                                                                      #
-#                                                                                                      #
-#                                                                                                      #
-########################################################################################################
+#set -euo pipefail
+#set -u
 
 
 
@@ -47,6 +31,7 @@
 
 
 # Issues:
+# * UEBERZUG SUPPORT
 # * recent file has two duplicated entries
 # * when txt file is already opened it will show the prompt twice
 # * PROBLEM: using full path instead of . will add more chars and therefore limit search results
@@ -104,7 +89,7 @@ ${Yellow}#search in .\n\
 # Add your most used dirs/files here, to make them show up on start
 
 list=$(echo -e "\
-${Red}$HOME/scripts/fuzzyfinder/fuzzy.sh${NC}\n\
+${Red}$HOME/scripts/fuzzyfinder/fuzzy${NC}\n\
 ${Cyan}$HOME/.zshrc${NC}\n\
 ${Cyan}$HOME/.xinitrc${NC}\n\
 ${Cyan}$HOME/.config/qtile/config.py${NC}\
@@ -127,7 +112,8 @@ dir=$1
 
 filter=$2
 #[[ "$filter" ]] || filter="default"
-[[ "$filter" ]] || filter="fd"
+[[ "$filter" ]] || filter="rec"
+#[[ "$filter" ]] || filter="super"
 
 
 
@@ -147,8 +133,27 @@ recent=$(tac "$recentpath")
 
 
 
-# Without colors
-[[ "$filter" = "fd" ]] && selection=$(<<< "$list" <<< "$recent" <<< "~" <<< "$dir" < <(fd -uag -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
+# Without colors --mount wont descend into mounted fs
+[[ "$filter" = "def" ]] && selection=$(<<< "$list" <<< "$recent" <<< "$dir" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="╢ 󰈞 Find Files   ╟" --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
+
+
+
+
+
+[[ "$filter" = "col" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< "$dir" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{80,}") <<< "$config" awk '!a[$0]++' | xargs -L 1 eza -d --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
+
+
+
+# open prompt with most recent files (user list, recent files, z)
+[[ "$filter" = "rec" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< "$dir" awk '!a[$0]++' | xargs -L 1 eza -d --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
+
+
+
+
+
+
+
+
 
 
 
@@ -206,7 +211,7 @@ recent=$(tac "$recentpath")
 
 
 
-#<<< $recent | awk '!a[$0]++' | grep -Ev "^#.*" | tac > $recentpath
+<<< $recent | awk '!a[$0]++' | grep -Ev "^#.*" | tac > $recentpath
 [[ "$selection" ]] && <<< $selection >> $recentpath
 
 

@@ -74,6 +74,25 @@ comp_on     = ""
 comp_off    = ""
 
 
+"""
+if qtile.core.name == "x11":
+    term = "urxvt"
+elif qtile.core.name == "wayland":
+    term = "foot"
+"""
+
+from libqtile.backend.wayland import InputConfig
+
+wl_input_rules = {
+    "1267:12377:ELAN1300:00 04F3:3059 Touchpad": InputConfig(left_handed=True),
+    "*": InputConfig(left_handed=True, pointer_accel=True),
+    "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="de"),
+}
+
+
+
+
+
 #     __                  _   _                 
 #    / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
 #   | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -201,11 +220,11 @@ keys = [
 
     # Switching between windows
 
-    #Key([mod], "j", lazy.layout.next(),                            desc="Move window focus to next window"),
-    #Key([mod], "k", lazy.layout.previous(),                        desc="Move window focus to previous window"),
+    Key([mod], "j", lazy.layout.next(),                            desc="Move window focus to next window"),
+    Key([mod], "k", lazy.layout.previous(),                        desc="Move window focus to previous window"),
 
-    Key([mod], "j", lazy.group.next_window(),                      desc="Move window focus to next window"),
-    Key([mod], "k", lazy.group.prev_window(),                      desc="Move window focus to previous window"),
+    #Key([mod], "j", lazy.group.next_window(),                      desc="Move window focus to next window"),
+    #Key([mod], "k", lazy.group.prev_window(),                      desc="Move window focus to previous window"),
 
     Key([mod], "h", lazy.layout.left(),                            desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(),                           desc="Move focus to right"),
@@ -479,7 +498,8 @@ deco = {
         RectDecoration(
             colour      = colors["grey_light"],   #464d64
             line_colour = colors["grey_lighter"], #5b6078
-            radius      = 10, # 13 -- 12 for 40 bar height -- 12
+            #radius      = 10, # 13 -- 12 for 40 bar height -- 12
+            radius      = 8, # 13 -- 12 for 40 bar height -- 12
             clip        = False, # Line mode in groupbox wont work unless this is False
             filled      = True,
             padding_y   = 6, #5 -- 7 for 40 bar height
@@ -498,7 +518,8 @@ widget_defaults = dict(
     fontsize   = 16, # 18 for 40 bar height
     foreground = colors["white"], #cad3f5
     background = colors["grey"],  #363a4f
-    #background = '#00000000',
+    fmt="<b>{}</b>",
+    #background = '#0000007f',
     #opacity   = 0,
     #padding   = 3,
     padding    = 15,
@@ -578,12 +599,14 @@ screens = [
                     text = "", #   
                     foreground = colors["grey"],
                     background = colors["grey_light"],
+                    #background = "#0000000f",
                     padding    = 0,
                     fontsize   = 32,
                     ),
                 widget.TextBox(
                     text       = "", #   
                     foreground = colors["grey_light"],
+                    #foreground = "#0000000f",
                     background = colors["semi_transparent"],
                     padding    = 0,
                     fontsize   = 32,
@@ -803,6 +826,7 @@ screens = [
                     **deco,
                     foreground = colors["red"], #f5a97f
                     format     = '  %H:%M',
+                    #fmt="  <u><b>{}</b></u>",
                     ),
                 widget.TextBox(" ", padding = 0),
                 widget.TextBox(
@@ -878,6 +902,7 @@ floating_layout    = layout.Floating(
         Match(wm_class = "nsxiv"),  # ssh-askpass
         Match(wm_class = "VirtualBox Manager"),  # ssh-askpass
         Match(title    = "Steam Settings"),  # GPG key password entry
+        Match(wm_class = "xzoom x2"),  # ssh-askpass
         #Match(title   = "Friends List"),  # GPG key password entry
     ],
     border_normal           = colors["grey"],       #363a4f

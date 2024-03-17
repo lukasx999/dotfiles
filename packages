@@ -54,6 +54,7 @@ emacs
 "doom emacs"
 fancontrol-gui (AUR)
 devour (window swallowing)
+simple-mtpfs (for mounting androids)
 
 
 
@@ -66,10 +67,12 @@ zsh
   * "zsh plugins" (see ~/.zshrc)
     * fast syntax highlighting
     * autocompletions
+    * zsh vi mode
 dash (symlink to /bin/sh)
 neovim
   * xsel (for accessing + register)
   * neovide
+xclip (for clipboard)
 bluez
   * bluez-utils
 eza (ls replacement)
