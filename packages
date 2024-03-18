@@ -62,6 +62,7 @@ simple-mtpfs (for mounting androids)
 
 kitty
 tldr
+zoxide
 fzf, fzy (fuzzyfinders)
 zsh
   * "zsh plugins" (see ~/.zshrc)
@@ -83,7 +84,7 @@ powerlevel10k
 ripgrep
 fd (find)
 lf
-  * ueberzug
+  * ueberzug/ueberzugpp
 ("tpm" for tmux)
 imagemagick
 lynx
