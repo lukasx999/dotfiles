@@ -1,0 +1,6 @@
+#!/bin/sh
+
+perc=$(top -n 1 -b -i | awk 'NR==8 {print $9}') &&
+program=$(top -n 1 -b -i | awk 'NR==8 {print $12}') &&
+
+echo  $program @ $perc%

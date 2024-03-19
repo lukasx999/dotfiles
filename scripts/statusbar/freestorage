@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+free=$(df -h | awk 'NR==5 {print $5}')
+
+echo  $free

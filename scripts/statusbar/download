@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+rx=$(cat /sys/class/net/[ew]*/statistics/rx_bytes)
+rx2=$((rx/1000000))
+
+echo  $rx2"MiB"

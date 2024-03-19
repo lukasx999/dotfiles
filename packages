@@ -10,12 +10,19 @@
 
 ### OS Utils
 
+Hyprland
+  * swww
+  * wl-clipboard
+  * waybar
+  * wofi
+  * "hyprpm offical plugins" (enable trails)
 Qtile
   * Qtile extra (via AUR/PIP)
 dunst
 network-manager-applet
+blueman
 rofi
-lxappearance
+lxappearance / nwg-look (theme selectors)
 conky-lua-nv
 #slock (Install not required)
 betterlockscreen (AUR)
@@ -41,6 +48,7 @@ redshift
 #picom-ftlabs-git
 picom-simpleanims-next-git (AUR)
 yay / paru
+catppuccin-gtk-theme-mocha
 wine
   * wine-mono
 git
@@ -62,6 +70,7 @@ simple-mtpfs (for mounting androids)
 
 kitty
 tldr
+pup (webscraping)
 zoxide
 fzf, fzy (fuzzyfinders)
 zsh
@@ -69,6 +78,7 @@ zsh
     * fast syntax highlighting
     * autocompletions
     * zsh vi mode
+    * zsh autopairs
 dash (symlink to /bin/sh)
 neovim
   * xsel (for accessing + register)
@@ -105,6 +115,9 @@ platformio-core
 nsxiv
 mupdf
 steam
+  * steamcmd
+  * steam-cli
+  * steam-tui (compile)
 "LTspice XVII" via wine
 openrgb-git
 flameshot

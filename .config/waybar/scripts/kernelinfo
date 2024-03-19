@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+kernel=$(uname -a | awk '{print $3}')
+
+echo  $kernel

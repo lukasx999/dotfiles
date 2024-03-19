@@ -141,9 +141,10 @@ recent=$(tac "$recentpath")
 
 
 
-[[ "$filter" = "col" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< "$dir" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{80,}") <<< "$config" awk '!a[$0]++' | xargs -L 1 eza -d --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
+#[[ "$filter" = "col" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< "$dir" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{80,}") <<< "$config" awk '!a[$0]++' | xargs -L 1 eza -d --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 100% --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
+[[ "$filter" = "col" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{80,}") <<< "$recent2" <<< "$recentz" <<< "$dir" xargs -L 1 eza -dF --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | awk '!a[$0]++' | sed "s_->.*__g" | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
 
@@ -153,13 +154,9 @@ recentz=$(zoxide query -l) # use zoxide to generate list of recently visited dir
 
 
 # open prompt with most recent files (user list, recent files, z)
-[[ "$filter" = "rec" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{10,}") <<< "$recent2" <<< "$recentz" <<< "$dir" xargs -L 1 eza -dF --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | awk '!a[$0]++' | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
+[[ "$filter" = "rec" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{10,}") <<< "$recent2" <<< "$recentz" <<< "$dir" xargs -L 1 eza -dF --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | awk '!a[$0]++' | sed "s_->.*__g" | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
-
-
-
-#[[ "$filter" = "rec" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< "$recent2" <<< "$recentz" <<< "$dir" awk '!a[$0]++' | xargs -L 1 eza -dF --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
 
@@ -238,6 +235,9 @@ extension="${filename##*.}" # file extension (no .)
 filename="${filename%.*}"
 
 
+
+# symlinks
+[[ "$filetype" = "symbolic" ]] && filetype=$(file $(readlink -f $selection) | awk '{print $2}')
 
 # directories
 [[ "$filetype" = "directory" ]] && cd $selection && return 0
