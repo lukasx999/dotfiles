@@ -3,18 +3,18 @@
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "position": "top",
-    "height": 30, // Waybar height (to be removed for auto height)
+    //"height": 30, // Waybar height (to be removed for auto height)
+    "height": 35, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "margin": 5,
+    "margin": 10,
     //"spacing": 4, // Gaps between modules (4px)
     "spacing": 6, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
         "cpu",
         "memory",
-        "custom/cputemp",
         //"custom/media",
-        "hyprland/window",
+        "custom/cputemp",
     ],
     "modules-center": [
         "hyprland/workspaces",
@@ -22,17 +22,6 @@
     "modules-right": [
         "tray",
         "custom/packages",
-        "mpd",
-        "idle_inhibitor",
-        "pulseaudio",
-        "network",
-        "power-profiles-daemon",
-        "temperature",
-        "backlight",
-        "keyboard-state",
-        "sway/language",
-        "battery",
-        "battery#bat2",
         "clock#date",
         "clock",
     ],
@@ -41,11 +30,11 @@
 
 
     "custom/cputemp": {
-        "exec": "~/.config/waybar/cputemp.sh",
-        "interval": 10,
-        "format": "{icon} {}°C",
+        "exec": "~/.config/waybar/cpu_temp.sh",
+        "interval": 1,
+        "format": "  {}°C ",
         "return-type": "",
-        "format-icons": ["", "", "", "", "▅", "▆", "▇", "█"],
+        //"format-icons": ["", "", "", "", "▅", "▆", "▇", "█"],
         //"restart-interval": 1,
     },
 
@@ -53,13 +42,13 @@
     "custom/packages": {
         "exec": "~/.config/waybar/packages.sh",
         "interval": 10,
-        "format": "  {}",
+        "format": "   {}  ",
         "return-type": "",
     },
 
     "clock": {
         "timezone": "Germany/Berlin",
-        "format": "{:%H:%M} ",
+        "format": " {:%H:%M}",
         "interval": 60,
         "format-alt": "{:%H:%M:%S}"
     },
@@ -68,7 +57,7 @@
     "clock#date": {
 
         "timezone": "Germany/Berlin",
-        "format": "{:%d.%m.%Y} ",
+        "format": " {:%d.%m.%Y}",
         "interval": 60,
     },
 
@@ -84,7 +73,7 @@
 
     "cpu": {
         "interval": 1,
-        "format": "{icon} <b>{usage}</b>% at <b>{avg_frequency}</b>MHz ",
+        "format": " <b>{usage}</b>% at <b>{avg_frequency}</b>MHz {icon}",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
         //"max-length": "",
         //"rotate": "",
@@ -96,7 +85,7 @@
 
     "memory": {
         "interval": 30,
-        "format": "{icon} {percentage}% ",
+        "format": " {percentage}% {icon}",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     },
 
@@ -108,24 +97,24 @@
     "hyprland/workspaces": {
         "active-only": false,
         "all-outputs": false,
-        "format": "{icon} <b>{name}</b> {windows}",
+        "format": "<span color='#f5e0dc'>{icon}</span> <b>{name}</b><span color='#7f849c'>{windows}</span>",
         "format-window-separator": " ",
-        "window-rewrite-default": "",
+        "window-rewrite-default": " ",
         "window-rewrite": {
-           "title<.*youtube.*>": "",
-           "class<firefox>": "",
-           "class<firefox> title<.*github.*>": "",
-           "foot": "",
-           "neovide": "",
-           "title<vim>": "",
-           "kitty": "",
-           "code": "󰨞",
+           "title<.*youtube.*>": " ",
+           "class<firefox>": " ",
+           "class<firefox> title<.*github.*>": " ",
+           "foot": " ",
+           "neovide": " ",
+           "title<.*vim.*>": " ",
+           "kitty": " ",
+           "code": " 󰨞",
 	       },
         "format-icons": {
             "active": "",
-            "default": "",
-            "empty": "_",
-            "persistent": "O",
+            "default": "", //  <-- this option is useless?
+            "empty": "",
+            "persistent": "",
             "special": "S",
             "urgent": "",
             },
@@ -147,16 +136,7 @@
             "unlocked": ""
         }
     },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
+
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",

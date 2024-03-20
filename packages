@@ -16,6 +16,7 @@ Hyprland
   * waybar
   * wofi
   * "hyprpm offical plugins" (enable trails)
+  * mpvpaper
 Qtile
   * Qtile extra (via AUR/PIP)
 dunst
@@ -91,6 +92,7 @@ bat (cat replacement)
 cava
 shell-color-scripts
 powerlevel10k
+starship
 ripgrep
 fd (find)
 lf

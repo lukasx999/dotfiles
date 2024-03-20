@@ -1,17 +1,23 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     /*font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;*/
-    font-family: FontAwesome, Roboto;
+    font-family: FontAwesome, JetBrainsMono NerdFont;
     /*font-family: FontAwesome, JetBrainsMono NerdFont;*/
-    font-size: 13px;
+    /*font-size: 13px;*/
+    font-size: 17px;
 }
+
+
+
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    /*background-color: transparent;*/
+    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
+    border-radius: 10px;
 }
 
 window#waybar.hidden {
@@ -59,31 +65,54 @@ button:hover {
   border-left-style: solid;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
-  padding-left: 1.5em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 #workspaces button:last-child{
   border-right-style: solid;
   border-top-right-radius: 9999px;
   border-bottom-right-radius: 9999px;
-  padding-right: 1.5em;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 
 #workspaces button {
     border-top-style: solid;
     border-bottom-style: solid;
     border-width: 1px;
-    border-color: white;
+    border-color: #585b70;
     /*padding: 0 5px;*/
     padding: 0 1em;
-    margin: 0em;
-    background-color: #464d64;
+    background-color: #313244;
     /*background-color: transparent;*/
-    color: #ffffff;
+    color: #cdd6f4;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 1px 1px #585b70;
 }
 
+
+@keyframes wschange {
+  /*0%   {background-color: #363a4f;}
+  25%  {background-color: #5e657a;}
+  50%  {background-color: #5e657a;}
+  100% {background-color: #363a4f;}*/
+}
+
+
 #workspaces button.active {
-    background-color: #363a4f;
+  /*background-color: #363a4f;*/
+  /*background-image: linear-gradient(to right, blue , white);*/
+  background-image: linear-gradient(to right, #11111b , #7f849c);
+  color: #89b4fa;
+  animation-name: wschange;
+  animation-duration: 1s;
+
+  /*border-bottom-style: outset;
+  border-bottom-width: 3px;
+  border-bottom-color: #74c7ec;*/
 }
 
 #workspaces button.empty {
@@ -159,9 +188,27 @@ button:hover {
     margin-right: 0;
 }
 
+
 #clock {
-    background-color: #64727D;
+    background-color: #313244;
+    color: #f38ba8;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+    /*border-style: solid;
+    border-width: 2px;
+    border-color: #585b70;*/
 }
+
+
+#custom-packages {
+    background-color: #313244;
+    color: #fab387;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
 
 #battery {
     background-color: #ffffff;
@@ -215,12 +262,27 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    background-color: #313244;
+    color: #74c7ec;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: #313244;
+    color: #b4befe;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
+#custom-cputemp {
+    background-color: #313244;
+    color: #cba6f7;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
 }
 
 #disk {
