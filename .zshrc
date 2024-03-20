@@ -33,8 +33,6 @@ setopt auto_cd # cding into dirs by just typing the name
 #KEYTIMEOUT=1 # instantly switch to normal mode (no delay)
 
 
-# set up zoxide
-eval "$(zoxide init zsh)"
 
 
 
@@ -63,10 +61,6 @@ alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.
 
 #default apps
 
-#export EDITOR="nvim"
-#export SUDO_EDITOR="nvim"
-export EDITOR="$HOME/scripts/nvide.sh"
-export SUDO_EDITOR="$HOME/scripts/nvide.sh"
 export TERMINAL="kitty"
 export BROWSER="librewolf"
 
@@ -203,6 +197,13 @@ alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port
 #alias fzy='~/scripts/fuzzyfinder'
 alias neovide='devour neovide --no-fork 2>/dev/null'
 
+export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
+#export EDITOR="neovide"
+#export SUDO_EDITOR="neovide"
+#export EDITOR="$HOME/scripts/nvide.sh"
+#export SUDO_EDITOR="$HOME/scripts/nvide.sh"
+
 alias vim='nvim'
 alias vim=$EDITOR
 
@@ -279,6 +280,8 @@ function zvm_after_lazy_keybindings() {
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
+autopair-init
 
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 bindkey -s '^x' '$EDITOR\n'
@@ -288,15 +291,28 @@ bindkey -s '^g' 'fuzzy / def\n'
 
 
 
+
+
+# set up zoxide
+eval "$(zoxide init zsh)"
+#export _ZO_DATA_DIR=""
+
+
+
+
+
 #source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
+
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+#eval "$(starship init zsh)"
 
 
 

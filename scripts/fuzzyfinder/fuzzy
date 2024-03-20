@@ -167,7 +167,6 @@ recentz=$(zoxide query -l) # use zoxide to generate list of recently visited dir
 
 
 
-
 [[ "$filter" = "default" ]] && selection=$(<<< "$recent" < <(find "$dir" -maxdepth 7 -mount 2>/dev/null | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vx "$ignore" | sed "s;/home/$USER;~;g" | fzf --ansi --scroll-off=5 --height 60% --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;/home/$USER;g")
 
 
@@ -235,7 +234,6 @@ extension="${filename##*.}" # file extension (no .)
 filename="${filename%.*}"
 
 
-
 # symlinks
 [[ "$filetype" = "symbolic" ]] && filetype=$(file $(readlink -f $selection) | awk '{print $2}')
 
@@ -246,7 +244,7 @@ filename="${filename%.*}"
 [[ "$filetype" =~ "PNG|JPEG|JPG" ]] && cd $dirpath && $IMGVIEWER $selection && return 0
 
 # file extensions (txt)
-[[ "$extension" =~ "c|py|lua|cpp|sh|hs|rs|go" ]] && cd $dirpath && $EDITOR $selection && return 0
+[[ "$extension" =~ "c|py|lua|cpp|sh|hs|rs|go|js|json|jsonc" ]] && cd $dirpath && $EDITOR $selection && return 0
 
 # pdfs
 [[ "$extension" = "pdf" ]] && cd $dirpath && $PDFVIEWER $selection && return 0

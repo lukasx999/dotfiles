@@ -28,6 +28,7 @@ xinput set-prop 9 'libinput Accel Speed' -0.6 &
 conky -d &
 redshift &
 nm-applet &
+blueman-applet &
 
 #dwmblocks &
 #exec dwm

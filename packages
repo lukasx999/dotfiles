@@ -15,8 +15,14 @@ Hyprland
   * wl-clipboard
   * waybar
   * wofi
-  * "hyprpm offical plugins" (enable trails)
+  * hyprpm plugins
+    -> hyprland-plugins (trails)
+    -> VortexCoyote/hyprfocus
   * mpvpaper
+  * hyprlock
+  * grim
+  * slurp
+  * pyprland
 Qtile
   * Qtile extra (via AUR/PIP)
 dunst
