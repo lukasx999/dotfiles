@@ -11,7 +11,8 @@
 
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    /*background-color: rgba(43, 48, 59, 0.5);*/
+    background-color: rgba(17, 17, 27, 0.5);
     /*background-color: transparent;*/
     /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     color: #ffffff;
@@ -90,29 +91,35 @@ button:hover {
 
     margin-top: 5px;
     margin-bottom: 5px;
-    box-shadow: 1px 1px #585b70;
+    /*box-shadow: 1px 1px #585b70;*/
+
+    transition: background-color 1s;
 }
 
 
 @keyframes wschange {
-  /*0%   {background-color: #363a4f;}
-  25%  {background-color: #5e657a;}
-  50%  {background-color: #5e657a;}
-  100% {background-color: #363a4f;}*/
+    /*0%   {background-color: #363a4f;}
+    25%  {background-color: #5e657a;}
+    50%  {background-color: #5e657a;}
+    100% {background-color: #363a4f;}*/
 }
 
 
 #workspaces button.active {
-  /*background-color: #363a4f;*/
-  /*background-image: linear-gradient(to right, blue , white);*/
-  background-image: linear-gradient(to right, #11111b , #7f849c);
-  color: #89b4fa;
-  animation-name: wschange;
-  animation-duration: 1s;
+    /*background-color: #45475a;*/
+    background-color: #585b70;
+    /*background-image: linear-gradient(to right, blue , white);*/
+    /*background-image: linear-gradient(to right, #11111b , #7f849c);*/
+    color: #89b4fa;
+    animation-name: wschange;
 
-  /*border-bottom-style: outset;
-  border-bottom-width: 3px;
-  border-bottom-color: #74c7ec;*/
+    /*border-bottom-style: outset;
+    border-bottom-width: 3px;
+    border-bottom-color: #74c7ec;*/
+
+    margin-left: 6px;
+    margin-right: 6px;
+    transition: margin-left 0.3s, margin-right 0.3s;
 }
 
 #workspaces button.empty {
@@ -200,14 +207,42 @@ button:hover {
     border-color: #585b70;*/
 }
 
-
-#custom-packages {
+#custom-date {
     background-color: #313244;
     color: #fab387;
     border-radius: 10px;
     margin: 5px;
     box-shadow: 1px 1px;
 }
+
+#custom-packages {
+    background-color: #313244;
+    color: #f9e2af;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
+
+
+#tray {
+    /*background-color: #2980b9;*/
+    background-color: #313244;
+    color: #cdd6f4;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
 
 
 #battery {
@@ -339,19 +374,6 @@ label:focus {
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #2980b9;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
 }
 

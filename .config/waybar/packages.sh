@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-packages=$(pacman -Q | wc -l)
+packages=$(pacman -Qu | wc -l)
 
 echo $packages

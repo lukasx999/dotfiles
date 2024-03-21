@@ -6,7 +6,9 @@
     //"height": 30, // Waybar height (to be removed for auto height)
     "height": 35, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "margin": 10,
+    "margin-top": 5, // 10
+    "margin-left": 5, // 10
+    "margin-right": 5, // 10
     //"spacing": 4, // Gaps between modules (4px)
     "spacing": 6, // Gaps between modules (4px)
     // Choose the order of the modules
@@ -22,7 +24,8 @@
     "modules-right": [
         "tray",
         "custom/packages",
-        "clock#date",
+        //"clock#date",
+        "custom/date",
         "clock",
     ],
     // Modules configuration
@@ -42,7 +45,7 @@
     "custom/packages": {
         "exec": "~/.config/waybar/packages.sh",
         "interval": 10,
-        "format": "   {}  ",
+        "format": "  {} ",
         "return-type": "",
     },
 
@@ -55,13 +58,18 @@
 
 
     "clock#date": {
-
         "timezone": "Germany/Berlin",
         "format": " {:%d.%m.%Y}",
         "interval": 60,
     },
 
 
+    "custom/date": {
+        "exec": "~/.config/waybar/date.sh",
+        "interval": 999,
+        "format": "  {} ",
+        "return-type": "",
+    },
 
 
     "tray": {
@@ -97,7 +105,7 @@
     "hyprland/workspaces": {
         "active-only": false,
         "all-outputs": false,
-        "format": "<span color='#f5e0dc'>{icon}</span> <b>{name}</b><span color='#7f849c'>{windows}</span>",
+        "format": "<span color='#b4befe'>{icon}</span> <b>{name}</b><span color='#7f849c'>{windows}</span>",
         "format-window-separator": "",
         "window-rewrite-default": " ",
         "window-rewrite": {
