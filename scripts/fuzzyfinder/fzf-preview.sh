@@ -18,7 +18,7 @@ type=$(file --dereference --mime -- "$file")
 
 
 
-function fileinfo(){
+function filetype(){
   echo $1 | sed "s.^~./home/$USER.g" | xargs file | cut -d" " -f 2-
 }
 
@@ -31,15 +31,31 @@ function filesize(){
   echo $1 | sed "s.^~./home/$USER.g" | xargs du -hc 2>/dev/null | tail -n 1 | awk '{print $1}'
 }
 
+function fileinfo(){
+  echo $1 | xargs | eza -F -lh --icons=auto --color=always --group-directories-first "$file"
+}
 
+
+  if [[ $type =~ /directory ]]; then
+    filetype "$file"
+    filesize "$file"
+    echo ""
+    #eza -F -lh --icons=auto --color=always --group-directories-first "$file"
+    echo $1 | xargs | eza -F -lhd --icons=auto --color=always --group-directories-first "$file"
+    echo ""
+    fileinfo "$file"
+    exit
+  fi
 
 
 
 
 if [[ ! $type =~ image/ ]]; then
   if [[ $type =~ =binary ]]; then
-    fileinfo "$file"
+    filetype "$file"
     filesize "$file"
+    echo ""
+    fileinfo "$file"
     #file "$1"
     exit
   fi
@@ -61,8 +77,10 @@ if [[ ! $type =~ image/ ]]; then
     exit
   fi
 
-  fileinfo "$file"
+  filetype "$file"
   filesize "$file"
+  echo ""
+  fileinfo "$file"
   echo ""
   textpreview "$file" "${batname}"
   #echo $file | sed "s;^~;/home/$USER;g" | xargs file | cut -d" " -f 2-
@@ -98,8 +116,10 @@ if [[ $KITTY_WINDOW_ID ]]; then
   #    So we remove the last line and append the reset code to its previous line.
   kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="$dim@0x0" "$file" | sed '$d' | sed $'$s/$/\e[m/'
   echo ""
-  fileinfo "$file"
+  filetype "$file"
   filesize "$file"
+  echo ""
+  fileinfo "$file"
 
 # 2. Use chafa with Sixel output
 elif command -v chafa > /dev/null; then

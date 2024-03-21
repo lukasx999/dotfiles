@@ -76,6 +76,10 @@ simple-mtpfs (for mounting androids)
 ### Terminal Applications
 
 kitty
+chafa
+libsixel
+foot
+alacritty
 tldr
 pup (webscraping)
 zoxide

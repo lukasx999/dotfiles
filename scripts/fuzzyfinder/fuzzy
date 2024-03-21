@@ -96,7 +96,7 @@ ${Cyan}$HOME/.xinitrc${NC}\n\
 ${Cyan}$HOME/.config/qtile/config.py${NC}\
 ")
 
-ignore=$(<<< "$list" sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
+ignore=$(echo "$list" | sed -r "s/\x1B\[(([0-9]+)(;[0-9]+)*)?[m,K,H,f,J]//g")
 # grep -vx "$ignore"
 
 
@@ -135,7 +135,7 @@ recent=$(tac "$recentpath")
 
 
 # Without colors --mount wont descend into mounted fs
-[[ "$filter" = "def" ]] && selection=$(<<< "$list" <<< "$recent" <<< "$dir" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="╢ 󰈞 Find Files   ╟" --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;^~;$HOME;g")
+[[ "$filter" = "def" ]] && selection=$(<<< "$list" <<< "$recent" <<< "$dir" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{50,}") <<< "$config" awk '!a[$0]++' | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="╢ 󰈞 Find Files   ╟" --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='~/scripts/fuzzyfinder/fzf-preview.sh {}' | sed "s;\*$;;g" | sed "s;^~;$HOME;g")
 
 
 
@@ -153,8 +153,8 @@ recent2=$(command ls -Art ~ | tail -n 30 | sed "s_^_"$HOME"/_g") # list most rec
 recentz=$(zoxide query -l) # use zoxide to generate list of recently visited dirs
 
 
-# open prompt with most recent files (user list, recent files, z)
-[[ "$filter" = "rec" ]] && selection=$(<<< "$ignore" <<< "$recent" <<< $(fd -uag --mount -d 7 -c never "*" "$dir" | grep -vEi "^$PWD$|/run/|/usr/lib32/|/usr/include/|/usr/lib/|/opt/|/var/|/proc/|/dev/|/tmp/|cache|/sys/|.{10,}") <<< "$recent2" <<< "$recentz" <<< "$dir" xargs -L 1 eza -dF --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed "s;$HOME;~;g" | awk '!a[$0]++' | sed "s_->.*__g" | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | cut -d" " -f 2-| sed "s;^~;$HOME;g")
+# open prompt with most recent files (user list, recent files, z) -- eza -F : --classify
+[[ "$filter" = "rec" ]] && selection=$(cat <(echo "$ignore") <(echo "$recent") <(echo "$HOME") <(echo "/") <(fd -uag -d 1 "*" "$HOME") <(fd -uag -d 2 "*" "$HOME/.config" | grep -vEi "/$|.{50,}") <(fd -uag -d 1 "*" "$PWD" | grep -vEi ".{60,}") <(fd -uag -d 1 "*" "/") <(echo "$recent2") <(echo "$recentz") | xargs -L 1 eza -d --classify=always --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed -e "s;$HOME;~;g" -e "s,/home/.*lukas,~,g" -e "s_->.*__g" | awk '!a[$0]++' | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 60% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s;\*$;;g" | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | sed "s;\*$;;g" | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
 
@@ -216,8 +216,8 @@ recentz=$(zoxide query -l) # use zoxide to generate list of recently visited dir
 
 
 
-<<< $recent | awk '!a[$0]++' | grep -Ev "^#.*" | tac > $recentpath
-[[ "$selection" ]] && <<< $selection >> $recentpath
+echo $recent | awk '!a[$0]++' | grep -Ev "^#.*" | tac > $recentpath
+[[ "$selection" ]] && echo $selection >> $recentpath
 
 
 
@@ -275,7 +275,7 @@ shebang=$(command cat $selection 2>/dev/null sed 1q | grep ^\#!) #cmd cat instea
 [[ "$selection" = "#run with fzy" ]] && fuzzy $dir fzy && return 0
 [[ "$selection" = "#show a compact prompt" ]] && fuzzy $dir compact && return 0
 [[ "$selection" = "#copy the file path" ]] && fuzzy $dir copypath && return 0
-[[ "$selection" = "#clear history" ]] && <<< "" > $recentpath && return 0
+[[ "$selection" = "#clear history" ]] && echo "" > $recentpath && return 0
 [[ "$selection" = "#filter: icons" ]] && fuzzy $dir icons && return 0
 [[ "$selection" = "#filter: only dirs" ]] && fuzzy $dir onlydir && return 0
 
