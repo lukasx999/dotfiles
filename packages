@@ -76,6 +76,7 @@ simple-mtpfs (for mounting androids)
 
 ### Terminal Applications
 
+tgpt (terminal chatgpt)
 kitty
 chafa
 libsixel
