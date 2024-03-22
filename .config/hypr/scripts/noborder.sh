@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 
-bordersize=$(grep "border_size" hyprland.conf | cut -d' ' -f7)
+#bordersize=$(grep "border_size" ~/.config/hypr/hyprland.conf | cut -d' ' -f7)
+bordersize=$(hyprctl getoption general:border_size | grep "int" | awk '{print $2}')
 
 while true; do
 windows=$(hyprctl activeworkspace | grep "windows" | awk 'NR==1' | cut -d' ' -f2)

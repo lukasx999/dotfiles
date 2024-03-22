@@ -17,6 +17,7 @@
         "memory",
         //"custom/media",
         "custom/cputemp",
+        "custom/wallpaper",
     ],
     "modules-center": [
         "hyprland/workspaces",
@@ -30,6 +31,14 @@
     ],
     // Modules configuration
 
+    "custom/wallpaper": {
+        "exec": "echo ",
+        "on-click": "~/.config/waybar/randomwp.sh",
+        "interval": 100,
+        "format": "  <b>{}</b>   ",
+        "tooltip": false,
+        "return-type": "",
+    },
 
 
     "custom/cputemp": {
@@ -37,6 +46,7 @@
         "interval": 1,
         "format": "  {}°C ",
         "return-type": "",
+        "tooltip": false,
         //"format-icons": ["", "", "", "", "▅", "▆", "▇", "█"],
         //"restart-interval": 1,
     },
@@ -46,6 +56,7 @@
         "exec": "~/.config/waybar/packages.sh",
         "interval": 10,
         "format": "  {} ",
+        "tooltip": false,
         "return-type": "",
     },
 
@@ -53,6 +64,7 @@
         "timezone": "Germany/Berlin",
         "format": " {:%H:%M}",
         "interval": 60,
+        "tooltip": false,
         "format-alt": "{:%H:%M:%S}"
     },
 
@@ -60,6 +72,7 @@
     "clock#date": {
         "timezone": "Germany/Berlin",
         "format": " {:%d.%m.%Y}",
+        "tooltip": false,
         "interval": 60,
     },
 
@@ -68,6 +81,7 @@
         "exec": "~/.config/waybar/date.sh",
         "interval": 999,
         "format": "  {} ",
+        "tooltip": false,
         "return-type": "",
     },
 
@@ -87,7 +101,7 @@
         //"rotate": "",
         //"states": "",
         //"on-click":
-        "tooltip": false
+        "tooltip": false,
     },
 
 
