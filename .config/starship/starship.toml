@@ -1,0 +1,361 @@
+
+
+
+#format = '$all'
+#format = """╭─$os$username$hostname$directory$line_break╰─$character"""
+
+format = """$os$username$hostname$directory$line_break$character"""
+
+right_format = """$all"""
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+follow_symlinks = true
+
+
+
+
+
+
+
+
+
+
+
+
+[cmd_duration]
+min_time = 2_000
+show_milliseconds = false
+format = 'took [$duration]($style) '
+style = 'bold yellow'
+disabled = false
+show_notifications = false
+min_time_to_notify = 45_000
+
+
+
+
+[sudo]
+format = '[as $symbol]($style)'
+symbol = '🧙 '
+style = 'bold blue'
+allow_windows = false
+disabled = false
+
+
+
+
+
+
+[character]
+format = '$symbol '
+success_symbol = '[=>>](bold dimmed white)' # blue
+error_symbol = '[=>>](bold red)'
+vimcmd_symbol = '[<<=](bold green)'
+vimcmd_replace_one_symbol = '[❮](bold purple)'
+vimcmd_replace_symbol = '[❮](bold purple)'
+vimcmd_visual_symbol = '[❮](bold yellow)'
+
+#success_symbol = '[❯](bold dimmed green)'
+#error_symbol = '[❯](bold red)'
+#vimcmd_symbol = '[❮](bold green)'
+#vimcmd_replace_one_symbol = '[❮](bold purple)'
+#vimcmd_replace_symbol = '[❮](bold purple)'
+#vimcmd_visual_symbol = '[❮](bold yellow)'
+disabled = false
+
+
+
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = '[$path]($style)[$read_only]($read_only_style) '
+style = 'bold blue' # bold purple
+disabled = false
+read_only_style = 'red'
+truncation_symbol = ''
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+home_symbol = ' ~' #    
+use_os_path_sep = true
+read_only = " 󰌾"
+
+
+
+[username]
+style_root = 'bold red'
+style_user = 'bold blue'
+format = '[$user]($style)@'
+show_always = true
+disabled = false
+
+
+[hostname]
+ssh_symbol = " "
+ssh_only = false
+format = '[$ssh_symbol$hostname]($style) '
+style = 'bold dimmed blue'
+trim_at = '.'
+disabled = false
+
+
+[shell]
+format = '[$indicator]($style) '
+disabled = true
+style = 'white bold'
+
+unknown_indicator = ''
+nu_indicator = 'nu'
+cmd_indicator = 'cmd'
+xonsh_indicator = 'xsh'
+tcsh_indicator = 'tsh'
+elvish_indicator = 'esh'
+ion_indicator = 'ion'
+zsh_indicator = '' # zsh
+fish_indicator = 'fsh'
+bash_indicator = '' # bsh
+
+
+[direnv]
+format = '[$symbol$loaded/$allowed]($style) '
+symbol = 'direnv '
+style = 'bold orange'
+disabled = false
+detect_extensions = []
+detect_files = ['.envrc']
+detect_folders = []
+allowed_msg = 'allowed'
+not_allowed_msg = 'not allowed'
+denied_msg = 'denied'
+loaded_msg = 'loaded'
+unloaded_msg = 'not loaded'
+
+
+[jobs]
+format = '[$symbol$number]($style) '
+disabled = false
+style = 'bold blue'
+number_threshold = 2
+symbol_threshold = 1
+symbol = '✦'
+
+
+
+[status]
+format = '[$symbol$status]($style) '
+symbol = '❌'
+success_symbol = ''
+
+not_executable_symbol = '🚫'
+not_found_symbol = '🔍'	
+sigint_symbol = '🧱'	
+signal_symbol = '⚡'	
+style = 'bold red'	
+recognize_signal_code	= true	
+map_symbol = false
+pipestatus = false
+pipestatus_separator = '|'
+pipestatus_format	= '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style)'
+disabled = false
+
+
+
+
+
+
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[git_branch]
+symbol = " "
+always_show_remote = false
+style = 'bold purple'
+format = 'on [$symbol$branch(:$remote_branch)]($style) '
+
+[git_commit]
+format = '[\($hash$tag\)]($style) '
+style = 'bold green'
+commit_hash_length = 7
+tag_symbol = ' 🏷 '
+
+[golang]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kotlin]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+
+
+
+
+
+[os]
+format = '[$symbol]($style)'
+style = 'bold white'
+disabled = false
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+
+
+
+
+
+[package]
+symbol = "󰏗 "
+format = 'is [$symbol$version]($style) '
+version_format = 'v${raw}'
+style = 'bold 208'
+display_private = false
+disabled = false
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[swift]
+symbol = " "
+
+[zig]
+symbol = " "
+
+
+
+[line_break]
+disabled = false
