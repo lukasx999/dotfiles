@@ -75,12 +75,12 @@ disabled = false
 truncation_length = 3
 truncate_to_repo = true
 format = '[$path]($style)[$read_only]($read_only_style) '
-style = 'bold blue' # bold purple
+style = 'bold purple' # bold purple
 disabled = false
 read_only_style = 'red'
 truncation_symbol = ''
 repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
-home_symbol = ' ~' #    
+home_symbol = ' ~' #    
 use_os_path_sep = true
 read_only = " 󰌾"
 

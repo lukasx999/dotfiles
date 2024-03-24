@@ -10,7 +10,9 @@ module=vosk-model-small-en-us-0.15 # faster, but often incorrect
 rm $tmpfile >/dev/null 2>&1
 rm $outputfile >/dev/null 2>&1
 
-inputdev=$(pactl list short sources | tac | awk 'NR==1 {print $2}')
+#inputdev=$(pactl list short sources | tac | awk 'NR==1 {print $2}')
+#inputdev="alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo.monitor"
+inputdev="alsa_input.usb-SteelSeries_Arctis_Nova_7-00.mono-fallback"
 
 #ffmpeg -y -f alsa -i default -acodec pcm_s16le -ac 1 -ar 44100 -t 4 -f wav /tmp/audiorecording.wav
 #ffmpeg -f pulse -i alsa_input.usb-SteelSeries_Arctis_Nova_7-00.3.mono-fallback -t -ac 1 recording.m4a

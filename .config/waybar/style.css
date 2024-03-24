@@ -13,6 +13,7 @@
 window#waybar {
     /*background-color: rgba(43, 48, 59, 0.5);*/
     background-color: rgba(17, 17, 27, 0.5);
+    background-color: transparent;
     /*background-color: transparent;*/
     /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     color: #ffffff;
@@ -94,10 +95,22 @@ button:hover {
     /*box-shadow: 1px 1px #585b70;*/
 
     transition: background-color 1s;
+    /*animation: ws_normal 20s ease-in-out 1;*/
 }
 
 
 @keyframes wschange {
+
+    0% {margin-left: 0px; margin-right: 0px;}
+    25% {margin-left: 6px; margin-right: 6px; color: #cdd6f4; text-shadow: 1px 1px;}
+    50% {margin-left: 6px; margin-right: 6px; color: #ffffff; text-shadow: 2px 2px;}
+    100% {margin-left: 0px; margin-right: 0px;}
+
+    /*0% {margin-left: 0px; margin-right: 0px;}
+    25% {margin-left: 6px; margin-right: 6px;}
+    50% {margin-left: 6px; margin-right: 6px;}
+    100% {margin-left: 0px; margin-right: 0px;}*/
+
     /*0%   {background-color: #363a4f;}
     25%  {background-color: #5e657a;}
     50%  {background-color: #5e657a;}
@@ -112,14 +125,19 @@ button:hover {
     /*background-image: linear-gradient(to right, #11111b , #7f849c);*/
     color: #89b4fa;
     animation-name: wschange;
+    animation-duration: 1s;
 
     /*border-bottom-style: outset;
     border-bottom-width: 3px;
     border-bottom-color: #74c7ec;*/
 
-    margin-left: 6px;
+    /*margin-left: 6px;
     margin-right: 6px;
-    transition: margin-left 0.3s, margin-right 0.3s;
+    transition: margin-left 0.3s, margin-right 0.3s, background-color 0.2s;*/
+    transition: background-color 0.2s;
+
+    /*animation: ws_active 20s ease-in-out 1;
+    transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);*/
 }
 
 #workspaces button.empty {
@@ -235,7 +253,8 @@ button:hover {
 
 #custom-wallpaper {
     background-color: #313244;
-    color: #74c7ec;
+    /*color: #74c7ec;*/
+    color: #313244;
     border-radius: 10px;
     margin: 5px;
     box-shadow: 1px 1px;

@@ -24,6 +24,9 @@ Hyprland
   * slurp
   * pyprland
   * hyprprop / wlprop
+  * hyprshade
+  * wlr-randr
+vosk
 Qtile
   * Qtile extra (via AUR/PIP)
 dunst

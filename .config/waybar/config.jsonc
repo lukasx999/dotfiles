@@ -127,6 +127,7 @@
            "class<firefox>": " ",
            "class<firefox> title<.*github.*>": " ",
            "foot": " ",
+           "steam": " 󰓓",
            "neovide": " ",
            "title<.*vim.*>": " ",
            "kitty": " ",

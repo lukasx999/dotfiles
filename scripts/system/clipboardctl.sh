@@ -7,10 +7,9 @@ mode=$1
 
 
 # daemon
-[[ $mode == "daemon" ]] && wl-paste -w wl-paste -n >> $clipboardpath
+[[ $mode == "daemon" ]] && wl-paste -w wl-paste -n | xargs >> $clipboardpath
 
 
 # menu
-[[ $mode == "menu" ]] && sed 20q $clipboardpath | wofi --dmenu --prompt='Clipboard History' | wl-copy
-
+[[ $mode == "menu" ]] && tac $clipboardpath | awk '!a[$0]++' | grep -v "^$" | wofi --columns=1 --dmenu --prompt='Clipboard History' | wl-copy
 

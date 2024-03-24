@@ -1,7 +1,7 @@
 stylesheet=style.css
 colors=colors
 
-columns=2
+columns=1
 show=drun
 
 width=50%
