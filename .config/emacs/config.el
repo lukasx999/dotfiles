@@ -38,6 +38,13 @@
 
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 
+(use-package beacon
+  :init
+  (beacon-mode 1)
+  :config
+  ;;(setq beacon-size 10)
+)
+
 (use-package company
   :defer 2
   :diminish
@@ -345,9 +352,13 @@
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode -1) ;; -1 -- also in sane defaults
+(horizontal-scroll-bar-mode -1)
 
 (global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+;;(setq display-line-numbers 'relative)
+
 (global-visual-line-mode t)
 
 (use-package git-timemachine
@@ -359,6 +370,16 @@
 )
 
 (use-package magit)
+
+(use-package golden-ratio
+  :init
+  ;;(golden-ratio-mode 1)
+  :config
+  ;;(setq golden-ratio-auto-scale t)
+
+  (setq golden-ratio-adjust-factor .8
+	golden-ratio-wide-adjust-factor .8)
+)
 
 (use-package hl-todo
   :hook ((org-mode . hl-todo-mode)
@@ -413,10 +434,24 @@
 
 (global-set-key [escape] 'keyboard-escape-quit)
 
+(use-package minimap
+:init
+(setq minimap-window-location 'right)
+(setq minimap-hide-fringes t)
+(setq minimap-width-fraction 0.01)
+;;(map! :leader
+      ;;(:prefix ("t" . "toggle")
+       ;;:desc "Toggle minimap-mode" "m" #'minimap-mode))
+:config
+    (lukas/leader-keys
+      "tm" '(minimap-mode :wk "Toggle minimap-mode"))
+)
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
   :config
+  (column-number-mode 1)
   (setq doom-modeline-height 35      ;; sets modeline height
         doom-modeline-bar-width 5    ;; sets right bar width
         doom-modeline-persp-name t   ;; adds perspective name to modeline
@@ -425,11 +460,27 @@
 (use-package neotree
   :config
   (setq neo-smart-open t
+	;;neo-banner-message "***Neotree - Emacs***"
+	;;neo-theme "classic"
         neo-show-hidden-files t
-        neo-window-width 55
+        neo-window-width 20 ;; 55 -- 30
         neo-window-fixed-size nil
         inhibit-compacting-font-caches t
         projectile-switch-project-action 'neotree-projectile-action) 
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+
+  ;; Disable line-numbers minor mode for neotree
+  (add-hook 'neo-after-create-hook
+            (lambda (&rest _) (display-line-numbers-mode -1)))
+
+
+
+
+;; decrease text size of neotree window
+;;(defun text-scale-twice ()(interactive)(progn(text-scale-adjust 0)(text-scale-decrease 1.5))) ;; 2
+;;(add-hook 'neo-after-create-hook (lambda (_)(call-interactively 'text-scale-twice)))
+
         ;; truncate long file names in neotree
         (add-hook 'neo-after-create-hook
            #'(lambda (_)
@@ -440,37 +491,6 @@
                  (setq auto-hscroll-mode nil)))))
 
 ;; show hidden files
-
-;;(setq-default org-startup-indented t
-                  ;;org-pretty-entities t
-                  ;;org-use-sub-superscripts "{}"
-                  ;;org-hide-emphasis-markers t
-                  ;;org-startup-with-inline-images t
-                  ;;org-image-actual-width '(300))
-
-
-
-  ;;(use-package org-appear
-    ;;:hook
-    ;;(org-mode . org-appear-mode))
-
-
-
-
-  (use-package org-modern
-    :hook
-    (org-mode . global-org-modern-mode)
-    :custom
-    (org-modern-keyword nil)
-    (org-modern-checkbox nil)
-    (org-modern-table nil)
-
-    (package-initialize)
-    ;;(menu-bar-mode -1)
-    ;;(tool-bar-mode -1)
-    ;;(scroll-bar-mode -1)
-    (modus-themes-load-operandi)
-    )
 
 (use-package toc-org
     :commands toc-org-enable
@@ -495,6 +515,11 @@
  '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 
 (require 'org-tempo)
+
+(use-package spacious-padding
+:init
+(spacious-padding-mode t)
+)
 
 (use-package perspective
   :custom
@@ -541,10 +566,10 @@
                    `(lambda (c)
                   (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 (global-auto-revert-mode t)  ;; Automatically show changes if the file has changed
-(global-display-line-numbers-mode 1) ;; Display line numbers
+;;(global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)  ;; Enable truncated lines
 (menu-bar-mode -1)           ;; Disable the menu bar 
-(scroll-bar-mode -1)         ;; Disable the scroll bar
+;;(scroll-bar-mode -1)         ;; Disable the scroll bar
 (tool-bar-mode -1)           ;; Disable the tool bar
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 
@@ -568,9 +593,18 @@
 
 (use-package vterm
 :config
+
+;;(defun text-scale-twice ()(interactive)(progn(text-scale-adjust 0)(text-scale-decrease 2))) ;; 2
+;;(add-hook 'vterm-mode-hook (lambda (_)(call-interactively 'text-scale-twice)))
+
 ;;(setq shell-file-name "/bin/fish"
 (setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000))
+
+
+  ;; Disable line-numbers minor mode for vterm
+  (add-hook 'vterm-toggle-show-hook
+            (lambda (&rest _) (display-line-numbers-mode -1)))
 
 (use-package vterm-toggle
   :after vterm
@@ -589,7 +623,15 @@
                   ;;(direction . bottom)
                   ;;(dedicated . t) ;dedicated is supported in emacs27
                   (reusable-frames . visible)
-                  (window-height . 0.3))))
+                  (window-height . 0.2)))) ;; 0.3
+
+(use-package solaire-mode
+  :init
+  (solaire-global-mode 1)
+  :config
+  ;;(dolist (face '(mode-line mode-line-inactive))
+  ;;(setf (alist-get face solaire-mode-remap-modeline) nil))
+)
 
 (use-package sudo-edit
   :config
@@ -620,7 +662,17 @@
 
 (use-package tldr)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
+(add-to-list 'default-frame-alist '(alpha-background . 95)) :: 90
+
+(use-package vertico-posframe
+  :ensure t
+  :init
+  (vertico-posframe-mode 1)
+  :custom
+  (setq vertico-posframe-parameters
+	'((left-fringe . 8)
+          (right-fringe . 8)))
+  )
 
 (use-package which-key
   :init
