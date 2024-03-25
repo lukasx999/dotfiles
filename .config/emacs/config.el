@@ -1,5 +1,14 @@
 (load "server")
 (unless (server-running-p) (server-start))
+	
+
+;; restore default tabs
+(global-set-key (kbd "TAB") 'self-insert-command)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
+
+
 
 ;; no confirm kill prompt
 (setq confirm-kill-processes nil)
@@ -176,6 +185,13 @@
   :defer t
   :diminish
   :init (global-flycheck-mode))
+
+(use-package mixed-pitch
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
+  :config
+  ;;(setq mixed-pitch-fixed-pitch-faces t)
 
 (set-face-attribute 'default nil
   :font "JetBrains Mono"
@@ -400,6 +416,18 @@
           ("NOTE"       success bold)
           ("DEPRECATED" font-lock-doc-face bold))))
 
+(use-package highlight-indent-guides
+:ensure t
+:init
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+:config
+(setq highlight-indent-guides-method 'bitmap) ;; 'character, fill, column, bitmap
+
+(set-face-background 'highlight-indent-guides-odd-face "darkgray")
+(set-face-background 'highlight-indent-guides-even-face "dimgray")
+(set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+)
+
 (use-package counsel
   :after ivy
   :diminish
@@ -498,6 +526,8 @@
                  (setq auto-hscroll-mode nil)))))
 
 ;; show hidden files
+
+(setq org-indent-mode t)
 
 (use-package toc-org
     :commands toc-org-enable

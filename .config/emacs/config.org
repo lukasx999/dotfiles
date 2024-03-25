@@ -1,3 +1,4 @@
+
 #+TITLE: Lukas's GNU Emacs Config
 #+AUTHOR: Lukas
 #+DESCRIPTION: Lukas's personal Emacs config.
@@ -21,6 +22,7 @@
 - [[#evil][EVIL]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
+  - [[#mixed-pitch][Mixed Pitch]]
   - [[#setting-the-font-face][Setting the Font Face]]
   - [[#zooming-inout][Zooming In/Out]]
 - [[#general-keybindings][GENERAL KEYBINDINGS]]
@@ -31,7 +33,8 @@
   - [[#git-time-machine][Git Time Machine]]
   - [[#magit][Magit]]
 - [[#golden-ratio][GOLDEN RATIO]]
-- [[#highlight-todo][HIGHLIGHT TODO]]
+- [[#highlight-todo][HIGHLIGHT 'TODO']]
+- [[#highlight-indent-guides-todo][HIGHLIGHT INDENT GUIDES TODO]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#language-support][LANGUAGE SUPPORT]]
 - [[#minibuffer-escape][MINIBUFFER ESCAPE]]
@@ -39,6 +42,7 @@
 - [[#modeline][MODELINE]]
 - [[#neotree][NEOTREE]]
 - [[#org-mode][ORG MODE]]
+  - [[#extra][Extra]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
   - [[#disable-electric-indent][Disable Electric Indent]]
@@ -70,6 +74,14 @@
 #+begin_src emacs-lisp
 (load "server")
 (unless (server-running-p) (server-start))
+	
+
+;; restore default tabs
+(global-set-key (kbd "TAB") 'self-insert-command)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
+
 
 ;; no confirm kill prompt
 (setq confirm-kill-processes nil)
@@ -348,6 +360,20 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
 * FONTS
 Defining the various fonts that Emacs will use.
 
+
+** Mixed Pitch
+Mixed pitch is a minor mode that enables mixing fixed-pitch (also known as fixed-width or monospace) and variable-pitch (AKA “proportional”) fonts.
+
+#+begin_src emacs-lisp
+(use-package mixed-pitch
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
+  :config
+  ;;(setq mixed-pitch-fixed-pitch-faces t)
+#+end_src
+
+
 ** Setting the Font Face
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
@@ -617,7 +643,7 @@ golden-ratio helps on this issue by resizing automatically the windows you are w
 
 
 
-* HIGHLIGHT TODO
+* HIGHLIGHT 'TODO'
 Adding highlights to TODO and related words.
 
 #+begin_src emacs-lisp
@@ -635,6 +661,30 @@ Adding highlights to TODO and related words.
           ("DEPRECATED" font-lock-doc-face bold))))
 
 #+end_src
+
+
+* HIGHLIGHT INDENT GUIDES TODO
+TODO lines are barely visible
+
+#+begin_src emacs-lisp
+
+(use-package highlight-indent-guides
+:ensure t
+:init
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+:config
+(setq highlight-indent-guides-method 'bitmap) ;; 'character, fill, column, bitmap
+
+(set-face-background 'highlight-indent-guides-odd-face "darkgray")
+(set-face-background 'highlight-indent-guides-even-face "dimgray")
+(set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+)
+
+#+end_src
+
+
+
+
 
 
 
@@ -799,6 +849,12 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 
 
 * ORG MODE
+
+** Extra
+
+#+begin_src emacs-lisp
+(setq org-indent-mode t)
+#+end_src
 
 
 ** Enabling Table of Contents
