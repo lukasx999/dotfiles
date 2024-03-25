@@ -6,7 +6,20 @@
 #+OPTIONS: toc:2
 
 
+* TODO
+** fix indentation plugin
+** fix tabs
+** fix treemacs keybinds
+** LSP
+
+
+
 * TABLE OF CONTENTS :toc:
+- [[#todo][TODO]]
+  - [[#fix-indentation-plugin][fix indentation plugin]]
+  - [[#fix-tabs][fix tabs]]
+  - [[#fix-treemacs-keybinds][fix treemacs keybinds]]
+  - [[#lsp][LSP]]
 - [[#general-options][General Options]]
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
@@ -14,12 +27,16 @@
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
 - [[#beacon][BEACON]]
+- [[#centaur-tabs][CENTAUR TABS]]
 - [[#company][COMPANY]]
 - [[#dashboard][DASHBOARD]]
 - [[#diminish][DIMINISH]]
 - [[#dired][DIRED]]
 - [[#elfeed][ELFEED]]
 - [[#evil][EVIL]]
+  - [[#search][Search]]
+  - [[#key-chords][Key Chords]]
+  - [[#setup][Setup]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
   - [[#mixed-pitch][Mixed Pitch]]
@@ -29,12 +46,14 @@
 - [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
   - [[#disable-menubar-toolbars-and-scrollbars][Disable Menubar, Toolbars and Scrollbars]]
   - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
+  - [[#more][More]]
 - [[#git-programs][GIT PROGRAMS]]
   - [[#git-time-machine][Git Time Machine]]
   - [[#magit][Magit]]
 - [[#golden-ratio][GOLDEN RATIO]]
 - [[#highlight-todo][HIGHLIGHT 'TODO']]
 - [[#highlight-indent-guides-todo][HIGHLIGHT INDENT GUIDES TODO]]
+- [[#format-all][FORMAT ALL]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#language-support][LANGUAGE SUPPORT]]
 - [[#minibuffer-escape][MINIBUFFER ESCAPE]]
@@ -62,8 +81,10 @@
   - [[#vterm-toggle][Vterm-Toggle]]
 - [[#solaire-mode][SOLAIRE MODE]]
 - [[#sudo-edit][SUDO EDIT]]
-- [[#theme][THEME]]
-- [[#catppuccin-theme][Catppuccin Theme]]
+- [[#themes][THEMES]]
+  - [[#custom-themes][Custom Themes]]
+  - [[#catppuccin-theme][Catppuccin Theme]]
+  - [[#more-themes][More Themes]]
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
 - [[#vertico-pos-frame][VERTICO POS FRAME]]
@@ -86,9 +107,6 @@
 ;; no confirm kill prompt
 (setq confirm-kill-processes nil)
 (setq confirm-kill-emacs nil)
-
-(setq inhibit-startup-message t)
-(setq use-dialog-box nil)
 
 (setq scroll-margin 15
       scroll-conservatively 101
@@ -174,6 +192,42 @@ Never lose your cursor. When you scroll, your cursor will shine! This is a globa
 
 
 
+* CENTAUR TABS
+
+#+begin_src emacs-lisp
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+	(setq centaur-tabs-style "bar") ;; wave, slant, box
+	(setq centaur-tabs-height 32)
+	(setq centaur-tabs-set-icons t)
+	;;(setq centaur-tabs-gray-out-icons 'buffer)
+	;;(setq centaur-tabs-set-bar 'left)
+
+	;;(setq centaur-tabs-set-bar 'under)
+	;;(setq x-underline-at-descent-line t)
+
+	;;(setq centaur-tabs--buffer-show-groups t)
+
+	(setq centaur-tabs-cycle-scope 'tabs)
+
+	;;(define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+	;;(define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+
+  :bind
+  ;;("C-<prior>" . centaur-tabs-backward)
+  ;;("C-<next>" . centaur-tabs-forward)
+
+  ;;(:map evil-normal-state-map
+        ;;("g t" . centaur-tabs-forward)
+        ;;("g T" . centaur-tabs-backward))
+)
+#+end_src
+
+
+
+
 
 * COMPANY
 [[https://company-mode.github.io/][Company]] is a text completion framework for Emacs. The name stands for "complete anything".  Completion will start automatically after you type a few letters. Use M-n and M-p to select, <return> to complete or <tab> to complete the common part.
@@ -200,26 +254,26 @@ Never lose your cursor. When you scroll, your cursor will shine! This is a globa
 Emacs Dashboard is an extensible startup screen showing you recent files, bookmarks, agenda items and an Emacs banner.
 
 #+begin_src emacs-lisp
-  (use-package dashboard
-    :ensure t 
-    :init
-    (setq initial-buffer-choice 'dashboard-open)
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
-    ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-    (setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacs-dash.png")  ;; use custom image as banner
-    (setq dashboard-center-content nil) ;; set to 't' for centered content
-    (setq dashboard-items '((recents . 5)
-                            (agenda . 5 )
-                            (bookmarks . 3)
-                            (projects . 3)
-                            (registers . 3)))
-    :custom
-    (dashboard-modify-heading-icons '((recents . "file-text")
-                                      (bookmarks . "book")))
-    :config
-    (dashboard-setup-startup-hook))
+(use-package dashboard
+  :ensure t 
+  :init
+  (setq initial-buffer-choice 'dashboard-open)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  (setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacs-dash.png") ;; 300x300
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-items '((recents . 5)
+                          (agenda . 5 )
+                          (bookmarks . 3)
+                          (projects . 3)
+                          (registers . 3)))
+  :custom
+  (dashboard-modify-heading-icons '((recents . "file-text")
+                                    (bookmarks . "book")))
+  :config
+  (dashboard-setup-startup-hook))
 #+end_src
 
 * DIMINISH
@@ -302,6 +356,35 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
 * EVIL
 [[https://github.com/emacs-evil/evil][Evil]] is an extensible vi/vim layer for Emacs.  Because...let's face it.  The Vim keybindings are just plain better.
 
+
+** Search
+#+begin_src emacs-lisp
+(use-package evil-search-highlight-persist
+:ensure t
+:init
+;;(global-evil-search-highlight-persist t)
+:config
+;;(global-set-key (kbd "C-h") 'evil-search-highlight-persist-remove-all)
+;;(lukas/leader-keys
+  ;;"t n" '(treemacs :wk "Remove Highlighting"))
+)
+#+end_src
+
+
+
+
+** Key Chords
+
+#+begin_src emacs-lisp
+(use-package key-chord
+:ensure t
+:init
+(key-chord-mode 1))
+#+end_src
+
+
+** Setup
+
 #+begin_src emacs-lisp
 ;; Expands to: (elpaca evil (use-package evil :demand t))
 (use-package evil
@@ -313,6 +396,14 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
           evil-undo-system 'undo-redo)  ;; Adds vim-like C-r redo functionality
     (setq evil-want-C-u-scroll t)
     (blink-cursor-mode -1)
+	:config
+	(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+	(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+	;;Exit insert mode by pressing j and then j quickly
+	(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+	(setq evil-search-module 'evil-search)
+
 
 ;;(with-eval-after-load 'evil-maps ;; remapping keys
   ;;(define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
@@ -336,7 +427,6 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
 ;; Setting RETURN key in org-mode to follow links
   (setq org-return-follows-link  t)
 #+end_src
-
 
 
 
@@ -597,6 +687,25 @@ Let's make GNU Emacs look a little better.
 
 
 
+** More
+
+#+begin_src emacs-lisp
+(setq inhibit-startup-message t)
+(setq use-dialog-box nil)
+(setq use-file-dialog nil)
+(defalias 'yes-or-no-p 'y-or-n-p)
+    
+;;(fringe-mode -1)
+    
+
+;;(setq make-backup-files nil)
+;;(setq auto-save-default nil)
+    
+#+end_src
+
+
+
+
 * GIT PROGRAMS
 ** Git Time Machine
 [[https://github.com/emacsmirror/git-timemachine][git-timemachine]] is a program that allows you to move backwards and forwards through a file's commits.  'SPC g t' will open the time machine on a file if it is in a git repo.  Then, while in normal mode, you can use 'CTRL-j' and 'CTRL-k' to move backwards and forwards through the commits.
@@ -670,10 +779,16 @@ TODO lines are barely visible
 
 (use-package highlight-indent-guides
 :ensure t
+:defer t
 :init
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+:hook (prog-mode . highlight-indent-guides-mode)
+;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 :config
-(setq highlight-indent-guides-method 'bitmap) ;; 'character, fill, column, bitmap
+;;(setq highlight-indent-guides-method 'bitmap) ;; 'character, fill, column, bitmap
+
+(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-character ?\|)
+(setq highlight-indent-guides-responsive 'top)
 
 (set-face-background 'highlight-indent-guides-odd-face "darkgray")
 (set-face-background 'highlight-indent-guides-even-face "dimgray")
@@ -683,6 +798,17 @@ TODO lines are barely visible
 #+end_src
 
 
+
+* FORMAT ALL
+
+#+begin_src emacs-lisp
+(use-package format-all
+:ensure t
+:config
+(lukas/leader-keys
+  "f a" '(format-all-buffer :wk "Format the entire buffer"))
+)
+#+end_src
 
 
 
@@ -927,11 +1053,15 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 #+begin_src emacs-lisp
 (use-package treemacs
 :ensure t
+:defer t
 :custom
 (treemacs-is-never-other-window 1)
 :hook
 (treemacs-mode . treemacs-project-follow-mode)
 :config
+(setq treemacs-width 30)
+;;(setq-local mode-line-format nil)
+
 (lukas/leader-keys
   "t n" '(treemacs :wk "Toggle Treemacs"))
 
@@ -1176,7 +1306,13 @@ Solaire Mode is an aesthetic plugin designed to visually distinguish "real" buff
 #+end_src
 
 
-* THEME
+
+* THEMES
+
+
+
+
+** Custom Themes
 The first of the two lines below designates the directory where will place all of our themes.  The second line loads our chosen theme which is *dtmacs*, a theme that I created with the help of the [[https://emacsfodder.github.io/emacs-theme-editor/][Emacs Theme Editor]].
 
 #+begin_src emacs-lisp
@@ -1197,8 +1333,7 @@ The first of the two lines below designates the directory where will place all o
 
 
 
-* Catppuccin Theme
-
+** Catppuccin Theme
 
 #+begin_src emacs-lisp
       (use-package catppuccin-theme
@@ -1208,6 +1343,21 @@ The first of the two lines below designates the directory where will place all o
 (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
 (catppuccin-reload))
 #+end_src
+
+
+** More Themes
+
+#+begin_src emacs-lisp
+(use-package ef-themes
+  :if window-system
+  :ensure t
+  :config
+  ;; Enable the theme
+  ;;(load-theme 'ef-winter t)
+)
+#+end_src
+
+
 
 
 

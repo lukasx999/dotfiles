@@ -9,13 +9,9 @@
 (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
 
 
-
 ;; no confirm kill prompt
 (setq confirm-kill-processes nil)
 (setq confirm-kill-emacs nil)
-
-(setq inhibit-startup-message t)
-(setq use-dialog-box nil)
 
 (setq scroll-margin 15
       scroll-conservatively 101
@@ -58,6 +54,35 @@
   ;;(setq beacon-size 10)
 )
 
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+	(setq centaur-tabs-style "bar") ;; wave, slant, box
+	(setq centaur-tabs-height 32)
+	(setq centaur-tabs-set-icons t)
+	;;(setq centaur-tabs-gray-out-icons 'buffer)
+	;;(setq centaur-tabs-set-bar 'left)
+
+	;;(setq centaur-tabs-set-bar 'under)
+	;;(setq x-underline-at-descent-line t)
+
+	;;(setq centaur-tabs--buffer-show-groups t)
+
+	(setq centaur-tabs-cycle-scope 'tabs)
+
+	;;(define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+	;;(define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+
+  :bind
+  ;;("C-<prior>" . centaur-tabs-backward)
+  ;;("C-<next>" . centaur-tabs-forward)
+
+  ;;(:map evil-normal-state-map
+        ;;("g t" . centaur-tabs-forward)
+        ;;("g T" . centaur-tabs-backward))
+)
+
 (use-package company
   :defer 2
   :diminish
@@ -80,9 +105,9 @@
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacs-dash.png")  ;; use custom image as banner
+  (setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacs-dash.png") ;; 300x300
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
@@ -147,6 +172,21 @@
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
 
+(use-package evil-search-highlight-persist
+:ensure t
+:init
+;;(global-evil-search-highlight-persist t)
+:config
+;;(global-set-key (kbd "C-h") 'evil-search-highlight-persist-remove-all)
+;;(lukas/leader-keys
+  ;;"t n" '(treemacs :wk "Remove Highlighting"))
+)
+
+(use-package key-chord
+:ensure t
+:init
+(key-chord-mode 1))
+
 ;; Expands to: (elpaca evil (use-package evil :demand t))
 (use-package evil
     :init      ;; tweak evil's configuration before loading it
@@ -157,6 +197,14 @@
           evil-undo-system 'undo-redo)  ;; Adds vim-like C-r redo functionality
     (setq evil-want-C-u-scroll t)
     (blink-cursor-mode -1)
+	:config
+	(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+	(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+	;;Exit insert mode by pressing j and then j quickly
+	(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+	(setq evil-search-module 'evil-search)
+
 
 ;;(with-eval-after-load 'evil-maps ;; remapping keys
   ;;(define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
@@ -383,6 +431,17 @@
 
 (global-visual-line-mode t)
 
+(setq inhibit-startup-message t)
+(setq use-dialog-box nil)
+(setq use-file-dialog nil)
+(defalias 'yes-or-no-p 'y-or-n-p)
+    
+;;(fringe-mode -1)
+    
+
+;;(setq make-backup-files nil)
+;;(setq auto-save-default nil)
+
 (use-package git-timemachine
   :after git-timemachine
   :hook (evil-normalize-keymaps . git-timemachine-hook)
@@ -418,14 +477,27 @@
 
 (use-package highlight-indent-guides
 :ensure t
+:defer t
 :init
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+:hook (prog-mode . highlight-indent-guides-mode)
+;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 :config
-(setq highlight-indent-guides-method 'bitmap) ;; 'character, fill, column, bitmap
+;;(setq highlight-indent-guides-method 'bitmap) ;; 'character, fill, column, bitmap
+
+(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-character ?\|)
+(setq highlight-indent-guides-responsive 'top)
 
 (set-face-background 'highlight-indent-guides-odd-face "darkgray")
 (set-face-background 'highlight-indent-guides-even-face "dimgray")
 (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+)
+
+(use-package format-all
+:ensure t
+:config
+(lukas/leader-keys
+  "f a" '(format-all-buffer :wk "Format the entire buffer"))
 )
 
 (use-package counsel
@@ -555,11 +627,15 @@
 
 (use-package treemacs
 :ensure t
+:defer t
 :custom
 (treemacs-is-never-other-window 1)
 :hook
 (treemacs-mode . treemacs-project-follow-mode)
 :config
+(setq treemacs-width 30)
+;;(setq-local mode-line-format nil)
+
 (lukas/leader-keys
   "t n" '(treemacs :wk "Toggle Treemacs"))
 
@@ -733,6 +809,14 @@
     :config
 (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
 (catppuccin-reload))
+
+(use-package ef-themes
+  :if window-system
+  :ensure t
+  :config
+  ;; Enable the theme
+  ;;(load-theme 'ef-winter t)
+)
 
 (use-package tldr)
 
