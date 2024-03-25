@@ -71,6 +71,7 @@ gotop
 (xdo)
 htop
 emacs
+  * python-pylint
 "doom emacs"
 fancontrol-gui (AUR)
 devour (window swallowing)
