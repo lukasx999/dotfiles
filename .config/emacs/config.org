@@ -45,6 +45,7 @@
   - [[#diminish-org-indent-mode][Diminish Org Indent Mode]]
   - [[#org-level-headers][Org Level Headers]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
+- [[#treemacs][TREEMACS]]
 - [[#padding][PADDING]]
 - [[#perspective][PERSPECTIVE]]
 - [[#projectile][PROJECTILE]]
@@ -69,6 +70,10 @@
 #+begin_src emacs-lisp
 (load "server")
 (unless (server-running-p) (server-start))
+
+;; no confirm kill prompt
+(setq confirm-kill-processes nil)
+(setq confirm-kill-emacs nil)
 
 (setq inhibit-startup-message t)
 (setq use-dialog-box nil)
@@ -513,7 +518,8 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
   "t" '(:ignore t :wk "Toggle")
   "t e" '(eshell-toggle :wk "Toggle eshell")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-  "t n" '(neotree-toggle :wk "Toggle neotree file viewer")
+  ;;"t n" '(neotree-toggle :wk "Toggle neotree file viewer")
+  ;;"t n" '(treemacs :wk "Toggle Treemacs")
   "t t" '(visual-line-mode :wk "Toggle truncated lines")
   "t v" '(vterm-toggle :wk "Toggle vterm"))
 
@@ -551,6 +557,7 @@ Let's make GNU Emacs look a little better.
 (tool-bar-mode -1)
 (scroll-bar-mode -1) ;; -1 -- also in sane defaults
 (horizontal-scroll-bar-mode -1)
+(global-hl-line-mode 1)
 #+end_src
 
 ** Display Line Numbers and Truncated Lines
@@ -762,6 +769,7 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
         neo-window-fixed-size nil
         inhibit-compacting-font-caches t
         projectile-switch-project-action 'neotree-projectile-action) 
+
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 
@@ -856,6 +864,46 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 #+begin_src emacs-lisp 
 (require 'org-tempo)
 #+end_src
+
+
+* TREEMACS
+
+#+begin_src emacs-lisp
+(use-package treemacs
+:ensure t
+:custom
+(treemacs-is-never-other-window 1)
+:hook
+(treemacs-mode . treemacs-project-follow-mode)
+:config
+(lukas/leader-keys
+  "t n" '(treemacs :wk "Toggle Treemacs"))
+
+;; Disable line-numbers for neotree
+(add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1)))
+;;(add-hook 'treemacs-mode-hook (lambda() (scroll-bar-mode -1)))
+
+:bind
+("C-g" . treemacs)
+;;(global-set-key (kbd "SPC") nil)
+(:map global-map
+      ;;("SPC" . nil)
+      ;;("SPC t n" . treemacs)
+      ("C-x t t" . treemacs))
+)
+
+(use-package treemacs-evil
+  :ensure t
+)
+(use-package treemacs-all-the-icons)
+(use-package treemacs-projectile)
+(use-package treemacs-perspective)
+;;(use-package treemacs-magit)
+(use-package treemacs-tab-bar)
+(use-package treemacs-icons-dired)
+#+end_src
+
+
 
 
 * PADDING
@@ -1048,6 +1096,10 @@ Solaire Mode is an aesthetic plugin designed to visually distinguish "real" buff
   :config
   ;;(dolist (face '(mode-line mode-line-inactive))
   ;;(setf (alist-get face solaire-mode-remap-modeline) nil))
+  
+  (push '(treemacs-window-background-face . solaire-default-face) solaire-mode-remap-alist)
+  (push '(treemacs-hl-line-face . solaire-hl-line-face) solaire-mode-remap-alist)
+
 )
 #+end_src
 

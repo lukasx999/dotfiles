@@ -1,6 +1,10 @@
 (load "server")
 (unless (server-running-p) (server-start))
 
+;; no confirm kill prompt
+(setq confirm-kill-processes nil)
+(setq confirm-kill-emacs nil)
+
 (setq inhibit-startup-message t)
 (setq use-dialog-box nil)
 
@@ -325,7 +329,8 @@
   "t" '(:ignore t :wk "Toggle")
   "t e" '(eshell-toggle :wk "Toggle eshell")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-  "t n" '(neotree-toggle :wk "Toggle neotree file viewer")
+  ;;"t n" '(neotree-toggle :wk "Toggle neotree file viewer")
+  ;;"t n" '(treemacs :wk "Toggle Treemacs")
   "t t" '(visual-line-mode :wk "Toggle truncated lines")
   "t v" '(vterm-toggle :wk "Toggle vterm"))
 
@@ -354,6 +359,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1) ;; -1 -- also in sane defaults
 (horizontal-scroll-bar-mode -1)
+(global-hl-line-mode 1)
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -467,6 +473,7 @@
         neo-window-fixed-size nil
         inhibit-compacting-font-caches t
         projectile-switch-project-action 'neotree-projectile-action) 
+
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 
@@ -515,6 +522,39 @@
  '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 
 (require 'org-tempo)
+
+(use-package treemacs
+:ensure t
+:custom
+(treemacs-is-never-other-window 1)
+:hook
+(treemacs-mode . treemacs-project-follow-mode)
+:config
+(lukas/leader-keys
+  "t n" '(treemacs :wk "Toggle Treemacs"))
+
+;; Disable line-numbers for neotree
+(add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1)))
+;;(add-hook 'treemacs-mode-hook (lambda() (scroll-bar-mode -1)))
+
+:bind
+("C-g" . treemacs)
+;;(global-set-key (kbd "SPC") nil)
+(:map global-map
+      ;;("SPC" . nil)
+      ;;("SPC t n" . treemacs)
+      ("C-x t t" . treemacs))
+)
+
+(use-package treemacs-evil
+  :ensure t
+)
+(use-package treemacs-all-the-icons)
+(use-package treemacs-projectile)
+(use-package treemacs-perspective)
+;;(use-package treemacs-magit)
+(use-package treemacs-tab-bar)
+(use-package treemacs-icons-dired)
 
 (use-package spacious-padding
 :init
@@ -631,6 +671,10 @@
   :config
   ;;(dolist (face '(mode-line mode-line-inactive))
   ;;(setf (alist-get face solaire-mode-remap-modeline) nil))
+  
+  (push '(treemacs-window-background-face . solaire-default-face) solaire-mode-remap-alist)
+  (push '(treemacs-hl-line-face . solaire-hl-line-face) solaire-mode-remap-alist)
+
 )
 
 (use-package sudo-edit
