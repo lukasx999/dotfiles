@@ -178,13 +178,15 @@
   :font "JetBrains Mono"
   :height 110
   :weight 'medium)
+
+
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.
-(set-face-attribute 'font-lock-comment-face nil
-  :slant 'italic)
-(set-face-attribute 'font-lock-keyword-face nil
-  :slant 'italic)
+;;(set-face-attribute 'font-lock-comment-face nil
+  ;;:slant 'italic)
+;;(set-face-attribute 'font-lock-keyword-face nil
+  ;;:slant 'italic)
 
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
@@ -438,6 +440,37 @@
                  (setq auto-hscroll-mode nil)))))
 
 ;; show hidden files
+
+;;(setq-default org-startup-indented t
+                  ;;org-pretty-entities t
+                  ;;org-use-sub-superscripts "{}"
+                  ;;org-hide-emphasis-markers t
+                  ;;org-startup-with-inline-images t
+                  ;;org-image-actual-width '(300))
+
+
+
+  ;;(use-package org-appear
+    ;;:hook
+    ;;(org-mode . org-appear-mode))
+
+
+
+
+  (use-package org-modern
+    :hook
+    (org-mode . global-org-modern-mode)
+    :custom
+    (org-modern-keyword nil)
+    (org-modern-checkbox nil)
+    (org-modern-table nil)
+
+    (package-initialize)
+    ;;(menu-bar-mode -1)
+    ;;(tool-bar-mode -1)
+    ;;(scroll-bar-mode -1)
+    (modus-themes-load-operandi)
+    )
 
 (use-package toc-org
     :commands toc-org-enable
