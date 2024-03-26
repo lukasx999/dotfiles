@@ -4,3 +4,4 @@ chocho
 echo $SHELL
 ls
 ll
+ls 

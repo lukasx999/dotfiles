@@ -1,5 +1,8 @@
 (load "server")
 (unless (server-running-p) (server-start))
+
+;; Meta X no ^ in the front
+(setq ivy-initial-inputs-alist nil)
 	
 
 ;; restore default tabs
@@ -37,6 +40,14 @@
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
+
+(use-package nerd-icons
+  :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  (nerd-icons-font-family "JetBrainsMono Nerd Font")
+  )
 
 (use-package all-the-icons
   :ensure t
@@ -77,6 +88,9 @@
   :bind
   ;;("C-<prior>" . centaur-tabs-backward)
   ;;("C-<next>" . centaur-tabs-forward)
+  ("C-<tab>" . centaur-tabs-forward)
+  ("C-<iso-lefttab>" . centaur-tabs-backward)
+  ;;("C-S-<tab>" . centaur-tabs-backward)
 
   ;;(:map evil-normal-state-map
         ;;("g t" . centaur-tabs-forward)
@@ -105,9 +119,41 @@
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
+  (setq dashboard-projects-backend 'projectile)
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacs-dash.png") ;; 300x300
-  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-set-init-info nil)
+  (setq dashboard-set-navigator t)
+  ;; Format: "(icon title help action face prefix suffix)"
+  (setq dashboard-page-separator "\n\n")
+  ;;(setq dashboard-page-separator "\n............................................................................................................................................\n\n")
+
+
+  (setq dashboard-footer-messages '("The One True Editor!"
+                                    "Protocol 3: Protect the Pilot"
+                                    "All systems nominal."
+                                    "Democracy... is non negotiable."
+                                    "It's my way or... hell, it's my way!"
+                                    "Make life rue the day it though it could give Richard Stallman lemons!"
+                                    "Vi-Vi-Vi, the editor of the beast."
+                                    "Happy hacking!"
+                                    "While any text editor can save your files, only Emacs can save your soul."
+                                    "There's an Emacs package for that."
+                                    "Rip and tear, until it is done!"
+                                    "It's time to kick ass and chew bubblegum... and I'm all outta gum."
+                                    "Eight Megabytes And Constantly Swapping"
+                                    "Escape Meta Alt Control Super"
+                                    "M-x butterfly"
+                                    "The thermonuclear word processor."
+                                    "The best OS!"
+                                    ""))
+
+
+  ;;(setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacs-dash.png") ;; 300x300
+  (setq dashboard-startup-banner "/home/lukas/.config/emacs/images/emacslogo.png") ;; 300x300
+  ;;(setq dashboard-image-banner-max-height 250)
+  ;;(setq dashboard-image-banner-max-width 500)
+
+  (setq dashboard-banner-logo-title "Vim is deprecated!")
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
@@ -118,7 +164,14 @@
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book")))
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+
+  ;;:hook
+  ;;(dashboard-mode . hide-mode-line-mode)
+  ;;(dashboard-mode . turn-off-solaire-mode)
+
+
+)
 
 (use-package diminish)
 
@@ -419,6 +472,35 @@
 
 )
 
+(use-package ligature
+  ;;:load-path "path-to-ligature-repo"
+  :config
+  ;; Enable all JetBrains Mono ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->" "///" "/=" "/=="
+                                      "/>" "//" "/*" "*>" "***" "*/" "<-" "<<-" "<=>" "<=" "<|" "<||"
+                                      "<|||" "<|>" "<:" "<>" "<-<" "<<<" "<==" "<<=" "<=<" "<==>" "<-|"
+                                      "<<" "<~>" "<=|" "<~~" "<~" "<$>" "<$" "<+>" "<+" "</>" "</" "<*"
+                                      "<*>" "<->" "<!--" ":>" ":<" ":::" "::" ":?" ":?>" ":=" "::=" "=>>"
+                                      "==>" "=/=" "=!=" "=>" "===" "=:=" "==" "!==" "!!" "!=" ">]" ">:"
+                                      ">>-" ">>=" ">=>" ">>>" ">-" ">=" "&&&" "&&" "|||>" "||>" "|>" "|]"
+                                      "|}" "|=>" "|->" "|=" "||-" "|-" "||=" "||" ".." ".?" ".=" ".-" "..<"
+                                      "..." "+++" "+>" "++" "[||]" "[<" "[|" "{|" "??" "?." "?=" "?:" "##"
+                                      "###" "####" "#[" "#{" "#=" "#!" "#:" "#_(" "#_" "#?" "#(" ";;" "_|_"
+                                      "__" "~~" "~~>" "~>" "~-" "~@" "$>" "^=" "]#"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
+
+(use-package smooth-scrolling
+;;:init
+;;(smooth-scrolling-mode 1)
+)
+
+(use-package good-scroll
+;;:init
+;;(good-scroll-mode 1)
+)
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1) ;; -1 -- also in sane defaults
@@ -435,8 +517,8 @@
 (setq use-dialog-box nil)
 (setq use-file-dialog nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
-    
-;;(fringe-mode -1)
+
+(fringe-mode -1)
     
 
 ;;(setq make-backup-files nil)
@@ -601,6 +683,37 @@
 
 (setq org-indent-mode t)
 
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (python . t)
+	(shell . t))
+)
+
+(setq org-confirm-babel-evaluate nil)
+
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+
+
+
+;; this will export all code blocks individually. the file name will be the same as the org file
+;; foo.org -> foo.py
+;;#+PROPERTY: header-args :tangle yes
+
+;; with this you can specify a certain file to be exported to
+;;##+PROPERTY: header-args:python :tangle ./example.py
+
+
+
+;; TODO doesnt really work
+;; add default arguments to use when evaluating a source block
+(add-to-list 'org-babel-default-header-args
+             '(:tangle . "yes"))
+
 (use-package toc-org
     :commands toc-org-enable
     :init (add-hook 'org-mode-hook 'toc-org-enable))
@@ -628,6 +741,7 @@
 (use-package treemacs
 :ensure t
 :defer t
+:init
 :custom
 (treemacs-is-never-other-window 1)
 :hook
@@ -653,14 +767,30 @@
 )
 
 (use-package treemacs-evil
-  :ensure t
-)
-(use-package treemacs-all-the-icons)
+:after treemacs
+:ensure t)
+
+(use-package treemacs-all-the-icons
+:after alltheicons
+;;:after treemacs
+:init
+(treemacs-load-theme "all-the-icons"))
+
 (use-package treemacs-projectile)
 (use-package treemacs-perspective)
 ;;(use-package treemacs-magit)
 (use-package treemacs-tab-bar)
 (use-package treemacs-icons-dired)
+
+(use-package olivetti
+  :config
+  (setq-default olivetti-body-width 180)
+  :hook ((prog-mode . olivetti-mode)))
+         ;; (prog-mode .
+         ;;            (lambda ()
+         ;;              (setq header-line-format " ")
+         ;;              (face-remap-add-relative 'header-line '(:height 100 :background "#0b0f16"))
+         ;;              ))
 
 (use-package spacious-padding
 :init
