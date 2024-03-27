@@ -1382,28 +1382,6 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (menu-bar-mode -1)           ;; Disable the menu bar 
 ;;(scroll-bar-mode -1)         ;; Disable the scroll bar
 (tool-bar-mode -1)           ;; Disable the tool bar
-(setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
-
-#+end_src
-
-
-
-* SHELLS AND TERMINALS
-In my configs, all of my shells (bash, fish, zsh and the ESHELL) require my shell-color-scripts-git package to be installed.  On Arch Linux, you can install it from the AUR.  Otherwise, go to my shell-color-scripts repository on GitLab to get it.
-
-** Eshell
-Eshell is an Emacs 'shell' that is written in Elisp.
-
-#+begin_src emacs-lisp
-(use-package eshell-syntax-highlighting
-  :after esh-mode
-  :config
-  (eshell-syntax-highlighting-global-mode +1))
-
-;; eshell-syntax-highlighting -- adds fish/zsh-like syntax highlighting.
-;; eshell-rc-script -- your profile for eshell; like a bashrc for eshell.
-;; eshell-aliases-file -- sets an aliases file for the eshell.
-  
 (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
       eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
       eshell-history-size 5000

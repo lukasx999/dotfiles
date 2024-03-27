@@ -67,7 +67,7 @@ button:hover {
   border-left-style: solid;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
-  padding-left: 1em;
+  padding-left: 1.5em;
   padding-right: 1em;
 }
 
@@ -75,7 +75,7 @@ button:hover {
   border-right-style: solid;
   border-top-right-radius: 9999px;
   border-bottom-right-radius: 9999px;
-  padding-right: 1em;
+  padding-right: 1.5em;
   padding-left: 1em;
 }
 
@@ -106,10 +106,6 @@ button:hover {
     50% {margin-left: 6px; margin-right: 6px; color: #ffffff; text-shadow: 2px 2px;}
     100% {margin-left: 0px; margin-right: 0px;}
 
-    /*0% {margin-left: 0px; margin-right: 0px;}
-    25% {margin-left: 6px; margin-right: 6px;}
-    50% {margin-left: 6px; margin-right: 6px;}
-    100% {margin-left: 0px; margin-right: 0px;}*/
 
     /*0%   {background-color: #363a4f;}
     25%  {background-color: #5e657a;}
@@ -154,6 +150,7 @@ button:hover {
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
 }
 
 #workspaces button.focused {

@@ -35,7 +35,7 @@
         "exec": "echo ",
         "on-click": "~/.config/waybar/randomwp.sh",
         "interval": 100,
-        "format": "  <b>{}</b>   ",
+        "format": "     <b>{}</b>     ",
         "tooltip": false,
         "return-type": "",
     },
@@ -55,7 +55,7 @@
     "custom/packages": {
         "exec": "~/.config/waybar/packages.sh",
         "interval": 10,
-        "format": "  {} ",
+        "format": "   {} ",
         "tooltip": false,
         "return-type": "",
     },
@@ -80,7 +80,7 @@
     "custom/date": {
         "exec": "~/.config/waybar/date.sh",
         "interval": 999,
-        "format": "  {} ",
+        "format": "   {} ",
         "tooltip": false,
         "return-type": "",
     },
@@ -128,6 +128,7 @@
            "class<firefox> title<.*github.*>": " ",
            "foot": " ",
            "steam": " 󰓓",
+           "emacs": " ",
            "neovide": " ",
            "title<.*vim.*>": " ",
            "kitty": " ",
@@ -142,7 +143,7 @@
             "urgent": "",
             },
         "persistent-workspaces": {
-            "*": 9, // "*" is for monitor (every monitor) -- 5 is for nr of tags
+            "*": 6, // "*" is for monitor (every monitor) -- 5 is for nr of tags
             },
         "show-special": false,
         "sort-by": "DEFAULT",

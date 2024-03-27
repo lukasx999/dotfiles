@@ -4,7 +4,7 @@
 #set -u
 
 
-
+jkkjk
 
 
 
@@ -154,11 +154,10 @@ recentz=$(zoxide query -l) # use zoxide to generate list of recently visited dir
 
 
 # open prompt with most recent files (user list, recent files, z) -- eza -F : --classify
-#[[ "$filter" = "rec" ]] && selection=$(cat <(echo "$ignore") <(echo "$recent") <(echo "$HOME") <(echo "/") <(echo "..") <(fd -uag -d 1 "*" "$PWD" | grep -vEi ".{60,}") <(fd -uag -d 1 "*" "$HOME") <(fd -uag -d 2 "*" "$HOME/.config" | grep -vEi "/$|.{50,}") <(fd -uag -d 1 "*" "/") <(echo "$recent2") <(echo "$recentz") | xargs -L 1 eza -d --classify=always --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed -e "s;$HOME;~;g" -e "s,/home/.*lukas,~,g" -e "s_->.*__g" | awk '!a[$0]++' | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 100% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s;\*$;;g" | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | sed "s;\*$;;g" | cut -d" " -f 2-| sed "s;^~;$HOME;g")
+[[ "$filter" = "rec" ]] && selection=$(cat <(echo "$ignore") <(echo "$recent") <(echo "$HOME") <(echo "/") <(echo "..") <(fd -uag -d 1 "*" "$PWD" | grep -vEi ".{60,}") <(fd -uag -d 1 "*" "$HOME") <(fd -uag -d 2 "*" "$HOME/.config" | grep -vEi "/$|.{50,}") <(fd -uag -d 1 "*" "/") <(echo "$recent2") <(echo "$recentz") | xargs -L 1 eza -d --classify=always --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed -e "s;$HOME;~;g" -e "s,/home/.*lukas,~,g" -e "s_->.*__g" | awk '!a[$0]++' | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 100% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s;\*$;;g" | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | sed "s;\*$;;g" | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
 
-[[ "$filter" = "rec" ]] && selection=$(cat <(echo "$ignore") <(echo "$recent") <(echo "$HOME") <(echo "/") <(echo "..") <(fd -uag -d 1 "*" "$PWD" | grep -vEi ".{60,}") | xargs -L 1 eza -d --classify=always --color=always --icons=always 2>/dev/null | sed "s;^\.;$PWD;g" | grep -vxE "$ignore|^$" | sed -e "s;$HOME;~;g" -e "s,/home/.*lukas,~,g" -e "s_->.*__g" | awk '!a[$0]++' | cut -d' ' -f1,2 | fzf --ansi --scroll-off=5 --height 100% --border double --border-label="   Recent Files   " --color=label:italic:red --reverse --preview-window=right --scheme=path --cycle --algo=v2 --preview='echo {} | sed "s;\*$;;g" | cut -d" " -f 2- | xargs ~/scripts/fuzzyfinder/fzf-preview.sh' | sed "s;\*$;;g" | cut -d" " -f 2-| sed "s;^~;$HOME;g")
 
 
 

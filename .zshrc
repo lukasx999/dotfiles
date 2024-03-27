@@ -62,7 +62,8 @@ alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.
 #default apps
 
 export TERMINAL="kitty"
-export BROWSER="librewolf"
+export BROWSER="firefox"
+export TERM=xterm-256color
 
 
 
@@ -149,10 +150,14 @@ _comp_options+=(globdots) #include hidden files
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
+
+# case insensitive matching
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 
 
@@ -187,6 +192,7 @@ alias ltspice='wine ~/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe'
 alias PIO_UP='pio run --upload-port /dev/ttyACM0 -t upload'
 alias PIO_MON='pio run --upload-port /dev/ttyACM0 -t monitor'
 alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port /dev/ttyACM0 -t monitor'
+alias PIO_CDB='pio run -t compiledb'
 
 
 
@@ -197,7 +203,9 @@ alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port
 #alias fzy='~/scripts/fuzzyfinder'
 alias neovide='devour neovide --no-fork 2>/dev/null'
 
+alias emacs='emacs -nw'
 export EDITOR="nvim"
+export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
 #export EDITOR="neovide"
 #export SUDO_EDITOR="neovide"
@@ -206,8 +214,8 @@ export SUDO_EDITOR="nvim"
 
 alias vim='nvim'
 alias vim=$EDITOR
+alias vi='command vim'
 
-alias vi='/bin/vim'
 alias cat='bat --paging=never -n'
 alias eza='eza -F --icons=auto --group-directories-first'
 alias ls='eza'
@@ -303,17 +311,15 @@ eval "$(zoxide init zsh)"
 
 #source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
-#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
 
 
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
-#eval "$(starship init zsh)"
-
-
-
+eval "$(starship init zsh)"
 

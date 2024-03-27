@@ -77,6 +77,7 @@ emacs
 fancontrol-gui (AUR)
 devour (window swallowing)
 simple-mtpfs (for mounting androids)
+nmap
 
 
 
@@ -102,6 +103,7 @@ dash (symlink to /bin/sh)
 neovim
   * xsel (for accessing + register)
   * neovide
+  * vimv (bulk renaming)
 xclip (for clipboard)
 bluez
   * bluez-utils
