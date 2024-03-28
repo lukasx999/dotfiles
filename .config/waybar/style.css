@@ -222,9 +222,26 @@ button:hover {
     border-color: #585b70;*/
 }
 
-#custom-date {
+
+#custom-audio{
+    background-color: #313244;
+    color: #f2cdcd;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
+#custom-kblayout{
     background-color: #313244;
     color: #fab387;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
+#custom-date {
+    background-color: #313244;
+    color: #eba0ac;
     border-radius: 10px;
     margin: 5px;
     box-shadow: 1px 1px;

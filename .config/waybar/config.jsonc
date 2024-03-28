@@ -26,10 +26,34 @@
         "tray",
         "custom/packages",
         //"clock#date",
+        "custom/kblayout",
+        "custom/audio",
         "custom/date",
         "clock",
     ],
     // Modules configuration
+
+
+    "custom/audio": {
+        "exec": "~/.config/waybar/audioctl.sh",
+        "interval": 60,
+        "format": "   {} ",
+        "return-type": "",
+        "tooltip": false,
+        "signal": 2
+    },
+
+
+    "custom/kblayout": {
+        "exec": "~/.config/waybar/kblayout.sh",
+        "interval": 999,
+        "format": "   {} ",
+        "return-type": "",
+        "tooltip": false,
+        "signal": 1
+    },
+
+
 
     "custom/wallpaper": {
         "exec": "echo ",

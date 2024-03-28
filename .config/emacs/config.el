@@ -23,6 +23,8 @@
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
 ;;(text-scale-set 1)
+
+
 ;;(set-frame-font "JetBrainsMono NerdFont 16" nil t)
 
 
@@ -518,8 +520,22 @@
 (setq use-file-dialog nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(fringe-mode -1)
-    
+;;(fringe-mode -1)
+;;(setq fringe-mode nil)
+;;(set-fringe-mode 0)
+;;(set-fringe-mode '(0 . 0))
+;;(setq set-fringe-mode 0)
+;;(setq fringe-mode '(0 . 0))
+;;(setq fringe-mode '(0 . 0))
+;;(fringe-mode 'no-fringes' t)
+
+
+(set-fringe-mode '(0 . 0))
+(fringe-mode '(0 . 0))
+(set-fringe-style -1)
+(setq fringe-mode 0)
+
+
 
 ;;(setq make-backup-files nil)
 ;;(setq auto-save-default nil)
@@ -656,12 +672,19 @@
         inhibit-compacting-font-caches t
         projectile-switch-project-action 'neotree-projectile-action) 
 
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow)) ;; black and white icons
+(setq neo-theme (if (display-graphic-p) 'classic))
 
 
   ;; Disable line-numbers minor mode for neotree
   (add-hook 'neo-after-create-hook
             (lambda (&rest _) (display-line-numbers-mode -1)))
+
+
+ (lukas/leader-keys
+  "t n" '(neotree-toggle :wk "Toggle neotree file viewer"))
+
+
 
 
 
@@ -750,15 +773,15 @@
 (setq treemacs-width 30)
 ;;(setq-local mode-line-format nil)
 
-(lukas/leader-keys
-  "t n" '(treemacs :wk "Toggle Treemacs"))
+;;(lukas/leader-keys
+  ;;"t n" '(treemacs :wk "Toggle Treemacs"))
 
 ;; Disable line-numbers for neotree
 (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1)))
 ;;(add-hook 'treemacs-mode-hook (lambda() (scroll-bar-mode -1)))
 
 :bind
-("C-g" . treemacs)
+;;("C-g" . treemacs)
 ;;(global-set-key (kbd "SPC") nil)
 (:map global-map
       ;;("SPC" . nil)
@@ -911,6 +934,19 @@
   (push '(treemacs-window-background-face . solaire-default-face) solaire-mode-remap-alist)
   (push '(treemacs-hl-line-face . solaire-hl-line-face) solaire-mode-remap-alist)
 
+;; config.el
+;;(defun solaire-mode-real-buffer-custom-p ()
+  ;;"Return t if the current buffer is the dashboard or scratch, or is a real (file-visiting) buffer."
+  ;;(cond ((string= (buffer-name (buffer-base-buffer)) "*doom*") t)
+        ;;((string= (buffer-name (buffer-base-buffer)) "*scratch*") t)
+        ;;((buffer-file-name (buffer-base-buffer)) t)
+        ;;(t nil)))
+;;
+;;(after! solaire-mode
+  ;;(setq solaire-mode-real-buffer-fn #'solaire-mode-real-buffer-custom-p))
+
+
+
 )
 
 (use-package sudo-edit
@@ -923,7 +959,7 @@
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t)) ; if nil, italics is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
   ;;(load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
@@ -931,52 +967,20 @@
   ;; Corrects (and improves) org-mode's native fontification.
   ;;(doom-themes-org-config))
 
+:init
+(load-theme 'doom-one t)
+(defalias 'load-theme 'counsel-load-theme)
+)
 ;;(load-theme 'dtmacs t)
 
 (use-package catppuccin-theme
-      :init
-      (load-theme 'catppuccin' t)
-    :config
+:init
+;;(load-theme 'catppuccin' t) ;; for using catppuccin
+:config
 (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
-(catppuccin-reload))
+;;(catppuccin-reload) ;; for using catppuccin
+)
 
 (use-package ef-themes
   :if window-system
-  :ensure t
-  :config
-  ;; Enable the theme
-  ;;(load-theme 'ef-winter t)
 )
-
-(use-package tldr)
-
-(add-to-list 'default-frame-alist '(alpha-background . 95)) :: 90
-
-(use-package vertico-posframe
-  :ensure t
-  :init
-  (vertico-posframe-mode 1)
-  :custom
-  (setq vertico-posframe-parameters
-	'((left-fringe . 8)
-          (right-fringe . 8)))
-  )
-
-(use-package which-key
-  :init
-    (which-key-mode 1)
-  :diminish
-  :config
-  (setq which-key-side-window-location 'bottom
-	  which-key-sort-order #'which-key-key-order
-	  which-key-allow-imprecise-window-fit nil
-	  which-key-sort-uppercase-first nil
-	  which-key-add-column-padding 1
-	  which-key-max-display-columns nil
-	  which-key-min-display-lines 6
-	  which-key-side-window-slot -10
-	  which-key-side-window-max-height 0.25
-	  which-key-idle-delay 0.8
-	  which-key-max-description-length 25
-	  which-key-allow-imprecise-window-fit nil
-	  which-key-separator " → " ))
