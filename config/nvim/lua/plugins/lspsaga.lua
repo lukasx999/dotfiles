@@ -6,10 +6,10 @@
                 vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>Lspsaga term_toggle<CR>", { desc = "Terminal" }),
                 vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga project_replace<CR>", { desc = "Project replace" }),
 
-                symbol_in_winbar = {
+                symbol_in_winbar = {  -- alternative to barbecue nvim
 
                     --vim.keymap.set("n", "<leader>te", "<cmd>Lspsaga winbar_toggle<CR>", { desc = "Winbar" }),
-                    enable = false,
+                    enable = true,
                     separator = " › ",
                     hide_keyword = false,
                     color_mode = true,

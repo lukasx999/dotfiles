@@ -1,8 +1,13 @@
 
-
-
-
 -- autocmds
+
+
+
+
+-- Disable line numbers when in terminal mode
+vim.cmd("autocmd TermOpen * setlocal nonumber norelativenumber")
+
+
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
@@ -30,6 +35,8 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
+    "vim",  -- C-f in cmd mode
+    "oil",
     "PlenaryTestPopup",
     "help",
     "lspinfo",
@@ -47,7 +54,13 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
-    --vim.keymap.set("n", "q", "<cmd>q!<cr>", { buffer = event.buf, silent = true })
+
+        if ( vim.bo.filetype == "oil" ) then
+            vim.keymap.set("n", "q", "<cmd>bd<cr>", { buffer = event.buf, silent = true })
+        end
+
+
+
   end,
 })
 
@@ -63,5 +76,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+
+
+-- save all unsaves changes in all buffers when unfocusing the window
+-- autocmd('FocusLost', { pattern = '*', command = 'silent! wa' })
+
 
 

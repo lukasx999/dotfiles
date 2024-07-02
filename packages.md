@@ -77,6 +77,9 @@ clang
 python-devtools
 mypy (python static type checker)
 cython
+
+raylib
+
 # Microcontrollers
 platformio-core
 platformio-core-udev
@@ -92,21 +95,26 @@ PYTHON:
 - tree-sitter-cli (treesitter executable not found error)
 - stylua
 - python-isort
+- php (needed for mason)
+- composer (for php)
+- julia (needed for mason)
 
 # Apps
 
-gromit-mpx (aur) (screen annotation tool)
-boomer-git (aur) (x11 screen zoom)
-emacs
-nautilus
-spotify
-steam
-gimp
-anki (aur)
-visual-studio-code-bin (aur)
+- gromit-mpx (aur) (screen annotation tool)
+- boomer-git (aur) (x11 screen zoom)
+- emacs
+- nautilus
+- spotify
+- steam
+- gimp
+- anki (aur)
+- visual-studio-code-bin (aur)
 
 
 # Fonts
+ttf-dejavu
+ttf-jetbrains-mono
 ttf-roboto
 ttf-jetbrains-mono-nerd
 ttf-font-awesome

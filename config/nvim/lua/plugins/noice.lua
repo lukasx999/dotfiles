@@ -1,3 +1,4 @@
+
     return {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -17,12 +18,12 @@
 
                 -- clean cmdline
 
-                --[[
                 views = {
                     cmdline_popup = {
                         border = {
                             style = "none",
-                            padding = { 2, 3 },
+                            -- padding = { 2, 3 },
+                            padding = { 1, 1 },
                         },
                         filter_options = {},
                         win_options = {
@@ -30,7 +31,10 @@
                         },
                     },
                 },
-                ]]
+                --
+
+
+
 
                 lsp = {
                     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -51,6 +55,8 @@
             })
 
             vim.keymap.set("n", "<leader>nd", "<cmd>Noice dismiss<CR>", { desc = "dismiss notification" })
-            -- vim.keymap.set("n", "<C-l>", "<cmd>Noice dismiss<CR>", { desc = "dismiss notification" })
+            vim.keymap.set("n", "ö", "<cmd>Noice dismiss<CR>", { desc = "dismiss notification" })
         end,
     }
+
+

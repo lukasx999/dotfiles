@@ -30,50 +30,49 @@
 
 
 
-        {
-            "utilyre/barbecue.nvim",
-            name = "barbecue",
-            version = "*",
-            dependencies = {
-                "SmiteshP/nvim-navic",
-                "nvim-tree/nvim-web-devicons", -- optional dependency
-            },
-            opts = {
-                -- configurations go here
-            },
-            config = function()
-                vim.keymap.set("n", "<leader>te", "<cmd>Barbecue toggle<CR>", { desc = "Winbar", silent = true })
-                require("barbecue").setup({
-                    -- better performance
-                    create_autocmd = false,
-
-                    vim.api.nvim_create_autocmd({
-                        "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
-                        "BufWinEnter",
-                        "CursorHold",
-                        "InsertLeave",
-
-                        -- include this if you have set `show_modified` to `true`
-                        "BufModifiedSet",
-                    }, {
-                            group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-                            callback = function()
-                                require("barbecue.ui").update()
-                            end,
-                        }),
-
-
-                    -- scrolling bug fix for neovide
-                    lead_custom_section = function()
-                        return { { " ", "WinBar" } }
-                    end,
-
-
-
-
-                })
-            end,
-        },
+        -- {
+        --     "utilyre/barbecue.nvim",
+        --     name = "barbecue",
+        --     version = "*",
+        --     dependencies = {
+        --         "SmiteshP/nvim-navic",
+        --         "nvim-tree/nvim-web-devicons", -- optional dependency
+        --     },
+        --     opts = {},
+        --
+        --     config = function()
+        --         vim.keymap.set("n", "<leader>te", "<cmd>Barbecue toggle<CR>", { desc = "Winbar", silent = true })
+        --         require("barbecue").setup({
+        --             -- better performance
+        --             create_autocmd = false,
+        --
+        --             vim.api.nvim_create_autocmd({
+        --                 "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+        --                 "BufWinEnter",
+        --                 "CursorHold",
+        --                 "InsertLeave",
+        --
+        --                 -- include this if you have set `show_modified` to `true`
+        --                 "BufModifiedSet",
+        --             }, {
+        --                     group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+        --                     callback = function()
+        --                         require("barbecue.ui").update()
+        --                     end,
+        --                 }),
+        --
+        --
+        --             -- -- scrolling bug fix for neovide
+        --             -- lead_custom_section = function()
+        --             --     return { { " ", "WinBar" } }
+        --             -- end,
+        --
+        --
+        --
+        --
+        --         })
+        --     end,
+        -- },
 
 
 
@@ -107,10 +106,11 @@
                     end, ]]
 
                         color_icons = true,
+                        -- separator_style = "slant",
+
                         --separator_style = "padded_slant",
                         --separator_style = "padded_slope",
-                        separator_style = "slant",
-                        --separator_style = "thin",
+                        separator_style = "thin",
                         --separator_style = "thick",
 
                         show_buffer_icons = true,

@@ -9,6 +9,11 @@ SAVEHIST=$HISTSIZE
 
 
 
+# Doom Emacs scripts
+export PATH=$HOME/.config/emacs/bin:$PATH
+
+
+
 
 setopt interactive_comments  # Interactive Comments
 setopt auto_cd  # cding into dirs by just typing the name
@@ -59,6 +64,20 @@ export RANGER_DEVICONS_SEPARATOR=' '
 #     fi
 #     command rm -f -- "$tempfile" 2>/dev/null
 # }
+
+
+
+
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+
 
 
 
@@ -201,20 +220,13 @@ zstyle ':completion:*' group-name ''
 # PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
-
 NEWLINE=$'\n'
-# PROMPT="%B%{$fg[magenta]%}%~ %{$fg[blue]%}$      %{$fg[yellow]%}    ${NEWLINE}∇%{$reset_color%}%b "
-
-# PROMPT="${NEWLINE}%B%{$fg[magenta]%}%~ %{$fg[blue]%}$      %{$fg[yellow]%}    ${NEWLINE}∇%{$reset_color%}%b "
 PROMPT="${NEWLINE}%B%{$fg[magenta]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
+
+# No Newline
+# PROMPT="%B%{$fg[magenta]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
+
 # RPROMPT=""
-
-
-
-#%{$fg[blue]%}%M
-#%{$fg[yellow]%}%n
-
-
 
 
 
@@ -258,12 +270,16 @@ alias spotify='spotify --enable-features=UseOzonePlatform --ozone-platform=wayla
 alias \
         ls='ls -hNF --color=auto --group-directories-first' \
         cat='bat --paging=never -n' \
-        eza='eza -F --icons=auto --group-directories-first' \
+        eza='eza -F --icons=never --group-directories-first' \
         ls='eza' \
         l1='ls -1' \
         l1a='ls -1a' \
-        lt='eza --tree --level 2' \
-        lta='eza --tree -a'
+        lt='eza --tree --level 2 --icons=auto' \
+        lta='eza --tree -a --icons=auto' \
+        ll='eza -l --icons=auto' \
+        lla='eza -Al --icons=auto' \
+        la='ls -A'
+        # ll='ls -lh' \
 
 
 # Etc
@@ -275,9 +291,6 @@ alias \
         grep='grep --color=auto' \
         diff='diff --color=auto' \
         ip='ip -color=auto' \
-        ll='ls -lh' \
-        la='ls -A' \
-        lla='ls -Al' \
         ..='cd ..' \
         ...='cd .. && cd ..'
 
@@ -409,6 +422,7 @@ bindkey '^H' backward-kill-word
 
 
 
+
 # Set up direnv
 eval "$(direnv hook zsh)"
 
@@ -417,6 +431,8 @@ eval "$(direnv hook zsh)"
 # Set up Starship prompt
 # export STARSHIP_CONFIG=~/.config/starship/starship.toml
 # eval "$(starship init zsh)"
+
+
 
 
 

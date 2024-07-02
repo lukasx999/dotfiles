@@ -123,16 +123,16 @@
                 },
                 -- User defined loops
                 additions = {
-                    { "Foo", "Bar", "Baz" },
+
+                },
+                allow_caps_additions = {
+                    { "foo", "bar", "baz", "qux", "quux" },
                     { "tic", "tac", "toe" },
-                    { "Tic", "Tac", "Toe" },
-                    { "foo", "bar", "baz" },
                     { "up", "down" },
                     { "left", "right" },
                     { "top", "bottom" },
-                    { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" },
-                },
-                allow_caps_additions = {
+                    { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" },
+
                     --{ "enable", "disable" },
                     -- enable → disable
                     -- Enable → Disable

@@ -31,23 +31,27 @@
                     --suffix = "suffix",
 
 
-                    --[[
-                    prefix = function(diagnostic)
-                        if diagnostic.severity == vim.diagnostic.severity.ERROR then
-                            --return ""
-                            return icons['error']
-                        elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-                            --return ""
-                            return icons['warn']
-                        elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-                            --return ""
-                            return icons['info']
-                        else
-                            --return ""
-                            return icons['hint']
-                        end
-                    end,
-                    ]]
+
+
+                    -- Change virtual text icons
+                    -- prefix = function(diagnostic)
+                    --     if diagnostic.severity == vim.diagnostic.severity.ERROR then
+                    --         --return ""
+                    --         return icons['error']
+                    --     elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+                    --         --return ""
+                    --         return icons['warn']
+                    --     elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+                    --         --return ""
+                    --         return icons['info']
+                    --     else
+                    --         --return ""
+                    --         return icons['hint']
+                    --     end
+                    -- end,
+
+
+
 
                 },
             })

@@ -35,6 +35,9 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "j", "gj", {})
 vim.keymap.set("n", "k", "gk", {})
 
+vim.keymap.set("n", "§", "w:!", {})  -- open shell prompt
+
+
 
 vim.keymap.set("n", "ZW", "<cmd>w<CR>", { desc = "Write file" })
 
@@ -119,6 +122,7 @@ vim.keymap.set("n", "<leader>bc", "<cmd>bd!<CR>", { desc = "Close Buffer" })
 -- better C-w commands
 vim.keymap.set("n", "<C-w>q", "<cmd>q!<CR>", { desc = "Quit Window" })
 vim.keymap.set("n", "<C-w>c", "<cmd>bd!<CR>", { desc = "Delete Buffer" })
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<C-w>b", "<cmd>bnext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<C-w>B", "<cmd>bprev<CR>", { desc = "Previous Buffer" })
 

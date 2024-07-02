@@ -26,7 +26,8 @@ program = "/usr/bin/zsh"
 #position = { x = 865, y = 420 }
 padding = { x = 15, y = 15 }
 dynamic_padding = true
-opacity = 0.90
+# opacity = 0.90
+opacity = 1
 decorations = "None"
 title = "Alacritty"
 dynamic_title = true

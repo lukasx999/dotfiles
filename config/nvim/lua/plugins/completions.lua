@@ -57,7 +57,9 @@
                         }),
 
                         documentation = cmp.config.window.bordered(),
+                        -- documentation = false,
                     },
+
                     mapping = cmp.mapping.preset.insert({
                         ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
                         ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
@@ -78,6 +80,16 @@
 
                         ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
+                        -- ['<C-g>'] = function()
+                        --     if cmp.visible_docs() then
+                        --         cmp.close_docs()
+                        --     else
+                        --         cmp.open_docs()
+                        --     end
+                        -- end
+
+
+
                     }),
                     sources = cmp.config.sources({
                         { name = "nvim_lsp" },
@@ -86,8 +98,8 @@
                         { name = "buffer" },
 
                         { name = "treesitter" },
-                        { name = "calc" },
-                        { name = "dotenv" },
+                        -- { name = "calc" },
+                        -- { name = "dotenv" },
                     }),
                     formatting = {
                         format = lspkind.cmp_format({
@@ -136,6 +148,8 @@
                 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
                 cmp.setup.cmdline(":", {
                     mapping = cmp.mapping.preset.cmdline(),
+
+
 
                     sources = cmp.config.sources({
                         { name = "path" },

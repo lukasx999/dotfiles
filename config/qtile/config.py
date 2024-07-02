@@ -6,6 +6,7 @@ from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal, send_notification
+from libqtile.config import Key, KeyChord
 
 # Additional Python libraries
 import os
@@ -24,6 +25,13 @@ browser = "firefox"
 launcher = "rofi -show drun"
 screenshot = f"flameshot gui --clipboard --path /home/{getuser()}/Pictures/Screenshots"
 zoom = "boomer"
+lock = "betterlockscreen --lock"
+
+draw_toggle = "gromit-mpx --toggle"
+draw_clear = "gromit-mpx --clear"
+draw_visibility = "gromit-mpx --visibility"
+draw_undo = "gromit-mpx --undo"
+draw_redo = "gromit-mpx --redo"
 
 
 
@@ -73,19 +81,18 @@ games = [
 
 # Gaming
 
-@hook.subscribe.client_new
-def game_launched(client):
-    if client.name in games:
-        client.togroup("5", switch_group=True)
-        qtile.spawn("pkill picom")
+# @hook.subscribe.client_new
+# def game_launched(client):
+#     if client.name in games:
+#         client.togroup("5", switch_group=True)
+        # qtile.spawn("pkill picom")
 
 
-@hook.subscribe.client_killed
-def game_closed(client):
-    if client.name in games:
-        #qtile.current_screen.set_group(qtile.current_screen.previous_group)
-        qtile.current_screen.set_group(qtile.current_screen.toggle_group("4"))
-        qtile.spawn("picom -b")
+# @hook.subscribe.client_killed
+# def game_closed(client):
+#     if client.name in games:
+#         qtile.current_screen.set_group(qtile.current_screen.toggle_group("4"))
+        # qtile.spawn("picom -b")
 
 
 
@@ -137,6 +144,20 @@ keys = [
     Key([mod], "s", lazy.spawn(screenshot), desc="Take screenshot"),
     Key([mod], "q", lazy.spawn(browser), desc="Launch browser"),
     Key([mod], "a", lazy.spawn(zoom), desc="Launch zoom"),
+
+    Key([mod, "shift", "control"], "l", lazy.spawn(lock), desc="lock the screen"),
+
+    KeyChord([mod], "g", [
+        Key([], "t", lazy.spawn(draw_toggle), desc="Toggle drawing mode"),
+        Key([], "c", lazy.spawn(draw_clear), desc="Clear screen of drawings"),
+        Key([], "v", lazy.spawn(draw_visibility), desc="Toggle drawing visibility"),
+        Key([], "u", lazy.spawn(draw_undo), desc="undo"),
+        Key([], "r", lazy.spawn(draw_redo), desc="redo"),
+    ]),
+
+
+
+
 
 
     # Toggle between different layouts as defined below

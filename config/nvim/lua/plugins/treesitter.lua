@@ -33,6 +33,7 @@
                         "markdown_inline",
                         "hyprlang",
                         "regex",
+                        -- "yaml",
                         -- "yuck",
                         -- "java",
                         -- "r",
@@ -53,16 +54,11 @@
                     incremental_selection = {
                         enable = true,
                         keymaps = {
-                            --[[
-                        init_selection = "<leader>ss",
-                        node_incremental = "<leader>si",
-                        scope_incremental = "<leader>sc",
-                        node_decremental = "<leader>sd",
-                        ]]
-                            init_selection = '<CR>',
-                            scope_incremental = '<CR>',
-                            node_incremental = '<TAB>',
-                            node_decremental = '<S-TAB>',
+                            -- Annoying as hell!
+                            -- init_selection = '<CR>',
+                            -- scope_incremental = '<CR>',
+                            -- node_incremental = '<TAB>',
+                            -- node_decremental = '<S-TAB>',
                         },
                     },
 

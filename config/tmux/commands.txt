@@ -1,0 +1,2 @@
+make
+/home/lukas/Code/C/Projects/Pacman
