@@ -61,6 +61,7 @@ yazi (file manager)
 # Desktop Tools
 
 mupdf
+qt6ct (qt6 configuration tool)
 
 
 # Package managers
@@ -79,6 +80,12 @@ mypy (python static type checker)
 cython
 
 raylib
+
+python-sqlalchemy
+
+sbcl (common lisp)
+
+
 
 # Microcontrollers
 platformio-core
@@ -111,6 +118,10 @@ PYTHON:
 - anki (aur)
 - visual-studio-code-bin (aur)
 
+- lxappearance
+
+# Themes
+- papirus-icon-theme
 
 # Fonts
 ttf-dejavu
