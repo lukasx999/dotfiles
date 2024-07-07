@@ -7,6 +7,7 @@ tree
 tldr (better man entries)
 bc (calculator lang)
 imagemagick (image manipulation)
+locate (GNU locate for finding files)
 
 
 # Extra Shell tools
@@ -122,6 +123,8 @@ PYTHON:
 
 # Themes
 - papirus-icon-theme
+- phinger-cursors (aur)
+- bibata-cursor-theme (aur)
 
 # Fonts
 ttf-dejavu
