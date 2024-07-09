@@ -124,6 +124,8 @@ PYTHON:
 - lxappearance
 
 # Themes
+- tokyonight-gtk-theme-git (aur)
+- gruvbox-dark-gtk (aur)
 - papirus-icon-theme
 - phinger-cursors (aur)
 - bibata-cursor-theme (aur)
