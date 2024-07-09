@@ -63,6 +63,7 @@ yazi (file manager)
 
 mupdf
 qt6ct (qt6 configuration tool)
+texlive (group for latex)
 
 
 # Package managers
@@ -109,6 +110,7 @@ PYTHON:
 
 # Apps
 
+- anki (aur) (flashcards)
 - gromit-mpx (aur) (screen annotation tool)
 - boomer-git (aur) (x11 screen zoom)
 - emacs
@@ -127,6 +129,7 @@ PYTHON:
 - bibata-cursor-theme (aur)
 
 # Fonts
+ttf-ubuntu-font-family
 ttf-dejavu
 ttf-jetbrains-mono
 ttf-roboto
