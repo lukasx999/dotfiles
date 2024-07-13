@@ -490,7 +490,9 @@
 
 
 
-            dashboard.section.header.val = theme.neovim
+            -- dashboard.section.header.val = theme.neovim
+            -- dashboard.section.header.val = theme.neovim_based
+            dashboard.section.header.val = theme.hydra
 
 
 
@@ -551,7 +553,6 @@
 
 
             dashboard.section.buttons.val = {
-                dashboard.button( "e", " [ ] New Buffer" , "<cmd>ene<CR>"),
                 -- dashboard.button( "<leader>ff", "󰈞 [ ] Find File", "<cmd>Telescope find_files<CR>"),
                 -- dashboard.button( "<leader>fo", " [ ] Recent Files"   , "<cmd>Telescope oldfiles<CR>"),
                 -- dashboard.button( "<leader>fg", "󰈭 [ ] Find Word"   , "<cmd>Telescope live_grep<CR>"),
@@ -560,8 +561,9 @@
                 -- dashboard.button( "b", " [ ] Bookmarks", "<cmd>Telescope marks<CR>"),
                 -- dashboard.button( "p", "󰒲 [ ] Lazy", "<cmd>Lazy<CR>"),
                 -- dashboard.button( "m", " [ ] Mason", "<cmd>Mason<CR>"),
-                dashboard.button( "c", " [ ] Config" , "<cmd>cd ~/.config/nvim<CR>"),
-                dashboard.button( "q", " [ ] Quit", "<cmd>qa<CR>"), -- 󰅚
+                dashboard.button( "e", "  New Buffer" , "<cmd>ene<CR>"),
+                dashboard.button( "c", "  Config" , "<cmd>cd ~/.config/nvim<CR>"),
+                dashboard.button( "q", "  Quit", "<cmd>qa<CR>"), -- 󰅚
             }
 
 

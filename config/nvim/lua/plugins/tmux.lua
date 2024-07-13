@@ -2,16 +2,18 @@ return {
     "aserowy/tmux.nvim",
     config = function()
 
+        local tmux = require("tmux")
+        local map = vim.keymap.set
 
-        vim.keymap.set("n", "<M-h>", function() require("tmux").move_left() end, { desc = "navigate to left pane" })
-        vim.keymap.set("n", "<M-j>", function() require("tmux").move_bottom() end, {desc = "navigate to bottom pane"})
-        vim.keymap.set("n", "<M-k>", function() require("tmux").move_top() end, {desc = "navigate to top pane"})
-        vim.keymap.set("n", "<M-l>", function() require("tmux").move_right() end, {desc = "navigate to right pane"})
+        map("n", "<M-h>", function() tmux.move_left    () end, { desc = "navigate to left pane"   })
+        map("n", "<M-j>", function() tmux.move_bottom  () end, { desc = "navigate to bottom pane" })
+        map("n", "<M-k>", function() tmux.move_top     () end, { desc = "navigate to top pane"    })
+        map("n", "<M-l>", function() tmux.move_right   () end, { desc = "navigate to right pane"  })
 
-        vim.keymap.set("n", "<M-H>", function() require("tmux").resize_left() end, {desc = "resizing left pane"})
-        vim.keymap.set("n", "<M-J>", function() require("tmux").resize_bottom() end, {desc = "resizing bottom pane"})
-        vim.keymap.set("n", "<M-K>", function() require("tmux").resize_top() end, {desc = "resizing top pane"})
-        vim.keymap.set("n", "<M-L>", function() require("tmux").resize_right() end, {desc = "resizing right pane"})
+        map("n", "<M-H>", function() tmux.resize_left  () end, { desc = "resizing left pane"      })
+        map("n", "<M-J>", function() tmux.resize_bottom() end, { desc = "resizing bottom pane"    })
+        map("n", "<M-K>", function() tmux.resize_top   () end, { desc = "resizing top pane"       })
+        map("n", "<M-L>", function() tmux.resize_right () end, { desc = "resizing right pane"     })
 
 
         require("tmux").setup({
@@ -66,10 +68,10 @@ return {
                 enable_default_keybindings = false,
 
                 -- sets resize steps for x axis
-                resize_step_x = 5,
+                resize_step_x = 3,
 
                 -- sets resize steps for y axis
-                resize_step_y = 5,
+                resize_step_y = 3,
             },
 
 

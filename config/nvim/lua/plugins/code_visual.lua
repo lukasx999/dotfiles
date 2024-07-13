@@ -7,6 +7,8 @@
                 require("colorizer").setup({
                     filetypes = {
                         "*",
+                        "!oil",  -- Dont show colors in oil
+                        "!neo-tree",
                         cmp_docs = { always_update = true },
                     },
                 })

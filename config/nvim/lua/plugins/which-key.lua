@@ -1,43 +1,90 @@
-    return {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
-        config = function()
-            require("which-key").setup({
+return {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+    end,
+    opts = {},
+    config = function()
 
-                vim.keymap.set("n", "<leader>nw", "<cmd>WhichKey<CR>", { desc = "WhichKey" }),
-
-                mode = "n", -- NORMAL mode
-                -- prefix: use "<leader>f" for example for mapping everything related to finding files
-                -- the prefix is prepended to every mapping part of `mappings`
-                prefix = "",
-                buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-                silent = true,  -- use `silent` when creating keymaps
-                noremap = true, -- use `noremap` when creating keymaps
-                nowait = false, -- use `nowait` when creating keymaps
-                expr = false,   -- use `expr` when creating keymaps
+        local wk = require("which-key")
 
 
-                -- for modes.nvim
-                triggers_blacklist = {
-                    n = { "d", "y" }
-                }
+        wk.setup({
 
-            })
+            mode = "n", -- NORMAL mode
+            -- prefix: use "<leader>f" for example for mapping everything related to finding files
+            -- the prefix is prepended to every mapping part of `mappings`
+            prefix = "",
+            buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+            silent = true, -- use `silent` when creating keymaps
+            noremap = true, -- use `noremap` when creating keymaps
+            nowait = false, -- use `nowait` when creating keymaps
+            expr = false, -- use `expr` when creating keymaps
 
-            -- custom binds
+            triggers_blacklist = {
+                -- list of mode / prefixes that should never be hooked by WhichKey
+                -- this is mostly relevant for keymaps that start with a native binding
+                i = { "j", "k" },
+                v = { "j", "k" },
+                n = { "d", "y" },
+            },
 
-            --local wk = require("which-key")
-            --wk.register(mappings, opts)
 
-            --require("which-key").load_extension("registers")
-        end,
-    }
+            triggers_nowait = {
+                -- marks
+                "`",
+                "'",
+                "g`",
+                "g'",
+                -- registers
+                '"',
+                "<c-r>",
+                -- spelling
+                "z=",
+            },
+
+            window = {
+                border = "single", -- none, single, double, shadow
+                position = "bottom", -- bottom, top
+                margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+                padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
+                winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+                zindex = 1000, -- positive value to position WhichKey above other floating windows.
+            },
+
+
+
+
+        })
+
+
+
+
+        -- Keybind Groups
+        wk.register({
+            f = { name = "File" },
+            t = { name = "Toggle" },
+            l = { name = "LSP" },
+            m = { name = "Move in context" },
+            w = { name = "Windows" },
+            b = { name = "Buffers" },
+
+        }, { prefix = "<leader>" })
+
+
+        wk.register({
+            A = { name = "All" },
+
+        }, { prefix = "Z" })
+
+
+
+
+
+
+
+    end,
+}
+

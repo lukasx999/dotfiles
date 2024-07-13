@@ -1,6 +1,15 @@
     return {
 
 
+
+        {
+            "AlessandroYorba/Alduin",
+            "AlessandroYorba/Despacio",
+            "lunarvim/horizon.nvim",
+        },
+
+
+
         {
             -- remember color scheme
             'raddari/last-color.nvim',
@@ -15,14 +24,6 @@
 
 
 
-        --[[
-        {
-            "olimorris/onedarkpro.nvim",
-            priority = 1000, -- Ensure it loads first
-        },
-        ]]
-
-
         {
             'navarasu/onedark.nvim',
             config = function()
@@ -35,31 +36,23 @@
 
         {
             "loctvl842/monokai-pro.nvim";
-            config = function()
-            end,
         },
 
 
 
         {
             "ku1ik/vim-monokai",
-            config = function()
-            end,
         },
 
 
         {
             'Everblush/nvim',
             name = 'everblush',
-            config = function()
-            end,
         },
 
 
         {
             'rmehri01/onenord.nvim',
-            config = function()
-            end
         },
 
 

@@ -13,6 +13,9 @@ SAVEHIST=$HISTSIZE
 export PATH=$HOME/.config/emacs/bin:$PATH
 
 
+# Set Qt6 theme
+# export QT_QPA_PLATFORMTHEME="qt6ct"
+
 
 
 setopt interactive_comments  # Interactive Comments

@@ -1,2 +1,2 @@
 make
-/home/lukas/Code/C/Projects/Pacman
+/home/lukas/Code/C/Projects/Particle

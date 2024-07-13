@@ -7,4 +7,7 @@ blueman-applet &
 gromit-mpx &
 dunst &
 
+export QT_QPA_PLATFORMTHEME=qt6ct
+
+
 exec qtile start

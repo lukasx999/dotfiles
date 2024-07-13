@@ -62,7 +62,6 @@ vim.opt.mouse = 'a'
 --vim.opt.showmode = false
 --vim.opt.breakindent = false
 
---set colorcolumn=80
 
 
 
@@ -95,7 +94,7 @@ vim.opt.undofile = true
 vim.opt.clipboard = "unnamedplus"
 
 --vim.opt.scrolloff = 999
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 5  -- 10
 
 
 vim.opt.virtualedit = "block" -- keep highlighting on lines that are not of the same length, in visual block mode
@@ -113,7 +112,10 @@ vim.opt.termguicolors = true -- better, gui-like colors
 
 
 
-vim.opt.colorcolumn = "80"
+-- Colorcolumn
+-- vim.opt.colorcolumn = "80"
+
+
 
 --vim.opt.guicursor = "i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
 
@@ -180,7 +182,7 @@ vim.opt.laststatus = 3
 --vim.cmd("set laststatus=3") -- only have one global bar
 --vim.cmd("highlight WinSeparator guibg=None")
 
-vim.opt.showmode = false -- disable mode indicator (using lualine)
+-- vim.opt.showmode = true -- disable mode indicator (using lualine)
 
 
 

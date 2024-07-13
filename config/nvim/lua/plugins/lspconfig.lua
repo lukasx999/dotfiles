@@ -1,4 +1,93 @@
+
+
+local lsp = vim.lsp.buf
+local tele = require("telescope.builtin")
+local map = vim.keymap.set
+
     return {
+        ------------------------------------------------------------------------
+        -- Keymaps
+        {
+
+            --[[ Not used
+
+
+            -- Inferior to outline.nvim
+            map("n", "<leader>lo", "<cmd>Lspsaga outline<CR>",                  { desc = "Outline"                       }),
+
+
+            -- Lists all symbols - Does the same as outline.nvim
+            map("n", "<leader>lS", tele.lsp_document_symbols,                   { desc = "List all symbols"              }),
+
+
+            -- Puts all symbols into a quickfix list - Does the same as outline.nvim
+            map("n", "<leader>ls", lsp.document_symbol,                         { desc = "List all symbols"              }),
+
+
+            -- Puts all occurances of current symbol in quickfix list - No preview
+            map("n", "<leader>lR", lsp.references,                   { desc = "References of symbol"          }),
+
+
+            -- Goto definition, if theres more than one, open list in telescope
+            -- Doesnt really work? What the hell?
+            map('n', '<leader>lx', tele.lsp_type_definitions,                { desc = 'references'                    }),
+            map('n', '<leader>le', tele.lsp_definitions,                     { desc = 'goto definition'               }),
+
+
+            -- Doesnt work (No diagnostics found)
+            map("n", "<leader>lx", tele.diagnostics,                         { desc = "diagnostics"                   }),
+
+            -- Doesnt work (not supported by current server (Python))
+            map( "n", "<leader>li", tele.lsp_implementations,                { desc = "Implementations"               }),
+
+
+            -- Opens popup
+            map("n", "<leader>lr", "<cmd>Lspsaga rename<CR>",                { desc = "Rename"                        }),
+
+            -- Opens popup (kinda broken ui)
+            map("n", "<leader>lA", "<cmd>Lspsaga code_action<CR>",           { desc = "Code actions"                  }),
+
+            -- Doesnt work?
+            map("n", "<leader>lx", "<cmd>Lspsaga project_replace<CR>",       { desc = "Project replace"               }),
+
+            -- Dont need it
+            map("n", "<leader>te", "<cmd>Lspsaga winbar_toggle<CR>",         { desc = "Winbar"                        }),
+
+            -- Currently using Lspsaga version
+            map("n", "<leader>ld", lsp.definition,                           { desc = "Goto Definition"               }),
+            map("n", "<leader>lT", lsp.type_definition,                      { desc = "Goto type definition"          }),
+
+            -- Crashes (On Python project)
+            map("n", "<leader>lD", tele.lsp_dynamic_workspace_symbols,       { desc = "List all symbols in workspace" }),
+
+
+            ]]
+
+
+            -- General
+            map("n", "<leader>lr", lsp.rename,                              { desc = "Rename symbol"                 }),
+            map("n", "<leader>lf", lsp.format,                              { desc = "Format buffer"                 }),
+            map("n", "<leader>la", lsp.code_action,                         { desc = "Code action"                   }),
+
+            -- Goto
+            -- Will open popup for every definition
+            map("n", "<leader>ld", "<cmd>Lspsaga goto_definition<CR>",      { desc = "Goto definition"               }),
+            map("n", "<leader>lT", "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Goto type definition"          }),
+
+            -- Shows symbols in all files of workspace
+            map('n', '<leader>ls', tele.lsp_workspace_symbols,              { desc = 'List workspace symbols'        }),
+
+            -- Show all occurances of current symbol
+            map('n', '<leader>lR', tele.lsp_references,                     { desc = 'Show References of symbol'     }),
+
+            -- Peek
+            map("n", "K",          "<cmd>Lspsaga hover_doc<CR>",            { desc = "Hover"                         }),
+            map("n", "<leader>lp", "<cmd>Lspsaga peek_definition<CR>",      { desc = "Peek definition"               }),
+            map("n", "<leader>lP", "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Peek type definition"          }),
+        },
+
+
+        {
         "neovim/nvim-lspconfig",
         config = function()
             local icons = {
@@ -59,54 +148,88 @@
             --vim.api.nvim_set_hl(0,"DiagnosticVirtualTextPrefixError",{fg="none", bg="none"})
 
 
-            vim.keymap.set("n", "<leader>l", ":", { desc = "LSP" })
-
-            -- toggle diagnostics: <leader>ll -> options.lua
-
-            vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<CR>", { desc = "Info" })
-
-            vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover (old)" })
-            --vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "hover" })
-
-            vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
-            vim.keymap.set("n", "<leader>lb", vim.lsp.buf.references, { desc = "References" })
-            --vim.keymap.set('n', '<leader>lb', require("telescope.builtin").lsp_references, { desc = 'references' })
-            vim.keymap.set(
-                "n",
-                "<leader>li",
-                require("telescope.builtin").lsp_implementations,
-                { desc = "Implementations" }
-            )
-
-            vim.keymap.set(
-                "n",
-                "<leader>lT",
-                require("telescope.builtin").filetypes,
-                { desc = "Set filetype" }
-            )
 
 
-            --[[
-            vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "goto Definition" })
-            vim.keymap.set('n', '<leader>le', require("telescope.builtin").lsp_definitions, { desc = 'goto definition' })
-            vim.keymap.set("n", "<leader>lA", vim.lsp.buf.code_action, { desc = "Code actions (old)" })
-            vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Global rename" })
-            vim.keymap.set("n", "<leader>ld", require("telescope.builtin").diagnostics, { desc = "diagnostics" })
-            ]]
-
-
-            vim.keymap.set(
-                "n",
-                "<leader>ls",
-                require("telescope.builtin").lsp_document_symbols,
-                { desc = "Find symbols" }
-            )
-            vim.keymap.set(
-                "n",
-                "<leader>lS",
-                require("telescope.builtin").lsp_dynamic_workspace_symbols,
-                { desc = "Find symbols in the entire project" }
-            )
         end,
+        },
+
+
+        {
+            "nvimdev/lspsaga.nvim",
+            dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+            config = function()
+                require("lspsaga").setup({
+                    -- vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>Lspsaga term_toggle<CR>", { desc = "Terminal" }),
+
+                    symbol_in_winbar = {  -- alternative to barbecue nvim
+
+                        enable = true,
+                        separator = " › ",
+                        hide_keyword = false,
+                        color_mode = true,
+                        show_file = true,
+                        folder_level = 1,
+                        delay = 300,
+                    },
+
+                    -- rename = {
+                    --     in_select = true,
+                    --     keys = {
+                    --         quit = "<esc>",
+                    --     },
+                    -- },
+
+                    -- code_action = {
+                    --     num_shortcut = true,
+                    --     show_server_name = false,
+                    --     keys = {
+                    --         quit = "<esc>",
+                    --     },
+                    -- },
+
+                    -- definition = {
+                    --     keys = {
+                    --         quit = "q",
+                    --     },
+                    -- },
+
+                    hover = {
+                        max_width = 0.9,
+                        max_height = 0.8,
+                    },
+
+                    lightbulb = {
+                        enable = false,
+                    },
+
+
+                    outline = {
+                        win_position = "right",
+                        auto_close = true,
+                        auto_preview = true,
+                        detail = true,
+
+                        keys = {
+                            jump = "<CR>",
+                            quit = "q",
+                            toggle_or_jump = "o",
+                        },
+                    },
+
+                    -- beacon = {
+                    --     border = "single",
+                    --     frequency = 7,
+                    --     scroll_down = "<C-f>",
+                    --     scroll_up = "<C-b>",
+                    -- },
+                })
+            end,
+        },
+
+
+
+
+
+
     }
 

@@ -82,6 +82,7 @@
 
 
 
+                
                 require("nvim-autopairs").setup({
                     -- Settings
                     disable_filetype = { "TelescopePrompt", "vim" },
@@ -129,6 +130,8 @@
                     { "foo", "bar", "baz", "qux", "quux" },
                     { "tic", "tac", "toe" },
                     { "up", "down" },
+                    { "x", "y" },
+                    { "width", "height" },
                     { "left", "right" },
                     { "top", "bottom" },
                     { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" },
