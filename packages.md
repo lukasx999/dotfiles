@@ -108,8 +108,11 @@ PYTHON:
 - composer (for php)
 - julia (needed for mason)
 
+- python-pynvim
+
 # Apps
 
+- libreoffice-fresh
 - anki (aur) (flashcards)
 - gromit-mpx (aur) (screen annotation tool)
 - boomer-git (aur) (x11 screen zoom)
