@@ -139,22 +139,32 @@ end, {expr=true, noremap=true})
 
 
 
+-- USE TREESITTER BASED FOLDING
+-- old
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 
 
 
+-- FOLD SETTINGS
+
+-- without numbers
+-- vim.wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) ]]
+
+-- w/ number of lines
+vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+
+vim.opt.fillchars = "fold: "
+-- or
+-- vim.opt.fillchars = { fold = " " }
+
+vim.wo.foldnestmax = 3
+vim.wo.foldminlines = 1
 
 
--- set fold method
---vim.opt.foldmethod = "syntax"
---vim.opt.foldmethod = "manual"
---vim.cmd("set foldmethod=syntax")
---vim.cmd("foldmethod=manual")
---vim.cmd("foldmethod=indent")
-
--- treesitter based folding
-vim.cmd("set foldmethod=expr")
-vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
-vim.cmd("set nofoldenable")
 
 
 
@@ -171,7 +181,11 @@ vim.api.nvim_create_autocmd({"BufWinEnter"}, {
 })
 
 
-vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- no auto comments on new line
+
+
+-- No auto comments on new line
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
+
 
 
 
