@@ -87,6 +87,8 @@ local map = vim.keymap.set
         },
 
 
+
+
         {
         "neovim/nvim-lspconfig",
         config = function()
@@ -104,6 +106,9 @@ local map = vim.keymap.set
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
             end
+
+
+
 
 
             vim.diagnostic.config({

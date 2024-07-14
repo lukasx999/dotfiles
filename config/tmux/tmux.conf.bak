@@ -1,21 +1,16 @@
 
-#set-window-option -g automatic-rename on
 
-#set -g status-justify centre # center align window list
+# setw -g monitor-activity on
+# setw -g monitor-bell on
 
-#set-window-option -g pane-base-index 1
-
-
+# setw -g monitor-silence on  # yields error?
 
 
 
+# Hack to get bell working on alacritty
+# set -g bell-action other
+# set-hook -g alert-bell 'run-shell "tmux display-message DingDong"'
 
-#send-keys -t 0 'y' Enter
-#unbind-key -T copy-mode-vi v
-#unbind-key -T copy-mode R
-#setw -g mode-keys vi
-#setw -g mode-mouse on
-#setw -g monitor-activity on
 
 
 
@@ -40,12 +35,12 @@ set-option -g renumber-windows on
 
 
 # default shell
-# set -g default-shell /usr/bin/zsh
-#set -g default-shell /usr/bin/bash
+set -g default-shell /usr/bin/zsh
 
 
 # Allows for faster key repetition
 set -s escape-time 0 # 50, 0
+
 # repeat time
 set-option -g repeat-time 10
 
@@ -65,7 +60,6 @@ setw -g mode-keys vi
 
 
 # name windows after the current directory, not the process
-set-option -g status-interval 5
 set-option -g automatic-rename on
 set-option -g automatic-rename-format '#{b:pane_current_path}'
 
@@ -92,8 +86,7 @@ bind C-s send-prefix
 
 
 
-#bind-key t choose-tree -s -w -N
-bind-key t choose-tree -s -w
+bind-key t choose-tree -s -w  # -N no preview
 bind-key g clock-mode
 
 bind-key u display-panes
@@ -105,7 +98,8 @@ bind-key y set-option -g status # toggle status bar
 bind -n M-: command-prompt
 
 
-#############################
+################################################################################
+
 # scripts
 
 
@@ -121,24 +115,11 @@ bind-key -r M-i run-shell "tmux split-window -h ~/.config/tmux/cheatsheet.sh"
 bind-key -r M-I run-shell "tmux split-window -v ~/.config/tmux/cheatsheet.sh"
 
 
-# Python Code Runner
-# bind-key -r R run-shell "tmux split-window -h ~/Desktop/Code/GitHubRepos/py-tmux-runner/run.sh"
-bind-key -r R run-shell "~/Desktop/Code/GitHubRepos/py-tmux-runner/run.sh"
+# Code runner
+bind-key -r R run-shell "tmux popup -E ~/.config/tmux/compile_command.sh set-command"
+bind-key -r r run-shell "tmux split-window -h ~/.config/tmux/compile_command.sh run-command"
 
-
-
-
-# code runner
-# bind-key -r r run-shell "~/.config/tmux/run.sh vsplit"
-# bind-key -r M-r run-shell "~/.config/tmux/run.sh split"
-# bind-key -r M-R run-shell "~/.config/tmux/run.sh window"
-
-
-set -g @plugin 'lukasx999/tmux-code-runner'
-set -g @code_runner_show_time on
-
-
-#############################
+################################################################################
 
 
 
@@ -152,38 +133,44 @@ bind-key -r c kill-pane # used to be leader + x
 bind-key -r v split-window -h -c "#{pane_current_path}"
 bind-key -r s split-window -v -c "#{pane_current_path}"
 # default binds
-bind '"' split-window -v -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
+bind-key '"' split-window -v -c "#{pane_current_path}"
+bind-key % split-window -h -c "#{pane_current_path}"
 
-# focus
-bind-key -r j select-pane -D
-bind-key -r k select-pane -U
-bind-key -r h select-pane -L
-bind-key -r l select-pane -R
-# using meta
-bind -n M-k select-pane -U
-bind -n M-j select-pane -D
-bind -n M-h select-pane -L
-bind -n M-l select-pane -R
 
-# resizing
-bind-key -r J resize-pane -D 5
-bind-key -r K resize-pane -U 5
-bind-key -r H resize-pane -L 5
-bind-key -r L resize-pane -R 5
-# using meta
-bind -n M-J resize-pane -D 5
-bind -n M-K resize-pane -U 5
-bind -n M-H resize-pane -L 5
-bind -n M-L resize-pane -R 5
+# rotate through panes
+bind-key -r o select-pane -t :.+
+bind-key -n M-o select-pane -t :.+
+
+# FOCUSING PANES
+bind-key -n M-k select-pane -U
+bind-key -n M-j select-pane -D
+bind-key -n M-h select-pane -L
+bind-key -n M-l select-pane -R
+
+
+# RESIZING
+bind-key -n M-J resize-pane -D 5
+bind-key -n M-K resize-pane -U 5
+bind-key -n M-H resize-pane -L 5
+bind-key -n M-L resize-pane -R 5
+
+
+# bind-key -r n swap-pane -U
+# bind-key -r m swap-pane -D
+bind-key -n M-n swap-pane -U
+bind-key -n M-m swap-pane -D
+
+bind-key -n M-x next-layout
+
+
+
+
 
 
 
 # WINDOWS
 
 # management
-#bind-key -r n new-window
-#bind-key -r Enter new-window
 bind-key -r Enter new-window -c "#{pane_current_path}"
 bind-key -r q kill-window
 
@@ -195,6 +182,22 @@ bind -r , previous-window
 bind -n M-. next-window
 bind -n M-, previous-window
 
+# change position of current window with the first one
+bind-key -r p swap-window -t 1
+bind-key -n M-p swap-window -t 1
+
+
+
+# doesnt seem to work
+# bind-key -n M-1 select-window -t :1
+# bind-key -n M-2 select-window -t :2
+# bind-key -n M-3 select-window -t :3
+# bind-key -n M-4 select-window -t :4
+# bind-key -n M-5 select-window -t :5
+# bind-key -n M-6 select-window -t :6
+# bind-key -n M-7 select-window -t :7
+# bind-key -n M-8 select-window -t :8
+# bind-key -n M-9 select-window -t :9
 
 bind-key 1 select-window -t :1
 bind-key 2 select-window -t :2
@@ -207,6 +210,9 @@ bind-key 8 select-window -t :8
 bind-key 9 select-window -t :9
 
 
+
+################################################################################
+
 # COPY MODE
 bind-key Space copy-mode # used to be leader + c
 
@@ -218,7 +224,7 @@ bind-key -T copy-mode-vi _ send-keys -X back-to-indentation
 bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
 bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -selection clipboard"
 
-############################################################################################
+################################################################################
 
 # statusbar:
 
@@ -226,94 +232,95 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -selectio
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'MunifTanjim/tmux-mode-indicator'
 
-set -g @mode_indicator_prefix_prompt '  WAIT '
-set -g @mode_indicator_copy_prompt '  COPY '
-set -g @mode_indicator_sync_prompt '  SYNC '
-set -g @mode_indicator_empty_prompt '  TMUX '
-#set -g @mode_indicator_empty_prompt '  TMUX '
-
-set -g @mode_indicator_prefix_mode_style 'bg=blue,fg=black bold'
-set -g @mode_indicator_copy_mode_style 'bg=yellow,fg=black bold'
-set -g @mode_indicator_sync_mode_style 'bg=red,fg=black bold'
-set -g @mode_indicator_empty_mode_style 'bg=cyan,fg=black bold'
+set -g @mode_indicator_prefix_prompt '  wait '
+set -g @mode_indicator_copy_prompt '  copy '
+set -g @mode_indicator_sync_prompt '  sync '
+set -g @mode_indicator_empty_prompt '  tmux '
+set -g @mode_indicator_prefix_mode_style 'fg=blue bold italics'
+set -g @mode_indicator_copy_mode_style 'fg=yellow bold'
+set -g @mode_indicator_sync_mode_style 'fg=red bold'
+set -g @mode_indicator_empty_mode_style 'fg=cyan bold'
 
 
 
-# clock mode leader + t
+# clock mode leader + g
 setw -g clock-mode-colour colour1
 
-# copy mode
-setw -g mode-style 'fg=colour0 bg=colour3 bold'
+# COPY MODE
+# setw -g mode-style 'fg=colour0 bg=colour3 bold'  # Old
+setw -g mode-style 'fg=colour6 bg=colour8 dim'
 
 
-# statusbar
-set -g status-position top # bottom, top
+# STATUSBAR (for all widgets)
+set -g status-position bottom # bottom, top
 set -g status-justify left # centre, left
-set -g status-style 'fg=colour7 bg=default' # for all widgets / bg=colour0 for black bg
+set -g status-style 'fg=colour7 bg=black'  # change bg to default for transparent bg
 
 
-# left
-set -g status-left ' #[fg=colour8]/ #[fg=colour1]#S #[fg=colour8]/ #{tmux_mode_indicator} #[fg=colour8].. ' # 󰣇
-# set -g status-left '󰣇 #[fg=colour8]/ #[fg=colour1]#S #[fg=colour8]/ #{tmux_mode_indicator} #[fg=colour8].. ' # 󰣇
+# LEFT
+set -g status-left ' #[fg=colour1]#S #[fg=colour8]|#{tmux_mode_indicator} #[fg=colour8]── '
 set -g status-left-style 'fg=colour3'
 set -g status-left-length 30 # 10
 
 
-# right
+# RIGHT
 
-set -g status-right '#[fg=colour4]  #{cpu_percentage} #[fg=default]|#[fg=colour6]  #{ram_percentage} #[fg=default]|#[fg=colour3]  %d.%m.%Y #[fg=default]|#[fg=colour1]  %H:%M '
+#       #[fg=colour3]  %d.%m.%Y #[fg=default]|#[fg=colour1]  %H:%M 
+
+
+set -g status-right '#[fg=colour4]  #{cpu_percentage} #[fg=default]|#[fg=colour6]  #{ram_percentage} #[fg=default]'
+
 set -g status-right-style 'fg=colour8'
 set -g status-right-length 50
 
 
 
-# window list
+# WINDOW LIST
 
-# current
-setw -g window-status-current-style 'fg=colour0 bg=colour4 bold'
-#setw -g window-status-current-format ' #I #W #F '
-
-setw -g window-status-current-format ' #I #W '
-#setw -g window-status-current-format ' #I #W #{?window_zoomed_flag, 󰍉 ,}'
-# setw -g window-status-current-format ' #I #W #F '
+# CURRENT
+# setw -g window-status-current-format ' #I #W #F '  # #F is * if current win
+setw -g window-status-current-style 'fg=blue bg=default bold'
+setw -g window-status-current-format ' #I#[fg=colour7] #W #{?window_zoomed_flag,󰍉 ,}'
 
 
-# always
-setw -g window-status-style 'fg=colour1 bg=default dim'
+# ALWAYS
+setw -g window-status-style 'fg=colour3 bg=default dim'
+
 # setw -g window-status-format ' #I #[fg=colour7]#W #[fg=colour1]'
-setw -g window-status-format ' #I #[fg=colour7]#W '
+setw -g window-status-format ' #I #[fg=white]#W '
 
 
-setw -g window-status-last-style 'fg=colour3 bg=default bold dim'
-setw -g window-status-separator ' '
+setw -g window-status-last-style 'fg=colour1 bg=default bold dim'
+setw -g window-status-separator ' '  # /
 
 
-############################################################################################
+################################################################################
 
 
-setw -g window-status-bell-style 'fg=colour2 bg=colour1 bold'
+# BELL
+setw -g window-status-bell-style 'fg=black bg=orange bold'
 
-# messages
-set -g message-style 'fg=colour2 bg=colour0 bold'
+# MESSAGES
+set -g message-style 'fg=green bg=black bold'
 
 
-# add padding
-setw -g pane-border-status top # top, bottom, off
+# PADDING
+setw -g pane-border-status off # top, bottom, off
 #setw -g pane-border-format ' #{pane_current_command} ' # ─
 setw -g pane-border-format '─'
 
 
-# style pane borders
-setw -g pane-active-border-style 'fg=colour3 bg=default'
-setw -g pane-border-style 'fg=colour8 bg=default'
-setw -g pane-border-lines single # heavy, single, double, simple, number
+# STYLE PANE BORDERS
+setw -g pane-active-border-style 'fg=red bg=default'
+setw -g pane-border-style 'fg=color8 bg=default'
+setw -g pane-border-lines single # single, heavy, double, simple, number
 
 
-############################################################################################
+################################################################################
 
 
 
-# completions
+# COMPLETIONS
 set -g @plugin 'laktak/extrakto'
 
 #set -g @extrakto_split_size "15"
@@ -343,78 +350,55 @@ set -g @extrakto_fzf_layout reverse
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 set -g mouse on
 
-############################################################################################
 
-# session manager
+################################################################################
 
-set -g @plugin 'omerxx/tmux-sessionx'
-
-set -g @sessionx-bind 'o'
-#set -g @sessionx-x-path '~/Desktop'
-set -g @sessionx-custom-paths '~/Desktop,~/Desktop/Code'
-#set -g @sessionx-filter-current 'false'
-#set -g @sessionx-window-mode 'on'
-#set -g @sessionx-tree-mode 'on'
-#set -g @sessionx-preview-location 'right'
-#set -g @sessionx-preview-ratio '55%'
-#set -g @sessionx-preview-enabled 'false'
-#set -g @sessionx-window-height '90%'
-#set -g @sessionx-window-width '75%'
-
-
-############################################################################################
-
-# auto save enviroment and restore after reboot
-
+# Preserve tmux enviroments after reboots
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# Restore neovim sessions
+set -g @resurrect-strategy-nvim 'session'  # Looks for session.vim (mksession)
+
+# Restore pane contents
+set -g @resurrect-capture-pane-contents 'on'
+
+# Change default keybinds (prefix + C-s/C-r)
+# set -g @resurrect-save 'S'
+# set -g @resurrect-restore 'R'
 
 
-############################################################################################
+
+# Continous saving of tmux enviroment
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @continuum-restore 'on'
+# set -g @continuum-save-interval '15'  # in minutes, set to 0 for no saving
+
+
+################################################################################
 
 
 
 #set -g window-active-style bg=black
 #set -g window-style bg=white
 
-#set -g pane-active-border-style bg=default,fg=magenta
-#set -g pane-border-style fg=green
 
-
-#set -g default-terminal "tmux-256color"
-set -as terminal-features ",kitty*:RGB"
-
-
-#set -g pane-border-lines double
 
 
 set -g history-limit 50000
-set -g display-time 4000
-#set -g status-interval 5
-#set -g default-command "reattach-to-user-namespace -l $SHELL"
+set -g display-time 4000  # make tmux messages stay longer on the screen
+set -g status-interval 5  # update statusbar more often
+
+# set -g default-command "reattach-to-user-namespace -l $SHELL"
+
 set -g status-keys emacs
 set -g focus-events on
 
-#bind r source-file '~/.config/tmux/tmux.conf'
-
-
 
 # better terminal colors for vim
+# Upgrade $TERM
 set -ag terminal-overrides ",xterm-256color:RGB"
-#set -g default-terminal "screen-256color"
 set -g default-terminal "tmux-256color"
-
-
-#set -g @plugin 'catppuccin/tmux'
-#set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
-
-
-
-
-#set -g @plugin "janoamaral/tokyo-night-tmux"
-
-
-
+set -as terminal-features ",kitty*:RGB"
 
 
 
@@ -422,7 +406,42 @@ set-option -g @plugin 'b0o/tmux-autoreload'
 
 
 # seemless navigation with panes and vim splits
-#set -g @plugin 'christoomey/vim-tmux-navigator'
+
+
+set -g @plugin 'aserowy/tmux.nvim'
+
+# navigation
+set -g @tmux-nvim-navigation true
+set -g @tmux-nvim-navigation-cycle true
+set -g @tmux-nvim-navigation-keybinding-left 'M-h'
+set -g @tmux-nvim-navigation-keybinding-down 'M-j'
+set -g @tmux-nvim-navigation-keybinding-up 'M-k'
+set -g @tmux-nvim-navigation-keybinding-right 'M-l'
+
+# resize
+set -g @tmux-nvim-resize true
+set -g @tmux-nvim-resize-step-x 5
+set -g @tmux-nvim-resize-step-y 5
+set -g @tmux-nvim-resize-keybinding-left 'M-H'
+set -g @tmux-nvim-resize-keybinding-down 'M-J'
+set -g @tmux-nvim-resize-keybinding-up 'M-K'
+set -g @tmux-nvim-resize-keybinding-right 'M-L'
+
+
+
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+# if a new plugin is not working: use <leader>I to install it!!!!!!!!!!!!!!!!!!!
 
 
 
@@ -435,12 +454,5 @@ set-option -g @plugin 'b0o/tmux-autoreload'
 set -g @plugin 'tmux-plugins/tpm'
 #set -g @plugin 'tmux-plugins/tmux-sensible'
 
-# Other examples:
-# set -g @plugin 'github_username/plugin_name'
-# set -g @plugin 'github_username/plugin_name#branch'
-# set -g @plugin 'git@github.com:user/plugin'
-# set -g @plugin 'git@bitbucket.com:user/plugin'
-
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-# run '~/.tmux/plugins/tpm/tpm'
 run '~/.config/tmux/tpm/tpm'

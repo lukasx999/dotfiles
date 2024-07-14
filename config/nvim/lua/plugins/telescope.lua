@@ -118,11 +118,8 @@
                     find_files = {
                         -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
                         -- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-
                         -- wrap_results = false,
                         -- path_display = { "smart" }, -- shorten, hidden, tail, absolute, smart, truncate
-
-                        -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
                         -- dynamic_preview_title = false,
 
                         -- Also find directories, not just files

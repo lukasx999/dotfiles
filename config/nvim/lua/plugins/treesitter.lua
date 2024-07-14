@@ -170,7 +170,7 @@
 
 
         {
-            "windwp/nvim-ts-autotag",
+            "windwp/nvim-ts-autotag",  -- auto close html/jsx tags
             config = function()
                 require('nvim-ts-autotag').setup({
                     opts = {

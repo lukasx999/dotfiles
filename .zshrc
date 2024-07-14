@@ -119,8 +119,9 @@ export SUDO_EDITOR="nvim"
 
 
 
-export BAT_THEME="base16-256"
-#unset BAT_THEME
+# export BAT_THEME="base16-256"
+unset BAT_THEME  # Only way to get colored man pages
+alias man="batman"
 
 
 

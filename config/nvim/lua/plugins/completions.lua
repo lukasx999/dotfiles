@@ -112,7 +112,8 @@ return {
                 }),
                 formatting = {
                     format = lspkind.cmp_format({
-                        mode = "symbol_text",     -- text_symbol, symbol, text, symbol_text
+                        -- mode = "symbol_text",     -- text_symbol, symbol, text, symbol_text
+                        mode = "symbol",     -- text_symbol, symbol, text, symbol_text
                         preset = "default",       -- codicons, default
 
                         maxwidth = 25,  -- default: 50

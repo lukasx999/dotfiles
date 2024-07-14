@@ -21,7 +21,7 @@ fi
 if [[ $mode == "window" ]]; then
     read -p "Enter Query: " query
     tmux new-window "unset BAT_THEME; batman $selected"
-    tmux rename-window "man ($selected: $query)"
+    tmux rename-window "man $selected"
 
     if [[ -n $query ]]; then
         tmux send-keys "/$query"
