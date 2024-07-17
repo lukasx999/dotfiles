@@ -123,6 +123,7 @@ PYTHON:
 - gimp
 - anki (aur)
 - openrgb
+  - i2c-tools
 - visual-studio-code-bin (aur)
 
 - lxappearance
