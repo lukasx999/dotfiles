@@ -122,6 +122,7 @@ PYTHON:
 - steam
 - gimp
 - anki (aur)
+- openrgb
 - visual-studio-code-bin (aur)
 
 - lxappearance
