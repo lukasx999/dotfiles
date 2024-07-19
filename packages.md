@@ -126,6 +126,7 @@ PYTHON:
   - i2c-tools
 - visual-studio-code-bin (aur)
 
+- rpi-imager
 - lxappearance
 
 # Themes
