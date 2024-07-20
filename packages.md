@@ -8,6 +8,7 @@ tldr (better man entries)
 bc (calculator lang)
 imagemagick (image manipulation)
 locate (GNU locate for finding files)
+nmap (network scanner)
 
 
 # Extra Shell tools
