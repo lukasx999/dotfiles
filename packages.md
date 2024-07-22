@@ -115,7 +115,6 @@ PYTHON:
 
 - libreoffice-fresh
 - anki (aur) (flashcards)
-- gromit-mpx (aur) (screen annotation tool)
 - boomer-git (aur) (x11 screen zoom)
 - emacs
 - nautilus
@@ -149,3 +148,10 @@ ttf-iosevka-nerd
 ttf-roboto-mono-nerd
 ttf-inconsolata-nerd
 noto-fonts
+
+
+
+# Not using anymore
+
+
+- gromit-mpx (aur) (screen annotation tool)

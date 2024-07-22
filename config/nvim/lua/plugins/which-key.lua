@@ -13,6 +13,10 @@ return {
 
         wk.setup({
 
+            icons = {
+                rules = false  -- Disable icons
+            },
+            preset = "helix",  -- helix, classic, modern
             mode = "n", -- NORMAL mode
             -- prefix: use "<leader>f" for example for mapping everything related to finding files
             -- the prefix is prepended to every mapping part of `mappings`
@@ -23,36 +27,25 @@ return {
             nowait = false, -- use `nowait` when creating keymaps
             expr = false, -- use `expr` when creating keymaps
 
-            triggers_blacklist = {
-                -- list of mode / prefixes that should never be hooked by WhichKey
-                -- this is mostly relevant for keymaps that start with a native binding
-                i = { "j", "k" },
-                v = { "j", "k" },
-                n = { "d", "y" },
+
+
+            win = {
+                no_overlap = true,  -- don't allow the popup to overlap with the cursor
+                -- width = 1,
+                -- height = { min = 4, max = 25 },
+                -- col = 0,
+                -- row = math.huge,
+                -- border = "none",
+                padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+                title = true,
+                title_pos = "center",
+                zindex = 1000,
+
+                -- value between 0-100 0 for fully opaque and 100 for fully transparent
+                wo = { winblend = 10 },
             },
 
 
-            triggers_nowait = {
-                -- marks
-                "`",
-                "'",
-                "g`",
-                "g'",
-                -- registers
-                '"',
-                "<c-r>",
-                -- spelling
-                "z=",
-            },
-
-            window = {
-                border = "single", -- none, single, double, shadow
-                position = "bottom", -- bottom, top
-                margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
-                padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-                winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-                zindex = 1000, -- positive value to position WhichKey above other floating windows.
-            },
 
 
 
@@ -60,28 +53,16 @@ return {
         })
 
 
-
-
         -- Keybind Groups
-        wk.register({
-            f = { name = "File" },
-            t = { name = "Toggle" },
-            l = { name = "LSP" },
-            m = { name = "Move in context" },
-            w = { name = "Windows" },
-            b = { name = "Buffers" },
-
-        }, { prefix = "<leader>" })
-
-
-        wk.register({
-            A = { name = "All" },
-
-        }, { prefix = "Z" })
-
-
-
-
+        wk.add({
+            { "<leader>f", group = "File" },
+            { "<leader>t", group = "Toggle" },
+            { "<leader>l", group = "LSP" },
+            { "<leader>m", group = "Move in context" },
+            { "<leader>w", group = "Windows" },
+            { "<leader>b", group = "Buffers" },
+            { "ZA", group = "All" }
+        })
 
 
 

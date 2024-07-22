@@ -24,6 +24,10 @@ return {
 
             "ray-x/cmp-treesitter",
 
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            "hrsh7th/cmp-nvim-lsp-document-symbol",
+
+            -- "hrsh7th/cmp-emoji",
             -- "hrsh7th/cmp-calc",
             -- "SergioRibera/cmp-dotenv",
             -- "dmitmel/cmp-cmdline-history",
@@ -107,6 +111,8 @@ return {
                     { name = "luasnip" },
                     { name = "buffer" },
                     { name = "treesitter" },
+
+                    { name = "nvim_lsp_signature_help" },
                     -- { name = "calc" },
                     -- { name = "dotenv" },
                 }),
@@ -146,9 +152,10 @@ return {
             -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = {
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp_document_symbol' },
                     { name = "buffer" },
-                },
+                }),
             })
 
 
@@ -168,6 +175,17 @@ return {
                 }),
                 matching = { disallow_symbol_nonprefix_matching = false },
             })
+
+
+
+
+            -- Gleiches Diagnosefenster auf cmp.config.window.bordered() setzen
+            -- vim.cmd(':set winhighlight=' .. cmp.config.window.bordered().winhighlight)
+
+
+
+
+
         end,
     },
 

@@ -55,7 +55,7 @@ vim.opt.smartindent = true
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 250 --write to disk
-vim.opt.timeoutlen = 300 -- which-key popup
+vim.opt.timeoutlen = 600 -- which-key popup -- old: 300
 
 vim.g.have_nerd_font = true
 vim.opt.mouse = 'a'
@@ -73,7 +73,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-vim.opt.whichwrap:append "<>[]hl"
+-- vim.opt.whichwrap:append "<>[]hl"
 
 
 
@@ -144,10 +144,9 @@ end, {expr=true, noremap=true})
 -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 
-
+-- vim.wo.foldmethod = "expr"
+-- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- FOLD SETTINGS
 
@@ -155,14 +154,12 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) ]]
 
 -- w/ number of lines
-vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+-- vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 
-vim.opt.fillchars = "fold: "
--- or
--- vim.opt.fillchars = { fold = " " }
+-- vim.opt.fillchars = "fold: "
 
-vim.wo.foldnestmax = 3
-vim.wo.foldminlines = 1
+-- vim.wo.foldnestmax = 3
+-- vim.wo.foldminlines = 1
 
 
 

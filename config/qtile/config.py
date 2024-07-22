@@ -27,11 +27,11 @@ screenshot = f"flameshot gui --clipboard --path /home/{getuser()}/Pictures/Scree
 zoom = "boomer"
 lock = "betterlockscreen --lock"
 
-draw_toggle = "gromit-mpx --toggle"
-draw_clear = "gromit-mpx --clear"
-draw_visibility = "gromit-mpx --visibility"
-draw_undo = "gromit-mpx --undo"
-draw_redo = "gromit-mpx --redo"
+# draw_toggle = "gromit-mpx --toggle"
+# draw_clear = "gromit-mpx --clear"
+# draw_visibility = "gromit-mpx --visibility"
+# draw_undo = "gromit-mpx --undo"
+# draw_redo = "gromit-mpx --redo"
 
 
 
@@ -147,13 +147,13 @@ keys = [
 
     Key([mod, "shift", "control"], "l", lazy.spawn(lock), desc="lock the screen"),
 
-    KeyChord([mod], "g", [
-        Key([], "t", lazy.spawn(draw_toggle), desc="Toggle drawing mode"),
-        Key([], "c", lazy.spawn(draw_clear), desc="Clear screen of drawings"),
-        Key([], "v", lazy.spawn(draw_visibility), desc="Toggle drawing visibility"),
-        Key([], "u", lazy.spawn(draw_undo), desc="undo"),
-        Key([], "r", lazy.spawn(draw_redo), desc="redo"),
-    ]),
+    # KeyChord([mod], "g", [
+    #     Key([], "t", lazy.spawn(draw_toggle), desc="Toggle drawing mode"),
+    #     Key([], "c", lazy.spawn(draw_clear), desc="Clear screen of drawings"),
+    #     Key([], "v", lazy.spawn(draw_visibility), desc="Toggle drawing visibility"),
+    #     Key([], "u", lazy.spawn(draw_undo), desc="undo"),
+    #     Key([], "r", lazy.spawn(draw_redo), desc="redo"),
+    # ]),
 
 
 
@@ -199,7 +199,8 @@ keys = [
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 # group_labels = ["󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃", "󰏃",]
-group_labels = ["" for i in range(9)]  #  
+# group_labels = [i for i in range(1, 10)]  #  
+group_labels= ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 group_layouts = ["columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns", "columns"]
 
 
@@ -210,15 +211,6 @@ for i in range(len(group_names)):
             layout=group_layouts[i].lower(),
             label=group_labels[i],
         ))
-
-
-
-
-
-
-
-
-
 
 
 
@@ -300,7 +292,7 @@ layouts = [
         border_focus="#9aa5ce",
         border_normal="#1a1b26",
         border_width=2,
-        margin=0,  # Gaps
+        margin=5,  # Gaps
         margin_on_single=0,
         grow_amount=10,
         border_on_single=False,
@@ -331,8 +323,8 @@ layouts = [
 widget_defaults = dict(
     # font="JetBrains Mono Nerd Font",
     font="Roboto",
-    # background="#000000",
-    background="#1a1b26",
+    background="#000000",
+    # background="#1a1b26",
     foreground="#ffffff",
     # foreground="#c0caf5",
     fontsize=16,  # 12
@@ -394,6 +386,7 @@ screens = [
                 widget.GroupBox(
                     # active = '#ffffff',  # Active Group Font
                     active = '#c0caf5',
+                    # foreground = '#ffffff',
                     # background = '#000000',
                     borderwidth = 3,
                     center_aligned = True,
@@ -401,17 +394,19 @@ screens = [
                     # fmt = '<i>{}</i>',
                     fmt = '{}',
                     fontshadow = None,
-                    fontsize = 30,
-                    # foreground = '#ffffff',
+                    fontsize = 23,  # 30
                     hide_unused = False,
                     margin = 3,
-                    markup = True,
+                    padding = 3,
                     rounded = True,
+                    # radius = 1,
+                    markup = True,
                     urgent_alert_method = 'text',
                     urgent_text = '#f7768e',
-                    highlight_method = 'text',  # border, block, text, line
+                    highlight_method = 'block',  # border, block, text, line
                     highlight_color = ['#000000', '#414868'],  # Only on line highlighting
-                    this_current_screen_border = '#7aa2f7',
+                    this_current_screen_border = '#c0caf5',  # #7aa2f7
+                    block_highlight_text_color = '#000000',  # highlight color when using block highlighting
                 ),
 
 
@@ -437,11 +432,15 @@ screens = [
                 # Systray
                 widget.Systray(),
 
+
+                widget.TextBox(" "),
+
+
                 # Date
-                widget.Clock(format = "%d.%m.%Y  "),
+                widget.Clock(format = " %d.%m.%Y"),
 
                 # Time
-                widget.Clock(format = '%H:%M  '),
+                widget.Clock(format = ' %H:%M'),
 
             ],
             32,  # 24

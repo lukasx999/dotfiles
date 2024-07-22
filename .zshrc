@@ -130,7 +130,8 @@ alias man="batman"
 # source /usr/share/fzf/key-bindings.zsh
 
 
-
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 
 

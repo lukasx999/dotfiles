@@ -6,6 +6,55 @@
 
 
 
+-- Define a Lua function to create the scratch buffer, execute the shell command, and set the keymap
+function create_scratch_buffer(command)
+    -- Create a new scratch buffer
+    -- vim.cmd"new"
+    vim.cmd"sp new"  -- vsp for vert split
+    vim.cmd"setlocal buftype=nofile bufhidden=hide noswapfile"
+
+    -- Execute the shell command and capture its output in the buffer
+    -- vim.cmd("r !" .. command)
+    vim.cmd("%!" .. command)
+
+    -- Get the buffer number of the current (scratch) buffer
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    -- Set the 'q' key to exit the buffer in the scratch buffer
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "q", ":q!<CR>", { noremap = true, silent = true })
+end
+
+-- Set keymap for scratch buffer
+vim.keymap.set("n", "<C-z>", function()
+    local input = vim.fn.input("Command: ")
+    if input == "" then return end
+    create_scratch_buffer(input)
+end)
+
+-- Create a user command 'R' to execute your Lua function, passing along any arguments
+vim.api.nvim_create_user_command(
+  "R",
+  "lua create_scratch_buffer(<q-args>)",
+  { bang = false, nargs = "*", complete = "shellcmd" }
+)
+
+
+
+
+--Open Buildin terminal vertical mode
+vim.api.nvim_create_user_command("VT", 'vsplit | terminal bash -c "cd %:p:h;zsh"', { bang = false, nargs = "*" })
+
+--Open Buildin terminal
+vim.api.nvim_create_user_command(
+  "T",
+  'split | resize 15 | terminal bash -c "cd %:p:h;zsh"',
+  { bang = true, nargs = "*" }
+)
+
+
+
+
+
 
 
 -- Auto f-strings in Python
@@ -147,36 +196,34 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 
 
-vim.api.nvim_create_augroup("alpha", { clear = true })
-
-vim.g.alpha_launched = false
-
-vim.api.nvim_create_autocmd(
-    "BufNew",
-    {
-        pattern = "",
-        group = "alpha",
-        callback = function()
-
-            if true then return end
-
-
-            if vim.g.alpha_launched then return end
-
-
-            local filetype = vim.bo.filetype
-            print(filetype)
-
-            if filetype == "alpha" then
-                vim.g.alpha_launched = true
-            end
-
-
-        end,
-    }
-)
-
-
+-- vim.api.nvim_create_augroup("alpha", { clear = true })
+--
+-- vim.g.alpha_launched = false
+--
+-- vim.api.nvim_create_autocmd(
+--     "BufNew",
+--     {
+--         pattern = "",
+--         group = "alpha",
+--         callback = function()
+--
+--             if true then return end
+--
+--
+--             if vim.g.alpha_launched then return end
+--
+--
+--             local filetype = vim.bo.filetype
+--             print(filetype)
+--
+--             if filetype == "alpha" then
+--                 vim.g.alpha_launched = true
+--             end
+--
+--
+--         end,
+--     }
+-- )
 
 
 
@@ -184,55 +231,103 @@ vim.api.nvim_create_autocmd(
 
 
 
-vim.api.nvim_create_augroup("alpha_on_empty", { clear = true })
-
-vim.api.nvim_create_autocmd(
-    "BufDelete",
-    {
-        pattern = "",
-        group = "alpha_on_empty",
-        callback = function()
-
-            if true then return end
 
 
-            -- Only run this if alpha has been initialized
-            if not vim.g.alpha_launched then return end
+-- vim.api.nvim_create_augroup("alpha_on_empty", { clear = true })
+--
+-- vim.api.nvim_create_autocmd(
+--     "BufDelete",
+--     {
+--         pattern = "",
+--         group = "alpha_on_empty",
+--         callback = function()
+--
+--             if true then return end
+--
+--
+--             -- Only run this if alpha has been initialized
+--             if not vim.g.alpha_launched then return end
+--
+--
+--             local buffers = vim.api.nvim_list_bufs()
+--             local actual = {}
+--
+--             -- Filter out nofile buffers created by plugins
+--             for i=1, #buffers, 1 do
+--                 local current = buffers[i]
+--                 local buftype = vim.bo[current].buftype
+--
+--                 if buftype ~= "nofile" then table.insert(actual, current) end
+--             end
+--
+--             -- Return if theres more than 1 buffer
+--             if #actual ~= 1 then return end
+--
+--
+--
+--             -- Get name of last buffer
+--             local last_buf = actual[1]
+--             local bufname = vim.api.nvim_buf_get_name(last_buf)
+--
+--
+--             -- Alpha deletes nvim vanilla splashscreen at startup
+--
+--
+--             -- Open Alpha if name is empty
+--             if bufname == "" then
+--                 print"last buffer!"
+--                 vim.cmd"Alpha"
+--             end
+--
+--         end,
+--     }
+-- )
 
 
-            local buffers = vim.api.nvim_list_bufs()
-            local actual = {}
 
-            -- Filter out nofile buffers created by plugins
-            for i=1, #buffers, 1 do
-                local current = buffers[i]
-                local buftype = vim.bo[current].buftype
-
-                if buftype ~= "nofile" then table.insert(actual, current) end
-            end
-
-            -- Return if theres more than 1 buffer
-            if #actual ~= 1 then return end
-
-
-
-            -- Get name of last buffer
-            local last_buf = actual[1]
-            local bufname = vim.api.nvim_buf_get_name(last_buf)
-
-
-            -- Alpha deletes nvim vanilla splashscreen at startup
-
-
-            -- Open Alpha if name is empty
-            if bufname == "" then
-                print"last buffer!"
-                vim.cmd"Alpha"
-            end
-
-        end,
-    }
-)
+-- TODO: THIS!
+-- vim.api.nvim_create_augroup("alpha_on_empty", { clear = true })
+-- vim.api.nvim_create_autocmd(
+--     "BufAdd",
+--     {
+--         pattern = "*",
+--         group = "alpha_on_empty",
+--         callback = function(args)
+--
+--             local buffers = vim.api.nvim_list_bufs()
+--             local actual = {}
+--
+--
+--
+--             -- Filter out nofile buffers created by plugins
+--             for i=1, #buffers, 1 do
+--                 local current = buffers[i]
+--                 local buftype = vim.bo[current].buftype
+--
+--                 if buftype ~= "nofile" then table.insert(actual, current) end
+--             end
+--
+--
+--             -- Return if theres more than 1 buffer
+--             if #actual ~= 1 then return end
+--
+--             -- Get name of last buffer
+--             local last_buf = actual[1]
+--             local bufname = vim.api.nvim_buf_get_name(last_buf)
+--             local buftype = vim.bo[last_buf].buftype
+--             local filetype = vim.bo[last_buf].filetype
+--
+--             if bufname ~= "" then return end
+--             if buftype ~= "" then return end
+--             if filetype ~= "" then return end
+--
+--
+--             vim.cmd("Alpha")
+--
+--
+--         end
+--     }
+-- )
 
 
 
