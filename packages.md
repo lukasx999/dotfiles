@@ -114,6 +114,7 @@ PYTHON:
 # Apps
 
 - libreoffice-fresh
+- kicad (electronics schematics)
 - anki (aur) (flashcards)
 - boomer-git (aur) (x11 screen zoom)
 - emacs
