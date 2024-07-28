@@ -78,6 +78,9 @@ strace (show syscalls of binary)
 nasm
 gdb
 clang
+dart
+node
+flutter (aur)
 python-devtools
 mypy (python static type checker)
 cython
@@ -87,6 +90,7 @@ raylib
 python-sqlalchemy
 
 sbcl (common lisp)
+cffi (dynamic library loading)
 
 
 
