@@ -14,7 +14,29 @@ return {
 
 
 
+        -- Run a shell command on the current selected file
+        local function runcmd()
 
+            local oil = require("oil")
+
+            local bufnr = vim.api.nvim_get_current_buf()
+            local dir = oil.get_current_dir(bufnr)
+
+
+            local input = vim.fn.input("Command: ")
+            if input == "" then return end
+
+            local current = oil.get_cursor_entry()
+
+            local cmd = string.format("%s %s%s", input, dir, current.name)
+            create_scratch_buffer(cmd)
+
+            -- print(current.parsed_name)
+            -- for key, value in pairs(current) do print(key) end
+
+        end
+
+        vim.keymap.set("n", "ö", runcmd)
 
         -- for colored permissions
         local permission_hlgroups = {
@@ -145,7 +167,7 @@ return {
                 ["<C-c>"] = "actions.close",
                 ["<C-l>"] = "actions.refresh",
                 ["-"] = "actions.parent",
-                ["_"] = "actions.open_cwd",
+                -- ["_"] = "actions.open_cwd",
                 ["`"] = "actions.cd",
                 ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
                 ["gs"] = "actions.change_sort",
@@ -172,7 +194,7 @@ return {
             },
 
             -- Set to false to disable all of the above keymaps
-            use_default_keymaps = true,
+            use_default_keymaps = false,
 
             view_options = {
                 -- Show files and directories that start with "."

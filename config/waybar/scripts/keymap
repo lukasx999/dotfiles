@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+keymap=$(setxkbmap -query | awk 'NR==3 {print $2}')
+
+echo  $keymap

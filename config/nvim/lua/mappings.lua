@@ -29,6 +29,11 @@ map("n", "k", "gk", { silent = true })
 vim.api.nvim_set_keymap("c", "<c-h>",  [[ wildmenumode() ? "c-h>" : "<C-w>"  ]], { noremap = true, expr = true })  -- for tmux
 vim.api.nvim_set_keymap("c", "<c-BS>", [[ wildmenumode() ? "c-BS>" : "<C-w>" ]], { noremap = true, expr = true })  -- for non-tmux
 
+vim.api.nvim_set_keymap("c", "<M-b>", [[ wildmenumode() ? "M-b>" : "<C-Left>" ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<M-f>", [[ wildmenumode() ? "M-f>" : "<C-Right>" ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<C-n>", [[ wildmenumode() ? "M-b>" : "<C-Down>" ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<C-p>", [[ wildmenumode() ? "M-f>" : "<C-Up>" ]], { noremap = true, expr = true })
+
 
 
 -- Shell prompt

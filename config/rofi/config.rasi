@@ -1,8 +1,6 @@
 configuration {
 //modes: "drun,run,window,ssh,combi,keys,filebrowser,recursivebrowser";
-//modes: "drun,run,window";
 modes: "drun,run";
-//font: "Font Awesome, Roboto 14";
 font: "Font Awesome, Roboto 16";
 icon-theme: "Papirus-Dark";
 show-icons: true;
@@ -12,7 +10,7 @@ cycle: true;
 sidebar-mode: true;
 hide-scrollbar: true;
 
-hover-select: true;
+hover-select: false;  // disable mouse hover
 //auto-select: true;
 //scroll-method: 1;
 

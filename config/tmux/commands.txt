@@ -1,2 +1,2 @@
-gcc main.c -o output && ./output
-/home/lukas/Code/C/Projects/myATOI
+make
+/home/lukas/Code/C/DataStructures

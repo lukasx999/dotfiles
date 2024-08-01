@@ -35,6 +35,11 @@ betterlockscreen (aur)
 
 # Desktop
 
+- hyprland
+  - cpio
+  - meson
+  - cmake
+- hyprlock
 qtile
 rofi
 picom
@@ -80,6 +85,7 @@ gdb
 clang
 dart
 node
+nvm (aur) (node version manager)
 flutter (aur)
 python-devtools
 mypy (python static type checker)

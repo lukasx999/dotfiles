@@ -220,11 +220,17 @@
 ;; Setting RETURN key in org-mode to follow links
   (setq org-return-follows-link  t)
 
-(use-package flycheck
+(use-package evil-commentary
   :ensure t
   :defer t
   :diminish
-  :init (global-flycheck-mode))
+  :init (evil-commentary-mode))
+
+;; (use-package flycheck
+;;   :ensure t
+;;   :defer t
+;;   :diminish
+;;   :init (global-flycheck-mode))
 
 ;;(set-face-attribute 'default nil
   ;;:font "JetBrains Mono"
@@ -489,9 +495,20 @@
    ("C-x B" . ivy-switch-buffer-other-window))
   :diminish
   :custom
-  (setq ivy-use-virtual-buffers t)
+  (setq ivy-use-virtual-buffers t)     
   (setq ivy-count-format "(%d/%d) ")
   (setq enable-recursive-minibuffers t)
+
+  (global-unset-key (kbd "C-j"))
+  (global-unset-key (kbd "C-k"))
+  ;;(define-key minibuffer-local-map (kbd "C-j") 'ivy-next-line)
+  ;;(define-key minibuffer-local-map (kbd "C-k") 'ivy-previous-line)
+
+  (add-hook 'minibuffer-setup-hook
+            (lambda ()
+              (local-set-key (kbd "C-j") 'ivy-next-line)))
+
+
   :config
   (ivy-mode))
 
@@ -505,8 +522,8 @@
   :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
   :custom
   (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
@@ -517,15 +534,15 @@
 
 (global-set-key [escape] 'keyboard-escape-quit)
 
-;;(use-package doom-modeline
-  ;;:ensure t
-  ;;:init (doom-modeline-mode 1)
-  ;;:config
-  ;;(column-number-mode 1)
-  ;;(setq doom-modeline-height 35      ;; sets modeline height
-        ;;doom-modeline-bar-width 5    ;; sets right bar width
-        ;;doom-modeline-persp-name t   ;; adds perspective name to modeline
-        ;;doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (column-number-mode 1)
+  (setq doom-modeline-height 35      ;; sets modeline height
+        doom-modeline-bar-width 5    ;; sets right bar width
+        doom-modeline-persp-name t   ;; adds perspective name to modeline
+        doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
 
 (setq org-indent-mode t)
 
@@ -627,12 +644,19 @@
 ;;(load-theme 'catppuccin t)
 ;;(load-theme 'doom-gruvbox t)
 
-(load-theme 'monokai-pro t)
+;;(load-theme 'monokai-pro t)
+  (load-theme 'kanagawa t)
 
 (defalias 'load-theme 'counsel-load-theme)
 )
 
 (use-package monokai-pro-theme
+  :ensure t
+  :config
+)
+
+
+(use-package kanagawa-theme
   :ensure t
   :config
 )

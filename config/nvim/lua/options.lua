@@ -10,7 +10,7 @@ vim.fn for vimscript functions
 
 
 -- vim.opt.guicursor = { 'a:ver25' }  -- cursor is beam in all modes
--- vim.opt.guicursor = "" -- cursor is block in all modes
+vim.opt.guicursor = "" -- cursor is block in all modes
 
 
 
@@ -145,8 +145,12 @@ end, {expr=true, noremap=true})
 -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 
--- vim.wo.foldmethod = "expr"
--- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- Dont collapse folds on start
+vim.cmd"set nofoldenable"
+vim.cmd"set foldlevelstart=99"
 
 -- FOLD SETTINGS
 
@@ -155,13 +159,10 @@ end, {expr=true, noremap=true})
 
 -- w/ number of lines
 -- vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
-
--- vim.opt.fillchars = "fold: "
+-- vim.opt.fillchars = "fold: "  -- Remove dotted chars
 
 -- vim.wo.foldnestmax = 3
 -- vim.wo.foldminlines = 1
-
-
 
 
 

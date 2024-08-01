@@ -2,6 +2,10 @@
 # colorscript random
 
 
+# Syncwd.nvim
+source ~/Scripts/syncwd/changecwd.sh
+
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
@@ -226,7 +230,7 @@ zstyle ':completion:*' group-name ''
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
 NEWLINE=$'\n'
-PROMPT="${NEWLINE}%B%{$fg[magenta]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
+PROMPT="${NEWLINE}%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
 
 # No Newline
 # PROMPT="%B%{$fg[magenta]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
@@ -438,6 +442,5 @@ eval "$(direnv hook zsh)"
 # eval "$(starship init zsh)"
 
 
-
-
-
+# NVM
+# source /usr/share/nvm/init-nvm.sh

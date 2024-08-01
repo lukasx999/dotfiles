@@ -33,6 +33,7 @@
   - [[#search][Search]]
   - [[#key-chords][Key Chords]]
   - [[#setup][Setup]]
+  - [[#comments][Comments]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
   - [[#setting-the-font-face][Setting the Font Face]]
@@ -64,9 +65,9 @@
 - [[#sane-defaults][SANE DEFAULTS]]
 - [[#themes][THEMES]]
   - [[#doom-themes][Doom Themes]]
-  - [[#monokai-pro-theme][Monokai Pro Theme]]
+  - [[#more-themes][More themes]]
   - [[#catppuccin-theme][Catppuccin Theme]]
-  - [[#more-themes][More Themes]]
+  - [[#more-themes-1][More Themes]]
 
 * General Options
 
@@ -141,10 +142,6 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
   (nerd-icons-font-family "JetBrainsMono Nerd Font")
   )
 #+end_src
-
-
-
-
 
 
 
@@ -389,15 +386,33 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 
 
 
+** Comments
+
+#+begin_src emacs-lisp
+
+
+(use-package evil-commentary
+  :ensure t
+  :defer t
+  :diminish
+  :init (evil-commentary-mode))
+
+
+
+#+end_src
+
+
+
+
 * FLYCHECK
 Install =luacheck= from your Linux distro's repositories for flycheck to work correctly with lua files.  Install =python-pylint= for flycheck to work with python files.  Haskell works with flycheck as long as =haskell-ghc= or =haskell-stack-ghc= is installed.  For more information on language support for flycheck, [[https://www.flycheck.org/en/latest/languages.html][read this]].
 
 #+begin_src emacs-lisp
-(use-package flycheck
-  :ensure t
-  :defer t
-  :diminish
-  :init (global-flycheck-mode))
+;; (use-package flycheck
+;;   :ensure t
+;;   :defer t
+;;   :diminish
+;;   :init (global-flycheck-mode))
 
 #+end_src
 
@@ -746,9 +761,20 @@ TODO lines are barely visible
    ("C-x B" . ivy-switch-buffer-other-window))
   :diminish
   :custom
-  (setq ivy-use-virtual-buffers t)
+  (setq ivy-use-virtual-buffers t)     
   (setq ivy-count-format "(%d/%d) ")
   (setq enable-recursive-minibuffers t)
+
+  (global-unset-key (kbd "C-j"))
+  (global-unset-key (kbd "C-k"))
+  ;;(define-key minibuffer-local-map (kbd "C-j") 'ivy-next-line)
+  ;;(define-key minibuffer-local-map (kbd "C-k") 'ivy-previous-line)
+
+  (add-hook 'minibuffer-setup-hook
+            (lambda ()
+              (local-set-key (kbd "C-j") 'ivy-next-line)))
+
+
   :config
   (ivy-mode))
 
@@ -762,8 +788,8 @@ TODO lines are barely visible
   :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
   :custom
   (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
@@ -799,15 +825,15 @@ By default, Emacs requires you to hit ESC three times to escape quit the minibuf
 The modeline is the bottom status bar that appears in Emacs windows.  While you can create your own custom modeline, why go to the trouble when Doom Emacs already has a nice modeline package available.  For more information on what is available to configure in the Doom modeline, check out: [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
 
 #+begin_src emacs-lisp
-;;(use-package doom-modeline
-  ;;:ensure t
-  ;;:init (doom-modeline-mode 1)
-  ;;:config
-  ;;(column-number-mode 1)
-  ;;(setq doom-modeline-height 35      ;; sets modeline height
-        ;;doom-modeline-bar-width 5    ;; sets right bar width
-        ;;doom-modeline-persp-name t   ;; adds perspective name to modeline
-        ;;doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (column-number-mode 1)
+  (setq doom-modeline-height 35      ;; sets modeline height
+        doom-modeline-bar-width 5    ;; sets right bar width
+        doom-modeline-persp-name t   ;; adds perspective name to modeline
+        doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
 
 #+end_src
 
@@ -1017,20 +1043,28 @@ The following settings are simple modes that are enabled (or disabled) so that E
 ;;(load-theme 'catppuccin t)
 ;;(load-theme 'doom-gruvbox t)
 
-(load-theme 'monokai-pro t)
+;;(load-theme 'monokai-pro t)
+  (load-theme 'kanagawa t)
 
 (defalias 'load-theme 'counsel-load-theme)
 )
 #+end_src
 
 
-** Monokai Pro Theme
+** More themes
 #+begin_src emacs-lisp
 
 (use-package monokai-pro-theme
   :ensure t
   :config
 )
+
+
+(use-package kanagawa-theme
+  :ensure t
+  :config
+)
+
 
 #+end_src
 

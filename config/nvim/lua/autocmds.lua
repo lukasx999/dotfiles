@@ -57,6 +57,7 @@ vim.api.nvim_create_user_command(
 
 
 
+
 -- Auto f-strings in Python
 -- Treesitter automatic Python format strings
 -- Automatically puts an `f` before your string if you type `{`
@@ -165,7 +166,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 
         if ( vim.bo.filetype == "oil" ) then
-            vim.keymap.set("n", "q", "<cmd>bd<cr>", { buffer = event.buf, silent = true })
+            -- vim.keymap.set("n", "q", "<cmd>bd<cr>", { buffer = event.buf, silent = true })
+            vim.keymap.set("n", "q", function() require("oil").close() end, { buffer = event.buf, silent = true })
         end
 
 

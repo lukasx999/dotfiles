@@ -95,7 +95,7 @@
                                 ["<leader>md"] = { query = "@conditional.outer", desc = "next conditional" },
                                 ["<leader>ml"] = { query = "@loop.outer", desc = "next loop" },
 
-                                ["<leader>mt"] = { query = "@comment.outer", desc = "next comment" },
+                                ["<leader>mm"] = { query = "@comment.outer", desc = "next comment" },
                             },
                             goto_previous_start = {
                                 ["<leader>mF"] = { query = "@function.outer", desc = "previous function" },
@@ -103,7 +103,7 @@
                                 ["<leader>mD"] = { query = "@conditional.outer", desc = "previous conditional" },
                                 ["<leader>mL"] = { query = "@loop.outer", desc = "previous loop" },
 
-                                ["<leader>mT"] = { query = "@comment.outer", desc = "previous comment" },
+                                ["<leader>mM"] = { query = "@comment.outer", desc = "previous comment" },
                             },
                         },
 
@@ -127,8 +127,8 @@
                                 ["al"] = { query = "@loop.outer", desc = "outer loop" },
                                 ["il"] = { query = "@loop.inner", desc = "inner loop" },
 
-                                ["at"] = { query = "@comment.outer", desc = "outer comment" },
-                                ["it"] = { query = "@comment.inner", desc = "inner comment" },
+                                ["am"] = { query = "@comment.outer", desc = "outer comment" },
+                                ["im"] = { query = "@comment.inner", desc = "inner comment" },
 
 
                                 -- You can also use captures from other query groups like `locals.scm`

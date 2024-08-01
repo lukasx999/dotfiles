@@ -6,8 +6,8 @@
 # import = ["~/.config/alacritty/themes/github_dark.toml"]
 
 # import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
-# import = ["~/.config/alacritty/themes/carbonfox.toml"]
-import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
+import = ["~/.config/alacritty/themes/carbonfox.toml"]
+# import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
 # import = ["~/.config/alacritty/themes/one_dark.toml"]
 
 
@@ -26,10 +26,10 @@ program = "/usr/bin/zsh"
 [window]
 # dimensions = { columns = 80, lines = 24 }
 #position = { x = 865, y = 420 }
-padding = { x = 15, y = 15 }
-dynamic_padding = true
-opacity = 0.90
-# opacity = 1
+# padding = { x = 15, y = 15 }
+# dynamic_padding = true
+opacity = 0.90  # 1
+# opacity = 1  # 1
 decorations = "None"
 title = "Alacritty"
 dynamic_title = true
