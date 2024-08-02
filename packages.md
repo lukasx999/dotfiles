@@ -35,11 +35,18 @@ betterlockscreen (aur)
 
 # Desktop
 
+- pyprland (aur)
+- blueman
+- rofi-wayland
+- swww
+- waypaper (aur)
 - hyprland
   - cpio
   - meson
   - cmake
+  - hyprwayland-scanner
 - hyprlock
+
 qtile
 rofi
 picom
@@ -78,6 +85,7 @@ rust
 python-pip
 
 # Programming
+igcc (aur) (interactive gcc)
 docker
 strace (show syscalls of binary)
 nasm
