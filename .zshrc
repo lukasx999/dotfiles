@@ -14,7 +14,7 @@ SAVEHIST=$HISTSIZE
 
 
 # Doom Emacs scripts
-export PATH=$HOME/.config/emacs/bin:$PATH
+# export PATH=$HOME/.config/emacs/bin:$PATH
 
 
 # Set Qt6 theme
@@ -229,8 +229,14 @@ zstyle ':completion:*' group-name ''
 # PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
+
+
 NEWLINE=$'\n'
-PROMPT="${NEWLINE}%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
+# PROMPT="${NEWLINE}%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
+PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
+
+
+
 
 # No Newline
 # PROMPT="%B%{$fg[magenta]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
@@ -263,7 +269,7 @@ alias quickfind="source $HOME/Scripts/quickfind/quickfind.sh"
 
 #alias cat='bat -pp'
 alias neovide='neovide --no-fork 2>/dev/null'
-alias emacs='emacs -nw'  # Open emacs in terminal session
+alias emacstui='emacs -nw'  # Open emacs in terminal session
 
 alias vim='nvim'
 alias vi='command vim'

@@ -85,6 +85,7 @@ rust
 python-pip
 
 # Programming
+zig
 igcc (aur) (interactive gcc)
 docker
 strace (show syscalls of binary)

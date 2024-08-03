@@ -14,9 +14,6 @@ vim.opt.guicursor = "" -- cursor is block in all modes
 
 
 
-
-
-
 -- Vim Options
 
 -- use :options
@@ -28,8 +25,7 @@ vim.opt.relativenumber = true
 
 
 vim.opt.cursorline = true
---vim.o.cursorlineopt = "number"
---vim.api.nvim_set_hl(0, "CursorLineSign", {bg="none"})
+--vim.o.cursorlineopt = "number"  -- both, number, screenline
 --vim.opt.cursorcolumn = true
 
 --vim.opt.numberwidth = 3
@@ -47,22 +43,22 @@ vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.tabstop = 4 -- only for opening/closing files
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
+
 vim.opt.smartindent = true
 
 
+
+
 -- experimental
---vim.opt.swapfile = false
+vim.opt.swapfile = false
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 250 --write to disk
 vim.opt.timeoutlen = 600 -- which-key popup -- old: 300
 
 vim.g.have_nerd_font = true
-vim.opt.mouse = 'a'
---vim.opt.showmode = false
---vim.opt.breakindent = false
-
-
+vim.opt.mouse = 'a'  -- Enable mouse
+vim.opt.breakindent = true  -- preserve indent on wrapped lines for blocks of text
 
 
 -- whitespaces
@@ -72,11 +68,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 
 -- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
 -- vim.opt.whichwrap:append "<>[]hl"
-
-
-
 
 
 -- automatically backup files
@@ -84,8 +76,8 @@ vim.opt.backup = true
 vim.opt.backupdir = os.getenv("HOME") .. "/.vim/backupdir"
 
 -- automatically save undo history
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 
 
@@ -93,8 +85,7 @@ vim.opt.undofile = true
 -- sync system clipboard
 vim.opt.clipboard = "unnamedplus"
 
---vim.opt.scrolloff = 999
-vim.opt.scrolloff = 5  -- 10
+vim.opt.scrolloff = 8  -- 5
 
 
 vim.opt.virtualedit = "block" -- keep highlighting on lines that are not of the same length, in visual block mode
@@ -108,23 +99,11 @@ vim.opt.termguicolors = true -- better, gui-like colors
 
 
 -- disable nvim intro
---vim.opt.shortmess:append "sI"
+-- vim.opt.shortmess:append "sI"
 
 
 
--- Colorcolumn
 -- vim.opt.colorcolumn = "80"
-
-
-
---vim.opt.guicursor = "i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
-
-
--- command for special filetypes
---[[
-" But set it to 100 chars when editing Kotlin.
-autocmd filetype kotlin setlocal colorcolumn=100
-]]
 
 
 
@@ -189,18 +168,14 @@ vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 
 
--- global status bar
-vim.opt.laststatus = 3
---vim.cmd("set laststatus=3") -- only have one global bar
+vim.opt.laststatus = 3  -- global status bar
 --vim.cmd("highlight WinSeparator guibg=None")
 
--- vim.opt.showmode = true -- disable mode indicator (using lualine)
+vim.opt.showmode = true -- disable mode indicator (using lualine)
 
 
 
--- auto cd into dir of file
---vim.cmd("set autochdir") -- automatically change cwd to root of file
-vim.opt.autochdir = true
+vim.opt.autochdir = true  -- automatically change cwd to root of file
 
 
 
@@ -214,6 +189,5 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 vim.opt.incsearch = true -- start searching before pressing enter
-vim.opt.hlsearch = true
-
+vim.opt.hlsearch = true  -- Highlight search results
 

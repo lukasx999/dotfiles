@@ -48,22 +48,47 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load()
 
             cmp.setup({
+
+                view = {
+                    -- entries = "custom" -- can be "custom", "wildmenu" or "native"
+                    entries = {
+                        name = "custom",
+                        follow_cursor = true,
+                    },
+                    docs = {
+                        -- auto_open = false,
+                    }
+                },
+
+
+                experimental = {
+                    ghost_text = true,
+                },
+
+                -- completion = {
+                --     autocomplete = false
+                -- },
+
+
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
                     end,
                 },
+
+
                 window = {
                     --completion = cmp.config.window.bordered(),
                     completion = cmp.config.window.bordered({
                         scrollbar = false,
+                        scrolloff = 3,
                         -- side_padding = 15,
                         -- max_width
                         -- max_height
                         -- col_offset -- offsets window to the cursor
                         -- scrolloff
                         -- winblend
-                        -- border
+                        -- border -- (table)
                     }),
 
                     documentation = cmp.config.window.bordered({
@@ -71,6 +96,16 @@ return {
                     }),
                     -- documentation = false,
                 },
+
+                window = {
+                    completion = {
+                        scrollbar = false,
+                        scrolloff = 3,
+                        -- side_padding = 1,
+                    },
+                },
+
+
 
                 mapping = cmp.mapping.preset.insert({
                     ["<C-k>"] = cmp.mapping.select_prev_item(),       -- previous suggestion
@@ -89,10 +124,12 @@ return {
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<C-y>"] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-Space>"] = cmp.mapping.complete(),  -- Open completion window
                     ["<C-c>"] = cmp.mapping.abort(),  -- old: "<Esc>"
 
                     ["<CR>"] = cmp.mapping.confirm({ select = false }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                    -- ["<C-CR>"] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                    -- ["<C-Space>"] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
                     -- ['<C-g>'] = function()
                     --     if cmp.visible_docs() then
@@ -116,6 +153,7 @@ return {
                     -- { name = "calc" },
                     -- { name = "dotenv" },
                 }),
+
                 formatting = {
                     format = lspkind.cmp_format({
                         -- mode = "symbol_text",     -- text_symbol, symbol, text, symbol_text
@@ -132,13 +170,15 @@ return {
                             luasnip = "[LSnip]",
                             nvim_lua = "[Lua]",
                             latex_symbols = "[LaTeX]",
-                            treesitter = "[Tsitter]",
+                            treesitter = "[TS]",
 
                             -- calc = "[Calc]",
                             -- dotenv = "[Dotenv]",
                         },
                     }),
                 },
+
+
             })
 
             -- Set configuration for specific filetype.
