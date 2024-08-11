@@ -9,6 +9,7 @@ bc (calculator lang)
 imagemagick (image manipulation)
 locate (GNU locate for finding files)
 nmap (network scanner)
+inetutils
 
 
 # Extra Shell tools

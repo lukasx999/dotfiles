@@ -100,7 +100,8 @@ alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.
 # Default Applications
 export TERMINAL="kitty"
 export BROWSER="firefox"
-export TERM=xterm-256color
+# export TERM=xterm-256color
+export TERM=xterm-kitty
 export PAGER="less"
 
 # For quickfind

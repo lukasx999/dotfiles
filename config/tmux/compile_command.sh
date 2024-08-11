@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
 
-commands_file="$HOME/.config/tmux/commands.txt"
-filename_file="$HOME/.config/tmux/filename.txt"
-
-
-
-cwd=$(tmux display-message -p -F "#{pane_current_path}" -t1)
-
+workingdir=$(tmux display-message -p -F "#{pane_current_path}" -t1)
 
 
 NC='\033[0m' # No Color
@@ -18,88 +12,57 @@ Red='\033[0;31m'
 Green='\033[0;32m'
 
 
+cmddir=/tmp/tmux_compilecmd_cmd
+pathdir=/tmp/tmux_compilecmd_path
+
+oldcmd=`cat $cmddir`
+cwd=`cat $pathdir`
 
 
-arg=$1
+shellcmd="run-shell 'echo \"%1\" > $cmddir ; echo "$workingdir" > $pathdir'"
 
-if [[ $arg == "set-command" ]]; then
+prompt="Compile Command:"
 
-    # Get compile command
-    # commands=$(cat $commands_file)
-    # selection=$(echo "$commands" | fzf --print-query --border-label=" 󰈞 Compile Command  " --algo=v2 --cycle --reverse)
+function setcmd {
 
-    # query=$(echo $selection | sed 's_\s.*$__')
-    # preset=$(echo $selection | sed 's_^.*\s__')
-
-    # if [[ -n $preset ]]; then  # checks if not empty
-    #     sel=$preset
-    # else
-    #     sel=$query
-    # fi
-
-
-    # echo -e $sel >> $commands_file
-    # sed -i '/^$/d' $commands_file  # Remove blank lines
-    # awk -i inplace '!seen[$0]++' $commands_file  # Remove duplicate lines
-
-
-    # Get command
-    read -p "Compile command: " command
-
-    if [[ -z $command ]]; then
-        command=$(cat $commands_file)
+    if [[ -z "$oldcmd" ]]; then
+        tmux command-prompt -T command -p "$prompt" "$shellcmd"
+    else
+        tmux command-prompt -I "$oldcmd" -T command -p "$prompt" "$shellcmd"
     fi
 
-    echo $command > $commands_file
-    echo $cwd >> $commands_file
+    return 0
 
+}
 
+function run {
 
+    cd $cwd
 
-    # fzfselection=$(ls $cwd | fzf --border-label=" 󰈞 File Selection  " --algo=v2 --cycle --reverse)
-    #
-    # if [[ -z $fzfselection ]]; then
-    #     read -p "Filename: " readselection
-    #     filename=$readselection
-    # else
-    #     filename=$fzfselection
-    # fi
-    #
-    #
-    #
-    # echo ${cwd}/$filename > $filename_file
+    echo -e ${Grey}Running${Blue} \`$oldcmd\` ${Grey}in ${Blue}\`$cwd\` ${NC}"\n"
 
-
-
-
-fi
-
-
-if [[ $arg == "run-command" ]]; then
-
-
-
-    command=$(sed 1q $commands_file)
-    path=$(awk 'NR==2' $commands_file)
-
-
-    cd $path
-
-
-    echo -e ${Grey}Running${Blue} \`$command\` ${NC}"\n"
-
-
-    echo $command | bash
-
+    echo "$oldcmd" | bash
 
     echo -e ${Blue}"\nCompilation finished!"${NC}"\n"
 
     # tput civis  # hides cursor
     # read -p ""
     read -n 1 -s -r
-    # tput cnorm  # show cursor
+
+    return 0
+
+}
 
 
+arg=$1
+
+if [[ $arg == "set-command" ]]; then
+    setcmd
+fi
+
+
+if [[ $arg == "run-command" ]]; then
+    run
 fi
 
 

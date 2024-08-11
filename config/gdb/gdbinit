@@ -1,0 +1,28 @@
+# layout src
+set print pretty
+set debuginfod enabled on
+set prompt \033[31mgdb$ \033[0m
+
+# set confirm off
+set disassembly-flavor intel
+
+set tui active-border-mode half
+set tui border-kind acs
+# set tui border-kind space
+set tui compact-source on
+
+# Silence stdout/stderr of the program being run, as it well break the tui
+set args >/dev/null 2>&1
+
+
+tui enable
+
+
+
+# Hook: confirm only for certain commands
+# define hook-add-symbol-file
+# set confirm off
+# end
+# define hookpost-add-symbol-file
+# set confirm on
+# end

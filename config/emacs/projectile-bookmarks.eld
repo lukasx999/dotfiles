@@ -1,1 +1,1 @@
-("~/Code/C/Projects/Editor/" "~/Code/bravestone/testmanagement/frontend/" "~/Code/da_diag/")
+("~/Code/C/Projects/grep/" "~/Code/C/Projects/Balls/" "~/Code/bravestone/testmanagement/backend/" "~/Code/C/Projects/Editor/" "~/Code/bravestone/testmanagement/frontend/" "~/Code/da_diag/")
