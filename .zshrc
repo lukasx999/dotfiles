@@ -39,6 +39,7 @@ setopt CORRECT_ALL
 
 
 
+
 # LF
 LFCD="/home/lukas/.config/lf/lfcd.sh"
 if [ -f "$LFCD" ]; then
@@ -158,6 +159,7 @@ export FZF_DEFAULT_OPTS=" \
 
 
 
+
 # Load colors
 autoload -U colors && colors
 
@@ -179,6 +181,9 @@ bindkey -v '^?' backward-delete-char
 
 # case insensitive matching
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+
+
 
 
 
@@ -229,6 +234,7 @@ zstyle ':completion:*' group-name ''
 # PS1
 # PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+
 
 
 
@@ -337,81 +343,38 @@ function mkcd() {
 
 
 
+
 # VI Mode Config
 function zvm_config() {
-  ZVM_VI_EDITOR=$EDITOR # vi mode editor for vv in normal mode
-  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-  #ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-  # ZVM_KEYTIMEOUT=0.4
-  ZVM_KEYTIMEOUT=0
-  ZVM_INIT_MODE=sourcing
-  # Change to Zsh's default readkey engine
-  # ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
-  ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
+    ZVM_VI_EDITOR=$EDITOR # vi mode editor for vv in normal mode
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+    ZVM_KEYTIMEOUT=0
+    ZVM_INIT_MODE=sourcing
+    ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
 
-  # Disable the cursor style feature
-  ZVM_CURSOR_STYLE_ENABLED=false
+    # Disable the cursor style feature
+    ZVM_CURSOR_STYLE_ENABLED=false
 
 
 }
 
 
-
-
-
-# function underscore() {
-#   echo "\033[5D"
+# The plugin will auto execute this zvm_after_lazy_keybindings function
+# function zvm_after_lazy_keybindings() {
 # }
 
 
 
-# The plugin will auto execute this zvm_after_lazy_keybindings function
-function zvm_after_lazy_keybindings() {
-
-  # zvm_define_widget underscore
-  # zvm_bindkey vicmd '^E' underscore
-
-}
 
 
 
 
 
-
-
-# # Set up ZINIT as a plugin manager
-# ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-# [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-# [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-# source "${ZINIT_HOME}/zinit.zsh"
-#
-# # If you source after compinit
-# autoload -Uz _zinit
-# (( ${+_comps} )) && _comps[zinit]=_zinit
-#
-# # Load plugins
-# zinit ice depth=1  # Git clone depth
-# zinit light jeffreytse/zsh-vi-mode
-#
-# zinit light zsh-users/zsh-autosuggestions
-# zinit light zdharma-continuum/fast-syntax-highlighting
-# zinit light hlissner/zsh-autopair
-#
-# zinit ice lucid wait'0'
-# zinit light joshskidmore/zsh-fzf-history-search
-# export ZSH_FZF_HISTORY_SEARCH_BIND='^r'
-# export ZSH_FZF_HISTORY_SEARCH_EVENT_NUMBERS=0
-# export ZSH_FZF_HISTORY_SEARCH_DATES_IN_SEARCH=0
-# export ZSH_FZF_HISTORY_SEARCH_REMOVE_DUPLICATES=1
-
-
-
-
-# Plugins (old)
+# Plugins
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
+# source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
 source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
 # (zsh-completions is also installed)
@@ -422,15 +385,18 @@ source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
 
 
+bindkey -e  # Emacs keybindings
+
+
 
 
 
 # alias quickfind='. ~/Desktop/Code/Sh/quickfind'
-bindkey -s '^f' 'quickfind\n'
+# bindkey -s '^f' 'quickfind\n'
 
-bindkey -s '^n' 'tmux\n'
-bindkey -s '^x' '$EDITOR\n'
-bindkey -s '^y' 'lf\n'
+# bindkey -s '^n' 'tmux\n'
+# bindkey -s '^x' '$EDITOR\n'
+# bindkey -s '^y' 'lf\n'
 
 # delete words with C - <backspace>
 bindkey '^H' backward-kill-word
@@ -451,3 +417,4 @@ eval "$(direnv hook zsh)"
 
 # NVM
 # source /usr/share/nvm/init-nvm.sh
+

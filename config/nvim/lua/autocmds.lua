@@ -9,8 +9,8 @@
 -- Define a Lua function to create the scratch buffer, execute the shell command, and set the keymap
 function create_scratch_buffer(command)
     -- Create a new scratch buffer
-    -- vim.cmd"new"
-    vim.cmd"sp new"  -- vsp for vert split
+    vim.cmd"new"
+    -- vim.cmd"sp new"  -- vsp for vert split
     vim.cmd"setlocal buftype=nofile bufhidden=hide noswapfile"
 
     -- Execute the shell command and capture its output in the buffer
@@ -141,6 +141,80 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
+
+
+
+
+
+-- Goto qf location without switching windows
+-- outline.nvim like behaviour
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("quickfixpreview"),
+    pattern = { "qf" },
+    callback = function(event)
+        vim.keymap.set("n", "o",      "<CR><C-w>p", { buffer = event.buf, silent = true })
+        vim.keymap.set("n", "<C-j>", "j<CR><C-w>p", { buffer = event.buf, silent = true })
+        vim.keymap.set("n", "<C-k>", "k<CR><C-w>p", { buffer = event.buf, silent = true })
+        -- print(vim.inspect(event))
+    end,
+})
+
+
+
+-- Oil.nvim auto cd
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("oilautocd"),
+    pattern = { "oil" },
+    callback = function(event)
+
+        local oil = require("oil")
+
+
+        local function enter()
+
+            -- local bufnr = vim.api.nvim_get_current_buf()
+            -- local dir = oil.get_current_dir(bufnr)
+            local current = oil.get_cursor_entry()
+
+            if current == nil then return end  -- No files in dir
+
+            if current.type == "directory" then
+                vim.cmd(string.format("cd %s", current.name))
+            end
+
+            oil.select()
+
+        end
+
+
+        local function back_up()
+
+            vim.cmd"cd .."
+            oil.open()
+
+        end
+
+
+        vim.keymap.set("n", "<CR>", enter, { buffer = event.buf, silent = true })
+        vim.keymap.set("n", "-", back_up,  { buffer = event.buf, silent = true })
+
+        -- vim.keymap.set("n", "l", enter,    { buffer = event.buf, silent = true })
+        -- vim.keymap.set("n", "h", back_up,  { buffer = event.buf, silent = true })
+
+
+
+        -- print(vim.inspect(event))
+
+    end,
+})
+
+
+
+
+
+
+
+
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
@@ -170,10 +244,18 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.keymap.set("n", "q", function() require("oil").close() end, { buffer = event.buf, silent = true })
         end
 
+        if ( vim.bo.filetype == "help" ) then
+            vim.keymap.set("n", "<CR>", "<C-]>")
+        end
 
 
   end,
 })
+
+
+
+
+
 
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist

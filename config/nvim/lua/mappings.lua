@@ -220,3 +220,24 @@ vim.keymap.set("n", "n", "nzzzv", { silent = true })
 vim.keymap.set("n", "N", "Nzzzv", { silent = true })
 
 
+
+-- Remove/Add braces to indented statements in C code
+
+vim.keymap.set("v", "ö", "\
+:g_[a-z]*\\s(.*)$_norm A {<CR>\
+gv\
+:g_;$_norm o}\
+:noh<CR>\
+''\
+", { silent = false })
+
+
+vim.keymap.set("v", "Ö", "\
+:g_{$_norm $xx\
+gv\
+:g_}$_norm dd\
+", { silent = false })
+-- :g_{$_norm $dT)x\
+
+
+

@@ -102,6 +102,8 @@ mypy (python static type checker)
 cython
 
 raylib
+glib2-devel
+glib (aur)
 
 python-sqlalchemy
 

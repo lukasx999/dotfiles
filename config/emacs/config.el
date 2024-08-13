@@ -1,3 +1,23 @@
+[
+
+(use-package foo
+:if window-system  ;; only load module when condition is true (eg: gui emacs)
+:init  ;; evaluate some elisp before the package is loaded
+:config  ;; eval some elisp after the package is loaded
+:defer t  ;; lazy-loading: package is only loaded when command from it are actually used
+:ensure t  ;; automatically install the package if not already present on the system
+:custom  ;; allows customization of package custom variables
+:after <package-name>  ;; only configure package after another package has already been loaded
+:diminish <mode-name>  ;; keep effect of minor-mode, but hide or abbreviate it in the modeline display (eg: abbrev-mode)
+:hook <function>  ;; add functions onto package hooks
+:commands  ;; provide triggers, that cause a package to be loaded when certain events occur (needs :defer t)
+:demand t  ;; load package anyway: override package deferral
+:bind ("C-." . ace-jump-mode)  ;; bind a key
+:chords  ;; bind key chords
+)
+
+]
+
 (load "server")
 (unless (server-running-p) (server-start))
 
@@ -488,28 +508,25 @@
   :diminish
   :config (counsel-mode))
 
+
 (use-package ivy
   :bind
   ;; ivy-resume resumes the last Ivy-based completion.
   (("C-c C-r" . ivy-resume)
-   ("C-x B" . ivy-switch-buffer-other-window))
+   ("C-x B" . ivy-switch-buffer-other-window)
+	 ("C-j" . 'ivy-next-line)
+	 ("C-k" . 'ivy-previous-line))
+
   :diminish
   :custom
   (setq ivy-use-virtual-buffers t)     
   (setq ivy-count-format "(%d/%d) ")
   (setq enable-recursive-minibuffers t)
 
-  (global-unset-key (kbd "C-j"))
-  (global-unset-key (kbd "C-k"))
-  ;;(define-key minibuffer-local-map (kbd "C-j") 'ivy-next-line)
-  ;;(define-key minibuffer-local-map (kbd "C-k") 'ivy-previous-line)
-
-  (add-hook 'minibuffer-setup-hook
-            (lambda ()
-              (local-set-key (kbd "C-j") 'ivy-next-line)))
-
 
   :config
+	(setq ivy-wrap t)
+	(setq ivy-height 10)
   (ivy-mode))
 
 (use-package all-the-icons-ivy-rich
@@ -671,4 +688,8 @@
 
 (use-package ef-themes
   :if window-system
+
+
 )
+
+

@@ -29,7 +29,7 @@ return {
             outline_window = {
                 auto_jump = false,  -- auto jump to code (live)
                 position = 'right',
-                auto_close = false,  -- auto close when jumped with <cr>
+                auto_close = true,  -- auto close when jumped with <cr>
                 center_on_jump = true,
             },
 

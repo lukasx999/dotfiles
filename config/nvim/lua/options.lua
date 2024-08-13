@@ -10,7 +10,7 @@ vim.fn for vimscript functions
 
 
 -- vim.opt.guicursor = { 'a:ver25' }  -- cursor is beam in all modes
-vim.opt.guicursor = "" -- cursor is block in all modes
+-- vim.opt.guicursor = "" -- cursor is block in all modes
 
 
 
@@ -189,5 +189,5 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 vim.opt.incsearch = true -- start searching before pressing enter
-vim.opt.hlsearch = true  -- Highlight search results
+vim.opt.hlsearch = false  -- Highlight search results
 
