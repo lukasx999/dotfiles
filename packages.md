@@ -1,41 +1,35 @@
 # Shell tools
-ripgrep (grep multiple files)
-jq (json processor)
-fd (better find)
-entr (tracks file changes)
-tree
-tldr (better man entries)
-bc (calculator lang)
-imagemagick (image manipulation)
-locate (GNU locate for finding files)
-nmap (network scanner)
-inetutils
-
+- ripgrep (grep multiple files)
+- jq (json processor)
+- fd (better find)
+- entr (tracks file changes)
+- tree
+- tldr (better man entries)
+- bc (calculator lang)
+- imagemagick (image manipulation)
+- locate (GNU locate for finding files)
+- nmap (network scanner)
+- inetutils
 
 # Extra Shell tools
-
 - sshfs (mount filesystems over ssh)
 
 # Etc
-
-man-pages (man pages for glibc)
-python-pillow (for kitty image previews)
-gitleaks (scans git repos for secrets)
+- man-pages (man pages for glibc)
+- python-pillow (for kitty image previews)
+- gitleaks (scans git repos for secrets)
 
 # X11
-
-dunst
-xwallpaper
-xclip
-network-manager-applet
-bluez
-xdotool
-i3lock-color (aur) (needed for betterlockscreen)
-betterlockscreen (aur)
-
+- dunst
+- xwallpaper
+- xclip
+- network-manager-applet
+- bluez
+- xdotool
+- i3lock-color (aur) (needed for betterlockscreen)
+- betterlockscreen (aur)
 
 # Desktop
-
 - pyprland (aur)
 - blueman
 - rofi-wayland
@@ -48,74 +42,72 @@ betterlockscreen (aur)
   - hyprwayland-scanner
 - hyprlock
 
-qtile
-rofi
-picom
-flameshot
-kitty
+- qtile
+- rofi
+- picom
+- flameshot
+- kitty
 
 
 # Fun shell programs
-
-catimg (terminal image viewer)
-htop
-gotop
-neofetch
-onefetch
-eza
-bat
-bat-extras
+- catimg (terminal image viewer)
+- htop
+- gotop
+- neofetch
+- onefetch
+- eza
+- bat
+- bat-extras
 
 # Useful shell programs
-
-ptpython
-fzf
-ranger
-yazi (file manager)
+- ptpython
+- fzf
+- ranger
+- yazi (file manager)
 
 # Desktop Tools
-
-mupdf
-qt6ct (qt6 configuration tool)
-texlive (group for latex)
+- mupdf
+- qt6ct (qt6 configuration tool)
+- texlive (group for latex)
 
 
 # Package managers
-npm
-rust
-python-pip
+- npm
+- rust
+- python-pip
 
 # Programming
-zig
-igcc (aur) (interactive gcc)
-docker
-strace (show syscalls of binary)
-nasm
-gdb
-clang
-dart
-node
-nvm (aur) (node version manager)
-flutter (aur)
-python-devtools
-mypy (python static type checker)
-cython
+- zig
+- igcc (aur) (interactive gcc)
+- docker
+- strace (show syscalls of binary)
+- nasm
+- gdb
+- clang
+- dart
+- node
+- nvm (aur) (node version manager)
+- flutter (aur)
+- python-devtools
+- mypy (python static type checker)
+- cython
 
-raylib
-glib2-devel
-glib (aur)
+- valgrind
+- raylib
+- glib2-devel
+- glib (aur)
 
-python-sqlalchemy
+- python-sqlalchemy
 
-sbcl (common lisp)
-cffi (dynamic library loading)
+- sbcl (common lisp)
+- cffi (dynamic library loading)
 
 
 
 # Microcontrollers
-platformio-core
-platformio-core-udev
-esp-idf (aur)
+- platformio-core
+- platformio-core-udev
+- esp-idf (aur)
 
 PYTHON:
 - pyside6
@@ -160,17 +152,22 @@ PYTHON:
 - bibata-cursor-theme (aur)
 
 # Fonts
-ttf-ubuntu-font-family
-ttf-dejavu
-ttf-jetbrains-mono
-ttf-roboto
-ttf-jetbrains-mono-nerd
-ttf-font-awesome
-ttf-firacode-nerd
-ttf-iosevka-nerd
-ttf-roboto-mono-nerd
-ttf-inconsolata-nerd
-noto-fonts
+- ttf-ubuntu-font-family
+- ttf-dejavu
+- ttf-jetbrains-mono
+- ttf-roboto
+- ttf-jetbrains-mono-nerd
+- ttf-font-awesome
+- ttf-firacode-nerd
+- ttf-iosevka-nerd
+- ttf-roboto-mono-nerd
+- ttf-inconsolata-nerd
+- noto-fonts
+
+
+# ZSH
+- zsh
+- zsh-vi-mode (aur)
 
 
 
