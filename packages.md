@@ -83,6 +83,7 @@
 - strace (show syscalls of binary)
 - nasm
 - gdb
+ - gf2-git (aur) (gdb frontend)
 - clang
 - dart
 - node
