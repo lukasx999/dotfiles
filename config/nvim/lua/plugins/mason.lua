@@ -17,7 +17,7 @@
                     ensure_installed = {
                         "lua_ls",
                         "bashls",
-                        "tsserver",
+                        "ts_ls",
                         "clangd",
                         "jsonls",
                         -- "basedpyright",

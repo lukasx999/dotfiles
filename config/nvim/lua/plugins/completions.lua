@@ -127,6 +127,7 @@ return {
                     ["<C-Space>"] = cmp.mapping.complete(),  -- Open completion window
                     ["<C-c>"] = cmp.mapping.abort(),  -- old: "<Esc>"
 
+
                     ["<CR>"] = cmp.mapping.confirm({ select = false }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                     -- ["<C-CR>"] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                     -- ["<C-Space>"] = cmp.mapping.confirm({ select = true }),     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.

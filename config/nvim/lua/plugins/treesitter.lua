@@ -3,6 +3,7 @@
 
         {
             'andymass/vim-matchup',  -- Better %
+            enabled = true,
             config = function()
             end,
         },

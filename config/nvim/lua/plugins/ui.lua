@@ -39,6 +39,7 @@
 
         {
             "RRethy/vim-illuminate",
+            enabled = false,
             config = function()
 
 

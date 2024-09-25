@@ -78,10 +78,13 @@ local map = vim.keymap.set
             map('n', '<leader>ls', tele.lsp_workspace_symbols,              { desc = 'List workspace symbols'        }),
 
             -- Show all occurances of current symbol
-            map('n', '<leader>lR', tele.lsp_references,                     { desc = 'Show References of symbol'     }),
+            map("n", "<leader>lR", lsp.references,                          { desc = "References of symbol"          }),
+            -- map('n', '<leader>lR', tele.lsp_references,                     { desc = 'Show References of symbol'     }),
+
 
             -- Peek
-            map("n", "K",          "<cmd>Lspsaga hover_doc<CR>",            { desc = "Hover"                         }),
+            -- map("n", "K",          "<cmd>Lspsaga hover_doc<CR>",            { desc = "Hover"                         }),
+            map("n", "K",          lsp.hover,                               { desc = "Hover"                         }),
             map("n", "<leader>lp", "<cmd>Lspsaga peek_definition<CR>",      { desc = "Peek definition"               }),
             map("n", "<leader>lP", "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Peek type definition"          }),
         },
