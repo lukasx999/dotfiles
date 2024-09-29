@@ -32,7 +32,3 @@ require("lazy").setup("plugins", {
 })
 
 
-
-require("etc")
-
-

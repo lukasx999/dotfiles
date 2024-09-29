@@ -33,15 +33,15 @@ vim.opt.cursorline = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.wrap = false
+vim.opt.wrap       = false
 
 
 -- indenting
 
 -- set tabs to spaces
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.tabstop = 4 -- only for opening/closing files
-vim.opt.shiftwidth = 4
+vim.opt.expandtab   = true -- convert tabs to spaces
+vim.opt.tabstop     = 4 -- only for opening/closing files
+vim.opt.shiftwidth  = 4
 vim.opt.softtabstop = 4
 
 vim.opt.smartindent = true
@@ -50,19 +50,19 @@ vim.opt.smartindent = true
 
 
 -- experimental
-vim.opt.swapfile = false
-vim.opt.signcolumn = "yes"
+vim.opt.swapfile     = false
+vim.opt.signcolumn   = "yes"
 
-vim.opt.updatetime = 250 --write to disk
-vim.opt.timeoutlen = 600 -- which-key popup -- old: 300
+vim.opt.updatetime   = 250 --write to disk
+vim.opt.timeoutlen   = 600 -- which-key popup -- old: 300
 
 vim.g.have_nerd_font = true
-vim.opt.mouse = 'a'  -- Enable mouse
-vim.opt.breakindent = true  -- preserve indent on wrapped lines for blocks of text
+vim.opt.mouse        = 'a'  -- Enable mouse
+vim.opt.breakindent  = true  -- preserve indent on wrapped lines for blocks of text
 
 
 -- whitespaces
-vim.opt.list = true
+vim.opt.list      = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 --vim.opt.listchars = { trail = '·' }
 
@@ -72,12 +72,12 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 
 -- automatically backup files
-vim.opt.backup = true
+vim.opt.backup    = true
 vim.opt.backupdir = os.getenv("HOME") .. "/.vim/backupdir"
 
 -- automatically save undo history
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
 
 
@@ -90,10 +90,10 @@ vim.opt.scrolloff = 8  -- 5
 
 vim.opt.virtualedit = "block" -- keep highlighting on lines that are not of the same length, in visual block mode
 
-vim.opt.inccommand = "split" -- create new window for search results in global sub (%s)
+vim.opt.inccommand  = "split" -- create new window for search results in global sub (%s)
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.opt.ignorecase  = true
+vim.opt.smartcase   = true
 
 vim.opt.termguicolors = true -- better, gui-like colors
 
@@ -112,8 +112,8 @@ vim.opt.termguicolors = true -- better, gui-like colors
 
 ---- Auto indent on empty line.
 vim.keymap.set('n', 'i', function ()
-  return string.match(vim.api.nvim_get_current_line(), '%g') == nil
-         and 'cc' or 'i'
+    return string.match(vim.api.nvim_get_current_line(), '%g') == nil
+        and 'cc' or 'i'
 end, {expr=true, noremap=true})
 
 
@@ -125,7 +125,7 @@ end, {expr=true, noremap=true})
 
 
 vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr   = "nvim_treesitter#foldexpr()"
 
 -- Dont collapse folds on start
 vim.cmd"set nofoldenable"
@@ -171,11 +171,11 @@ vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 vim.opt.laststatus = 3  -- global status bar
 --vim.cmd("highlight WinSeparator guibg=None")
 
-vim.opt.showmode = true -- disable mode indicator (using lualine)
+vim.opt.showmode   = true -- disable mode indicator (using lualine)
 
 
 
-vim.opt.autochdir = true  -- automatically change cwd to root of file
+vim.opt.autochdir  = true  -- automatically change cwd to root of file
 
 
 
@@ -189,5 +189,5 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 vim.opt.incsearch = true -- start searching before pressing enter
-vim.opt.hlsearch = false  -- Highlight search results
+vim.opt.hlsearch  = false  -- Highlight search results
 

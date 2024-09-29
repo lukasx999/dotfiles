@@ -1,11 +1,4 @@
-
-
-
 local map = vim.keymap.set
-
-
-
-
 
 
 -- open and close folds with space
@@ -17,7 +10,7 @@ local map = vim.keymap.set
 
 -- Leader
 -- Map leader to space
-vim.g.mapleader = " "
+vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
 
 -- General
@@ -26,18 +19,14 @@ map("n", "k", "gk", { silent = true })
 
 -- Command mode
 -- Delete with C-BS
-vim.api.nvim_set_keymap("c", "<c-h>",  [[ wildmenumode() ? "c-h>" : "<C-w>"  ]], { noremap = true, expr = true })  -- for tmux
-vim.api.nvim_set_keymap("c", "<c-BS>", [[ wildmenumode() ? "c-BS>" : "<C-w>" ]], { noremap = true, expr = true })  -- for non-tmux
+vim.api.nvim_set_keymap("c", "<c-h>",  [[ wildmenumode() ? "c-h>" : "<C-w>"     ]], { noremap = true, expr = true })  -- for tmux
+vim.api.nvim_set_keymap("c", "<c-BS>", [[ wildmenumode() ? "c-BS>" : "<C-w>"    ]], { noremap = true, expr = true })  -- for non-tmux
 
-vim.api.nvim_set_keymap("c", "<M-b>", [[ wildmenumode() ? "M-b>" : "<C-Left>" ]], { noremap = true, expr = true })
-vim.api.nvim_set_keymap("c", "<M-f>", [[ wildmenumode() ? "M-f>" : "<C-Right>" ]], { noremap = true, expr = true })
-vim.api.nvim_set_keymap("c", "<C-n>", [[ wildmenumode() ? "M-b>" : "<C-Down>" ]], { noremap = true, expr = true })
-vim.api.nvim_set_keymap("c", "<C-p>", [[ wildmenumode() ? "M-f>" : "<C-Up>" ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<M-b>",  [[ wildmenumode() ? "M-b>" : "<C-Left>"  ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<M-f>",  [[ wildmenumode() ? "M-f>" : "<C-Right>" ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<C-n>",  [[ wildmenumode() ? "M-b>" : "<C-Down>"  ]], { noremap = true, expr = true })
+vim.api.nvim_set_keymap("c", "<C-p>",  [[ wildmenumode() ? "M-f>" : "<C-Up>"    ]], { noremap = true, expr = true })
 
-
-
--- Shell prompt
-map("n", "§", "w:!", {})
 
 
 -- Delete words with control + backspace
@@ -54,94 +43,63 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 
 
-
-
-
--- Exiting file
-vim.keymap.set("n", "ZW", "<cmd>w<CR>",    { desc = "Write file"     })
-vim.keymap.set("n", "ZAQ", "<cmd>qa!<CR>", { desc = "Quit all"       })
-vim.keymap.set("n", "ZAW", "<cmd>wa<CR>",  { desc = "Write all"      })
-vim.keymap.set("n", "ZAZ", "<cmd>wqa<CR>", { desc = "Write/Quit all" })
-
 -- Windows
-vim.keymap.set("n", "<leader>wc", "<cmd>q!<CR>",  { desc = "Close Window"     })
-vim.keymap.set("n", "<leader>wv", "<cmd>vsp<CR>", { desc = "Vertical split"   })
-vim.keymap.set("n", "<leader>ws", "<cmd>sp<CR>",  { desc = "Horizontal split" })
+map("n", "<leader>wc", "<cmd>q!<CR>",       { desc = "Close Window"       })
+map("n", "<leader>wv", "<cmd>vsp<CR>",      { desc = "Vertical split"     })
+map("n", "<leader>ws", "<cmd>sp<CR>",       { desc = "Horizontal split"   })
 
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Focus down"  })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Focus up"    })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Focus right" })
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Focus left"  })
+map("n", "<C-j>",      "<C-w>j",            { desc = "Focus down"         })
+map("n", "<C-k>",      "<C-w>k",            { desc = "Focus up"           })
+map("n", "<C-l>",      "<C-w>l",            { desc = "Focus right"        })
+map("n", "<C-h>",      "<C-w>h",            { desc = "Focus left"         })
 
 
 
-vim.keymap.set("n", "<C-S-j>", "<C-w>+", { desc = "Resize down" })
-vim.keymap.set("n", "<C-S-k>", "<C-w>-", { desc = "Resize up"   })
--- TODO dont work
---vim.keymap.set("n", "<C-S-l>", "<C-w>>", { desc = "Resize right" })
---vim.keymap.set("n", "<C-S-h>", "<C-w><", { desc = "Resize left"  })
+map("n", "<C-S-j>",    "<C-w>+",            { desc = "Resize down"        })
+map("n", "<C-S-k>",    "<C-w>-",            { desc = "Resize up"          })
 
 
 
 
-vim.keymap.set("n", "<leader>wj", "<cmd>wincmd j<CR>", { desc = "Focus down"  })
-vim.keymap.set("n", "<leader>wk", "<cmd>wincmd k<CR>", { desc = "Focus up"    })
-vim.keymap.set("n", "<leader>wh", "<cmd>wincmd h<CR>", { desc = "Focus left"  })
-vim.keymap.set("n", "<leader>wl", "<cmd>wincmd l<CR>", { desc = "Focus right" })
+map("n", "<leader>wj", "<cmd>wincmd j<CR>", { desc = "Focus down"         })
+map("n", "<leader>wk", "<cmd>wincmd k<CR>", { desc = "Focus up"           })
+map("n", "<leader>wh", "<cmd>wincmd h<CR>", { desc = "Focus left"         })
+map("n", "<leader>wl", "<cmd>wincmd l<CR>", { desc = "Focus right"        })
 
-vim.keymap.set("n", "<leader>wJ", "<cmd>wincmd J<CR>", { desc = "Move down"  })
-vim.keymap.set("n", "<leader>wK", "<cmd>wincmd K<CR>", { desc = "Move up"    })
-vim.keymap.set("n", "<leader>wH", "<cmd>wincmd H<CR>", { desc = "Move left"  })
-vim.keymap.set("n", "<leader>wL", "<cmd>wincmd L<CR>", { desc = "Move right" })
-
-vim.keymap.set("n", "<leader>wr", ":", { desc = "resize windows" })
-vim.keymap.set("n", "<leader>wrj", "<cmd>wincmd +<CR>", { desc = "Resize down"  })
-vim.keymap.set("n", "<leader>wrk", "<cmd>wincmd -<CR>", { desc = "Resize up"    })
-vim.keymap.set("n", "<leader>wrh", "<cmd>wincmd ><CR>", { desc = "Resize left"  })
-vim.keymap.set("n", "<leader>wrl", "<cmd>wincmd <<CR>", { desc = "Resize right" })
-
-vim.keymap.set("n", "<leader>ww", "<cmd>wincmd w<CR>", { desc = "Cycle prev window" })
-vim.keymap.set("n", "<leader>wW", "<cmd>wincmd W<CR>", { desc = "Cycle next window" })
-
+map("n", "<leader>wJ", "<cmd>wincmd J<CR>", { desc = "Move down"          })
+map("n", "<leader>wK", "<cmd>wincmd K<CR>", { desc = "Move up"            })
+map("n", "<leader>wH", "<cmd>wincmd H<CR>", { desc = "Move left"          })
+map("n", "<leader>wL", "<cmd>wincmd L<CR>", { desc = "Move right"         })
 
 
 
 -- Buffers
-vim.keymap.set("n", "<leader>bs", "<cmd>buffers<CR>", { desc = "buffers" })
--- bb buffer list in plugins
-
--- vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "next" })
--- vim.keymap.set("n", "<leader>bp", "<cmd>bprev<CR>", { desc = "prev" })
--- vim.keymap.set("n", "<leader>bc", "<cmd>bd<CR>", { desc = "close" })
-
-vim.keymap.set("n", "<leader>bh", "<cmd>bnext<CR>", { desc = "Next"     })
-vim.keymap.set("n", "<leader>bl", "<cmd>bprev<CR>", { desc = "Previous" })
-vim.keymap.set("n", "<leader>bk", "<cmd>bnext<CR>", { desc = "Next"     })
-vim.keymap.set("n", "<leader>bj", "<cmd>bprev<CR>", { desc = "Previous" })
-
-vim.keymap.set("n", "<C-n>", "<cmd>bnext<CR>", { desc = "Next"     })
-vim.keymap.set("n", "<C-p>", "<cmd>bprev<CR>", { desc = "Previous" })
-
-vim.keymap.set("n", "<leader>bc", "<cmd>bd!<CR>", { desc = "Close Buffer" })
+map("n", "<leader>bh", "<cmd>bnext<CR>",    { desc = "Next"               })
+map("n", "<leader>bl", "<cmd>bprev<CR>",    { desc = "Previous"           })
+map("n", "<leader>bk", "<cmd>bnext<CR>",    { desc = "Next"               })
+map("n", "<leader>bj", "<cmd>bprev<CR>",    { desc = "Previous"           })
+map("n", "<leader>bc", "<cmd>bw!<CR>",      { desc = "Close Buffer"       })
+map("n", "<C-n>",      "<cmd>bnext<CR>",    { desc = "Next"               })
+map("n", "<C-p>",      "<cmd>bprev<CR>",    { desc = "Previous"           })
 
 
 -- better C-w commands
-vim.keymap.set("n", "<C-w>q", "<cmd>q!<CR>", { desc = "Quit Window" })
-vim.keymap.set("n", "<C-w>c", "<cmd>bd!<CR>", { desc = "Delete Buffer" })
-vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next Buffer" })
-vim.keymap.set("n", "<C-w>b", "<cmd>bnext<CR>", { desc = "Next Buffer" })
-vim.keymap.set("n", "<C-w>B", "<cmd>bprev<CR>", { desc = "Previous Buffer" })
+map("n", "<C-w>q",     "<cmd>q!<CR>",       { desc = "Quit Window"        })
+map("n", "<C-w>c",     "<cmd>bd!<CR>",      { desc = "Delete Buffer"      })
+map("n", "<Tab>",      "<cmd>bnext<CR>",    { desc = "Next Buffer"        })
+map("n", "<C-w>b",     "<cmd>bnext<CR>",    { desc = "Next Buffer"        })
+map("n", "<C-w>B",     "<cmd>bprev<CR>",    { desc = "Previous Buffer"    })
 
-map("n", "<leader>bn", "<cmd>ene<CR>", { desc = "New Unnamed Buffer" })
+map("n", "<leader>bn", "<cmd>ene<CR>",      { desc = "New Unnamed Buffer" })
 
 
 
 -- Toggle
-vim.keymap.set("n", "<leader>tf", "<cmd>set foldmethod=manual<CR>",                   { desc = "Foldmethod"    })
-vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>",                               { desc = "Line wrapping" })
-vim.keymap.set("n", "<leader>tc", "<cmd>set cursorcolumn!<CR>",                       { desc = "Cursorcolumn"  })
-vim.keymap.set("n", "<leader>tI", "<cmd>set cursorline!<CR>",                         { desc = "Cursorline"    })
-vim.keymap.set("n", "<leader>tl", "<cmd>set number!<CR><cmd>set relativenumber!<CR>", { desc = "Line numbers"  })
+map("n", "<leader>tf", "<cmd>set foldmethod=manual<CR>",                   { desc = "Foldmethod"    })
+map("n", "<leader>tw", "<cmd>set wrap!<CR>",                               { desc = "Line wrapping" })
+map("n", "<leader>tc", "<cmd>set cursorcolumn!<CR>",                       { desc = "Cursorcolumn"  })
+map("n", "<leader>tI", "<cmd>set cursorline!<CR>",                         { desc = "Cursorline"    })
+map("n", "<leader>tl", "<cmd>set number!<CR><cmd>set relativenumber!<CR>", { desc = "Line numbers"  })
 --vim.keymap.set("n", "<leader>te", "<cmd>Barbecue toggle<CR>", { desc = "barbecue" })
 
 

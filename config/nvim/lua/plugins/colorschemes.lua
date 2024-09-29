@@ -36,7 +36,6 @@
 
         {
             -- 'morhetz/gruvbox',
-            'Mofiqul/vscode.nvim',
             "loctvl842/monokai-pro.nvim";
             "ku1ik/vim-monokai",
             'rmehri01/onenord.nvim',
@@ -51,7 +50,6 @@
             'NTBBloodbath/doom-one.nvim',
             "EdenEast/nightfox.nvim",
             "nyoom-engineering/oxocarbon.nvim",
-            'Yagua/nebulous.nvim',
         },
 
 
@@ -92,62 +90,6 @@
             'Everblush/nvim',
             name = 'everblush',
         },
-
-
-
-
-
-        {
-            "catppuccin/nvim",
-            name = "catppuccin",
-            priority = 1000,
-            config = function()
-                vim.cmd.colorscheme("catppuccin")
-                require("catppuccin").setup({
-                    flavour = "mocha",
-                    --transparent_background = true,
-                    term_colors = true,
-                    integrations = {
-                        indent_blankline = true,
-                        telescope = true,
-                        mason = true,
-                        neotree = true,
-                        cmp = true,
-                        lsp_saga = true,
-                        beacon = true,
-                        noice = true,
-                        treesitter = true,
-                        treesitter_context = true,
-                    },
-                })
-            end,
-        },
-
-
-
-
-        {
-            "folke/tokyonight.nvim",
-            config = function()
-                require("tokyonight").setup({
-                    style = "night",
-                    --transparent = false,
-                    terminal_colors = true,
-                })
-
-                --vim.cmd.colorscheme("tokyonight")
-
-                --vim.api.nvim_set_hl(0,"BufferLineFill",{bg="none"})
-                --vim.api.nvim_set_hl(0,"BufferLineSeperator",{bg="none"})
-                --vim.api.nvim_set_hl(0,"BufferLineSeperatorSelected",{bg="none"})
-                -- cokeline
-                --vim.api.nvim_set_hl(0,"TabLineFill",{bg="none"})
-
-                --vim.api.nvim_set_hl(0,"TelescopeNormal",{bg="none"})
-            end,
-        },
-
-
 
 
 
