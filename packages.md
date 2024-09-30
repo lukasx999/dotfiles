@@ -40,6 +40,7 @@
   - meson
   - cmake
   - hyprwayland-scanner
+- wl-clipboard
 - hyprlock
 
 - qtile

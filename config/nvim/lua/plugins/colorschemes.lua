@@ -1,5 +1,14 @@
     return {
 
+        {
+            "blazkowolf/gruber-darker.nvim",
+            config = function()
+                require("gruber-darker").setup({
+                    bold = false,
+                })
+            end,
+        },
+
 
         {
             "ellisonleao/gruvbox.nvim",
@@ -9,7 +18,7 @@
                     terminal_colors = true, -- add neovim terminal colors
                     undercurl = true,
                     underline = true,
-                    bold = true,
+                    bold = false,
                     italic = {
                         strings = true,
                         emphasis = true,
