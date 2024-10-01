@@ -3,6 +3,7 @@
 
         {
             "NvChad/nvim-colorizer.lua",
+            enabled = true,
             config = function()
                 require("colorizer").setup({
                     filetypes = {
@@ -20,6 +21,7 @@
 
         {
             "HiPhish/rainbow-delimiters.nvim",
+            enabled = true,
             config = function() end,
         },
 

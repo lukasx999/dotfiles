@@ -74,7 +74,7 @@
 
 # Package managers
 - npm
-- rust
+- rustup
 - python-pip
 
 # Programming

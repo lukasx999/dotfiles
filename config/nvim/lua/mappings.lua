@@ -35,7 +35,7 @@ map("i", "<C-h>",  "<C-W>", {}) -- for tmux
 
 
 -- Remove search highlighting when pressing ESC
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>noh<CR>')
 
 
 -- Exit terminal mode with double escape
@@ -52,8 +52,6 @@ map("n", "<C-j>",      "<C-w>j",            { desc = "Focus down"         })
 map("n", "<C-k>",      "<C-w>k",            { desc = "Focus up"           })
 map("n", "<C-l>",      "<C-w>l",            { desc = "Focus right"        })
 map("n", "<C-h>",      "<C-w>h",            { desc = "Focus left"         })
-
-
 
 map("n", "<C-S-j>",    "<C-w>+",            { desc = "Resize down"        })
 map("n", "<C-S-k>",    "<C-w>-",            { desc = "Resize up"          })
