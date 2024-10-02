@@ -30,6 +30,7 @@
 - betterlockscreen (aur)
 
 # Desktop
+- gnome-shell
 - pyprland (aur)
 - blueman
 - rofi-wayland
