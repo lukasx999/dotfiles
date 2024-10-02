@@ -110,6 +110,22 @@ local map = vim.keymap.set
             -- end
 
 
+            local lspconfig = require("lspconfig")
+
+            -- lspconfig.clangd.setup({
+            --     cmd = {
+            --         "clangd",
+            --         "--background-index",
+            --         "--suggest-missing-includes",
+            --         "--clang-tidy",
+            --         "-Wall",
+            --         "--header-insertion=iwyu"
+            --     },
+            --     -- on_init = custom_init,
+            --     -- on_attach = function() end,
+            --     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "hpp" },
+            --
+            -- })
 
 
 
@@ -170,7 +186,7 @@ local map = vim.keymap.set
 
                     symbol_in_winbar = {  -- alternative to barbecue nvim
 
-                        enable = true,
+                        enable = false,
                         separator = " › ",
                         hide_keyword = false,
                         color_mode = true,

@@ -5,6 +5,7 @@
             'andymass/vim-matchup',  -- Better %
             enabled = true,
             config = function()
+                vim.cmd[[let g:matchup_matchparen_enabled = 0]]
             end,
         },
 

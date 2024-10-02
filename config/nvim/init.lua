@@ -1,6 +1,5 @@
 
 require("options") -- config dir is in runtimepath
-require("neovide") -- neovide options
 require("autocmds") -- autocmds
 require("mappings") -- keymaps
 

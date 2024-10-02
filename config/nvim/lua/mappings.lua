@@ -98,10 +98,9 @@ map("n", "<leader>tw", "<cmd>set wrap!<CR>",                               { des
 map("n", "<leader>tc", "<cmd>set cursorcolumn!<CR>",                       { desc = "Cursorcolumn"  })
 map("n", "<leader>tI", "<cmd>set cursorline!<CR>",                         { desc = "Cursorline"    })
 map("n", "<leader>tl", "<cmd>set number!<CR><cmd>set relativenumber!<CR>", { desc = "Line numbers"  })
---vim.keymap.set("n", "<leader>te", "<cmd>Barbecue toggle<CR>", { desc = "barbecue" })
 
 
-vim.keymap.set("n", "<leader>tO", "<cmd>execute 'set colorcolumn=' . (&colorcolumn == '' ? '80' : '')<CR>", { desc = "Colorcolumn", silent = true })
+map("n", "<leader>tO", "<cmd>execute 'set colorcolumn=' . (&colorcolumn == '' ? '80' : '')<CR>", { desc = "Colorcolumn", silent = true })
 
 
 
@@ -123,21 +122,16 @@ end
 
 -- minimize ui
 local toggle_all = function()
+
     toggle_diagnostics()
     vim.cmd("set number!")
     vim.cmd("set relativenumber!")
     vim.cmd("IBLToggle")
     vim.cmd("ColorizerToggle")
-    -- vim.cmd("BeaconToggle")
-    vim.cmd("GitGutterDisable")
-    vim.cmd("Lspsaga winbar_toggle")
-    vim.cmd("ScrollbarToggle")
-    --vim.cmd("execute 'set colorcolumn=' . (&colorcolumn == '' ? '80' : '') ")
+    -- vim.cmd("Lspsaga winbar_toggle")
+    if vim.opt.laststatus._value == 3 then vim.cmd "set laststatus=0" else vim.cmd "set laststatus=3" end
+
 end
-
-
-
-
 
 -- minimize ui
 vim.keymap.set("n", "<leader>tm", toggle_all, { desc = "Minimize UI", silent = true })
@@ -153,47 +147,13 @@ vim.keymap.set("n", "<leader>ll", toggle_diagnostics, { desc = "Toggle LSP", sil
 
 
 -- keep visual selection when using >/<
-vim.keymap.set("v", ">", ">gv", { silent = true })
-vim.keymap.set("v", "<", "<gv", { silent = true })
+map("v", ">", ">gv", { silent = true })
+map("v", "<", "<gv", { silent = true })
 
-
-
--- centering cursor on:
--- half page up/down
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true })
-
--- full page up/down
-vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true })
-vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true })
-
--- other mappings:
--- C-e C-y move screen without moving cursor
-
-
--- search
-vim.keymap.set("n", "n", "nzzzv", { silent = true })
-vim.keymap.set("n", "N", "Nzzzv", { silent = true })
-
-
-
--- Remove/Add braces to indented statements in C code
-
-vim.keymap.set("v", "ö", "\
-:g_[a-z]*\\s(.*)$_norm A {<CR>\
-gv\
-:g_;$_norm o}\
-:noh<CR>\
-''\
-", { silent = false })
-
-
-vim.keymap.set("v", "Ö", "\
-:g_{$_norm $xx\
-gv\
-:g_}$_norm dd\
-", { silent = false })
--- :g_{$_norm $dT)x\
-
-
-
+-- centering cursor:
+map("n", "<C-d>", "<C-d>zz", { silent = true })
+map("n", "<C-u>", "<C-u>zz", { silent = true })
+map("n", "<C-f>", "<C-f>zz", { silent = true })
+map("n", "<C-b>", "<C-b>zz", { silent = true })
+map("n", "n",     "nzzzv",   { silent = true })
+map("n", "N",     "Nzzzv",   { silent = true })

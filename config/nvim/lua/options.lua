@@ -1,50 +1,23 @@
---[[
-
-vim.opt for options
-vim.cmd for commands
-vim.fn for vimscript functions
-
---]]
-
-
-
 
 -- vim.opt.guicursor = { 'a:ver25' }  -- cursor is beam in all modes
 -- vim.opt.guicursor = "" -- cursor is block in all modes
 
-
-
--- Vim Options
-
--- use :options
-vim.opt.number = true
---vim.opt.numberwidth = 2
+vim.opt.number         = true
 vim.opt.relativenumber = true
---vim.opt.ruler = true
+vim.opt.numberwidth    = 4
 
+vim.opt.cursorline     = true
+vim.o.cursorlineopt    = "both"  -- both, number, screenline
+vim.opt.cursorcolumn   = false
+vim.opt.splitbelow     = true
+vim.opt.splitright     = true
+vim.opt.wrap           = false
 
-
-vim.opt.cursorline = true
---vim.o.cursorlineopt = "number"  -- both, number, screenline
---vim.opt.cursorcolumn = true
-
---vim.opt.numberwidth = 3
-
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
-vim.opt.wrap       = false
-
-
--- indenting
-
--- set tabs to spaces
-vim.opt.expandtab   = true -- convert tabs to spaces
-vim.opt.tabstop     = 4 -- only for opening/closing files
-vim.opt.shiftwidth  = 4
-vim.opt.softtabstop = 4
-
-vim.opt.smartindent = true
+vim.opt.expandtab      = true -- convert tabs to spaces
+vim.opt.tabstop        = 4 -- only for opening/closing files
+vim.opt.shiftwidth     = 4 -- 2 (tab size)
+vim.opt.softtabstop    = 4
+vim.opt.smartindent    = true
 
 
 
@@ -83,23 +56,18 @@ vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
 
 -- sync system clipboard
-vim.opt.clipboard = "unnamedplus"
-
-vim.opt.scrolloff = 8  -- 5
-
-
-vim.opt.virtualedit = "block" -- keep highlighting on lines that are not of the same length, in visual block mode
-
-vim.opt.inccommand  = "split" -- create new window for search results in global sub (%s)
-
-vim.opt.ignorecase  = true
-vim.opt.smartcase   = true
-
+vim.opt.clipboard     = "unnamedplus"
+vim.opt.scrolloff     = 8
+vim.opt.virtualedit   = "block" -- keep highlighting on lines that are not of the same length, in visual block mode
+vim.opt.inccommand    = "split" -- create new window for search results in global sub (%s)
+vim.opt.ignorecase    = true
+vim.opt.smartcase     = true
 vim.opt.termguicolors = true -- better, gui-like colors
 
 
--- disable nvim intro
+-- disable nvim splashscreen
 -- vim.opt.shortmess:append "sI"
+vim.opt.shortmess:append "I"
 
 
 
@@ -165,15 +133,10 @@ vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 
 
-
-
-
 vim.opt.laststatus = 3  -- global status bar
---vim.cmd("highlight WinSeparator guibg=None")
-
-vim.opt.showmode   = true -- disable mode indicator (using lualine)
-
-
+vim.opt.showmode   = false -- disable mode indicator (using lualine)
+vim.opt.ruler      = false -- bottom right numbers
+vim.opt.showcmd    = false -- bottom right output of keys
 
 vim.opt.autochdir  = true  -- automatically change cwd to root of file
 
@@ -190,4 +153,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 vim.opt.incsearch = true -- start searching before pressing enter
 vim.opt.hlsearch  = false  -- Highlight search results
-

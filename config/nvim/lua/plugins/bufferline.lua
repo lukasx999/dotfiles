@@ -7,14 +7,8 @@ return {
     enabled = false,
 
     event = "VeryLazy",
-    --event = "LazyLoad",
-
-    --after = "catppuccin",
 
     config = function()
-
-        vim.opt.termguicolors = true
-
 
         require("bufferline").setup({
             options = {
@@ -35,7 +29,7 @@ return {
                 --separator_style = "thick",
 
                 show_buffer_icons = true,
-                show_close_icon = true,
+                show_close_icon = false,
                 enforce_regular_tabs = false,
                 always_show_bufferline = true,
                 sort_by = 'insert_after_current',
