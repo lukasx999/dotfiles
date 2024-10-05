@@ -5,29 +5,85 @@ return {
         require("lualine").setup({
             options = {
                 theme = "auto",
-                -- theme = "horizon",
-
-                -- theme = "gruvbox",
-                -- theme = "gruvbox_dark",
-                -- theme = "gruvbox-material",
-                -- theme = "base16",
-                -- theme = "ayu_dark",
-                -- theme = "solarized_dark",
-                --theme = 'tokyonight',
                 -- component_separators = { left = "", right = "" },
                 -- section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
-                section_separators = { left = "", right = "" },
-            },
-            sections = {
-                lualine_a = { "mode" },
-                -- lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_b = { "branch" },
-                lualine_c = { "filename", "filesize" },
+                section_separators   = { left = "", right = "" },
+                fmt = string.lower,
+                globalstatus = true,
 
-                lualine_x = { "encoding", "fileformat", "filetype" },
+            },
+
+
+            -- winbar = {
+            --     lualine_a = {},
+            --     lualine_b = {},
+            --     lualine_c = {'filename'},
+            --     lualine_x = {},
+            --     lualine_y = {},
+            --     lualine_z = {}
+            -- },
+
+            -- inactive_winbar = {
+            --     lualine_a = {},
+            --     lualine_b = {},
+            --     lualine_c = {'filename'},
+            --     lualine_x = {},
+            --     lualine_y = {},
+            --     lualine_z = {}
+            -- };
+
+            extensions = {
+                'quickfix',
+                'oil',
+                'lazy',
+                'man',
+                'mason',
+                'symbols-outline',
+            },
+
+
+            sections = {
+
+                lualine_a = {
+                    {
+                        "mode",
+                        icons_enabled = true,
+                        fmt = function(str)
+                            return str:sub(1, 3):lower()
+                        end,
+                        icon = "",
+                    },
+                },
+                lualine_b = { },
+                lualine_c = {
+
+                    {
+                        "filename",
+                        file_status = true,
+                    },
+
+                    "filesize" },
+
+
+                lualine_x = {
+                    {
+                        "filetype",
+                        colored   = true,
+                        icon_only = false,
+                        icon = { align = 'right' },
+                    },
+
+                },
+
                 lualine_y = { "searchcount", "selectioncount", "progress" },
                 lualine_z = { "location" },
+
+                -- lualine_b = { "branch", "diff", "diagnostics" },
+                -- lualine_x = { "encoding", "fileformat", "filetype" },
+                -- lualine_y = { "searchcount", "selectioncount", "progress" },
+                -- lualine_z = { "location" },
+
             },
         })
     end,

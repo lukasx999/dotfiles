@@ -1,5 +1,12 @@
 
 
+-- Delete all buffers except current
+vim.api.nvim_create_user_command(
+  "DeleteAllBuffersExceptCurrent",
+    [[%bd|e#]],
+  { bang = false, nargs = "*" }
+)
+
 
 
 
@@ -34,6 +41,8 @@ vim.api.nvim_create_user_command(
   "lua Create_scratch_buffer(<q-args>)",
   { bang = false, nargs = "*", complete = "shellcmd" }
 )
+
+
 
 
 

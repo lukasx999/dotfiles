@@ -19,8 +19,8 @@ from getpass import getuser
 
 mod = "mod4"
 # terminal = guess_terminal()
-# terminal = "kitty"
-terminal = "alacritty"
+terminal = "kitty"
+# terminal = "alacritty"
 browser = "firefox"
 launcher = "rofi -show drun"
 screenshot = f"flameshot gui --clipboard --path /home/{getuser()}/Pictures/Screenshots"
@@ -403,10 +403,10 @@ screens = [
                     markup = True,
                     urgent_alert_method = 'text',
                     urgent_text = '#f7768e',
-                    highlight_method = 'block',  # border, block, text, line
+                    highlight_method = 'line',  # border, block, text, line
                     highlight_color = ['#000000', '#414868'],  # Only on line highlighting
                     this_current_screen_border = '#c0caf5',  # #7aa2f7
-                    block_highlight_text_color = '#000000',  # highlight color when using block highlighting
+                    # block_highlight_text_color = '#000000',  # highlight color when using block highlighting
                 ),
 
 
@@ -422,7 +422,7 @@ screens = [
                 # Spacer
                 widget.Spacer(),
 
-                # Task List
+                # Window List
                 # widget.TaskList(
                 #     markup_focused = "",
                 #     border = "#000000",

@@ -7,21 +7,16 @@ return {
 
     config = function()
 
-        vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+        local oil = require("oil")
 
-        -- floating window
-        vim.keymap.set("n", "+", "<cmd>lua require('oil').open_float('.')<CR>", { noremap = true, silent = true })
-
-
+        vim.keymap.set("n", "-", function() oil.open()          end, { desc = "Open parent directory" })
+        vim.keymap.set("n", "+", function() oil.open_float('.') end, { noremap = true, silent = true  })
 
         -- Run a shell command on the current selected file
         local function runcmd()
 
-            local oil = require("oil")
-
             local bufnr = vim.api.nvim_get_current_buf()
             local dir = oil.get_current_dir(bufnr)
-
 
             local input = vim.fn.input("Command: ")
             if input == "" then return end
@@ -29,7 +24,7 @@ return {
             local current = oil.get_cursor_entry()
 
             local cmd = string.format("%s %s%s", input, dir, current.name)
-            create_scratch_buffer(cmd)
+            Create_scratch_buffer(cmd)
 
             -- print(current.parsed_name)
             -- for key, value in pairs(current) do print(key) end
@@ -51,7 +46,7 @@ return {
         local detail = true
 
 
-        -- split
+        -- SPLIT
         vim.keymap.set("n", "ü", function()
             vim.cmd("vsplit | wincmd l | vertical resize -30")
             -- open in non detailed view

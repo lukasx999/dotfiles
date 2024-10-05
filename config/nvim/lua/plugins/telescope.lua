@@ -10,16 +10,16 @@
         },
         config = function()
 
-            local actions = require("telescope.actions")
-            local builtin = require("telescope.builtin")
-            local extensions = require("telescope").extensions
+            local actions        = require("telescope.actions")
+            local builtin        = require("telescope.builtin")
+            local extensions     = require("telescope").extensions
             local load_extension = require("telescope").load_extension
 
 
 
             local ivy_theme_config = {
-                theme = "ivy",
-                previewer = true,
+                theme         = "ivy",
+                previewer     = true,
                 layout_config = { height = 0.5 },
                 preview_title = "",
                 results_title = "",
@@ -33,18 +33,17 @@
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
             -- vim.keymap.set("n", "<C-p>",      builtin.find_files, { desc = "Find files" })
             -- vim.keymap.set("n", "<C-o>", builtin.oldfiles, { desc = "Recent files" })
-            vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Recent files" })
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
-            vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Grep string" })
-            vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "buffers" })
+            vim.keymap.set("n", "<leader>fo", builtin.oldfiles,    { desc = "Recent files" })
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep,   { desc = "Live grep"    })
+            vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Grep string"  })
+            vim.keymap.set('n', '<leader>fb', builtin.buffers,     { desc = "buffers"      })
 
-            vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags,   { desc = "Help tags"    })
 
-
-            vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
-            vim.keymap.set("n", "<leader>fC", builtin.command_history, { desc = "Command history" })
-            vim.keymap.set("n", "<leader>ft", builtin.colorscheme, { desc = "Set theme" })
-            vim.keymap.set("n", "<leader>fH", builtin.highlights, { desc = "Highlight groups" })
+            vim.keymap.set("n", "<leader>fc", builtin.commands,        { desc = "Commands"         })
+            vim.keymap.set("n", "<leader>fC", builtin.command_history, { desc = "Command history"  })
+            vim.keymap.set("n", "<leader>ft", builtin.colorscheme,     { desc = "Set theme"        })
+            vim.keymap.set("n", "<leader>fH", builtin.highlights,      { desc = "Highlight groups" })
 
             vim.keymap.set("n", "<leader>fi", "<cmd>Telescope file_browser<CR>", { desc = "Browse files" })
 

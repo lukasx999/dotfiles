@@ -24,7 +24,7 @@ vim.opt.smartindent    = true
 
 -- experimental
 vim.opt.swapfile     = false
-vim.opt.signcolumn   = "yes"
+vim.opt.signcolumn   = "yes" -- no - left empty column
 
 vim.opt.updatetime   = 250 --write to disk
 vim.opt.timeoutlen   = 600 -- which-key popup -- old: 300
@@ -67,7 +67,9 @@ vim.opt.termguicolors = true -- better, gui-like colors
 
 -- disable nvim splashscreen
 -- vim.opt.shortmess:append "sI"
-vim.opt.shortmess:append "I"
+vim.opt.shortmess:append "IW"
+-- I ... disable splashscreen
+-- W ... disable "written" message
 
 
 

@@ -31,6 +31,7 @@
 
 # Desktop
 - gnome-shell
+- gnome-tweaks
 - pyprland (aur)
 - blueman
 - rofi-wayland

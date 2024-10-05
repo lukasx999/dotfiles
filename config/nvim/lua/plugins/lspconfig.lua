@@ -84,6 +84,7 @@ local map = vim.keymap.set
 
             -- Peek
             -- map("n", "K",          "<cmd>Lspsaga hover_doc<CR>",            { desc = "Hover"                         }),
+            map("n", "ä",          "K",                                     { desc = "Open manpage"                  }),
             map("n", "K",          lsp.hover,                               { desc = "Hover"                         }),
             map("n", "<leader>lp", "<cmd>Lspsaga peek_definition<CR>",      { desc = "Peek definition"               }),
             map("n", "<leader>lP", "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Peek type definition"          }),
