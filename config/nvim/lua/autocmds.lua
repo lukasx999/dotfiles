@@ -67,7 +67,8 @@ vim.api.nvim_create_user_command(
 -- Auto f-strings in Python
 -- Treesitter automatic Python format strings
 -- Automatically puts an `f` before your string if you type `{`
-vim.api.nvim_create_augroup("py-fstring", { clear = true })
+
+--[[ vim.api.nvim_create_augroup("py-fstring", { clear = true })
 vim.api.nvim_create_autocmd("InsertCharPre", {
     pattern = { "*.py" },
     group = "py-fstring",
@@ -94,7 +95,7 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
         -- Otherwise, make the string a format string
         vim.api.nvim_input("<Esc>m'" .. row + 1 .. "gg" .. col + 1 .. "|if<Esc>`'la")
     end,
-})
+}) ]]
 
 
 
@@ -174,13 +175,15 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function(event)
 
         local oil = require("oil")
-
+        vim.cmd(string.format("cd %s", oil.get_current_dir())) -- cd to oil dir
 
         local function enter()
 
             -- local bufnr = vim.api.nvim_get_current_buf()
             -- local dir = oil.get_current_dir(bufnr)
             local current = oil.get_cursor_entry()
+
+            print(vim.inspect(current))
 
             if current == nil then return end  -- No files in dir
 
