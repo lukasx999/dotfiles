@@ -183,8 +183,6 @@ vim.api.nvim_create_autocmd("FileType", {
             -- local dir = oil.get_current_dir(bufnr)
             local current = oil.get_cursor_entry()
 
-            print(vim.inspect(current))
-
             if current == nil then return end  -- No files in dir
 
             if current.type == "directory" then

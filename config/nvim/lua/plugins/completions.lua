@@ -40,7 +40,7 @@ return {
         },
         --event = "InsertEnter",
         config = function()
-            local cmp = require("cmp")
+            local cmp     = require("cmp")
             local lspkind = require("lspkind")
             local luasnip = require("luasnip")
 
@@ -48,7 +48,6 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load()
 
             cmp.setup({
-
                 view = {
                     -- entries = "custom" -- can be "custom", "wildmenu" or "native"
                     entries = {
