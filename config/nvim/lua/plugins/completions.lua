@@ -10,6 +10,21 @@ return {
     },
 
 
+    -- {
+    --     'ray-x/lsp_signature.nvim',
+    --     config = function()
+    --         require'lsp_signature'.setup({
+    --             floating_window = true,
+    --             floating_window_above_cur_line = false,
+    --
+    --             hint_enable = false,
+    --             handler_opts = {
+    --                 border = "none"
+    --             },
+    --         })
+    --     end,
+    -- },
+
 
 
     {
@@ -25,6 +40,7 @@ return {
             "ray-x/cmp-treesitter",
 
             "hrsh7th/cmp-nvim-lsp-signature-help",
+
             "hrsh7th/cmp-nvim-lsp-document-symbol",
 
             -- "hrsh7th/cmp-emoji",
@@ -48,6 +64,10 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load()
 
             cmp.setup({
+
+                -- dont automatically select the first item
+                preselect = cmp.PreselectMode.None,
+
                 view = {
                     -- entries = "custom" -- can be "custom", "wildmenu" or "native"
                     entries = {
@@ -96,6 +116,7 @@ return {
                     -- documentation = false,
                 },
 
+                -- override for simple ui
                 window = {
                     completion = {
                         scrollbar = false,
@@ -150,6 +171,7 @@ return {
                     { name = "treesitter" },
 
                     { name = "nvim_lsp_signature_help" },
+
                     -- { name = "calc" },
                     -- { name = "dotenv" },
                 }),

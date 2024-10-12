@@ -169,7 +169,7 @@
             })
 
             -- load_extension("file_browser")
-            -- load_extension("ui-select")
+            load_extension("ui-select")
             load_extension("fzf")
             -- require("telescope").load_extension("noice")
 
