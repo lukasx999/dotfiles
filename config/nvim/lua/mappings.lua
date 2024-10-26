@@ -129,6 +129,7 @@ local toggle_all = function()
     vim.cmd("IBLToggle")
     vim.cmd("ColorizerToggle")
     -- vim.cmd("Lspsaga winbar_toggle")
+    ---@diagnostic disable-next-line: undefined-field
     if vim.opt.laststatus._value == 3 then vim.cmd "set laststatus=0" else vim.cmd "set laststatus=3" end
 
 end

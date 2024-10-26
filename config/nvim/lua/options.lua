@@ -81,10 +81,12 @@ vim.opt.shortmess:append "IW"
 
 
 ---- Auto indent on empty line.
+--[[
 vim.keymap.set('n', 'i', function ()
     return string.match(vim.api.nvim_get_current_line(), '%g') == nil
         and 'cc' or 'i'
 end, {expr=true, noremap=true})
+]]
 
 
 
@@ -154,4 +156,4 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 vim.opt.incsearch = true -- start searching before pressing enter
-vim.opt.hlsearch  = false  -- Highlight search results
+vim.opt.hlsearch  = true  -- Highlight search results
