@@ -1,9 +1,10 @@
 
-# colorscript random
 
 
 # Syncwd.nvim
 source ~/Scripts/syncwd/changecwd.sh
+
+
 
 
 # History
@@ -23,7 +24,7 @@ SAVEHIST=$HISTSIZE
 
 
 setopt interactive_comments  # Interactive Comments
-setopt auto_cd  # cding into dirs by just typing the name
+setopt auto_cd               # cding into dirs by just typing the name
 # setopt NO_CASE_GLOB  # Case insensitive globbing (wildcard expansion, eg ls ~/D*)
 
 # Corrections after sending commands
@@ -37,55 +38,13 @@ setopt CORRECT_ALL
 
 
 
-
-
-
 # LF
-LFCD="/home/lukas/.config/lf/lfcd.sh"
-if [ -f "$LFCD" ]; then
-  source "$LFCD"
-fi
-
-alias lf='lfcd'
-
-
-
-# Ranger
-export RANGER_LOAD_DEFAULT_RC=FALSE
-# alias ranger='export TERM="kitty"; ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"; export TERM="xterm-256color"'
-
-# Ranger Icons
-export RANGER_DEVICONS_SEPARATOR=' '
-
-# function ranger {
-#     local IFS=$'\t\n'
-#     local tempfile="$(mktemp -t tmp.XXXXXX)"
-#     local ranger_cmd=(
-#         command
-#         ranger
-#         --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-#     )
+# LFCD="/home/lukas/.config/lf/lfcd.sh"
+# if [ -f "$LFCD" ]; then
+#   source "$LFCD"
+# fi
 #
-#     ${ranger_cmd[@]} "$@"
-#     if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-#         cd -- "$(cat "$tempfile")" || return
-#     fi
-#     command rm -f -- "$tempfile" 2>/dev/null
-# }
-
-
-
-
-function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-
+# alias lf='lfcd'
 
 
 
@@ -114,14 +73,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
 
-
-
-
-# Keybinds
-#bindkey -s '^x' '$EDITOR\n'
-#bindkey -s '^o' 'lf\n'
-#bindkey -s '^y' 'lf\n'
-#bindkey -s '^f' 'fuzzy\n'
 
 
 
@@ -338,12 +289,6 @@ function mkcd() {
 
 
 
-
-
-
-
-
-
 # VI Mode Config
 function zvm_config() {
     ZVM_VI_EDITOR=$EDITOR # vi mode editor for vv in normal mode
@@ -373,7 +318,7 @@ function zvm_config() {
 # Plugins
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-# source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
 source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
@@ -385,7 +330,7 @@ source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
 
 
-bindkey -e  # Emacs keybindings
+# bindkey -e  # Emacs keybindings
 
 
 
@@ -401,6 +346,8 @@ bindkey -e  # Emacs keybindings
 # delete words with C - <backspace>
 bindkey '^H' backward-kill-word
 
+
+alias manfzf="apropos . | fzf | xargs man"
 
 
 
@@ -418,3 +365,12 @@ eval "$(direnv hook zsh)"
 # NVM
 # source /usr/share/nvm/init-nvm.sh
 
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/lukas/.opam/opam-init/init.zsh' ]] || source '/home/lukas/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration

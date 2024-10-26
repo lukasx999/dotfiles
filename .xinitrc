@@ -11,12 +11,13 @@
 # exec qtile start
 
 # -- DWM --
-picom -b &
-xwallpaper --zoom $(cat ~/.wallpaper) &
-xset r rate 300 50 &
-exec dwm
+# picom -b &
+# xwallpaper --zoom $(cat ~/.wallpaper) &
+# xset r rate 300 50 &
+# exec dwm
+# while [ : ]; do dwm; done
 
 # -- GNOME --
-# export XDG_SESSION_TYPE=x11
-# export GDK_BACKEND=x11
-# exec gnome-session
+export XDG_SESSION_TYPE=x11
+export GDK_BACKEND=x11
+exec gnome-session
