@@ -1,2 +1,0 @@
-make
-/home/lukas/Code/C/DataStructures
