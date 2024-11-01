@@ -110,7 +110,7 @@
                         -- dynamic_preview_title = false,
 
                         -- Also find directories, not just files
-                        find_command  = {"fd", "--type", "f", "--type", "d"},
+                        -- find_command  = {"fd", "--type", "f", "--type", "d"},
                         theme         = "ivy",
                         previewer     = true,
                         layout_config = { height = 0.3 }, -- 0.5
