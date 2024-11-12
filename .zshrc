@@ -178,29 +178,19 @@ zstyle ':completion:*' group-name ''
 
 
 
-# Symbols for PS1
-#Ω ∮ Δ δ ∇ φ ψ
 
 
-# PS1
-# PROMPT="%F{#b7bdf8}%B%1~ %F{#8aadf4}ψ %b%f"
+
+# Luke Smith PS1
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
 
-
-
+#Ω ∮ Δ δ ∇ φ ψ
 NEWLINE=$'\n'
-# PROMPT="${NEWLINE}%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
-PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
-
-
-
-
-# No Newline
-# PROMPT="%B%{$fg[magenta]%}%~      %{$fg[yellow]%}    ${NEWLINE}$%{$reset_color%}%b "
-
-# RPROMPT=""
-
+SYMBOL="*"
+PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
+RPROMPT="%(?..%?)" # Show exit code only if not 0
+# setopt PRINT_EXIT_VALUE # Always print out exit code
 
 
 # PlatformIO core
@@ -231,6 +221,7 @@ alias emacstui='emacs -nw'  # Open emacs in terminal session
 
 alias vim='nvim'
 alias vi='command vim'
+alias vimdiff='nvim -d'
 
 # alias py='ipython'
 alias py='ptpython'
@@ -253,6 +244,7 @@ alias \
         lla='eza -Al --icons=auto' \
         la='ls -A'
         # ll='ls -lh' \
+
 
 
 # Etc
