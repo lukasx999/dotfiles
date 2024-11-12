@@ -77,6 +77,7 @@
 # Package managers
 - npm
 - rustup
+- evcxr\_repl (Rust REPL)
 - python-pip
 
 # Programming
