@@ -78,6 +78,7 @@
 - npm
 - rustup
 - evcxr\_repl (Rust REPL)
+- bacon (Rust Testrunner)
 - python-pip
 
 # Programming
