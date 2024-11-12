@@ -1,27 +1,10 @@
-
-
-
 # Syncwd.nvim
 source ~/Scripts/syncwd/changecwd.sh
-
-
-
 
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
-
-
-
-# Doom Emacs scripts
-# export PATH=$HOME/.config/emacs/bin:$PATH
-
-
-# Set Qt6 theme
-# export QT_QPA_PLATFORMTHEME="qt6ct"
-
-
 
 setopt interactive_comments  # Interactive Comments
 setopt auto_cd               # cding into dirs by just typing the name
@@ -34,6 +17,8 @@ setopt CORRECT_ALL
 # Old VI Mode
 #bindkey -v # enable vi mode
 #KEYTIMEOUT=1 # instantly switch to normal mode (no delay)
+
+# bindkey -e  # Emacs keybindings (put this at bottom)
 
 
 
@@ -48,40 +33,23 @@ setopt CORRECT_ALL
 
 
 
-
-
-
 # Reload X11 Settings
 alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.6 && setxkbmap de'
-
-
-
 
 # Default Applications
 export TERMINAL="kitty"
 export BROWSER="firefox"
-# export TERM=xterm-256color
-export TERM=xterm-kitty
+export TERM=xterm-256color
 export PAGER="less"
-
-# For quickfind
-export IMGVIEWER="nsxiv"
-export PDFVIEWER="mupdf"
 
 # Editors
 export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
 
-
-
-
 # export BAT_THEME="base16-256"
 unset BAT_THEME  # Only way to get colored man pages
 alias man="batman"
-
-
-
 
 # source /usr/share/fzf/completion.zsh
 # source /usr/share/fzf/key-bindings.zsh
@@ -172,26 +140,15 @@ zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 # Grouping results
 zstyle ':completion:*' group-name ''
 
-
-
-
-
-
-
-
-
-
 # Luke Smith PS1
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
-
-#Ω ∮ Δ δ ∇ φ ψ
+# Ω ∮ Δ δ ∇ φ ψ
 NEWLINE=$'\n'
 SYMBOL="*"
 PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 RPROMPT="%(?..%?)" # Show exit code only if not 0
 # setopt PRINT_EXIT_VALUE # Always print out exit code
-
 
 # PlatformIO core
 alias PIO_UP='pio run --upload-port /dev/ttyACM0 -t upload'
@@ -199,21 +156,13 @@ alias PIO_MON='pio run --upload-port /dev/ttyACM0 -t monitor'
 alias PIO='pio run --upload-port /dev/ttyACM0 -t upload && pio run --upload-port /dev/ttyACM0 -t monitor'
 alias PIO_CDB='pio run -t compiledb'
 
-
-
 # Etc
 alias sqlite='sqlite3'
 alias pypy='pypy3'
 
-
-
 # Custom Scripts
 alias wpfzf="$HOME/Scripts/wpfzf/wpfzf.sh"
 alias quickfind="source $HOME/Scripts/quickfind/quickfind.sh"
-
-
-
-
 
 #alias cat='bat -pp'
 alias neovide='neovide --no-fork 2>/dev/null'
@@ -222,13 +171,6 @@ alias emacstui='emacs -nw'  # Open emacs in terminal session
 alias vim='nvim'
 alias vi='command vim'
 alias vimdiff='nvim -d'
-
-# alias py='ipython'
-alias py='ptpython'
-
-# Wayland compatibility
-alias qutebrowser='qutebrowser --qt-flag ignore-gpu-blacklist --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4'
-alias spotify='spotify --enable-features=UseOzonePlatform --ozone-platform=wayland'
 
 # File listing
 alias \
@@ -245,8 +187,6 @@ alias \
         la='ls -A'
         # ll='ls -lh' \
 
-
-
 # Etc
 alias \
         rm='rm -vi' \
@@ -261,12 +201,7 @@ alias \
 
 # Other fun stuff
 alias weather='curl wttr.in'
-alias pipes='~/software-etc/pipes.sh/pipes.sh'
-alias qlobe='clear; for ((;;)); do for i in {1..360}; do tput cup 0 0; ruby ~/software-etc/qlobe/src/qlobe.rb $i; sleep 0.1; done; done;'
-alias shark='~/software-etc/display3d/target/release/display3d ~/software-etc/display3d/resources/blahaj.obj -t 0,0,5.5'
-alias tock='~/software-etc/tock/target/release/tock'
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
-
 
 # make dir, then cd into it
 function mkcd() {
@@ -274,10 +209,6 @@ function mkcd() {
     mkdir "$dir"
     cd "$dir"
 }
-
-
-
-
 
 
 
@@ -291,19 +222,7 @@ function zvm_config() {
 
     # Disable the cursor style feature
     ZVM_CURSOR_STYLE_ENABLED=false
-
-
 }
-
-
-# The plugin will auto execute this zvm_after_lazy_keybindings function
-# function zvm_after_lazy_keybindings() {
-# }
-
-
-
-
-
 
 
 
@@ -322,12 +241,6 @@ source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
 
 
-# bindkey -e  # Emacs keybindings
-
-
-
-
-
 # alias quickfind='. ~/Desktop/Code/Sh/quickfind'
 # bindkey -s '^f' 'quickfind\n'
 
@@ -335,34 +248,8 @@ source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 # bindkey -s '^x' '$EDITOR\n'
 # bindkey -s '^y' 'lf\n'
 
-# delete words with C - <backspace>
-bindkey '^H' backward-kill-word
-
-
-alias manfzf="apropos . | fzf | xargs man"
-
-
+bindkey '^H' backward-kill-word # delete words with C - <backspace>
 
 
 # Set up direnv
 eval "$(direnv hook zsh)"
-
-
-
-# Set up Starship prompt
-# export STARSHIP_CONFIG=~/.config/starship/starship.toml
-# eval "$(starship init zsh)"
-
-
-# NVM
-# source /usr/share/nvm/init-nvm.sh
-
-
-
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-[[ ! -r '/home/lukas/.opam/opam-init/init.zsh' ]] || source '/home/lukas/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
