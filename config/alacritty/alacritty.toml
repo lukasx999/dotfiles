@@ -1,13 +1,13 @@
 
+[general]
 # import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
 # import = ["~/.config/alacritty/themes/gruvbox_light.toml"]
 # import = ["~/.config/alacritty/themes/tokyo_night_storm.toml"]
 # import = ["~/.config/alacritty/themes/tokyo_night.toml"]
 # import = ["~/.config/alacritty/themes/github_dark.toml"]
-
 # import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
-import = ["~/.config/alacritty/themes/carbonfox.toml"]
-# import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
+# import = ["~/.config/alacritty/themes/carbonfox.toml"]
+import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
 # import = ["~/.config/alacritty/themes/one_dark.toml"]
 
 
@@ -15,7 +15,9 @@ live_config_reload = true
 working_directory = "None"
 
 
-[shell]
+[terminal]
+osc52 = "CopyPaste"
+[terminal.shell]
 program = "/usr/bin/zsh"
 # args = ["-1"]
 
@@ -83,8 +85,6 @@ unfocused_hollow = false
 save_to_clipboard = true
 
 
-[terminal]
-osc52 = "CopyPaste"
 
 
 
