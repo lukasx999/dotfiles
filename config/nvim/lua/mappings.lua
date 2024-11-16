@@ -145,6 +145,11 @@ vim.keymap.set("n", "<leader>ll", toggle_diagnostics, { desc = "Toggle LSP", sil
 -- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 -- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
+vim.keymap.set("n", "<leader>p", [["0p]])
+
+-- Quickfix List
+vim.keymap.set("n", "[q", "<cmd>cp<CR>", { silent = true, desc = "Next Item in Quickfix"     })
+vim.keymap.set("n", "]q", "<cmd>cn<CR>", { silent = true, desc = "Previous Item in Quickfix" })
 
 
 -- keep visual selection when using >/<
