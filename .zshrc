@@ -1,6 +1,8 @@
 # Syncwd.nvim
 source ~/Scripts/syncwd/changecwd.sh
 
+PATH=$PATH:~/.cargo/bin
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
@@ -46,19 +48,14 @@ export PAGER="less"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
+alias vimpager="nvimpager"
 
-# export BAT_THEME="base16-256"
-unset BAT_THEME  # Only way to get colored man pages
-alias man="batman"
+# export MANPAGER="moar"
+# export MANPAGER="bat -p -l man"
+# alias man='man -P "bat -p -l man"'
+alias man="batman"  # AUR: bat-extras
 
-# source /usr/share/fzf/completion.zsh
-# source /usr/share/fzf/key-bindings.zsh
-
-
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
-
+source <(fzf --zsh)  # Set up fzf key bindings and fuzzy completion
 
 export FZF_DEFAULT_OPTS=" \
 --color=gutter:#24283b \
@@ -72,11 +69,6 @@ export FZF_DEFAULT_OPTS=" \
 --marker='' \
 --prompt='' \
 --pointer=''"
-
-
-
-
-
 
 
 # Load colors
@@ -230,25 +222,18 @@ function zvm_config() {
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-# source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
 source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
-# (zsh-completions is also installed)
 
-# source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# autopair-init
-
-
-
-
-# alias quickfind='. ~/Desktop/Code/Sh/quickfind'
-# bindkey -s '^f' 'quickfind\n'
-
-# bindkey -s '^n' 'tmux\n'
-# bindkey -s '^x' '$EDITOR\n'
 # bindkey -s '^y' 'lf\n'
 
 bindkey '^H' backward-kill-word # delete words with C - <backspace>
+
+# autoload -Uz select-word-style
+# select-word-style bash
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # Dont treat filepaths as words
+
+
 
 
 # Set up direnv
