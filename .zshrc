@@ -191,7 +191,7 @@ alias \
         ..='cd ..' \
         ...='cd .. && cd ..'
 
-# Other fun stuff
+# Other
 alias weather='curl wttr.in'
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
@@ -222,7 +222,7 @@ function zvm_config() {
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
 
 # bindkey -s '^y' 'lf\n'
