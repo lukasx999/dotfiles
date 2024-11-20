@@ -123,6 +123,7 @@ PYTHON:
 # Neovim
 
 - tree-sitter-cli (treesitter executable not found error)
+- nvimpager (aur)
 - stylua
 - python-isort
 - php (needed for mason)
