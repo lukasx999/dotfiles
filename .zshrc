@@ -147,7 +147,7 @@ zstyle ':completion:*' group-name ''
 NEWLINE=$'\n'
 SYMBOL="*"
 PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
-RPROMPT="%(?..%?)" # Show exit code only if not 0
+# RPROMPT="%(?..%?)" # Show exit code only if not 0
 # setopt PRINT_EXIT_VALUE # Always print out exit code
 
 # PlatformIO core
@@ -213,17 +213,17 @@ function mkcd() {
 
 
 
-# VI Mode Config
-function zvm_config() {
-    ZVM_VI_EDITOR=$EDITOR # vi mode editor for vv in normal mode
-    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-    ZVM_KEYTIMEOUT=0
-    ZVM_INIT_MODE=sourcing
-    ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
-
-    # Disable the cursor style feature
-    ZVM_CURSOR_STYLE_ENABLED=false
-}
+# # VI Mode Config
+# function zvm_config() {
+#     ZVM_VI_EDITOR=$EDITOR # vi mode editor for vv in normal mode
+#     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+#     ZVM_KEYTIMEOUT=0
+#     ZVM_INIT_MODE=sourcing
+#     ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
+#
+#     # Disable the cursor style feature
+#     ZVM_CURSOR_STYLE_ENABLED=false
+# }
 
 
 
