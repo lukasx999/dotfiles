@@ -82,12 +82,20 @@ compinit
 _comp_options+=(globdots) #include hidden files
 
 # Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect '^[[Z' reverse-menu-complete
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '^[[Z' reverse-menu-complete  # Shift-Tab
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
+
+# Emacs bindings
+bindkey -M menuselect '^B' vi-backward-char
+bindkey -M menuselect '^P' vi-up-line-or-history
+bindkey -M menuselect '^F' vi-forward-char
+bindkey -M menuselect '^N' vi-down-line-or-history
+
+
 
 
 # case insensitive matching
@@ -151,6 +159,7 @@ alias PIO_CDB='pio run -t compiledb'
 # Etc
 alias sqlite='sqlite3'
 alias pypy='pypy3'
+alias rust='evcxr'
 
 # Custom Scripts
 alias wpfzf="$HOME/Scripts/wpfzf/wpfzf.sh"
@@ -219,9 +228,9 @@ function zvm_config() {
 
 
 # Plugins
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
 
@@ -238,3 +247,12 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # Dont treat filepaths as words
 
 # Set up direnv
 eval "$(direnv hook zsh)"
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/lukas/.opam/opam-init/init.zsh' ]] || source '/home/lukas/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
