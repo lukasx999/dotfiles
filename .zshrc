@@ -57,18 +57,18 @@ alias man="batman"  # AUR: bat-extras
 
 source <(fzf --zsh)  # Set up fzf key bindings and fuzzy completion
 
-export FZF_DEFAULT_OPTS=" \
---color=gutter:#24283b \
---color=border:#24283b \
---color=bg+:#2f334d \
---color=info:#82aaff \
---color=fg+:#c8d3f5 \
---border=rounded \
---preview-window '-3' \
---info=default \
---marker='' \
---prompt='' \
---pointer=''"
+# export FZF_DEFAULT_OPTS=" \
+# --color=gutter:#24283b \
+# --color=border:#24283b \
+# --color=bg+:#2f334d \
+# --color=info:#82aaff \
+# --color=fg+:#c8d3f5 \
+# --border=rounded \
+# --preview-window '-3' \
+# --info=default \
+# --marker='' \
+# --prompt='' \
+# --pointer=''"
 
 
 # Load colors
