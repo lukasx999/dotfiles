@@ -9,11 +9,16 @@
             end,
         },
 
+
         {
-            "metalelf0/jellybeans-nvim",
+            "wtfox/jellybeans.nvim",
+            priority = 1000,
             config = function()
+                require("jellybeans").setup()
             end,
         },
+
+
 
         {
             "masar3141/mono-jade",
