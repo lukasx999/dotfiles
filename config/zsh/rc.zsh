@@ -148,7 +148,7 @@ zstyle ':completion:*' group-name ''
 
 # Ω ∮ Δ δ ∇ φ ψ
 NEWLINE=$'\n'
-SYMBOL="*"
+SYMBOL="()"
 PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 # RPROMPT="%(?..%?)" # Show exit code only if not 0
 # setopt PRINT_EXIT_VALUE # Always print out exit code
@@ -241,7 +241,16 @@ source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 
+# bindkey -v  # Vim bindings
 bindkey -e  # Emacs keybindings (put this at bottom)
+
+# Open current command in $VISUAL or $EDITOR (emacs bindings)
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+
+
 
 
 # bindkey -s '^y' 'lf\n'
