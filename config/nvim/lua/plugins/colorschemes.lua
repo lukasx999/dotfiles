@@ -9,6 +9,18 @@
             end,
         },
 
+        {
+            "metalelf0/jellybeans-nvim",
+            config = function()
+            end,
+        },
+
+        {
+            "masar3141/mono-jade",
+            config = function()
+            end,
+        },
+
 
         {
             "ellisonleao/gruvbox.nvim",
