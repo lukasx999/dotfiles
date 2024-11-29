@@ -55,7 +55,10 @@ return {
                         icon = "",
                     },
                 },
-                lualine_b = { },
+
+                -- lualine_b = {},
+                lualine_b = { "branch", "diff", "diagnostics" },
+
                 lualine_c = {
 
                     {

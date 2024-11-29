@@ -7,5 +7,9 @@ return {
                 Norm = { cmd = "norm" },
             },
         })
+
+        -- Replaces `norm` with `Norm` in command mode
+        vim.cmd[[cnoreabbrev norm Norm]]
+
     end,
 }
