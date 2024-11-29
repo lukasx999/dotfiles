@@ -236,6 +236,7 @@ function mkcd() {
 # source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # source /usr/share/zsh/plugins/zsh-fzf-plugin/fzf.plugin.zsh
 
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
