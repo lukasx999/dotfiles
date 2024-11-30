@@ -149,7 +149,7 @@ zstyle ':completion:*' group-name ''
 # Ω ∮ Δ δ ∇ φ ψ
 NEWLINE=$'\n'
 SYMBOL=">"
-PROMPT="%B%{$fg[blue]%}%~      %{$fg[red]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
+PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 # RPROMPT="%(?..%?)" # Show exit code only if not 0
 # setopt PRINT_EXIT_VALUE # Always print out exit code
 
