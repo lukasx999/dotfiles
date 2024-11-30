@@ -1,15 +1,17 @@
 
 [general]
 # import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
+# import = ["~/.config/alacritty/themes/rose-pine.toml"]
+import = ["~/.config/alacritty/themes/rose-pine-moon.toml"]
 # import = ["~/.config/alacritty/themes/gruvbox_light.toml"]
 # import = ["~/.config/alacritty/themes/tokyo_night_storm.toml"]
 # import = ["~/.config/alacritty/themes/tokyo_night.toml"]
 # import = ["~/.config/alacritty/themes/github_dark.toml"]
 # import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
 # import = ["~/.config/alacritty/themes/carbonfox.toml"]
-import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
+# import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
 # import = ["~/.config/alacritty/themes/one_dark.toml"]
-
+# import = ["~/.config/alacritty/themes/jellybeans.toml"]
 
 live_config_reload = true
 working_directory = "None"
