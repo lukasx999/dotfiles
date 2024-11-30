@@ -1,6 +1,5 @@
     return {
 
-
         {
             'andymass/vim-matchup',  -- Better %
             enabled = true,
@@ -8,8 +7,6 @@
                 vim.cmd[[let g:matchup_matchparen_enabled = 0]]
             end,
         },
-
-
 
         {
             "nvim-treesitter/nvim-treesitter",
@@ -26,9 +23,6 @@
                         enable = true,              -- mandatory, false will disable the whole extension
                         -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
                     },
-
-
-
 
                     ensure_installed = {
                         "c",
