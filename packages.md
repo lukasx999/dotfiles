@@ -1,23 +1,20 @@
 # Shell tools
-- ripgrep (grep multiple files)
-- jq (json processor)
-- fd (better find)
-- entr (tracks file changes)
+
+- fzf
+- ripgrep
+- jq
+- fd
+- entr
 - tree
-- tldr (better man entries)
-- bc (calculator lang)
-- imagemagick (image manipulation)
-- locate (GNU locate for finding files)
-- nmap (network scanner)
+- tldr
+- bc
+- imagemagick
+- locate
+- nmap
 - inetutils
-
-# Extra Shell tools
 - sshfs (mount filesystems over ssh)
-
-# Etc
-- man-pages (man pages for glibc)
-- python-pillow (for kitty image previews)
-- gitleaks (scans git repos for secrets)
+- man-pages
+- gitleaks
 
 # X11
 - dunst
@@ -44,80 +41,41 @@
   - hyprwayland-scanner
 - wl-clipboard
 - hyprlock
-
-- qtile
 - rofi
 - picom
 - flameshot
-- kitty
 
 
-# Fun shell programs
+# Etc
+
 - catimg (terminal image viewer)
 - htop
 - gotop
-- neofetch
+- fastfetch
 - onefetch
 - eza
 - bat
 - bat-extras
 
-# Useful shell programs
-- ptpython
-- fzf
-- ranger
-- yazi (file manager)
-
 # Desktop Tools
+
 - mupdf
-- qt6ct (qt6 configuration tool)
-- texlive (group for latex)
+- texlive
 
 
-# Package managers
-- npm
+# Programming
+
 - rustup
 - evcxr\_repl (Rust REPL)
 - bacon (Rust Testrunner)
-- python-pip
-
-# Programming
-- zig
 - igcc (aur) (interactive gcc)
-- docker
-- strace (show syscalls of binary)
-- nasm
-- gdb
- - gf2-git (aur) (gdb frontend)
-- clang
-- dart
-- node
-- nvm (aur) (node version manager)
-- flutter (aur)
-- python-devtools
-- mypy (python static type checker)
-- cython
-
+- strace
+- ltrace
 - valgrind
-- raylib
-- glib2-devel
-- glib (aur)
-
-- python-sqlalchemy
-
-- sbcl (common lisp)
-- cffi (dynamic library loading)
-
-
-
-# Microcontrollers
+- nasm
+- gf2-git (aur) (gdb frontend)
+- sbcl
 - platformio-core
-- platformio-core-udev
-- esp-idf (aur)
-
-PYTHON:
-- pyside6
-- pyside6-tools
 
 
 # Neovim
@@ -132,26 +90,10 @@ PYTHON:
 
 - python-pynvim
 
-# Apps
-
-- libreoffice-fresh
-- kicad (electronics schematics)
-- anki (aur) (flashcards)
-- boomer-git (aur) (x11 screen zoom)
-- emacs
-- nautilus
-- spotify
-- steam
-- gimp
-- anki (aur)
-- openrgb
-  - i2c-tools
-- visual-studio-code-bin (aur)
-
-- rpi-imager
-- lxappearance
 
 # Themes
+
+- lxappearance (for configuring gtk themes)
 - tokyonight-gtk-theme-git (aur)
 - gruvbox-dark-gtk (aur)
 - papirus-icon-theme
@@ -159,6 +101,7 @@ PYTHON:
 - bibata-cursor-theme (aur)
 
 # Fonts
+
 - ttf-ubuntu-font-family
 - ttf-dejavu
 - ttf-jetbrains-mono
@@ -170,15 +113,3 @@ PYTHON:
 - ttf-roboto-mono-nerd
 - ttf-inconsolata-nerd
 - noto-fonts
-
-
-# ZSH
-- zsh
-- zsh-vi-mode (aur)
-
-
-
-# Not using anymore
-
-
-- gromit-mpx (aur) (screen annotation tool)
