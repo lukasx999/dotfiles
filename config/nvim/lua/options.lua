@@ -37,7 +37,6 @@ vim.opt.breakindent  = true  -- preserve indent on wrapped lines for blocks of t
 -- whitespaces
 vim.opt.list      = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
---vim.opt.listchars = { trail = '·' }
 
 
 -- go to previous/next line with h,l,left arrow and right arrow
@@ -96,8 +95,8 @@ end, {expr=true, noremap=true})
 -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr   = "nvim_treesitter#foldexpr()"
+-- vim.wo.foldmethod = "expr"
+-- vim.wo.foldexpr   = "nvim_treesitter#foldexpr()"
 
 -- Dont collapse folds on start
 vim.cmd"set nofoldenable"

@@ -5,7 +5,7 @@
         {
             "0xAdk/full_visual_line.nvim",
             --keys = 'V',
-            enabled = true,
+            enabled = false,
             config = function()
                 require("full_visual_line").setup({})
             end,
