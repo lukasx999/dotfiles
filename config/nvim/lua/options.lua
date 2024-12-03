@@ -36,7 +36,38 @@ vim.opt.breakindent  = true  -- preserve indent on wrapped lines for blocks of t
 
 -- whitespaces
 vim.opt.list      = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.listchars = {
+    eol      = '↲',
+    tab      = '» ',
+    trail    = '·',
+    extends  = '<',
+    precedes = '>',
+    conceal  = '┊',
+    nbsp     = '␣',
+}
+
+-- vim.opt.listchars = {
+--     eol = '↲',
+--     tab = '»·',
+--     space = '␣',
+--     trail = '-',
+--     extends = '☛',
+--     precedes = '☚',
+--     conceal = '┊',
+--     nbsp = '☠',
+-- }
+
+
+
+
+
+
+
+
+
+
 
 
 -- go to previous/next line with h,l,left arrow and right arrow
@@ -89,14 +120,8 @@ end, {expr=true, noremap=true})
 
 
 
--- USE TREESITTER BASED FOLDING
--- old
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+vim.opt.foldmethod = "manual"
 
-
--- vim.wo.foldmethod = "expr"
--- vim.wo.foldexpr   = "nvim_treesitter#foldexpr()"
 
 -- Dont collapse folds on start
 vim.cmd"set nofoldenable"
@@ -116,6 +141,7 @@ vim.cmd"set foldlevelstart=99"
 
 
 
+--[[
 -- Remember folds
 vim.api.nvim_create_autocmd({"BufWinLeave"}, {
   pattern = {"*.*"},
@@ -127,6 +153,8 @@ vim.api.nvim_create_autocmd({"BufWinEnter"}, {
   desc = "load view (folds), when opening file",
   command = "silent! loadview"
 })
+]]
+
 
 
 
@@ -153,6 +181,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
 --]]
 
 
+-- vim.opt.more = false
+vim.opt.linebreak = true -- cut off last char at a sensible location (only when using wrap)
 
 vim.opt.incsearch = true -- start searching before pressing enter
 vim.opt.hlsearch  = true  -- Highlight search results
