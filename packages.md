@@ -15,6 +15,7 @@
 - sshfs (mount filesystems over ssh)
 - man-pages
 - gitleaks
+- rlwrap
 
 # X11
 - dunst
