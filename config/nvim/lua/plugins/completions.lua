@@ -9,24 +9,6 @@ return {
         dependencies = { "rafamadriz/friendly-snippets" },
     },
 
-
-    -- {
-    --     'ray-x/lsp_signature.nvim',
-    --     config = function()
-    --         require'lsp_signature'.setup({
-    --             floating_window = true,
-    --             floating_window_above_cur_line = false,
-    --
-    --             hint_enable = false,
-    --             handler_opts = {
-    --                 border = "none"
-    --             },
-    --         })
-    --     end,
-    -- },
-
-
-
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
