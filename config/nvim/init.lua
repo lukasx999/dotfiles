@@ -1,7 +1,8 @@
 
 require("options") -- config dir is in runtimepath
-require("autocmds") -- autocmds
-require("mappings") -- keymaps
+require("autocmds")
+require("mappings")
+require("commands")
 
 -- Sets up lazy.nvim
 

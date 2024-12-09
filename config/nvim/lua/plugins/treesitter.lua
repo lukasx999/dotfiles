@@ -20,8 +20,7 @@
                 require("nvim-treesitter.configs").setup({
 
                     matchup = {
-                        enable = true,              -- mandatory, false will disable the whole extension
-                        -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
+                        enable = true,
                     },
 
                     ensure_installed = {
@@ -44,17 +43,7 @@
                         "rasi",
                         "markdown",
                         "markdown_inline",
-                        "hyprlang",
                         "regex",
-                        -- "yaml",
-                        -- "yuck",
-                        -- "java",
-                        -- "r",
-                        -- "sql",
-                        -- "matlab",
-                        -- "go",
-                        --"latex",
-                        -- "rust",
                     },
 
                     auto_install = true,
@@ -84,22 +73,17 @@
 
                         move = {
                             enable = true,
-
                             goto_next_start = {
-                                ["<leader>mf"] = { query = "@function.outer", desc = "next function" },
-                                ["<leader>mc"] = { query = "@class.outer", desc = "next class" },
+                                ["<leader>mf"] = { query = "@function.outer",    desc = "next function"    },
+                                ["<leader>mc"] = { query = "@class.outer",       desc = "next class"       },
                                 ["<leader>md"] = { query = "@conditional.outer", desc = "next conditional" },
-                                ["<leader>ml"] = { query = "@loop.outer", desc = "next loop" },
-
-                                ["<leader>mm"] = { query = "@comment.outer", desc = "next comment" },
+                                ["<leader>ml"] = { query = "@loop.outer",        desc = "next loop"        },
                             },
                             goto_previous_start = {
-                                ["<leader>mF"] = { query = "@function.outer", desc = "previous function" },
-                                ["<leader>mC"] = { query = "@class.outer", desc = "previous class" },
+                                ["<leader>mF"] = { query = "@function.outer",    desc = "previous function"    },
+                                ["<leader>mC"] = { query = "@class.outer",       desc = "previous class"       },
                                 ["<leader>mD"] = { query = "@conditional.outer", desc = "previous conditional" },
-                                ["<leader>mL"] = { query = "@loop.outer", desc = "previous loop" },
-
-                                ["<leader>mM"] = { query = "@comment.outer", desc = "previous comment" },
+                                ["<leader>mL"] = { query = "@loop.outer",        desc = "previous loop"        },
                             },
                         },
 
@@ -110,45 +94,32 @@
                             lookahead = true,
 
                             keymaps = {
-
-                                --["af"] = "@function.outer",
-                                --["if"] = "@function.inner",
-                                --["ac"] = "@class.outer",
-                                ["af"] = { query = "@function.outer", desc = "outer function" },
-                                ["if"] = { query = "@function.inner", desc = "inner function" },
-                                ["ac"] = { query = "@class.outer", desc = "outer class" },
-                                ["ic"] = { query = "@class.inner", desc = "inner class" },
+                                ["af"] = { query = "@function.outer",    desc = "outer function"    },
+                                ["if"] = { query = "@function.inner",    desc = "inner function"    },
+                                ["ac"] = { query = "@class.outer",       desc = "outer class"       },
+                                ["ic"] = { query = "@class.inner",       desc = "inner class"       },
                                 ["ad"] = { query = "@conditional.outer", desc = "outer conditional" },
                                 ["id"] = { query = "@conditional.inner", desc = "inner conditional" },
-                                ["al"] = { query = "@loop.outer", desc = "outer loop" },
-                                ["il"] = { query = "@loop.inner", desc = "inner loop" },
-
-                                ["am"] = { query = "@comment.outer", desc = "outer comment" },
-                                ["im"] = { query = "@comment.inner", desc = "inner comment" },
-
-
-                                -- You can also use captures from other query groups like `locals.scm`
-                                --["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-
+                                ["al"] = { query = "@loop.outer",        desc = "outer loop"        },
+                                ["il"] = { query = "@loop.inner",        desc = "inner loop"        },
+                                -- ["ab"] = { query = "@block.outer",       desc = "outer block"       },
+                                -- ["ib"] = { query = "@block.inner",       desc = "inner block"       },
+                                ["am"] = { query = "@comment.outer",     desc = "outer comment"     },
+                                ["im"] = { query = "@comment.inner",     desc = "inner comment"     },
                             },
                             selection_modes = {
-
-                                --["@parameter.outer"] = "v", -- charwise
-
-                                ["@function.outer"] = "V",  -- linewise
-                                ["@function.inner"] = "V",  -- linewise
-                                ["@class.outer"] = "V",  -- linewise
-                                ["@class.inner"] = "V",  -- linewise
-                                ["@conditional.outer"] = "V",  -- linewise
-                                ["@conditional.inner"] = "V",  -- linewise
-                                ["@loop.outer"] = "V",  -- linewise
-                                ["@loop.inner"] = "V",  -- linewise
-
-                                ["@comment.outer"] = "V",  -- linewise
-                                ["@comment.inner"] = "V",  -- linewise
-
-                                --["@class.outer"] = "<c-v>", -- blockwise
-
+                                ["@function.outer"]    = "V",
+                                ["@function.inner"]    = "V",
+                                ["@class.outer"]       = "V",
+                                ["@class.inner"]       = "V",
+                                ["@conditional.outer"] = "V",
+                                ["@conditional.inner"] = "V",
+                                ["@loop.outer"]        = "V",
+                                ["@loop.inner"]        = "V",
+                                -- ["@block.outer"]        = "V",
+                                -- ["@block.inner"]        = "V",
+                                ["@comment.outer"]     = "V",
+                                ["@comment.inner"]     = "V",
                             },
                             -- If you set this to `true` (default is `false`) then any textobject is
                             -- extended to include preceding or succeeding whitespace. Succeeding
@@ -192,11 +163,6 @@
             "nvim-treesitter/nvim-treesitter-context",
             config = function()
                 vim.api.nvim_set_hl(0, "TreesitterContextBottom", { bg = "none" })
-                --vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "none" })
-                --vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { fg="#45475b", bg = "none" })
-
-                --vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-                --vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
 
                 vim.keymap.set("n", "<leader>tC", "<cmd>TSContextToggle<CR>", { desc = "Context" })
 

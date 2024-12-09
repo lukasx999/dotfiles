@@ -11,7 +11,6 @@ return {
                 section_separators   = { left = "", right = "" },
                 fmt = string.lower,
                 globalstatus = true,
-
             },
 
 
@@ -50,7 +49,8 @@ return {
                         "mode",
                         icons_enabled = true,
                         fmt = function(str)
-                            return str:sub(1, 3):lower()
+                            -- return str:sub(1, 3):lower()
+                            return str:sub(1, 1):lower()
                         end,
                         icon = "",
                     },

@@ -13,6 +13,7 @@ local tele = require("telescope.builtin")
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,     { desc = "Goto declaration"     }),
             -- vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,  { desc = "Goto declaration"     }),
             vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,     { desc = "Goto type definition"     }),
+            vim.keymap.set("n", "<leader>lT", vim.lsp.buf.typehierarchy,     { desc = "Show type hierarchy"     }),
 
             -- Shows symbols in all files of workspace
             vim.keymap.set('n', '<leader>ls', tele.lsp_workspace_symbols, { desc = 'List workspace symbols' }),
