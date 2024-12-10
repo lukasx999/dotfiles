@@ -15,47 +15,62 @@
             config = function()
                 require("mason-lspconfig").setup({
                     ensure_installed = {
-                        "lua_ls",
-                        "bashls",
-                        "ts_ls",
-                        "clangd",
-                        "jsonls",
-                        "asm_lsp",
-                        "ruff",
-                        "jedi_language_server",
-                        "cssls",
-                        "ast_grep",
-                        "arduino_language_server",
-                        "cmake",
-                        "html",
-                        "yamlls",
-                        -- "basedpyright",
-                        -- "ltex",
-                        -- "marksman",
-                        --"pylsp",
-                        -- "nil_ls",
-                        -- "rnix",
-                        -- "tsserver",
-                        -- "asm_lsp",
-                        -- "cpplint",
-                        -- "cpptools",
-                        -- "harper-ls",
-                        -- "rubocop",
-                        -- "rust_analyzer",
-                        -- "sqlls",
-                        -- "matlab_ls",
-                        -- "autotools_ls",
-                        -- "jinja_lsp",
-                        -- "hdl_checker",
-                        -- "gopls",
-                        -- "awk_ls",
+                        --[[ This will just break the setup on other machines ]]
                     },
                 })
+
                 require("mason-lspconfig").setup_handlers({
                     function(server_name)
                         require("lspconfig")[server_name].setup({})
                     end,
                 })
+
+                local lspconfig = require("lspconfig")
+
+                lspconfig.rust_analyzer.setup({
+                    settings = {
+                        ['rust-analyzer'] = {
+
+                            -- cargo = {
+                            --     -- target = "aarch64-linux-gnu"
+                            --     target = "aarch64"
+                            -- },
+
+                            diagnostics = {
+                                enable = true;
+                            }
+                        }
+                    }
+                })
+
+
+                lspconfig.clangd.setup({
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--suggest-missing-includes",
+                        "--clang-tidy",
+                        "--log=verbose",
+                        "--header-insertion=iwyu"
+                    },
+
+                    init_options = {
+                        fallbackFlags = {
+                            '-std=c99',
+                            "-pedantic",
+                            "-Wall",
+                            "-Wextra"
+                        },
+                    },
+
+                    -- on_init = custom_init,
+                    -- on_attach = function() end,
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+
+                })
+
+
+
             end,
         },
 
