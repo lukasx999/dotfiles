@@ -34,9 +34,11 @@
                     settings = {
                         ['rust-analyzer'] = {
 
-                            -- cargo = {
-                            --     target = "aarch64-unknown-linux-gnu" -- list targets with `rustc --print target-list`
-                            -- },
+                            cargo = {
+                                -- list targets with `rustc --print target-list`
+                                target = "aarch64-unknown-linux-gnu"
+                                -- target = "x86_64-unknown-linux-gnu"
+                            },
 
                             diagnostics = {
                                 enable = true

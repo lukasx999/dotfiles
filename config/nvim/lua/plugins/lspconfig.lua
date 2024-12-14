@@ -18,7 +18,7 @@ return {
         -- Shows symbols in all files of workspac
         vim.keymap.set('n', '<leader>ls', tele.lsp_workspace_symbols, { desc = 'List workspace symbols' })
 
-        -- Show all occurances of current symbo
+        -- Show all occurances of current symbol
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references, { desc = "References of symbol" })
         -- map('n', '<leader>lR', tele.lsp_references,                     { desc = 'Show References of symbol'     })
 
@@ -26,6 +26,10 @@ return {
         vim.keymap.set("n", "K",          vim.lsp.buf.hover,                       { desc = "Hover"                })
         vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<CR>",      { desc = "Peek definition"      })
         vim.keymap.set("n", "<leader>lP", "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Peek type definition" })
+
+        -- TODO: parameters to setqflist
+        vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Send diagnostics to qflist" })
+        -- TODO: have a look add vim.diagnostic
 
         -- Auto Format on write
         -- vim.api.nvim_create_autocmd("LspAttach", {

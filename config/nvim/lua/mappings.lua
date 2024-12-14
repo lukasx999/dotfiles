@@ -148,8 +148,9 @@ vim.keymap.set("n", "<leader>ll", toggle_diagnostics, { desc = "Toggle LSP", sil
 vim.keymap.set("n", "<leader>p", [["0p]])
 
 -- Quickfix List
-vim.keymap.set("n", "[q", "<cmd>cp<CR>", { silent = true, desc = "Next Item in Quickfix"     })
-vim.keymap.set("n", "]q", "<cmd>cn<CR>", { silent = true, desc = "Previous Item in Quickfix" })
+vim.keymap.set("n", "<leader>q", "<cmd>cope<CR>", { silent = true, desc = "Open Quickfixlist"         })
+vim.keymap.set("n", "[q", "<cmd>cp<CR>",          { silent = true, desc = "Next Item in Quickfix"     })
+vim.keymap.set("n", "]q", "<cmd>cn<CR>",          { silent = true, desc = "Previous Item in Quickfix" })
 
 
 -- keep visual selection when using >/<
@@ -163,3 +164,10 @@ vim.keymap.set("n", "<C-f>", "<C-f>zz", { silent = true })
 vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true })
 vim.keymap.set("n", "n",     "nzzzv",   { silent = true })
 vim.keymap.set("n", "N",     "Nzzzv",   { silent = true })
+
+
+
+-- Executing Lua
+vim.keymap.set("n", "<leader>X", "<cmd>so %<CR>",   { silent = true, desc = "Execute current file" })
+vim.keymap.set("n", "<leader>x", ":.lua<CR>",       { silent = true, desc = "Execute current line" })
+vim.keymap.set("v", "<leader>x", ":lua<CR>",        { silent = true, desc = "Execute current visual selection" })
