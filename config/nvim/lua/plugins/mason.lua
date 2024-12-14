@@ -13,6 +13,7 @@
             "williamboman/mason-lspconfig.nvim",
             dependencies = { "mason.nvim" },
             config = function()
+
                 require("mason-lspconfig").setup({
                     ensure_installed = {
                         --[[ This will just break the setup on other machines ]]
@@ -25,6 +26,8 @@
                     end,
                 })
 
+
+
                 local lspconfig = require("lspconfig")
 
                 lspconfig.rust_analyzer.setup({
@@ -32,13 +35,13 @@
                         ['rust-analyzer'] = {
 
                             -- cargo = {
-                            --     -- target = "aarch64-linux-gnu"
-                            --     target = "aarch64"
+                            --     target = "aarch64-unknown-linux-gnu" -- list targets with `rustc --print target-list`
                             -- },
 
                             diagnostics = {
-                                enable = true;
-                            }
+                                enable = true
+                            },
+
                         }
                     }
                 })
@@ -65,7 +68,7 @@
 
                     -- on_init = custom_init,
                     -- on_attach = function() end,
-                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+                    filetypes = { "c", "h", "cpp", "hpp" },
 
                 })
 
