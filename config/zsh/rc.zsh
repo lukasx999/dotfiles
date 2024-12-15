@@ -249,6 +249,11 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
+# Remove the default of run-help being aliased to man
+unalias run-help
+# Use zsh's run-help, which will display information for zsh builtins.
+autoload run-help
+alias help=run-help
 
 
 
