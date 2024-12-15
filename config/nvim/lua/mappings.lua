@@ -109,14 +109,14 @@ vim.keymap.set("n", "<leader>tO", "<cmd>execute 'set colorcolumn=' . (&colorcolu
 -- Toogle diagnostics
 local diagnostics_active = true
 local toggle_diagnostics = function()
-  diagnostics_active = not diagnostics_active
-  if diagnostics_active then
-    --vim.api.nvim_echo({ { "Show diagnostics" } }, false, {})
-    vim.diagnostic.enable()
-  else
-    --vim.api.nvim_echo({ { "Disable diagnostics" } }, false, {})
-    vim.diagnostic.disable()
-  end
+    diagnostics_active = not diagnostics_active
+    if diagnostics_active then
+        --vim.api.nvim_echo({ { "Show diagnostics" } }, false, {})
+        vim.diagnostic.enable()
+    else
+        --vim.api.nvim_echo({ { "Disable diagnostics" } }, false, {})
+        vim.diagnostic.disable()
+    end
 end
 
 
@@ -171,3 +171,5 @@ vim.keymap.set("n", "N",     "Nzzzv",   { silent = true })
 vim.keymap.set("n", "<leader>X", "<cmd>so %<CR>",   { silent = true, desc = "Execute current file" })
 vim.keymap.set("n", "<leader>x", ":.lua<CR>",       { silent = true, desc = "Execute current line" })
 vim.keymap.set("v", "<leader>x", ":lua<CR>",        { silent = true, desc = "Execute current visual selection" })
+
+vim.keymap.set("n", "<leader>i", "gg=G''zz",          { silent = true, desc = "Auto-Indent entire file" })
