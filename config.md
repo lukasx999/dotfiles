@@ -1,5 +1,5 @@
 
-## Some personal configs for my devices
+## Configs for some of my personal devices
 
 ### Using VIA in chromium with Neo80
 
