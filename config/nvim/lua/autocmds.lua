@@ -253,10 +253,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
     end,
 })
-
-
-
--- save all unsaves changes in all buffers when unfocusing the window
--- autocmd('FocusLost', { pattern = '*', command = 'silent! wa' })
-
-

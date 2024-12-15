@@ -1,5 +1,4 @@
 
--- vim.opt.guicursor = { 'a:ver25' }  -- cursor is beam in all modes
 -- vim.opt.guicursor = "" -- cursor is block in all modes
 
 vim.opt.number         = true
@@ -18,8 +17,6 @@ vim.opt.tabstop        = 4 -- only for opening/closing files
 vim.opt.shiftwidth     = 4 -- 2 (tab size)
 vim.opt.softtabstop    = 4
 vim.opt.smartindent    = true
-
-
 
 
 -- experimental
