@@ -18,6 +18,7 @@
 - rlwrap
 
 # X11
+
 - dunst
 - xwallpaper
 - xclip
@@ -28,6 +29,7 @@
 - betterlockscreen (aur)
 
 # Desktop
+
 - gnome-shell
 - gnome-tweaks
 - pyprland (aur)
