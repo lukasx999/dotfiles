@@ -9,7 +9,12 @@ return {
 
         local oil = require("oil")
 
-        vim.keymap.set("n", "-", function() oil.open() end, { desc = "Open parent directory" })
+        vim.keymap.set("n", "-", function()
+            oil.open()
+            -- oil.discard_all_changes()
+        end, { desc = "Open parent directory" })
+
+
 
         -- Run a shell command on the current selected file
         local function runcmd()
@@ -42,9 +47,11 @@ return {
         local detail = true
 
 
-        -- SPLIT
-        vim.keymap.set("n", "ü", function()
-            vim.cmd("vsplit | wincmd l | vertical resize -30")
+        -- Split
+        vim.keymap.set("n", "+", function()
+            vim.cmd.vnew()
+            vim.api.nvim_win_set_width(0, 40)
+
             -- open in non detailed view
             require("oil").set_columns({ "icon" })
             detail = false
@@ -66,8 +73,9 @@ return {
                     return hls
                 end,
             },
-            {"size", highlight = "Special"},
-            {"mtime", highlight = "Number"},
+            -- { "type", icons = { file = "f", directory = "d" } },
+            { "size",  highlight = "Special" },
+            { "mtime", highlight = "Number"  },
             {
                 'icon',
                 add_padding = false,

@@ -1,4 +1,52 @@
 
+-- Code Runner
+
+--[[ vim.api.nvim_create_user_command(
+    "Run",
+    function()
+        vim.cmd.vnew()
+
+        local bufnr = 0
+
+        vim.fn.jobstart({"cargo", "run"}, {stdout_buffered = true,
+            on_stdout = function(_, data)
+            -- on_stderr = function(_, data)
+            if data then
+                vim.api.nvim_buf_set_lines(
+                    -- bufnr, 0, -1, false, { "foo", "bar", "baz" }
+                    bufnr, 0, -1, false, data
+                )
+            end
+        end})
+
+    end,
+    {}
+) ]]
+
+
+
+
+
+-- Terminal
+vim.api.nvim_create_autocmd('TermOpen', {
+    group    = vim.api.nvim_create_augroup('term-open', {clear = true}),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+        vim.cmd "startinsert"
+    end
+})
+
+vim.api.nvim_create_user_command(
+    "T",
+    function()
+        vim.cmd.new()
+        vim.cmd.term()
+        vim.api.nvim_win_set_height(0, 10)
+    end,
+    {}
+)
+
 
 
 
@@ -44,27 +92,7 @@ vim.api.nvim_create_user_command(
 
 
 
---Open Buildin terminal vertical mode
-vim.api.nvim_create_user_command("VT", 'vsplit | terminal bash -c "cd %:p:h;zsh"', { bang = false, nargs = "*" })
 
---Open Buildin terminal
-vim.api.nvim_create_user_command(
-    "T",
-    'split | resize 15 | terminal bash -c "cd %:p:h;zsh"',
-    { bang = true, nargs = "*" }
-)
-
--- Disable line numbers when in terminal mode
-vim.cmd("autocmd TermOpen * setlocal nonumber norelativenumber")
-
---
-vim.api.nvim_create_augroup('bufcheck', {clear = true})
-
--- start terminal in insert mode (terminal mode)
-vim.api.nvim_create_autocmd('TermOpen',     {
-    group    = 'bufcheck',
-    pattern  = '*',
-    command  = 'startinsert | set winfixheight'})
 
 
 
@@ -197,7 +225,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 
         if ( vim.bo.filetype == "oil" ) then
-            -- vim.keymap.set("n", "q", "<cmd>bd<cr>", { buffer = event.buf, silent = true })
             vim.keymap.set("n", "q", function() require("oil").close() end, { buffer = event.buf, silent = true })
         end
 

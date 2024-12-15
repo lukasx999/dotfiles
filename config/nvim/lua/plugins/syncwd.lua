@@ -3,7 +3,7 @@ return {
     config = function()
 
         require("syncwd").setup({
-            init = true,
+            init = false,
         })
 
     end,
