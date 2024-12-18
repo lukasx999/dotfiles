@@ -84,7 +84,7 @@ vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
 -- sync system clipboard
 vim.opt.clipboard     = "unnamedplus"
-vim.opt.scrolloff     = 8
+vim.opt.scrolloff     = 5 -- 8
 vim.opt.virtualedit   = "block" -- keep highlighting on lines that are not of the same length, in visual block mode
 vim.opt.inccommand    = "split" -- create new window for search results in global sub (%s)
 vim.opt.ignorecase    = true
