@@ -1,5 +1,7 @@
 return {
     "hedyhli/outline.nvim",
+    dependencies = "onsails/lspkind.nvim",
+
     lazy = true,
     cmd = { "Outline", "OutlineOpen" },
     keys = {
