@@ -143,13 +143,15 @@ zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 # Grouping results
 zstyle ':completion:*' group-name ''
 
-# Luke Smith PS1
-# PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
-
 # Ω ∮ Δ δ ∇ φ ψ
 NEWLINE=$'\n'
-SYMBOL=">"
-PROMPT="%B%{$fg[blue]%}%~      %{$fg[yellow]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
+
+# Get random prompt for each session
+SYMBOLS=("()" "[]" "#" ">" "|" ";" "*" Ω ∮ Δ δ ∇ φ ψ)
+rand=$((1 + $RANDOM % ${#SYMBOLS}))
+SYMBOL=${SYMBOLS[$rand]}
+
+PROMPT="%B%{$fg[blue]%}%~      %{$fg[magenta]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 # RPROMPT="%(?..%?)" # Show exit code only if not 0
 # setopt PRINT_EXIT_VALUE # Always print out exit code
 
