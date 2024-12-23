@@ -105,7 +105,7 @@ return {
             win_options = {
                 -- number = true,
                 -- relativenumber = true,
-                -- colorcolumn = 0,
+                colorcolumn = "0",
 
                 wrap          = false,
                 signcolumn    = "no",
@@ -116,12 +116,8 @@ return {
                 conceallevel  = 3,
                 concealcursor = "nvic",
             },
-            -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
             delete_to_trash = true,
-            -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
             skip_confirm_for_simple_edits = false,
-            -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
-            -- (:help prompt_save_on_select_new_entry)
             prompt_save_on_select_new_entry = true,
             -- Oil will automatically delete hidden buffers after this delay
             -- You can set the delay to false to disable cleanup entirely
@@ -135,14 +131,9 @@ return {
                 autosave_changes = false,
             },
 
-
-
             -- Set to `false` to disable, or "name" to keep it on the file names
             constrain_cursor = "name",  -- editable
 
-
-
-            -- Set to true to watch the filesystem for changes and reload oil
             experimental_watch_for_changes = true,
 
 
@@ -152,26 +143,26 @@ return {
             -- it will use the mapping at require("oil.actions").<name>
             -- Set to `false` to remove a keymap
             -- See :help oil-actions for a list of all available actions
-            keymaps = {
-                ["g?"]    = "actions.show_help",
-                ["<CR>"]  = "actions.select",
-                ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-                ["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-                ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
-                -- ["<C-p>"] = "actions.preview",
-                ["gz"]    = "actions.preview",
-                ["<C-c>"] = "actions.close",
-                ["<C-l>"] = "actions.refresh",
-                ["-"]     = "actions.parent",
-                -- ["_"] = "actions.open_cwd",
-                ["`"]     = "actions.cd",
-                ["~"]     = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
-                ["gs"]    = "actions.change_sort",
-                ["gx"]    = "actions.open_external",
-                ["g."]    = "actions.toggle_hidden",
-                ["g\\"]   = "actions.toggle_trash",
 
-                ["gd"]    = {
+            keymaps = {
+                ["g?"]       = { "actions.show_help", mode = "n" },
+                ["<CR>"]     =   "actions.select",
+                ["<C-s>"]    = { "actions.select",    opts = { vertical   = true } },
+                ["<C-h>"]    = { "actions.select",    opts = { horizontal = true } },
+                ["<C-t>"]    = { "actions.select",    opts = { tab        = true } },
+                ["gz"]       =   "actions.preview",
+                ["<C-c>"]    = { "actions.close",     mode = "n" },
+                ["<C-l>"]    =   "actions.refresh",
+                ["-"]        = { "actions.parent",      mode = "n" },
+                ["_"]        = { "actions.open_cwd",    mode = "n" },
+                ["`"]        = { "actions.cd",          mode = "n" },
+                ["~"]        = { "actions.cd",          opts = { scope = "tab" }, mode = "n" },
+                ["gs"]       = { "actions.change_sort", mode = "n" },
+                ["gx"]       =   "actions.open_external",
+                ["g."]       = { "actions.toggle_hidden", mode = "n" },
+                ["g\\"]      = { "actions.toggle_trash",  mode = "n" },
+
+                ["gd"] = {
                     desc = "Toggle file detail view",
                     callback = function()
                         detail = not detail
@@ -202,12 +193,8 @@ return {
                     return name == '..'
                 end,
 
-                -- Sort file names in a more intuitive order for humans. Is less performant,
-                -- so you may want to set to false if you work with large directories.
                 natural_order = true,
                 sort = {
-                    -- sort order can be "asc" or "desc"
-                    -- see :help oil-columns to see which columns are sortable
                     { "type", "asc" },
                     { "name", "asc" },
                 },

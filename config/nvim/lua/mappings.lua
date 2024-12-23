@@ -166,6 +166,8 @@ vim.keymap.set("n", "n",     "nzzzv",   { silent = true })
 vim.keymap.set("n", "N",     "Nzzzv",   { silent = true })
 
 
+vim.keymap.set("n", "<C-z>", "<C-y>", { silent = true })
+
 
 -- Executing Lua
 vim.keymap.set("n", "<leader>X", "<cmd>so %<CR>",   { silent = true, desc = "Execute current file" })
