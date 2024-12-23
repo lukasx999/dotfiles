@@ -22,18 +22,10 @@ return {
 
             require("mason-lspconfig").setup_handlers({
                 function(server_name)
-                    -- require("lspconfig")[server_name].setup({})
+                    require("lspconfig")[server_name].setup({})
 
-
-                    -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-                    -- require('lspconfig')[server_name].setup {
-                    --     capabilities = capabilities
-                    -- }
-
-                    local capabilities = require('blink.cmp').get_lsp_capabilities()
-                    require('lspconfig')[server_name].setup({ capabilities = capabilities })
-
-
+                    -- local capabilities = require('blink.cmp').get_lsp_capabilities()
+                    -- require('lspconfig')[server_name].setup({ capabilities = capabilities })
 
                 end,
             })
@@ -50,7 +42,7 @@ return {
 
                         cargo = {
                             -- list targets with `rustc --print target-list`
-                            target = "aarch64-unknown-linux-gnu"
+                            -- target = "aarch64-unknown-linux-gnu"
                             -- target = "x86_64-unknown-linux-gnu"
                         },
 

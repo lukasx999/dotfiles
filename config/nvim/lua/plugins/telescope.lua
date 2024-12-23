@@ -15,15 +15,6 @@
             local extensions     = require("telescope").extensions
             local load_extension = require("telescope").load_extension
 
-            -- local ivy_theme_config = {
-            --     theme         = "ivy",
-            --     previewer     = true,
-            --     layout_config = { height = 0.3 },
-            --     preview_title = "",
-            --     results_title = "",
-            -- },
-
-
             vim.keymap.set("n", "<leader>ff",       builtin.find_files,  { desc = "Find files"   })
             vim.keymap.set("n", "<leader>fo",       builtin.oldfiles,    { desc = "Recent files" })
             vim.keymap.set("n", "<leader>fg",       builtin.live_grep,   { desc = "Live grep"    })
@@ -80,20 +71,6 @@
                 extensions = {
 
                     fzf = {},
-                    -- fzf = {
-                    --     fuzzy = true,                    -- false will only do exact matching
-                    --     override_generic_sorter = true,  -- override the generic sorter default: true
-                    --     override_file_sorter    = true,  -- override the file sorter default: true
-                    --     case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                    --     -- case_mode = "ignore_case",        -- or "ignore_case" or "respect_case"
-                    --     -- the default case_mode is "smart_case"
-                    -- },
-
-                    -- ["ui-select"] = {
-                    --     require("telescope.themes").get_dropdown({ --[[ even more opts]] }),
-                    --     -- require("telescope.themes").get_ivy({}),
-                    -- },
-
 
                 },
             })
