@@ -1,4 +1,19 @@
 
+
+
+
+
+-- Restore cursor
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    group = vim.api.nvim_create_augroup('jump-last-position', { clear = true }),
+    command = [[norm! g`"]]
+})
+
+
+
+
+
+
 -- Code Runner
 
 --[[ vim.api.nvim_create_user_command(
