@@ -70,8 +70,17 @@ return {
         },
 
         sources = {
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
-            cmdline = {},
+            default = {  "lazydev", 'lsp', 'path', 'snippets', 'buffer' },
+            -- cmdline = {},
+            providers = {
+                lazydev = {
+                    name = "LazyDev",
+                    module = "lazydev.integrations.blink",
+                    -- make lazydev completions top priority (see `:h blink.cmp`)
+                    score_offset = 100,
+                },
+            },
+
         },
 
         signature = { enabled = true }
