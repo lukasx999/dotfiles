@@ -70,7 +70,8 @@ return {
         },
 
         sources = {
-            default = {  "lazydev", 'lsp', 'path', 'snippets', 'buffer' },
+            -- default = {  "lazydev", 'lsp', 'path', 'snippets', 'buffer' },
+            default = {  "lazydev", 'lsp', 'path', 'snippets' },
             -- cmdline = {},
             providers = {
                 lazydev = {

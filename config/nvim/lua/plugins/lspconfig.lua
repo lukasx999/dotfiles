@@ -7,9 +7,9 @@ return {
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,      { desc = "Rename symbol"   })
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,      { desc = "Format buffer"   })
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action"     })
-        vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition,  { desc = "Goto definition" })
 
-        -- ??
+        vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition,  { desc = "Goto definition" })
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition,  { desc = "Goto definition" })
         vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,     { desc = "Goto declaration"     })
         -- vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,  { desc = "Goto declaration"     })
         vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,     { desc = "Goto type definition"     })
