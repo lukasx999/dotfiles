@@ -2,6 +2,18 @@
 
 
 
+-- Disable line wrapping in manpages
+vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('manpages-rc', { clear = true }),
+    pattern = { "man" },
+    callback = function(event)
+        vim.cmd [[ set wrap! ]]
+        vim.keymap.set("n", "q", "<cmd>bw<CR>", { buffer = event.buf, silent = true })
+    end,
+})
+
+
+
 
 -- Restore cursor
 vim.api.nvim_create_autocmd('BufWinEnter', {
