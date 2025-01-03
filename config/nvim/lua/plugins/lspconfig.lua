@@ -80,7 +80,7 @@ return {
 
             --virtual_text = false,
             virtual_text = {
-                source = "if_many",
+                -- source = "if_many",
                 -- prefix = "󰍉", --   󰍉
                 spacing = 5,
                 --suffix = "suffix",

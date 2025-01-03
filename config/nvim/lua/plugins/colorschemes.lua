@@ -1,3 +1,5 @@
+local transparent = true
+
 return {
 
     {
@@ -53,7 +55,7 @@ return {
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
-                transparent_mode = false,
+                transparent_mode = transparent,
             })
         end,
     },
@@ -133,7 +135,7 @@ return {
                 styles = {
                     bold = true,
                     italic = true,
-                    transparency = true,
+                    transparency = transparent,
                 },
 
 
