@@ -6,6 +6,7 @@
 source ~/Scripts/syncwd/changecwd.sh
 
 PATH=$PATH:~/.cargo/bin
+PATH=$PATH:~/.opt
 
 # History
 HISTFILE=~/.zsh_history
@@ -38,13 +39,17 @@ setopt CORRECT_ALL
 
 
 
+alias gitpush!='git add . && git commit --allow-empty-message -am "" && git push -u origin main'
+
+
 # Reload X11 Settings
-alias RELOAD='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.6 && setxkbmap de'
+alias RELOADX='xset r rate 300 50 && xinput set-prop 9 "libinput Accel Speed" -0.6 && setxkbmap de'
 
 # Default Applications
 export TERMINAL="kitty"
 export BROWSER="firefox"
-export TERM=xterm-256color
+# export TERM=xterm-256color
+export TERM=tmux-256color
 export PAGER="less"
 
 # Editors
@@ -147,9 +152,10 @@ zstyle ':completion:*' group-name ''
 NEWLINE=$'\n'
 
 # Get random prompt for each session
-SYMBOLS=("()" "[]" "#" ">" "|" ";" "*" Ω ∮ Δ δ ∇ φ ψ)
-rand=$((1 + $RANDOM % ${#SYMBOLS}))
-SYMBOL=${SYMBOLS[$rand]}
+# SYMBOLS=("()" "[]" "#" ">" "|" ";" "*" Ω ∮ Δ δ ∇ φ ψ)
+# rand=$((1 + $RANDOM % ${#SYMBOLS}))
+# SYMBOL=${SYMBOLS[$rand]}
+SYMBOL=">"
 
 PROMPT="%B%{$fg[blue]%}%~      %{$fg[magenta]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 # RPROMPT="%(?..%?)" # Show exit code only if not 0
@@ -163,15 +169,11 @@ alias PIO_CDB='pio run -t compiledb'
 
 # Etc
 alias sqlite='sqlite3'
-alias pypy='pypy3'
 alias rust='evcxr'
 
 # Custom Scripts
-alias wpfzf="$HOME/Scripts/wpfzf/wpfzf.sh"
 alias quickfind="source $HOME/Scripts/quickfind/quickfind.sh"
 
-#alias cat='bat -pp'
-alias neovide='neovide --no-fork 2>/dev/null'
 alias emacstui='emacs -nw'  # Open emacs in terminal session
 
 alias vim='nvim'
@@ -184,16 +186,11 @@ alias \
         cat='bat --paging=never -n' \
         eza='eza -F --icons=never --group-directories-first' \
         ls='eza' \
-        l1='ls -1' \
-        l1a='ls -1a' \
         lt='eza --tree --level 2 --icons=auto' \
-        lta='eza --tree -a --icons=auto' \
-        ll='eza -l --icons=auto' \
+        ll='eza -l --icons=auto -g' \
         lla='eza -Al --icons=auto' \
         la='ls -A'
-        # ll='ls -lh' \
 
-# Etc
 alias \
         rm='rm -vi' \
         mv='mv -vi' \
@@ -203,7 +200,9 @@ alias \
         diff='diff --color=auto' \
         ip='ip -color=auto' \
         ..='cd ..' \
-        ...='cd .. && cd ..'
+        ...='cd .. && cd ..' \
+        ....='cd .. && cd .. && cd ..' \
+        .....='cd .. && cd .. && cd .. && cd ..'
 
 # Other
 alias weather='curl wttr.in'
