@@ -1,6 +1,3 @@
-
-
-
 -- Goto config directory
 vim.api.nvim_create_user_command(
     "GotoConfig",
@@ -10,8 +7,6 @@ vim.api.nvim_create_user_command(
     end,
     {}
 )
-
-
 
 -- Delete all buffers except current
 vim.api.nvim_create_user_command(

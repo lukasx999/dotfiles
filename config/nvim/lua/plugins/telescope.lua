@@ -9,6 +9,7 @@ return {
 
     config = function()
         local actions        = require("telescope.actions")
+        local action_layout = require("telescope.actions.layout")
         local builtin        = require("telescope.builtin")
         local extensions     = require("telescope").extensions
         local load_extension = require("telescope").load_extension
@@ -33,6 +34,11 @@ return {
                     i = {
                         ["<C-k>"] = actions.move_selection_previous,
                         ["<C-j>"] = actions.move_selection_next,
+                        ["<C-z>"] = action_layout.toggle_preview,
+                        ["<C-u>"] = false,
+                        ["<C-d>"] = false, -- disabled
+                        ["<C-f>"] = actions.preview_scrolling_down,
+                        ["<C-b>"] = actions.preview_scrolling_up,
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                         ["<esc>"] = actions.close,
                         ["<C-h>"] = { "<c-s-w>", type = "command" }, -- Delete word with Control backspace

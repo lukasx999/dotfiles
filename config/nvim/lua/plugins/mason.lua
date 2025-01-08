@@ -1,13 +1,11 @@
 return {
 
-
     {
         "williamboman/mason.nvim",
         config = function()
             require("mason").setup()
         end,
     },
-
 
     {
         "williamboman/mason-lspconfig.nvim",
@@ -40,7 +38,6 @@ return {
                         cargo = {
                             -- list targets with `rustc --print target-list`
                             -- target = "aarch64-unknown-linux-gnu"
-                            -- target = "x86_64-unknown-linux-gnu"
                         },
 
                         diagnostics = {
@@ -50,7 +47,6 @@ return {
                     }
                 }
             })
-
 
             lspconfig.clangd.setup({
                 cmd = {
@@ -66,24 +62,14 @@ return {
                     fallbackFlags = {
                         "-Wall",
                         "-Wextra",
-                        -- "-std=c99",
-                        -- "-pedantic",
                     },
                 },
 
-                -- on_init = custom_init,
-                -- on_attach = function() end,
                 filetypes = { "c", "h", "cpp", "hpp" },
 
             })
 
-
-
         end,
     },
-
-
-
-
 
 }
