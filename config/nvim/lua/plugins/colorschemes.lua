@@ -15,6 +15,14 @@ return {
     },
 
     {
+        "jackplus-xyz/binary.nvim",
+        opts = {
+        },
+        config = function()
+        end,
+    },
+
+    {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()

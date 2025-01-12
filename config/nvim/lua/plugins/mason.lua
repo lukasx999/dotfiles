@@ -1,4 +1,3 @@
-
 local function configure_clangd()
     require("lspconfig").clangd.setup({
         filetypes = { "c", "h", "cpp", "hpp" },
@@ -36,10 +35,6 @@ local function configure_clangd()
         },
     })
 end
-
-
-
-
 
 local function configure_tsls()
     local inlayHints = {
@@ -130,10 +125,12 @@ return {
         config = function()
 
             require("mason-lspconfig").setup({
+                automatic_installation = true,
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
                     "gopls",
+                    "lua_ls",
                     "ts_ls",
                     "jedi_language_server",
                     -- "ast_grep",
@@ -145,17 +142,15 @@ return {
             })
 
             require("mason-lspconfig").setup_handlers({
-
                 function(server_name)
                     require("lspconfig")[server_name].setup {}
                 end,
 
                 ["clangd"]         = configure_clangd,
                 ["ts_ls"]          = configure_tsls,
-                ["lua_ls"]         = configure_lua,
+                -- ["lua_ls"]         = configure_lua,
                 ["gopls"]          = configure_gopls,
                 ["rust_analyzer"]  = configure_rust,
-
             })
 
         end,

@@ -1,4 +1,30 @@
 
+-- vim.api.nvim_create_user_command(
+--     "Run",
+--     function()
+--         local command = vim.fn.input({
+--             prompt       = "> ",
+--             default      = "",
+--             -- completion   = "shellcmd",
+--             completion   = "file_in_path",
+--             cancelreturn = "",
+--         })
+--
+--         local output = vim.system({ command }, { text = true, cwd = "." }):wait()
+--         print(output.stdout)
+--
+--     end,
+--     {}
+-- )
+
+
+
+
+
+
+
+
+
 -- Disable LSP Inlay hints in Insert mode
 
 vim.api.nvim_create_autocmd('InsertEnter', {
