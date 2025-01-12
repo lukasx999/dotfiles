@@ -2,6 +2,15 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
 
+        vim.lsp.inlay_hint.enable(true)
+
+        vim.keymap.set("n", "<leader>lh",
+            function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end,
+            { desc = "Toggle inlay hints" })
+
+
         local tele = require("telescope.builtin")
 
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,      { desc = "Rename symbol"   })

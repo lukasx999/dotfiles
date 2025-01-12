@@ -1,4 +1,32 @@
 
+-- Disable LSP Inlay hints in Insert mode
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+    callback = function()
+        vim.lsp.inlay_hint.enable(false)
+    end
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+    callback = function()
+        vim.lsp.inlay_hint.enable(true)
+    end
+})
+
+-- Disable LSP Inlay Hints in Insert and Visual mode
+-- vim.api.nvim_create_autocmd('ModeChanged', {
+--     callback = function(arg)
+--         -- n:v
+--         local new_mode = string.sub(arg.match, 3)
+--         local disable = new_mode == "v" or
+--         new_mode == "i" or
+--         new_mode == "V"
+--
+--         vim.lsp.inlay_hint.enable(not disable)
+--     end
+-- })
+
+
 
 
 

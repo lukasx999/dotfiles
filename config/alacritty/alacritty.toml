@@ -1,7 +1,7 @@
 
 [general]
-# import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
-import = ["~/.config/alacritty/themes/rose-pine.toml"]
+import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
+# import = ["~/.config/alacritty/themes/rose-pine.toml"]
 # import = ["~/.config/alacritty/themes/rose-pine-moon.toml"]
 # import = ["~/.config/alacritty/themes/gruvbox_light.toml"]
 # import = ["~/.config/alacritty/themes/tokyo_night_storm.toml"]
@@ -77,10 +77,12 @@ duration = 0  # 300
 
 
 [cursor]
-style = { shape = "Block", blinking = "Off" }
-vi_mode_style = "Block"
+style = { shape = "Block", blinking = "On" }
+blink_interval = 500 # 750
+blink_timeout = 5
 thickness = 0.2
-unfocused_hollow = false
+unfocused_hollow = true
+vi_mode_style = "Block"
 
 
 [selection]
