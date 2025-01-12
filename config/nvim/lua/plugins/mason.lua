@@ -1,28 +1,4 @@
 
-local function configure_tsls()
-    local inlayHints = {
-        includeInlayParameterNameHints = "all",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-    },
-
-    require("lspconfig").ts_ls.setup {
-        settings = {
-            typescript = {
-                inlayHints = inlayHints,
-            },
-            javascript = {
-                inlayHints = inlayHints,
-            },
-        },
-    }
-end
-
 local function configure_clangd()
     require("lspconfig").clangd.setup({
         filetypes = { "c", "h", "cpp", "hpp" },
@@ -62,6 +38,83 @@ local function configure_clangd()
 end
 
 
+
+
+
+local function configure_tsls()
+    local inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+    },
+
+    require("lspconfig").ts_ls.setup {
+        settings = {
+            typescript = {
+                inlayHints = inlayHints,
+            },
+            javascript = {
+                inlayHints = inlayHints,
+            },
+        },
+    }
+end
+
+local function configure_rust()
+    require("lspconfig").rust_analyzer.setup({
+        settings = {
+            ['rust-analyzer'] = {
+
+                cargo = {
+                    -- list targets with `rustc --print target-list`
+                    -- target = "aarch64-unknown-linux-gnu"
+                },
+
+                diagnostics = {
+                    enable = true
+                },
+
+            }
+        }
+    })
+end
+
+local function configure_gopls()
+    require("lspconfig").gopls.setup {
+        settings = {
+            hints = {
+                rangeVariableTypes = true,
+                parameterNames = true,
+                constantValues = true,
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                functionTypeParameters = true,
+            },
+        },
+    }
+end
+
+local function configure_lua()
+    require("lspconfig").lua_ls.setup {
+        settings = {
+            Lua = {
+                hint = { enable = true },
+            },
+        },
+    }
+end
+
+
+
+
+
+
 return {
 
     {
@@ -92,66 +145,18 @@ return {
             })
 
             require("mason-lspconfig").setup_handlers({
+
                 function(server_name)
-                    if server_name == 'rust_analyzer' or server_name == "clangd" then return end -- Rustaceanvim
-                    require("lspconfig")[server_name].setup({})
+                    require("lspconfig")[server_name].setup {}
                 end,
+
+                ["clangd"]         = configure_clangd,
+                ["ts_ls"]          = configure_tsls,
+                ["lua_ls"]         = configure_lua,
+                ["gopls"]          = configure_gopls,
+                ["rust_analyzer"]  = configure_rust,
+
             })
-
-
-            local lspconfig = require("lspconfig")
-
-            -- lspconfig.rust_analyzer.setup({
-            --     settings = {
-            --         ['rust-analyzer'] = {
-            --
-            --             cargo = {
-            --                 -- list targets with `rustc --print target-list`
-            --                 -- target = "aarch64-unknown-linux-gnu"
-            --             },
-            --
-            --             diagnostics = {
-            --                 enable = true
-            --             },
-            --
-            --         }
-            --     }
-            -- })
-
-            configure_clangd()
-            configure_tsls()
-
-
-            -- lua-ls
-            lspconfig.lua_ls.setup {
-                settings = {
-                    Lua = {
-                        hint = { enable = true },
-                    },
-                },
-            }
-
-            lspconfig.glslls.setup {
-                -- filetypes = { "glsl", "vert", "frag" },
-            }
-
-            -- gopls
-            lspconfig.gopls.setup {
-                settings = {
-                    hints = {
-                        rangeVariableTypes = true,
-                        parameterNames = true,
-                        constantValues = true,
-                        assignVariableTypes = true,
-                        compositeLiteralFields = true,
-                        compositeLiteralTypes = true,
-                        functionTypeParameters = true,
-                    },
-                },
-            }
-
-
-
 
         end,
     },
