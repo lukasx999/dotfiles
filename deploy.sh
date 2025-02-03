@@ -2,7 +2,7 @@
 set -uo pipefail
 
 PREFIX="$HOME/.config"
-FILES="nvim tmux"
+FILES="nvim tmux kitty"
 
 
 file_list=$(echo $FILES | tr ' ' '\n')
@@ -10,17 +10,11 @@ file_list=$(echo $FILES | tr ' ' '\n')
 
 
 function deploy {
-    echo "$file_list" | xargs -I{} ln -sr {} ${PREFIX}/{} 2>/dev/null
-    if [[ $? == 0 ]]; then
-        echo "$file_list" | xargs -I{} echo "created symlink to {} at ${PREFIX}/{}"
-    else
-        echo "$file_list" | xargs -I{} echo "symlink to {} already exists at ${PREFIX}/{}"
-    fi
+    echo "$file_list" | xargs -I{} ln -srv {} ${PREFIX}/{}
 }
 
 function remove {
-    echo "$file_list" | xargs -I{} rm ${PREFIX}/{}
-    echo "$file_list" | xargs -I{} echo "removed symlink to {} at ${PREFIX}/{}"
+    echo "$file_list" | xargs -I{} rm -v ${PREFIX}/{}
 }
 
 
