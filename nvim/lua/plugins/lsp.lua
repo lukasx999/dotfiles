@@ -34,7 +34,7 @@ return {
         }
 
 
-        vim.lsp.inlay_hint.enable(true)
+        vim.lsp.inlay_hint.enable(false)
 
         vim.diagnostic.config {
             underline = false,
