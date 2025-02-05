@@ -12,7 +12,6 @@ return {
             ensure_installed = {
                 "clangd",
                 "rust_analyzer",
-                "gopls",
                 "lua_ls",
                 "ts_ls",
                 "jedi_language_server",
