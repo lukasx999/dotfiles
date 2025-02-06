@@ -1,0 +1,10 @@
+InlayHints:
+  Enabled: Yes
+  BlockEnd: No
+  Designators: No
+  ParameterNames: Yes
+  DeducedTypes: Yes
+
+CompileFlags:
+  Add: [-Wall, -Wextra, -pedantic]
+  Compiler: gcc

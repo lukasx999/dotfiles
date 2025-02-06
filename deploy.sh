@@ -2,7 +2,7 @@
 set -uo pipefail
 
 PREFIX="$HOME/.config"
-FILES="nvim tmux kitty gdb"
+FILES="nvim tmux kitty gdb clangd alacritty"
 
 
 file_list=$(echo $FILES | tr ' ' '\n')
