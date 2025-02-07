@@ -4,13 +4,19 @@ set -uo pipefail
 PREFIX="$HOME/.config"
 FILES="nvim tmux kitty gdb clangd alacritty"
 
-
 file_list=$(echo $FILES | tr ' ' '\n')
 
-
-
 function deploy {
-    echo "$file_list" | xargs -I{} ln -srv {} ${PREFIX}/{}
+    for file in $file_list; do
+        path=${PREFIX}/${file}
+
+        if [[ -d $path ]]; then
+            echo "$path already exists"
+        else
+            ln -srv $file $path
+        fi
+
+    done
 }
 
 function remove {
