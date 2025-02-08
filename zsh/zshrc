@@ -1,0 +1,95 @@
+
+autoload -U colors && colors
+
+# Completions
+autoload -U compinit && compinit
+zstyle '*:completion:*' menu select
+zmodload zsh/complist
+
+bindkey -M menuselect '^[[Z' reverse-menu-complete  # Shift-Tab
+
+
+PATH=$PATH:~/.cargo/bin
+PATH=$PATH:~/.opt
+
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
+
+
+
+setopt interactive_comments  # Interactive Comments
+setopt auto_cd               # cding into dirs by just typing the name
+
+
+
+NEWLINE=$'\n'
+SYMBOL=">"
+PROMPT="%B%{$fg[blue]%}%~      %{$fg[magenta]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
+
+
+
+source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion
+
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERM="tmux-256color"
+export PAGER="less"
+
+alias gitpush!='git add . && git commit --allow-empty-message -am "" && git push -u origin main'
+
+
+alias ls="ls -NF --color=auto --group-directories-first"
+alias ll="ls -lh"
+
+alias rm="rm -vi"
+alias mv="rm -vi"
+alias cp="rm -vi"
+alias mkdir='mkdir -v'
+alias rmdir='rmdir -v'
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias ip="ip --color=auto"
+alias ..='cd ..'
+alias ...='cd .. && cd ..'
+alias ....='cd .. && cd .. && cd ..'
+alias .....='cd .. && cd .. && cd .. && cd ..'
+
+
+function mkcd() {
+    dir=$1
+    mkdir "$dir"
+    cd "$dir"
+}
+
+alias vim="nvim"
+
+
+
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
+
+
+# Remove the default of run-help being aliased to man
+unalias run-help
+# Use zsh's run-help, which will display information for zsh builtins.
+autoload run-help
+alias help=run-help
+
+
+
+# Emacs bindings
+bindkey -e
+
+# Open current command in $VISUAL or $EDITOR (emacs bindings)
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+# Delete words with C-BS
+# Has to be run after bindkey -e
+bindkey '^H' backward-kill-word
