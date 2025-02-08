@@ -28,7 +28,7 @@ function deploy_all {
 
 function remove {
     echo "$file_list" | xargs -I{} rm -v ${PREFIX}/{}
-    rm -v "~/.zshrc" "~/.zsh_plugins"
+    rm -v "$HOME/.zshrc" "$HOME/.zsh_plugins"
 }
 
 

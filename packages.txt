@@ -1,0 +1,4 @@
+ripgrep
+fzf
+locate
+man-pages
