@@ -1,3 +1,28 @@
+
+
+local function configure_clangd()
+    require("lspconfig").clangd.setup({
+        filetypes = { "c", "h", "cpp", "hpp" },
+        cmd = {
+            "clangd",
+            "--background-index",
+            "--suggest-missing-includes",
+            "--clang-tidy",
+            "--log=verbose",
+            "--header-insertion=never"
+        },
+        init_options = {
+            fallbackFlags = {
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+            },
+        },
+    })
+end
+
+
+
 return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
@@ -24,9 +49,9 @@ return {
                 -- default handler
                 function(server_name)
                     require("lspconfig")[server_name].setup {}
-                end
+                end,
 
-                -- ["clangd"]        = configure_clangd,
+                ["clangd"] = configure_clangd,
                 -- ["ts_ls"]         = configure_tsls,
                 -- ["gopls"]         = configure_gopls,
                 -- ["rust_analyzer"] = configure_rust,
