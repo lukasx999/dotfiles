@@ -57,8 +57,8 @@ alias ls="ls -NF --color=auto --group-directories-first"
 alias ll="ls -lh"
 
 alias rm="rm -vi"
-alias mv="rm -vi"
-alias cp="rm -vi"
+alias mv="mv -vi"
+alias cp="cp -vi"
 alias mkdir='mkdir -v'
 alias rmdir='rmdir -v'
 alias grep="grep --color=auto"
