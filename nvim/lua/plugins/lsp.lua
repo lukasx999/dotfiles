@@ -87,18 +87,19 @@ return {
             })
         end
 
-        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,           { desc = "Rename symbol"     })
-        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,           { desc = "Format buffer"     })
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,      { desc = "Code action"       })
-        vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition,       { desc = "Definition"        })
-        vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,      { desc = "Declaration"       })
-        vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,   { desc = "implementation"    })
-        vim.keymap.set("n", "<leader>lc", vim.lsp.buf.incoming_calls,   { desc = "Call Sites"        })
-        vim.keymap.set("n", "<leader>lC", vim.lsp.buf.outgoing_calls,   { desc = "Outgoing Calls"    })
-        vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,  { desc = "Type Definition"   })
-        vim.keymap.set("n", "<leader>lT", vim.lsp.buf.typehierarchy,    { desc = "Type Hierarchy"    })
-        vim.keymap.set('n', '<leader>ls', vim.lsp.buf.workspace_symbol, { desc = "Workspace Symbols" })
-        vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references,       { desc = "References"        })
+        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,                  { desc = "Rename symbol"        })
+        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,                  { desc = "Format buffer"        })
+        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,             { desc = "Code action"          })
+        vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition,              { desc = "Definition"           })
+        vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,             { desc = "Declaration"          })
+        vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,          { desc = "implementation"       })
+        vim.keymap.set("n", "<leader>lc", vim.lsp.buf.incoming_calls,          { desc = "Call Sites"           })
+        vim.keymap.set("n", "<leader>lC", vim.lsp.buf.outgoing_calls,          { desc = "Outgoing Calls"       })
+        vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,         { desc = "Type Definition"      })
+        vim.keymap.set("n", "<leader>lT", vim.lsp.buf.typehierarchy,           { desc = "Type Hierarchy"       })
+        vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol,        { desc = "Workspace Symbols"    })
+        vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references,              { desc = "References"           })
+        vim.keymap.set("n", "<leader>ls", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
         vim.keymap.set("n", "<leader>lh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -111,6 +112,8 @@ return {
         vim.keymap.set("n", "<leader>ll", function()
             vim.diagnostic.enable(not vim.diagnostic.is_enabled())
         end, { desc = "Toggle Diagnostics" })
+
+
 
 
 
