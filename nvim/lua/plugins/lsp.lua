@@ -99,6 +99,8 @@ return {
         vim.keymap.set("n", "<leader>lT", vim.lsp.buf.typehierarchy,           { desc = "Type Hierarchy"       })
         vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol,        { desc = "Workspace Symbols"    })
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references,              { desc = "References"           })
+        vim.keymap.set("n", "K",          vim.lsp.buf.hover,                   { desc = "Hover"                })
+        vim.keymap.set("n", "<leader>lm", "<cmd>Man<CR>",                      { desc = "Open Man Page"        })
         vim.keymap.set("n", "<leader>ls", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
         vim.keymap.set("n", "<leader>lh", function()
