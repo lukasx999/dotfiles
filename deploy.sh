@@ -24,11 +24,12 @@ function deploy_all {
     done
     deploy "zsh/zshrc" "$HOME/.zshrc"
     deploy "zsh/plugins" "$HOME/.zsh_plugins"
+    deploy "xinitrc" "$HOME/.xinitrc"
 }
 
 function remove {
     echo "$file_list" | xargs -I{} rm -v ${PREFIX}/{}
-    rm -v "$HOME/.zshrc" "$HOME/.zsh_plugins"
+    rm -v "$HOME/.zshrc" "$HOME/.zsh_plugins" "$HOME/.xinitrc"
 }
 
 
