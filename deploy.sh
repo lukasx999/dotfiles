@@ -10,6 +10,7 @@ function deploy {
     file=$1
     path=$2
 
+    # TODO: check for symlink, not directory
     if [[ -d $path ]]; then
         echo "$path already exists"
     else
