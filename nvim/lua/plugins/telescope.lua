@@ -1,6 +1,7 @@
 return {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     dependencies = {
+        'nvim-telescope/telescope-ui-select.nvim',
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { "nvim-tree/nvim-web-devicons", opts = {} },
@@ -60,6 +61,7 @@ return {
         })
 
         require('telescope').load_extension('fzf')
+        require("telescope").load_extension("ui-select")
 
     end
 
