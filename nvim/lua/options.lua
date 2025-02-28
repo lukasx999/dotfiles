@@ -67,3 +67,5 @@ vim.opt.undofile = true
 vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.cmd("colorscheme gruvbox")
+
+vim.g.zig_fmt_autosave = 0
