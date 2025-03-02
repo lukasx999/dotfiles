@@ -6,6 +6,7 @@ ripgrep
 fzf
 locate
 man-pages
+man-db
 chromium
 steam
 htop
