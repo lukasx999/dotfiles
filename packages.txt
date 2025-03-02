@@ -1,4 +1,11 @@
+vim
+neovim
+zsh
+tmux
 ripgrep
 fzf
 locate
 man-pages
+chromium
+steam
+htop

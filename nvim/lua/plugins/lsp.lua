@@ -38,10 +38,7 @@ return {
                 "clangd",
                 "rust_analyzer",
                 "lua_ls",
-                "ts_ls",
                 "jedi_language_server",
-                "glsl_analyzer",
-                "bashls",
             },
             handlers = {
                 -- server_name is lspconfig server name, not mason package name
