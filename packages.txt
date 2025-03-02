@@ -9,3 +9,8 @@ man-pages
 chromium
 steam
 htop
+cmake
+clang
+less
+raylib
+ttf-iosevka-nerd
