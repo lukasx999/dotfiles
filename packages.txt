@@ -14,6 +14,11 @@ openrgb
 vim
 neovim
 gimp
+perf
+gdb
+mupdf
+cloc
+onefetch
 
 # Basic utilities
 wget
