@@ -13,5 +13,19 @@ htop
 cmake
 clang
 less
+wget
 raylib
+
+# X11 Desktop
+gnome-shell
+
+# Wayland Desktop
+hyprland
+wofi
+wl-clipboard
+waybar
+
+# Fonts
 ttf-iosevka-nerd
+ttf-jetbrains-mono-nerd
+ttf-firacode-nerd
