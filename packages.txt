@@ -1,19 +1,27 @@
-vim
-neovim
 zsh
 tmux
 ripgrep
 fzf
-locate
-man-pages
-man-db
 chromium
+firefox
 steam
 htop
 cmake
+meson
+cpio
 clang
-less
+openrgb
+vim
+neovim
+
+# Basic utilities
 wget
+locate
+man-pages
+man-db
+less
+
+# Libraries
 raylib
 
 # X11 Desktop
@@ -29,3 +37,4 @@ waybar
 ttf-iosevka-nerd
 ttf-jetbrains-mono-nerd
 ttf-firacode-nerd
+ttf-font-awesome
