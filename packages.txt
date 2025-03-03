@@ -38,3 +38,4 @@ ttf-iosevka-nerd
 ttf-jetbrains-mono-nerd
 ttf-firacode-nerd
 ttf-font-awesome
+otf-font-awesome
