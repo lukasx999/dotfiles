@@ -13,6 +13,7 @@ clang
 openrgb
 vim
 neovim
+gimp
 
 # Basic utilities
 wget
