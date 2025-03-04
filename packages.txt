@@ -19,6 +19,7 @@ gdb
 mupdf
 cloc
 onefetch
+imagemagick
 
 # Basic utilities
 wget
