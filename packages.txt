@@ -21,6 +21,7 @@ cloc
 onefetch
 imagemagick
 nasm
+npm
 
 # Basic utilities
 wget
@@ -47,3 +48,5 @@ ttf-jetbrains-mono-nerd
 ttf-firacode-nerd
 ttf-font-awesome
 otf-font-awesome
+ttf-noto-nerd
+noto-fonts
