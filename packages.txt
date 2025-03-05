@@ -29,6 +29,7 @@ locate
 man-pages
 man-db
 less
+go
 
 # Libraries
 raylib
