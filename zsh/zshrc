@@ -23,6 +23,7 @@ export WORDCHARS=${WORDCHARS//\/}
 
 PATH=$PATH:~/.cargo/bin
 PATH=$PATH:~/.opt
+PATH=$PATH:~/.local/bin/
 
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
