@@ -22,6 +22,7 @@ onefetch
 imagemagick
 nasm
 npm
+zig
 
 # Basic utilities
 wget
