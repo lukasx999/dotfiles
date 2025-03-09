@@ -31,6 +31,7 @@ man-pages
 man-db
 less
 go
+flameshot
 
 # Libraries
 raylib
