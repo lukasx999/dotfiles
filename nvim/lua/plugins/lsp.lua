@@ -15,7 +15,7 @@ local function configure_clangd()
             fallbackFlags = {
                 "-Wall",
                 "-Wextra",
-                "-std=c11",
+                -- "-std=c11",
                 "-pedantic",
             },
         },
