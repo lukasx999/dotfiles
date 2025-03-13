@@ -8,7 +8,7 @@ return {
         require("outline").setup {
 
             outline_items = {
-                show_symbol_details = true,
+                show_symbol_details = false, -- Function signatures
             },
 
             outline_window = {

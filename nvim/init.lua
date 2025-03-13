@@ -1,7 +1,7 @@
-require("mappings")
+require("config.mappings")
 require("config.lazy")
-require("options")
-require("autocmds")
+require("config.options")
+require("config.autocmds")
 
 vim.cmd [[filetype off]]
 vim.opt.rtp:append("~/code/repos/seron/editor/vim")

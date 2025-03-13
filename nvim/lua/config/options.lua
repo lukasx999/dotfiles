@@ -1,4 +1,4 @@
--- vim.opt.guicursor = "" -- cursor is block in all modes
+vim.opt.guicursor = "" -- cursor is block in all modes
 
 vim.opt.number         = true
 vim.opt.relativenumber = true
@@ -21,24 +21,24 @@ vim.opt.showmode       = true
 vim.opt.ruler          = false
 vim.opt.showcmd        = false
 
-vim.opt.ignorecase    = true
-vim.opt.smartcase     = true
+vim.opt.ignorecase     = true
+vim.opt.smartcase      = true
 
-vim.opt.inccommand    = "split"
-vim.opt.scrolloff     = 5
-vim.opt.virtualedit   = "block"
-vim.opt.autochdir     = true
-vim.opt.termguicolors = true
+vim.opt.inccommand     = "split"
+vim.opt.scrolloff      = 5
+vim.opt.virtualedit    = "block"
+vim.opt.autochdir      = true
+vim.opt.termguicolors  = true
 
-vim.opt.incsearch = true
-vim.opt.hlsearch  = true
+vim.opt.incsearch      = true
+vim.opt.hlsearch       = true
 
-vim.opt.linebreak = true -- cut off last char at a sensible location (only when using wrap)
+vim.opt.linebreak       = true -- cut off last char at a sensible location (only when using wrap)
 -- vim.opt.signcolumn = "yes" -- no - left empty column
 
 vim.opt.shortmess:append "IW"
--- I ... disable splashscreen
--- W ... disable "written" message
+-- I: disable splashscreen
+-- W: disable "written" message
 
 
 vim.opt.list      = true
@@ -52,9 +52,6 @@ vim.opt.listchars = {
     nbsp     = '␣',
 }
 
-
-
-
 -- No auto comments on new line
 vim.cmd "autocmd FileType * set formatoptions-=cro"
 
@@ -67,5 +64,3 @@ vim.opt.undofile = true
 vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.cmd("colorscheme gruvbox")
-
-vim.g.zig_fmt_autosave = 0

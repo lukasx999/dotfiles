@@ -39,7 +39,6 @@ return {
 
     },
 
-
     {
         "rose-pine/neovim",
         name = "rose-pine",
@@ -57,7 +56,6 @@ return {
 
         end
     },
-
 
     {
         "ellisonleao/gruvbox.nvim",
