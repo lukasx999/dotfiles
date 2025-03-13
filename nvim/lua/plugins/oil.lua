@@ -12,8 +12,9 @@ return {
             ['-'] = 'NonText',
             ['r'] = 'DiagnosticSignWarn',
             ['w'] = 'DiagnosticSignError',
-            ['s'] = 'DiagnosticSignError', -- Setuid
             ['x'] = 'DiagnosticSignOk',
+            ['s'] = '@boolean', -- Setuid
+            ['t'] = '@boolean', -- Sticky bit
         }
 
         local columns_config = {
