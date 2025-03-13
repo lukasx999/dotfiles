@@ -12,6 +12,7 @@ return {
             ['-'] = 'NonText',
             ['r'] = 'DiagnosticSignWarn',
             ['w'] = 'DiagnosticSignError',
+            ['s'] = 'DiagnosticSignError', -- Setuid
             ['x'] = 'DiagnosticSignOk',
         }
 
