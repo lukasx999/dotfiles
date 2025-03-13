@@ -9,7 +9,6 @@ return {
 
             outline_items = {
                 show_symbol_details = true,
-                show_symbol_lineno = true,
             },
 
             outline_window = {
