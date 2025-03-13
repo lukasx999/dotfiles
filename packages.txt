@@ -42,6 +42,7 @@ gnome-shell
 # Wayland Desktop
 hyprland
 hyprpaper
+hyprlock
 wofi
 wl-clipboard
 waybar
