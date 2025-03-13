@@ -1,5 +1,3 @@
-
-
 local function configure_clangd()
     require("lspconfig").clangd.setup({
         filetypes = { "c", "h", "cpp", "hpp" },
