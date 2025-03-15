@@ -12,28 +12,6 @@ window#waybar {
     transition-duration: .5s;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
-
 button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
@@ -49,9 +27,14 @@ button:hover {
 }
 
 #workspaces button {
+    color: #ffffff;
     padding: 0 5px;
     background-color: transparent;
-    color: #ffffff;
+}
+
+#workspaces button.active {
+    color: #c6c6c6;
+    background-color: rgba(43, 48, 59, 0.5);
 }
 
 #workspaces button:hover {
@@ -64,7 +47,7 @@ button:hover {
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    color: #eb4d4b;
 }
 
 #mode {
