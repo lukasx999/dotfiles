@@ -3,6 +3,18 @@ local transparent = true
 return {
 
     {
+        "rebelot/kanagawa.nvim",
+        config = function()
+
+            require('kanagawa').setup {
+                -- undercurl = true,            -- enable undercurls
+                transparent = transparent,
+            }
+
+        end
+    },
+
+    {
         "EdenEast/nightfox.nvim",
         config = function()
             require("nightfox").setup {
