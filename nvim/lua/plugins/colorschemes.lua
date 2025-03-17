@@ -7,7 +7,6 @@ return {
         config = function()
 
             require('kanagawa').setup {
-                -- undercurl = true,            -- enable undercurls
                 transparent = transparent,
             }
 
