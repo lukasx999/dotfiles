@@ -20,6 +20,14 @@ local function configure_clangd()
     })
 end
 
+local function configure_hls()
+    require("lspconfig").hls.setup({
+        cmd = {
+            "haskell-language-server-wrapper",
+        },
+    })
+end
+
 
 
 return {
@@ -48,6 +56,7 @@ return {
                 end,
 
                 ["clangd"] = configure_clangd,
+                -- ["hls"] = configure_hls,
                 -- ["ts_ls"]         = configure_tsls,
                 -- ["gopls"]         = configure_gopls,
                 -- ["rust_analyzer"] = configure_rust,

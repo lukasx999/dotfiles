@@ -115,3 +115,5 @@ bindkey '^H' backward-kill-word
 # This section can be safely removed at any time if needed.
 [[ ! -r '/home/lukas/.opam/opam-init/init.zsh' ]] || source '/home/lukas/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
+
+[ -f "/home/lukas/.ghcup/env" ] && . "/home/lukas/.ghcup/env" # ghcup-env
