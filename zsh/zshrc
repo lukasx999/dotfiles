@@ -38,7 +38,7 @@ setopt auto_cd               # cding into dirs by just typing the name
 
 
 NEWLINE=$'\n'
-SYMBOL=">"
+SYMBOL="󰘧"
 PROMPT="%B%{$fg[blue]%}%~      %{$fg[magenta]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 
 
@@ -51,7 +51,7 @@ export VISUAL="nvim"
 export TERM="tmux-256color"
 export PAGER="less"
 
-alias gitpush!='git add . && git commit --allow-empty-message -am "" && git push -u origin main'
+alias gitpush!='git add . -A && git commit --allow-empty-message -am "" && git push -u origin main'
 
 
 alias ls="ls -NF --color=auto --group-directories-first"

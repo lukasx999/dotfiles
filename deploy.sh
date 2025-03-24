@@ -25,6 +25,7 @@ function deploy_all {
     done
     deploy "zsh/zshrc" "$HOME/.zshrc"
     deploy "zsh/plugins" "$HOME/.zsh_plugins"
+    deploy "sqliterc" "$HOME/.sqliterc"
     deploy "xinitrc" "$HOME/.xinitrc"
 }
 

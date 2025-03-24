@@ -18,7 +18,9 @@ return {
         }
 
         local columns_config = {
+            -- TODO: link
             -- { "type", icons = { file = "-", directory = "d", fifo = '|' }, highlight = "Special" },
+            { "type" },
             {
                 "permissions",
                 highlight = function(permission_str)
