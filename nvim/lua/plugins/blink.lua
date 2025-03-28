@@ -13,15 +13,17 @@ return {
             nerd_font_variant = 'mono'
         },
 
+        cmdline = { enabled = false },
+
         sources = {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
-            cmdline = {}, -- disable cmdline completion
         },
 
         completion = {
             accept = {
-                auto_brackets = { enabled = false },
+                auto_brackets = { enabled = false, },
             },
+
             documentation = {
                 auto_show = true,
             },

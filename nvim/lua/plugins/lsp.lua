@@ -60,10 +60,12 @@ return {
             underline        = false,
             update_in_insert = false,
             virtual_lines    = true,
-            virtual_text     = {
-                source = "if_many",
-                -- spacing = 5,
-            },
+            virtual_text = false,
+            -- -- redundant when using virtual_lines
+            -- virtual_text     = {
+            --     source = "if_many",
+            --     -- spacing = 5,
+            -- },
             severity_sort = true,
             signs = {
                 text = {
