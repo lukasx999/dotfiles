@@ -1,29 +1,21 @@
 local function configure_clangd()
     require("lspconfig").clangd.setup({
-        filetypes = { "c", "h", "cpp", "hpp" },
+        filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
         cmd = {
             "clangd",
             "--background-index",
             "--suggest-missing-includes",
             "--clang-tidy",
             "--log=verbose",
-            "--header-insertion=never"
+            "--header-insertion=never",
+            -- "--completion-style=bundled",
         },
         init_options = {
             fallbackFlags = {
                 "-Wall",
                 "-Wextra",
-                -- "-std=c11",
                 "-pedantic",
             },
-        },
-    })
-end
-
-local function configure_hls()
-    require("lspconfig").hls.setup({
-        cmd = {
-            "haskell-language-server-wrapper",
         },
     })
 end
@@ -56,7 +48,6 @@ return {
                 end,
 
                 ["clangd"] = configure_clangd,
-                -- ["hls"] = configure_hls,
                 -- ["ts_ls"]         = configure_tsls,
                 -- ["gopls"]         = configure_gopls,
                 -- ["rust_analyzer"] = configure_rust,
@@ -64,33 +55,33 @@ return {
         }
 
 
-        vim.lsp.inlay_hint.enable(false)
+        vim.lsp.inlay_hint.enable(true)
 
         vim.diagnostic.config {
-            underline = false,
-            -- update_in_insert = false,
-            -- signs = true,
-            virtual_text = {
+            underline        = false,
+            update_in_insert = false,
+            virtual_lines    = true,
+            virtual_text     = {
                 source = "if_many",
                 -- spacing = 5,
             },
-        }
+            severity_sort = true,
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "󰌶 ",
+                    [vim.diagnostic.severity.WARN]  = "󰀪 ",
+                    [vim.diagnostic.severity.INFO]  = "󰅚 ",
+                    [vim.diagnostic.severity.HINT]  = " ",
+                },
+                numhl = {
+                    [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+                    [vim.diagnostic.severity.WARN]  = "WarningMsg",
+                    [vim.diagnostic.severity.INFO]  = "InfoMsg",
+                    [vim.diagnostic.severity.HINT]  = "HintMsg",
+                },
+            }
 
-        local icons = {
-            Hint  = "󰌶 ",
-            Warn  = "󰀪 ",
-            Error = "󰅚 ",
-            Info  = " ",
         }
-
-        for type, icon in pairs(icons) do
-            local hl = "DiagnosticSign" .. type
-            vim.fn.sign_define(hl, {
-                text   = icon,
-                texthl = hl,
-                numhl  = hl
-            })
-        end
 
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,                  { desc = "Rename symbol"        })
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,                  { desc = "Format buffer"        })
@@ -108,10 +99,6 @@ return {
         vim.keymap.set("n", "<leader>lm", "<cmd>Man<CR>",                      { desc = "Open Man Page"        })
         vim.keymap.set("n", "<leader>ls", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
-        vim.keymap.set("n", "<leader>lh", function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end, { desc = "Toggle Inlay Hints" })
-
         vim.keymap.set("n", "<leader>lq", function()
             vim.diagnostic.setqflist({ open = true })
         end, { desc = "Diagnostics to qflist" })
@@ -119,6 +106,23 @@ return {
         vim.keymap.set("n", "<leader>ll", function()
             vim.diagnostic.enable(not vim.diagnostic.is_enabled())
         end, { desc = "Toggle Diagnostics" })
+
+        vim.keymap.set("n", "<leader>lF", function()
+            vim.diagnostic.open_float()
+        end, { desc = "Open Float" })
+
+        vim.keymap.set("n", "<leader>lh", function()
+
+            -- Toggle inlay hints
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+
+            -- Toggle virtual lines
+            local conf = vim.diagnostic.config()
+            conf.virtual_lines = not vim.diagnostic.config().virtual_lines
+            vim.diagnostic.config(conf)
+
+        end, { desc = "Toggle Virtual Lines and Inlay Hints" })
+
 
 
 
