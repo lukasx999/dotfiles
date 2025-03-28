@@ -60,7 +60,7 @@ return {
             underline        = false,
             update_in_insert = false,
             virtual_lines    = true,
-            virtual_text = false,
+            virtual_text     = false,
             -- -- redundant when using virtual_lines
             -- virtual_text     = {
             --     source = "if_many",
