@@ -1,5 +1,5 @@
 local function configure_clangd()
-    require("lspconfig").clangd.setup({
+    require("lspconfig").clangd.setup {
         filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
         cmd = {
             "clangd",
@@ -7,8 +7,7 @@ local function configure_clangd()
             "--suggest-missing-includes",
             "--clang-tidy",
             "--log=verbose",
-            "--header-insertion=never",
-            -- "--completion-style=bundled",
+            "--header-insertion=never"
         },
         init_options = {
             fallbackFlags = {
@@ -17,7 +16,7 @@ local function configure_clangd()
                 "-pedantic",
             },
         },
-    })
+    }
 end
 
 
