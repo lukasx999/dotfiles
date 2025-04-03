@@ -11,6 +11,7 @@ local function configure_clangd()
         },
         init_options = {
             fallbackFlags = {
+                -- "-xc",
                 "-Wall",
                 "-Wextra",
                 "-pedantic",
@@ -59,13 +60,15 @@ return {
         vim.diagnostic.config {
             underline        = false,
             update_in_insert = false,
-            virtual_lines    = true,
-            virtual_text     = false,
+
+            -- virtual_lines    = true,
+            -- virtual_text     = false,
+
             -- -- redundant when using virtual_lines
-            -- virtual_text     = {
-            --     source = "if_many",
-            --     -- spacing = 5,
-            -- },
+            virtual_text     = {
+                source = "if_many",
+                -- spacing = 5,
+            },
             severity_sort = true,
             signs = {
                 text = {
