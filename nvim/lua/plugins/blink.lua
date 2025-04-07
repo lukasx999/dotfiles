@@ -1,8 +1,8 @@
 return {
     'saghen/blink.cmp',
-    -- dependencies = 'rafamadriz/friendly-snippets',
     version = '*',
     opts = {
+
         keymap = {
             preset = 'default',
             ['<C-z>'] = { 'select_and_accept' },
@@ -16,12 +16,14 @@ return {
         cmdline = { enabled = false },
 
         sources = {
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
+            default = { 'lsp', 'path', 'buffer' },
         },
 
         completion = {
             accept = {
-                auto_brackets = { enabled = false, },
+                auto_brackets = {
+                    enabled = false,
+                },
             },
 
             documentation = {
@@ -36,5 +38,7 @@ return {
         signature = { enabled = true }
 
     },
+
     opts_extend = { "sources.default" }
+
 }

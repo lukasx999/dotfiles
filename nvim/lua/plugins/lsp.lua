@@ -92,7 +92,7 @@ return {
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,             { desc = "Code action"          })
         vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition,              { desc = "Definition"           })
         vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,             { desc = "Declaration"          })
-        vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,          { desc = "implementation"       })
+        vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,          { desc = "Implementation"       })
         vim.keymap.set("n", "<leader>lc", vim.lsp.buf.incoming_calls,          { desc = "Call Sites"           })
         vim.keymap.set("n", "<leader>lC", vim.lsp.buf.outgoing_calls,          { desc = "Outgoing Calls"       })
         vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,         { desc = "Type Definition"      })
@@ -100,11 +100,12 @@ return {
         vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol,        { desc = "Workspace Symbols"    })
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references,              { desc = "References"           })
         vim.keymap.set("n", "K",          vim.lsp.buf.hover,                   { desc = "Hover"                })
+
         vim.keymap.set("n", "<leader>lm", "<cmd>Man<CR>",                      { desc = "Open Man Page"        })
         vim.keymap.set("n", "<leader>ls", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
         vim.keymap.set("n", "<leader>lq", function()
-            vim.diagnostic.setqflist({ open = true })
+            vim.diagnostic.setqflist({ open = false })
         end, { desc = "Diagnostics to qflist" })
 
         vim.keymap.set("n", "<leader>ll", function()
@@ -126,9 +127,6 @@ return {
             vim.diagnostic.config(conf)
 
         end, { desc = "Toggle Virtual Lines and Inlay Hints" })
-
-
-
 
 
 

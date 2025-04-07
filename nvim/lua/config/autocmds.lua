@@ -28,12 +28,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
--- Preview qflist entry like outline.nvim
 vim.api.nvim_create_autocmd("FileType", {
     group    = augroup('qf-preview'),
     pattern  = { "qf" },
     callback = function(event)
+        -- Preview qflist entry like outline.nvim
         vim.keymap.set("n", "o", "<CR><C-w>p", { buffer = event.buf, silent = true })
+        -- Close with enter
+        vim.keymap.set("n", "<CR>", "<CR><C-w>p<CMD>q<CR>", { buffer = event.buf, silent = true })
     end,
 })
 

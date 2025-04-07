@@ -46,6 +46,8 @@ return {
 
             keymaps = {
                 ["_"] = false,
+                ["<C-p>"] = false,
+                ["<C-i>"] = "actions.preview",
             },
 
             win_options = {
