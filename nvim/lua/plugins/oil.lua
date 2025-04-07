@@ -6,7 +6,6 @@ return {
 
         vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-
         -- for colored permissions
         local permission_hlgroups = {
             ['-'] = 'NonText',
@@ -18,9 +17,8 @@ return {
         }
 
         local columns_config = {
-            -- TODO: link
-            -- { "type", icons = { file = "-", directory = "d", fifo = '|' }, highlight = "Special" },
-            { "type" },
+            { "type", icons = { link = "l", file = "-", directory = "d", fifo = '|' }, highlight = "Special" },
+            -- { "type" },
             {
                 "permissions",
                 highlight = function(permission_str)
