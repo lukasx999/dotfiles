@@ -87,6 +87,8 @@ return {
 
         }
 
+        -- local builtin = require('telescope.builtin')
+
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,                  { desc = "Rename symbol"        })
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,                  { desc = "Format buffer"        })
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,             { desc = "Code action"          })
@@ -98,6 +100,7 @@ return {
         vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,         { desc = "Type Definition"      })
         vim.keymap.set("n", "<leader>lT", vim.lsp.buf.typehierarchy,           { desc = "Type Hierarchy"       })
         vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol,        { desc = "Workspace Symbols"    })
+        -- vim.keymap.set('n', '<leader>lS', builtin.lsp_workspace_symbols,        { desc = "Workspace Symbols"    })
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references,              { desc = "References"           })
         vim.keymap.set("n", "K",          vim.lsp.buf.hover,                   { desc = "Hover"                })
 
