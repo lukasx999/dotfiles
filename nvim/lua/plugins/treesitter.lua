@@ -1,4 +1,5 @@
 return {
+
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -8,9 +9,9 @@ return {
     config = function()
 
         require'treesitter-context'.setup {
-            enable       = false,
+            enable       = true,
             multiwindow  = true,
-            max_lines    = 3,
+            max_lines    = 1,
             line_numbers = true,
         }
 
