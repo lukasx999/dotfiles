@@ -52,6 +52,8 @@ vim.opt.listchars = {
     nbsp     = '␣',
 }
 
+vim.opt.showmode = false -- dont show `-- INSERT --` text
+
 -- No auto comments on new line
 vim.cmd "autocmd FileType * set formatoptions-=cro"
 
