@@ -53,6 +53,8 @@ vim.opt.listchars = {
 }
 
 vim.opt.showmode = false -- dont show `-- INSERT --` text
+vim.opt.cmdheight = 0 -- message line
+vim.opt.cmdwinheight = 1 -- height of <C-f> window in command mode
 
 -- No auto comments on new line
 vim.cmd "autocmd FileType * set formatoptions-=cro"
