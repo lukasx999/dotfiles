@@ -1,5 +1,5 @@
 local function configure_clangd()
-    require("lspconfig").clangd.setup {
+    require'lspconfig'.clangd.setup {
         filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
         cmd = {
             "clangd",
@@ -20,6 +20,19 @@ local function configure_clangd()
     }
 end
 
+
+local function configure_rust_analyzer()
+    require'lspconfig'.rust_analyzer.setup {
+        settings = {
+            ['rust-analyzer'] = {
+                check = {
+                    command = "clippy",
+                },
+                checkOnSave = true,
+            }
+        }
+    }
+end
 
 
 return {
@@ -48,9 +61,7 @@ return {
                 end,
 
                 ["clangd"] = configure_clangd,
-                -- ["ts_ls"]         = configure_tsls,
-                -- ["gopls"]         = configure_gopls,
-                -- ["rust_analyzer"] = configure_rust,
+                ["rust_analyzer"] = configure_rust_analyzer,
             }
         }
 
