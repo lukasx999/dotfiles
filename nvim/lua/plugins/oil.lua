@@ -37,13 +37,16 @@ return {
 
 
         require("oil").setup {
-            columns = columns_config,
-            constrain_cursor = "name",  -- editable
+            columns                        = columns_config,
+            constrain_cursor               = "name",  -- editable
+            watch_for_changes              = true,
             experimental_watch_for_changes = true,
-            use_default_keymaps = true,
+            use_default_keymaps            = true,
+            skip_confirm_for_simple_edits  = true,
+            delete_to_trash                = true,
 
             keymaps = {
-                ["_"] = false,
+                ["_"]     = false,
                 ["<C-p>"] = false,
                 ["<C-i>"] = "actions.preview",
             },

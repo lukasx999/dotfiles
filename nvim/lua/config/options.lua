@@ -27,7 +27,7 @@ vim.opt.smartcase      = true
 vim.opt.inccommand     = "split"
 vim.opt.scrolloff      = 5
 vim.opt.virtualedit    = "block"
-vim.opt.autochdir      = true
+vim.opt.autochdir      = false -- will mess up harpoon if true
 vim.opt.termguicolors  = true
 
 vim.opt.incsearch      = true
