@@ -67,6 +67,7 @@ vim.opt.backupdir = os.getenv("HOME") .. "/.vim/backupdir"
 vim.opt.undofile = true
 vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
-vim.cmd("colorscheme rose-pine-moon")
+-- vim.cmd("colorscheme rose-pine-moon")
 -- vim.cmd("colorscheme kanagawa-dragon")
+vim.cmd("colorscheme kanagawa-wave")
 -- vim.cmd("colorscheme duskfox")

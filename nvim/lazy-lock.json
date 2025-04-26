@@ -1,5 +1,6 @@
 {
   "NeoSolarized.nvim": { "branch": "master", "commit": "fb395ea220c9befc06a91bd97e80fbfec939add5" },
+  "black-metal-theme-neovim": { "branch": "main", "commit": "5f24497ed12129979a5119b2b230a370634baac8" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "everforest-nvim": { "branch": "main", "commit": "135cc21a45756e688dd1a3cbeb1c80a04b569b46" },
   "gitsigns.nvim": { "branch": "main", "commit": "17ab794b6fce6fce768430ebc925347e349e1d60" },
