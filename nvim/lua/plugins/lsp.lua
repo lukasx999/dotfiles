@@ -42,6 +42,7 @@ return {
         "williamboman/mason.nvim",
     },
     config = function()
+
         -- order: mason -> mason-lspconfig -> lspconfig
         require("mason").setup()
         require("mason-lspconfig").setup {
@@ -58,6 +59,17 @@ return {
                 -- default handler
                 function(server_name)
                     require("lspconfig")[server_name].setup {}
+
+                    -- annoying as hell
+                    require("lspconfig")[server_name]
+                    .manager
+                    .config
+                    .capabilities
+                    .textDocument
+                    .completion
+                    .completionItem
+                    .snippetSupport = false
+
                 end,
 
                 ["clangd"] = configure_clangd,
