@@ -54,6 +54,9 @@ export PAGER="less"
 alias gitpush!='git add . -A && git commit --allow-empty-message -am "" && git push -u origin main'
 
 
+alias sesh="~/dotfiles/scripts/session.sh"
+
+
 alias ls="ls -NF --color=auto --group-directories-first"
 alias ll="ls -lh"
 
@@ -92,6 +95,9 @@ unalias run-help
 # Use zsh's run-help, which will display information for zsh builtins.
 autoload run-help
 alias help=run-help
+
+
+
 
 
 
