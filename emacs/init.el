@@ -44,6 +44,7 @@
 (require 'evil)
 (evil-mode 1)
 
+(setq evil-insert-state-cursor 'box)
 
 ;; send emacs garbage to other file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
