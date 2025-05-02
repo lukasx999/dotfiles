@@ -34,6 +34,13 @@
 (global-display-line-numbers-mode -1)
 (load-theme 'modus-vivendi t)
 
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+(global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
+
+
 
 
 
