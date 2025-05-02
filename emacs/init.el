@@ -33,6 +33,7 @@
 (scroll-bar-mode -1)
 (global-display-line-numbers-mode -1)
 (load-theme 'modus-vivendi t)
+(global-display-line-numbers-mode 1)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
