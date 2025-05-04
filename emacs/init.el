@@ -1,8 +1,5 @@
 
-
-
-
-;; set up MELPA
+;; Set up MELPA
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -35,24 +32,45 @@
 (load-theme 'modus-vivendi t)
 (global-display-line-numbers-mode 1)
 
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-(global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
 
 
 
 
 
-(use-package gruvbox-theme)
-; (load-theme 'gruvbox)
+(use-package gruvbox-theme
+             :config
+             (load-theme 'gruvbox t)
+             )
 
-(use-package evil)
-(require 'evil)
-(evil-mode 1)
+(use-package evil
+             :init
+	     (setq evil-insert-state-cursor 'box)
+	     (setq evil-want-C-u-scroll t)
 
-(setq evil-insert-state-cursor 'box)
+             :config
+             (require 'evil)
+             (evil-mode 1)
+             )
+
+
+
+
+(bind-key "C-+" 'text-scale-increase)
+(bind-key "C--" 'text-scale-decrease)
+(bind-key "C-0" (lambda () (interactive) (text-scale-set 0)))
+(define-key minibuffer-local-map (kbd "<escape>") 'abort-recursive-edit)
+
+(setq scroll-margin 10)
+(setq scroll-conservatively 101)
+
+
+
+
+
+
+
+
+
 
 ;; send emacs garbage to other file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
