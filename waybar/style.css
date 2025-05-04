@@ -1,13 +1,19 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 20px;
+    /* font-family: JetBrainsMonoNerdFont; */
+    font-size: 23px;
 }
 
+@define-color white #d8dee9;
+@define-color grey #4c566a;
+@define-color bg #2e3440;
+
 window#waybar {
-    background-color: rgba(43, 48, 59, 1);
+    background-color: @bg;
+    opacity: 0.9;
     border-bottom: 1px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    color: @white;
 }
 
 button {
@@ -25,14 +31,14 @@ button:hover {
 }
 
 #workspaces button {
-    color: grey;
-    border-bottom: 3px solid grey;
+    color: @grey;
+    border-bottom: 3px solid @grey;
 }
 
 #workspaces button.active {
-    color: white;
+    color: @white;
     background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid @white;
 }
 
 #workspaces button:hover {
@@ -43,11 +49,6 @@ button:hover {
     color: #eb4d4b;
 }
 
-#mode {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
 #clock,
 #battery,
 #cpu,
@@ -56,10 +57,6 @@ button:hover {
 #temperature,
 #wireplumber,
 #tray,
-#mode {
-    padding: 0 10px;
-    color: #ffffff;
-}
 
 #window,
 #workspaces {
@@ -77,9 +74,11 @@ button:hover {
 }
 
 #clock {
+    margin-right: 10;
 }
 
 #cpu {
+    margin-left: 10;
 }
 
 #memory {

@@ -53,7 +53,11 @@
              )
 
 
-(bind-key "C-+" 'text-scale-increase)
+
+
+(bind-key "C-zj:
+
+(BIND-key "C-+" 'text-scale-increase)
 (bind-key "C--" 'text-scale-decrease)
 (bind-key "C-0" (lambda () (interactive) (text-scale-set 0)))
 (define-key minibuffer-local-map (kbd "<escape>") 'abort-recursive-edit)
