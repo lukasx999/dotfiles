@@ -70,8 +70,6 @@ return {
 
                     },
 
-                    include_surrounding_whitespace = true,
-
                 },
             },
 

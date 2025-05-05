@@ -142,6 +142,10 @@ return {
             vim.diagnostic.open_float()
         end, { desc = "Open Float" })
 
+        vim.keymap.set("n", "<C-k>", function()
+            vim.diagnostic.open_float()
+        end, { desc = "Open Float" })
+
         vim.keymap.set("n", "<leader>lh", function()
 
             -- Toggle inlay hints
