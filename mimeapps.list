@@ -2,3 +2,5 @@
 [Default Applications]
 text/html=firefox.desktop
 default-web-browser=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
