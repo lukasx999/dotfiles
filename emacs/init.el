@@ -21,6 +21,7 @@
 
 
 
+(setq display-line-numbers-type 'relative)
 (setq make-backup-files nil)
 (setq inhibit-startup-message t)
 (global-hl-line-mode 1)
