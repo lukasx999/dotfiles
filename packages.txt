@@ -47,6 +47,11 @@ wofi
 wl-clipboard
 waybar
 
+# Demons
+bluez
+bluez-utils
+blueman
+
 # Fonts
 ttf-iosevka-nerd
 ttf-jetbrains-mono-nerd
