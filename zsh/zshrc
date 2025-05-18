@@ -57,6 +57,7 @@ alias gitpush!='git add . -A && git commit --allow-empty-message -am "" && git p
 alias sesh="~/dotfiles/scripts/session.sh"
 
 
+
 alias ls="ls -NF --color=auto --group-directories-first"
 alias ll="ls -lh"
 
