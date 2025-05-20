@@ -58,7 +58,7 @@ alias sesh="~/dotfiles/scripts/session.sh"
 
 
 # alias ls="ls -NF --color=auto --group-directories-first"
-alias ls="eza -F --smart-group --color=auto --group-directories-first"
+alias ls="eza -F --smart-group --color=auto --group-directories-first --icons=always"
 alias ll="ls -lh"
 
 alias rm="rm -vi"
