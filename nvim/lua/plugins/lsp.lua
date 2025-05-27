@@ -1,40 +1,3 @@
-local function configure_clangd()
-    require'lspconfig'.clangd.setup {
-        filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
-        cmd = {
-            "clangd",
-            "--background-index",
-            "--suggest-missing-includes",
-            "--clang-tidy",
-            "--log=verbose",
-            "--header-insertion=never"
-        },
-        init_options = {
-            fallbackFlags = {
-                -- "-xc",
-                "-Wall",
-                "-Wextra",
-                "-pedantic",
-            },
-        },
-    }
-end
-
-
-local function configure_rust_analyzer()
-    require'lspconfig'.rust_analyzer.setup {
-        settings = {
-            ['rust-analyzer'] = {
-                check = {
-                    command = "clippy",
-                },
-                checkOnSave = true,
-            }
-        }
-    }
-end
-
-
 return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
@@ -54,33 +17,21 @@ return {
                 "lua_ls",
                 "jedi_language_server",
             },
-            -- handlers = {
-            --     -- server_name is lspconfig server name, not mason package name
-            --
-            --     -- default handler
-            --     function(server_name)
-            --         require("lspconfig")[server_name].setup {}
-            --
-            --         -- annoying as hell
-            --         require("lspconfig")[server_name]
-            --         .manager
-            --         .config
-            --         .capabilities
-            --         .textDocument
-            --         .completion
-            --         .completionItem
-            --         .snippetSupport = false
-            --
-            --     end,
-            --
-            --     ["clangd"] = configure_clangd,
-            --     ["rust_analyzer"] = configure_rust_analyzer,
-            -- }
         }
 
         -- local capabilities = vim.lsp.protocol.make_client_capabilities()
         -- capabilities.textDocument.completion.completionItem.snippetSupport = false
-        -- vim.lsp.protocol.resolve_capabilities(capabilities)
+
+        vim.lsp.config('rust-analyzer', {
+            settings = {
+                ['rust-analyzer'] = {
+                    check = {
+                        command = "clippy",
+                    },
+                    checkOnSave = true,
+                }
+            }
+        })
 
         vim.lsp.config('clangd', {
             filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
@@ -182,6 +133,8 @@ return {
             vim.diagnostic.config(conf)
 
         end, { desc = "Toggle Virtual Lines and Inlay Hints" })
+
+
 
 
 
