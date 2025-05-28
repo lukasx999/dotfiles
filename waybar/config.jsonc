@@ -1,6 +1,6 @@
 {
     "layer": "top", // Waybar at top layer
-    "height": 50,   // Waybar height (to be removed for auto height)
+    "height": 55,   // Waybar height (to be removed for auto height)
     // "spacing": 5,  // Gaps between modules
     // "margin": 10,   // Gap between bar and screen border
     // "reload_style_on_change": true,
@@ -34,7 +34,10 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{id}"
+        "format": "{id}",
+        "persistent-workspaces": {
+            "*": 5,
+        }
     },
 
     "wireplumber": {

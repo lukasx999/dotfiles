@@ -12,6 +12,7 @@
 @define-color red           #C34043;
 @define-color blue          #658594;
 @define-color darkblue      #7FB4CA;
+@define-color purple        #957FB8;
 
 window#waybar {
     background-color: transparent;
@@ -30,16 +31,19 @@ button {
 button:hover {
 }
 
+#workspaces button.empty {
+    border-bottom: 5px solid @lightgrey;
+}
+
 #workspaces button {
     color: @white;
-    border-bottom: 3px solid @lightgrey;
+    border-bottom: 3px solid @purple;
 }
 
 #workspaces button.active {
     font-weight: bold;
-    color: @white;
     background-color: @grey;
-    border-bottom: 3px solid @blue;
+    border-bottom: 3px solid @darkblue;
 }
 
 #workspaces button:hover {
@@ -47,7 +51,8 @@ button:hover {
 }
 
 #workspaces button.urgent {
-    color: @red;
+    font-weight: bold;
+    border-bottom: 3px solid @red;
 }
 
 #workspaces {
@@ -68,12 +73,11 @@ button:hover {
     padding: 0px 20px 0px 20px;
     background-color: @bg;
     border-radius: 10px;
-    margin: 5px 5px 5px 5px;
+    margin: 10px 10px 10px 10px;
     box-shadow: 1 1 3 1px @grey;
 }
 
 #clock.time {
-    /* color: @darkblue; */
 }
 
 #clock.date {
