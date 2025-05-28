@@ -5,14 +5,17 @@
     font-size: 23px;
 }
 
-@define-color white #d8dee9;
-@define-color grey #4c566a;
-@define-color bg #2e3440;
+@define-color white #DCD7BA;
+@define-color grey #2A2A37;
+@define-color lightgrey #363646;
+@define-color bg #1F1F28;
+@define-color red #C34043;
+@define-color blue #658594;
+@define-color darkblue #7FB4CA;
 
 window#waybar {
     background-color: @bg;
-    /* opacity: 0.9; */
-    border-bottom: 1px solid rgba(100, 114, 125, 0.5);
+    /* opacity: 0.95; */
     color: @white;
 }
 
@@ -31,22 +34,23 @@ button:hover {
 }
 
 #workspaces button {
-    color: @grey;
-    border-bottom: 3px solid @grey;
+    color: @lightgrey;
+    border-bottom: 3px solid @lightgrey;
 }
 
 #workspaces button.active {
     color: @white;
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid @white;
+    background-color: @grey;
+    border-bottom: 3px solid @blue;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: @lightgrey;
+    opacity: 0.25;
 }
 
 #workspaces button.urgent {
-    color: #eb4d4b;
+    color: @red;
 }
 
 #clock,
