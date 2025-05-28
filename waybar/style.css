@@ -5,17 +5,16 @@
     font-size: 23px;
 }
 
-@define-color white #DCD7BA;
-@define-color grey #2A2A37;
-@define-color lightgrey #363646;
-@define-color bg #1F1F28;
-@define-color red #C34043;
-@define-color blue #658594;
-@define-color darkblue #7FB4CA;
+@define-color white         #DCD7BA;
+@define-color grey          #2A2A37;
+@define-color lightgrey     #363646;
+@define-color bg            #1F1F28;
+@define-color red           #C34043;
+@define-color blue          #658594;
+@define-color darkblue      #7FB4CA;
 
 window#waybar {
-    background-color: @bg;
-    /* opacity: 0.95; */
+    background-color: transparent;
     color: @white;
 }
 
@@ -29,16 +28,15 @@ button {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    /* background: inherit; */
-    /* box-shadow: inset 0 -3px #ffffff; */
 }
 
 #workspaces button {
-    color: @lightgrey;
+    color: @white;
     border-bottom: 3px solid @lightgrey;
 }
 
 #workspaces button.active {
+    font-weight: bold;
     color: @white;
     background-color: @grey;
     border-bottom: 3px solid @blue;
@@ -46,11 +44,14 @@ button:hover {
 
 #workspaces button:hover {
     background: @lightgrey;
-    opacity: 0.25;
 }
 
 #workspaces button.urgent {
     color: @red;
+}
+
+#workspaces {
+    /* margin: 2px 2px; */
 }
 
 #clock,
@@ -61,10 +62,60 @@ button:hover {
 #temperature,
 #wireplumber,
 #tray,
+#workspaces,
+#window {
+    color: @white;
+    padding: 0px 20px 0px 20px;
+    background-color: @bg;
+    border-radius: 10px;
+    margin: 5px 5px 5px 5px;
+    box-shadow: 1 1 3 1px @grey;
+}
 
-#window,
-#workspaces {
-    margin: 0 4px;
+#clock.time {
+    /* color: @darkblue; */
+}
+
+#clock.date {
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#temperature {
+}
+
+#temperature.critical {
+    color: @red;
+}
+
+#disk {
+}
+
+#tray {
+}
+
+#wireplumber {
+}
+
+#wireplumber.muted {
+    color: @red;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+}
+
+label:focus {
+    color: #000000;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -75,48 +126,4 @@ button:hover {
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
-}
-
-#clock {
-    margin-right: 10;
-}
-
-#cpu {
-    margin-left: 10;
-}
-
-#memory {
-}
-
-#temperature {
-}
-
-#temperature.critical {
-    color: #eb4d4b;
-}
-
-#disk {
-}
-
-#tray {
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
-}
-
-label:focus {
-    background-color: #000000;
-}
-
-#wireplumber {
-}
-
-#wireplumber.muted {
-    color: #f53c3c;
 }

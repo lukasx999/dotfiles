@@ -1,11 +1,10 @@
 {
     "layer": "top", // Waybar at top layer
-    "height": 50, // Waybar height (to be removed for auto height)
-    "spacing": 10, // Gaps between modules (4px)
-    // "margin": 10,
+    "height": 50,   // Waybar height (to be removed for auto height)
+    // "spacing": 5,  // Gaps between modules
+    // "margin": 10,   // Gap between bar and screen border
     // "reload_style_on_change": true,
 
-    // Choose the order of the modules
     "modules-left": [
         "custom/media",
         "cpu",
@@ -21,10 +20,10 @@
         "mpd",
         "wireplumber",
         "keyboard-state",
-        "clock"
+        "clock#date",
+        "clock#time"
     ],
 
-    // Modules configuration
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
@@ -40,7 +39,7 @@
 
     "wireplumber": {
         "format": "{volume}% {icon}",
-        "format-muted": "󰝟",
+        "format-muted": "{volume}% 󰝟",
         "format-icons": [ "", "", "" ],
         "scroll-step": 2.0,
         "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle"
@@ -57,9 +56,14 @@
         "path": "/"
     },
 
-    "clock": {
+    "clock#date": {
         "timezone": "Europe/Vienna",
-        "format": "{:%d.%m.%Y %H:%M} "
+        "format": "{:%d.%m.%Y} "
+    },
+
+    "clock#time": {
+        "timezone": "Europe/Vienna",
+        "format": "{:%H:%M} "
     },
 
     "tray": {
