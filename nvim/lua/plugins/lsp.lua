@@ -19,9 +19,6 @@ return {
             },
         }
 
-        -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-        -- capabilities.textDocument.completion.completionItem.snippetSupport = false
-
         vim.lsp.config('rust-analyzer', {
             settings = {
                 ['rust-analyzer'] = {
@@ -53,6 +50,17 @@ return {
 
         })
 
+        vim.lsp.config('*', {
+            capabilities = {
+                textDocument = {
+                    completion = {
+                        completionItem = {
+                            snippetSupport = false,
+                        }
+                    }
+                }
+            }
+        })
 
         -- vim.lsp.inlay_hint.enable(true)
 

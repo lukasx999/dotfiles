@@ -23,6 +23,11 @@ return {
             accept = {
                 auto_brackets = {
                     enabled = false,
+
+                    -- semantic_token_resolution = {
+                    --     enabled = false,
+                    -- }
+
                 },
             },
 
