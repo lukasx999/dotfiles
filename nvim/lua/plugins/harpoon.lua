@@ -20,8 +20,8 @@ return {
         vim.keymap.set("n", "<M-8>", function() hp:list():select(8) end)
         vim.keymap.set("n", "<M-9>", function() hp:list():select(9) end)
 
-        vim.keymap.set("n", "<C-n>", function() hp:list():next() end)
-        vim.keymap.set("n", "<C-p>", function() hp:list():prev() end)
+        -- vim.keymap.set("n", "<C-n>", function() hp:list():next() end)
+        -- vim.keymap.set("n", "<C-p>", function() hp:list():prev() end)
 
         local hp_ext = require("harpoon.extensions")
         hp:extend(hp_ext.builtins.highlight_current_file())
