@@ -112,7 +112,7 @@ return {
         vim.keymap.set("n", "K",          vim.lsp.buf.hover,                   { desc = "Hover"                })
 
         vim.keymap.set("n", "<leader>lm", "<cmd>Man<CR>",                      { desc = "Open Man Page"        })
-        vim.keymap.set("n", "<leader>ls", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
+        vim.keymap.set("n", "<leader>ls", "<cmd>LspClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
         vim.keymap.set("n", "<leader>lq", function()
             vim.diagnostic.setqflist({ open = false })
