@@ -44,6 +44,7 @@ return {
                 fallbackFlags = {
                     "-Wall",
                     "-Wextra",
+                    "-std=c++23",
                     "-pedantic",
                 },
             },
