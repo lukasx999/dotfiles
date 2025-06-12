@@ -69,5 +69,6 @@ vim.opt.undodir  = os.getenv("HOME") .. "/.vim/undodir"
 
 -- vim.cmd("colorscheme rose-pine-moon")
 -- vim.cmd("colorscheme kanagawa-dragon")
-vim.cmd("colorscheme kanagawa-wave")
+-- vim.cmd("colorscheme kanagawa-wave")
+vim.cmd("colorscheme gruvbox")
 -- vim.cmd("colorscheme duskfox")

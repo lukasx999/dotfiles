@@ -51,7 +51,18 @@ export VISUAL="nvim"
 export TERM="tmux-256color"
 export PAGER="less"
 
-alias gitpush!='git add . -A && git commit --allow-empty-message -am "" && git push -u origin main'
+alias gp!='git add . -A && git commit --allow-empty-message -am "" && git push -u origin main'
+alias gc!="git add . -A && git commit -am"
+
+function sanec++ {
+    out=$(echo $1 | sed 's/\..*$//')
+    c++ -Wall -Wextra -std=c++23 -pedantic -Og -ggdb $1 -o $out
+}
+
+function sanecc {
+    out=$(echo $1 | sed 's/\..*$//')
+    cc -Wall -Wextra -std=c11 -pedantic -Og -ggdb $1 -o $out
+}
 
 
 alias sesh="~/dotfiles/scripts/session.sh"
