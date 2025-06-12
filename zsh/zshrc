@@ -45,6 +45,7 @@ PROMPT="%B%{$fg[blue]%}%~      %{$fg[magenta]%}    ${NEWLINE}${SYMBOL}%{$reset_c
 
 source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion
 
+# export XDG_CURRENT_DESKTOP=sway
 
 export EDITOR="nvim"
 export VISUAL="nvim"
