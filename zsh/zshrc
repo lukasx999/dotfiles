@@ -70,6 +70,13 @@ function cc! {
     cc -Wall -Wextra -std=c11 -pedantic -Og -ggdb $1 -o $out
 }
 
+function watchcc! {
+    out=$(echo $1 | sed 's/\..*$//')
+    mkdir -p /tmp/watchcc
+    out=/tmp/watchcc/$out
+    echo $1 | entr -cs "sh -c \"c++ $1 -Wall -Wextra -std=c++23 -Og -ggdb -fsanitize=address,undefined -o $out\" && $out"
+}
+
 
 alias sesh="~/dotfiles/scripts/session.sh"
 
