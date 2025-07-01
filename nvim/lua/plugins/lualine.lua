@@ -5,7 +5,8 @@ return {
     config = function()
 
         local function linecount()
-            return vim.api.nvim_buf_line_count(0)
+            local loc = vim.api.nvim_buf_line_count(0)
+            return loc
         end
 
         require'lualine'.setup {
