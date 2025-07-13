@@ -74,7 +74,7 @@ function watchcc! {
     out=$(echo $1 | sed 's/\..*$//')
     mkdir -p /tmp/watchcc
     out=/tmp/watchcc/$out
-    echo $1 | entr -cs "sh -c \"c++ $1 -Wall -Wextra -std=c++23 -Og -ggdb -fsanitize=address,undefined -o $out\" && $out"
+    echo $1 | entr -cs "sh -c \"clang++ $1 -Wall -Wextra -std=c++23 -pedantic -Og -ggdb -fsanitize=address,undefined -o $out\" && $out"
 }
 
 
