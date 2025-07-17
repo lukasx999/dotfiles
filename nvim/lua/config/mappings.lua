@@ -14,7 +14,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Remove search highlighting
 vim.keymap.set('n', '<Esc>', '<cmd>noh<CR>')
 
-vim.keymap.set("n", "<C-z>", "<C-y>", { silent = true }) -- quertz sucks
+vim.keymap.set("n", "<C-z>", "<C-y>", { silent = true }) -- qwertz sucks
 
 -- Quickfix List
 vim.keymap.set("n", "<leader>q", "<cmd>cope<CR>", { silent = true, desc = "Open Quickfixlist"         })
@@ -24,6 +24,10 @@ vim.keymap.set("n", "]q", "<cmd>cn<CR>",          { silent = true, desc = "Previ
 -- keep visual selection when using >/<
 vim.keymap.set("v", ">", ">gv", { silent = true })
 vim.keymap.set("v", "<", "<gv", { silent = true })
+
+-- delete without yanking
+vim.keymap.set("n", "<leader>d", "\"_d")
+vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- centering cursor:
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true })
