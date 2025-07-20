@@ -78,7 +78,7 @@ function watchcc! {
 }
 
 function objdump! {
-    objdump -dC $1 -Mintel > $1.s
+    objdump -rdC $1 -Mintel > $1.s
 }
 
 alias sesh="~/dotfiles/scripts/session.sh"
