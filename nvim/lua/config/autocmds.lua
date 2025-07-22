@@ -72,8 +72,14 @@ vim.api.nvim_create_autocmd("FileType", {
     },
     callback = function(event)
 
-        if vim.bo.filetype == "vim" then
+        local ft = vim.bo.filetype
+
+        if ft == "vim" then
             vim.keymap.set("n", "q", "<cmd>q<CR>", { buffer = event.buf, silent = true })
+
+        elseif ft == "oil" then
+            vim.keymap.set("n", "q", function() require('oil').close() end, { buffer = event.buf, silent = true })
+
         else
             vim.keymap.set("n", "q", "<cmd>bw<CR>", { buffer = event.buf, silent = true })
         end
