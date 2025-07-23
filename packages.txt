@@ -23,6 +23,7 @@ imagemagick
 nasm
 npm
 zig
+glsl_analyzer-bin (aur)
 
 # Basic utilities
 wget
