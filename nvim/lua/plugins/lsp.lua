@@ -30,6 +30,8 @@ return {
             }
         })
 
+        require'lspconfig'.glsl_analyzer.setup{}
+
         vim.lsp.config('clangd', {
             filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
             cmd = {
