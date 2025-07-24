@@ -12,10 +12,8 @@ return {
         require("mason-lspconfig").setup {
             automatic_installation = true,
             ensure_installed = {
-                "clangd",
-                "rust_analyzer",
-                "lua_ls",
-                "jedi_language_server",
+                -- "clangd",
+                -- "rust_analyzer",
             },
         }
 
