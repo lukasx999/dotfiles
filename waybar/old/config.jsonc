@@ -1,0 +1,77 @@
+{
+    "layer": "top", // Waybar at top layer
+    "height": 55,   // Waybar height (to be removed for auto height)
+    // "spacing": 5,  // Gaps between modules
+    // "margin": 10,   // Gap between bar and screen border
+    // "reload_style_on_change": true,
+
+    "modules-left": [
+        "custom/media",
+        "cpu",
+        "temperature",
+        "memory",
+        "disk"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "tray",
+        "mpd",
+        "wireplumber",
+        "keyboard-state",
+        "clock#date",
+        "clock#time"
+    ],
+
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": "{used:0.1f} GiB "
+    },
+
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "persistent-workspaces": {
+            "*": 5,
+        }
+    },
+
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "{volume}% 󰝟",
+        "format-icons": [ "", "", "" ],
+        "scroll-step": 2.0,
+        "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle"
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+
+    "disk": {
+        "format": "{percentage_used}% ",
+        "path": "/"
+    },
+
+    "clock#date": {
+        "timezone": "Europe/Vienna",
+        "format": "{:%d.%m.%Y} "
+    },
+
+    "clock#time": {
+        "timezone": "Europe/Vienna",
+        "format": "{:%H:%M} "
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+
+}
