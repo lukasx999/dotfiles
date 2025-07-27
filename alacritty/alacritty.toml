@@ -1,75 +1,46 @@
-
 [general]
-# import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
-# import = ["~/.config/alacritty/themes/rose-pine.toml"]
-# import = ["~/.config/alacritty/themes/rose-pine-moon.toml"]
-# import = ["~/.config/alacritty/themes/gruvbox_light.toml"]
-# import = ["~/.config/alacritty/themes/tokyo_night_storm.toml"]
-# import = ["~/.config/alacritty/themes/tokyo_night.toml"]
-# import = ["~/.config/alacritty/themes/github_dark.toml"]
-# import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
-# import = ["~/.config/alacritty/themes/carbonfox.toml"]
 import = ["~/.config/alacritty/themes/kanagawa_wave.toml"]
-# import = ["~/.config/alacritty/themes/one_dark.toml"]
-# import = ["~/.config/alacritty/themes/jellybeans.toml"]
-
 live_config_reload = true
 working_directory = "None"
 
-
 [terminal]
 osc52 = "CopyPaste"
+
 [terminal.shell]
 program = "/usr/bin/zsh"
-# args = ["-1"]
-
-
-
-
 
 [window]
 # dimensions = { columns = 80, lines = 24 }
-#position = { x = 865, y = 420 }
 padding = { x = 15, y = 15 }
 # dynamic_padding = true
-opacity = 0.95
+opacity = 1
 # decorations = "None"
 title = "Alacritty"
 dynamic_title = true
 resize_increments = false
 
-
-
 [scrolling]
 history = 100000
 multiplier = 3
 
-
-
 [font]
-# normal      = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-# bold        = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-# italic      = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-# bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+normal      = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold        = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic      = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+# normal      = { family = "IosevkaNerdFont", style = "Regular" }
+# bold        = { family = "IosevkaNerdFont", style = "Bold" }
+# italic      = { family = "IosevkaNerdFont", style = "Italic" }
+# bold_italic = { family = "IosevkaNerdFont", style = "Bold Italic" }
 
-normal      = { family = "IosevkaNerdFont", style = "Regular" }
-bold        = { family = "IosevkaNerdFont", style = "Bold" }
-italic      = { family = "IosevkaNerdFont", style = "Italic" }
-bold_italic = { family = "IosevkaNerdFont", style = "Bold Italic" }
-
-
-
-size = 15
+size = 30
 offset = { x = 0, y = 0 }
 builtin_box_drawing = true
-
 
 [bell]
 animation = "EaseOut"
 duration = 0  # 300
 # command = "None"
-
-
 
 [cursor]
 # style = { shape = "Block", blinking = "Always" }
@@ -80,34 +51,20 @@ thickness = 0.2
 unfocused_hollow = true
 vi_mode_style = "Block"
 
-
 [selection]
 save_to_clipboard = true
-
-
-
-
 
 [mouse]
 hide_when_typing = true
 
-
 [hints]
-###
-
-
 
 [keyboard]
 bindings = [
 { key = "C", mods = "Control|Alt", action = "Copy"},
 { key = "V", mods = "Control|Alt", action = "Paste"},
-{ key = "T", mods = "Control", action = "SpawnNewInstance"},
 ]
-
 
 [debug]
 render_timer = false
 renderer = "None"
-
-
-
