@@ -116,7 +116,7 @@ return {
         vim.keymap.set("n", "<leader>ls", "<cmd>LspClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
         vim.keymap.set("n", "<leader>lq", function()
-            vim.diagnostic.setqflist({ open = false })
+            vim.diagnostic.setqflist({ open = true, severity = vim.diagnostic.severity.ERROR })
         end, { desc = "Diagnostics to qflist" })
 
         vim.keymap.set("n", "<leader>ll", function()
