@@ -107,7 +107,7 @@ return {
         vim.keymap.set("n", "<leader>lC", vim.lsp.buf.outgoing_calls,          { desc = "Outgoing Calls"       })
         vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition,         { desc = "Type Definition"      })
         vim.keymap.set("n", "<leader>lT", vim.lsp.buf.typehierarchy,           { desc = "Type Hierarchy"       })
-        vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol,        { desc = "Workspace Symbols"    })
+        vim.keymap.set('n', '<leader>lq', vim.lsp.buf.workspace_symbol,        { desc = "Workspace Symbols"    })
         -- vim.keymap.set('n', '<leader>lS', builtin.lsp_workspace_symbols,        { desc = "Workspace Symbols"    })
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references,              { desc = "References"           })
         vim.keymap.set("n", "K",          vim.lsp.buf.hover,                   { desc = "Hover"                })
@@ -115,7 +115,7 @@ return {
         vim.keymap.set("n", "<leader>lm", "<cmd>Man<CR>",                      { desc = "Open Man Page"        })
         vim.keymap.set("n", "<leader>ls", "<cmd>LspClangdSwitchSourceHeader<CR>", { desc = "Switch Source-Header" })
 
-        vim.keymap.set("n", "<leader>lq", function()
+        vim.keymap.set("n", "<leader>lQ", function()
             vim.diagnostic.setqflist({ open = true, severity = vim.diagnostic.severity.ERROR })
         end, { desc = "Diagnostics to qflist" })
 
