@@ -37,6 +37,11 @@ return {
                 "--background-index",
                 "--suggest-missing-includes",
                 "--clang-tidy",
+
+                "--clang-tidy-checks=*",
+                "--background-index",
+                "-j=12",
+
                 "--log=verbose",
                 "--header-insertion=never"
             },
