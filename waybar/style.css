@@ -15,7 +15,7 @@
 @define-color purple        #957FB8;
 
 window#waybar {
-    background-color: transparent;
+    background-color: @bg;
     color: @white;
 }
 
@@ -37,7 +37,7 @@ button:hover {
 
 #workspaces button {
     color: @white;
-    border-bottom: 3px solid @purple;
+    border-bottom: 3px solid @lightgrey;
 }
 
 #workspaces button.active {
@@ -72,9 +72,6 @@ button:hover {
     color: @white;
     padding: 0px 20px 0px 20px;
     background-color: @bg;
-    border-radius: 10px;
-    margin: 10px 10px 10px 10px;
-    box-shadow: 1 1 3 1px @grey;
 }
 
 #clock.time {
