@@ -1,8 +1,8 @@
 {
     "layer": "top", // Waybar at top layer
-    "height": 55,   // Waybar height (to be removed for auto height)
-    // "spacing": 5,  // Gaps between modules
-    // "margin": 10,   // Gap between bar and screen border
+    "height": 50,   // Waybar height (to be removed for auto height)
+    "spacing": 0,   // Gaps between modules
+    "margin": 0,    // Gap between bar and screen border
     // "reload_style_on_change": true,
 
     "modules-left": [
@@ -25,12 +25,12 @@
     ],
 
     "cpu": {
-        "format": "{usage}% ",
+        "format": " {usage}%",
         "tooltip": false
     },
 
     "memory": {
-        "format": "{used:0.1f} GiB "
+        "format": " {used:0.1f} GiB"
     },
 
     "hyprland/workspaces": {
@@ -41,7 +41,7 @@
     },
 
     "wireplumber": {
-        "format": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
         "format-muted": "{volume}% 󰝟",
         "format-icons": [ "", "", "" ],
         "scroll-step": 2.0,
@@ -50,23 +50,23 @@
 
     "temperature": {
         "critical-threshold": 80,
-        "format": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
 
     "disk": {
-        "format": "{percentage_used}% ",
+        "format": " {percentage_used}%",
         "path": "/"
     },
 
     "clock#date": {
         "timezone": "Europe/Vienna",
-        "format": "{:%d.%m.%Y} "
+        "format": " {:%d.%m.%Y}"
     },
 
     "clock#time": {
         "timezone": "Europe/Vienna",
-        "format": "{:%H:%M} "
+        "format": " {:%H:%M}"
     },
 
     "tray": {

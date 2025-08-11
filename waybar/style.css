@@ -1,8 +1,6 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    /* font-family: JetBrainsMonoNerdFont; */
-    font-size: 23px;
+    font-family: JetBrainsMonoNerdFont;
+    font-size: 24px;
 }
 
 @define-color white         #DCD7BA;
@@ -75,6 +73,7 @@ button:hover {
 }
 
 #clock.time {
+    /* text-decoration: underline; */
 }
 
 #clock.date {
