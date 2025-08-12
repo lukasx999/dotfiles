@@ -30,12 +30,12 @@ button:hover {
 }
 
 #workspaces button.empty {
-    border-bottom: 5px solid @lightgrey;
+    border-bottom: 5px solid @grey;
 }
 
 #workspaces button {
     color: @white;
-    border-bottom: 3px solid @lightgrey;
+    border-bottom: 3px solid @blue;
 }
 
 #workspaces button.active {
