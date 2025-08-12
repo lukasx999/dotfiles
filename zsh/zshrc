@@ -38,7 +38,7 @@ setopt auto_cd               # cding into dirs by just typing the name
 
 
 NEWLINE=$'\n'
-SYMBOL="󰘧"
+SYMBOL=">" # 󰘧
 PROMPT="%B%{$fg[blue]%}%~      %{$fg[magenta]%}    ${NEWLINE}${SYMBOL}%{$reset_color%}%b "
 
 
