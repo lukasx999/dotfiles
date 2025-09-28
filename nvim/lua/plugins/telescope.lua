@@ -29,6 +29,9 @@ return {
                 results_title = false,
                 -- preview_title = false,
 
+                -- TODO: show hidden files
+                -- hidden = true,
+
                 layout_config = {
                     height = 0.35
                 },
