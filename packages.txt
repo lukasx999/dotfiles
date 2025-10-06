@@ -46,6 +46,7 @@ rlwrap
 gnome-shell
 
 # Wayland Desktop
+rofi
 waypaper
 swww
 hyprland
