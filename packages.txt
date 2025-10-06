@@ -39,7 +39,6 @@ locate
 man-pages
 man-db
 less
-go
 flameshot
 rlwrap
 
