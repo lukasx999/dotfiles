@@ -1,6 +1,6 @@
 * {
     font-family: JetBrainsMonoNerdFont;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 @define-color white         #DCD7BA;
@@ -55,6 +55,14 @@ button:hover {
 
 #workspaces {
     /* margin: 2px 2px; */
+}
+
+#battery.warning {
+    color: @red;
+}
+
+#battery.critical {
+    color: @red;
 }
 
 #clock,

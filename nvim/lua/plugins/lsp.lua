@@ -4,8 +4,8 @@ return {
         "neovim/nvim-lspconfig",
         "williamboman/mason.nvim",
     },
-    config = function()
 
+    config = function()
 
         -- order: mason -> mason-lspconfig -> lspconfig
         require("mason").setup()
@@ -28,7 +28,7 @@ return {
             }
         })
 
-        require'lspconfig'.glsl_analyzer.setup{}
+        vim.lsp.config("glsl_analyzer", {})
 
         vim.lsp.config('clangd', {
             filetypes = { "c", "h", "cpp", "hpp", "cc", "hh" },
@@ -56,17 +56,6 @@ return {
 
         })
 
-        vim.lsp.config('*', {
-            capabilities = {
-                textDocument = {
-                    completion = {
-                        completionItem = {
-                            snippetSupport = false,
-                        }
-                    }
-                }
-            }
-        })
 
         -- vim.lsp.inlay_hint.enable(true)
 
@@ -99,6 +88,18 @@ return {
             }
 
         }
+
+        vim.lsp.config('*', {
+            capabilities = {
+                textDocument = {
+                    completion = {
+                        completionItem = {
+                            snippetSupport = false,
+                        }
+                    }
+                }
+            }
+        })
 
         -- local builtin = require('telescope.builtin')
 

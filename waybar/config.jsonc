@@ -1,6 +1,6 @@
 {
     "layer": "top", // Waybar at top layer
-    "height": 50,   // Waybar height (to be removed for auto height)
+    "height": 40,   // Waybar height (to be removed for auto height)
     "spacing": 0,   // Gaps between modules
     "margin": 0,    // Gap between bar and screen border
     // "reload_style_on_change": true,
@@ -10,7 +10,8 @@
         "cpu",
         "temperature",
         "memory",
-        "disk"
+        "disk",
+        "battery"
     ],
     "modules-center": [
         "hyprland/workspaces"
@@ -23,6 +24,15 @@
         "clock#date",
         "clock#time"
     ],
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+    },
 
     "cpu": {
         "format": " {usage}%",

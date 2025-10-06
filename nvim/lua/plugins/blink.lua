@@ -24,9 +24,9 @@ return {
                 auto_brackets = {
                     enabled = false,
 
-                    semantic_token_resolution = {
-                        enabled = false,
-                    }
+                    -- semantic_token_resolution = {
+                    --     enabled = false,
+                    -- }
 
                 },
             },

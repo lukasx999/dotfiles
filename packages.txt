@@ -1,3 +1,5 @@
+eza
+just
 bear
 zsh
 tmux
@@ -26,6 +28,11 @@ npm
 zig
 glsl_analyzer-bin (aur)
 
+# Programming
+glm
+glfw
+raylib
+
 # Basic utilities
 wget
 locate
@@ -35,9 +42,6 @@ less
 go
 flameshot
 rlwrap
-
-# Libraries
-raylib
 
 # X11 Desktop
 gnome-shell
