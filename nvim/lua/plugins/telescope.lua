@@ -21,7 +21,6 @@ return {
         vim.keymap.set('n', '<leader>fc', builtin.colorscheme, { desc = 'Telescope colorscheme' })
         vim.keymap.set('n', '<leader>fp', builtin.git_files,   { desc = 'Telescope git files'   })
 
-
         require("telescope").setup({
 
             defaults = require('telescope.themes').get_ivy({
