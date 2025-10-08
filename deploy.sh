@@ -10,12 +10,18 @@ function deploy {
     file=$1
     path=$2
 
-    # TODO: check for symlink, not directory
-    if [[ -d $path ]]; then
+    if [[ -e $path ]]; then
         echo "$path already exists"
     else
         ln -srv $file $path
     fi
+}
+
+function deploy_special {
+    deploy "zsh/zshrc" "$HOME/.zshrc"
+    deploy "zsh/plugins" "$HOME/.zsh_plugins"
+    deploy "sqliterc" "$HOME/.sqliterc"
+    deploy "xinitrc" "$HOME/.xinitrc"
 }
 
 function deploy_all {
@@ -23,17 +29,17 @@ function deploy_all {
         path=${PREFIX}/${file}
         deploy $file $path
     done
-    deploy "zsh/zshrc" "$HOME/.zshrc"
-    deploy "zsh/plugins" "$HOME/.zsh_plugins"
-    deploy "sqliterc" "$HOME/.sqliterc"
-    deploy "xinitrc" "$HOME/.xinitrc"
+
+    deploy_special
 }
 
 function remove {
     echo "$file_list" | xargs -I{} rm -v ${PREFIX}/{}
-    rm -v "$HOME/.zshrc" "$HOME/.zsh_plugins" "$HOME/.xinitrc"
+    rm -v "$HOME/.zshrc"       \
+          "$HOME/.zsh_plugins" \
+          "$HOME/.xinitrc"     \
+          "$HOME/.sqliterc"
 }
-
 
 if [[ $# == 0 ]]; then
     deploy_all
