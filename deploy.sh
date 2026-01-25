@@ -43,9 +43,12 @@ function remove {
 
 if [[ $# == 0 ]]; then
     deploy_all
+
 elif [[ $# == 1 && $1 == "remove" ]]; then
     remove
+
 else
     echo "Invalid number of arguments"
     exit 1
+
 fi
