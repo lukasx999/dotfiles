@@ -1,19 +1,19 @@
 * {
-    font-family: JetBrainsMonoNerdFont;
-    font-size: 23px;
+    font-family: JetBrainsMonoNerdFont, Roboto;
+    font-size: 21px;
 }
 
-@define-color white         #DCD7BA;
-@define-color grey          #2A2A37;
+@define-color white         #ffffff;
+@define-color black         #000000;
+@define-color grey          #282828;
 @define-color lightgrey     #363646;
-@define-color bg            #1F1F28;
 @define-color red           #C34043;
 @define-color blue          #658594;
 @define-color darkblue      #7FB4CA;
 @define-color purple        #957FB8;
 
 window#waybar {
-    background-color: @bg;
+    background-color: @black;
     color: @white;
 }
 
@@ -29,19 +29,19 @@ button {
 button:hover {
 }
 
-#workspaces button.empty {
-    border-bottom: 5px solid @grey;
-}
-
 #workspaces button {
     color: @white;
-    border-bottom: 3px solid @blue;
+    border-bottom: 1px solid @white;
 }
 
+#workspaces button.empty {
+    border-bottom: 1px solid @black;
+}
+
+
 #workspaces button.active {
-    font-weight: bold;
+    /* font-weight: bold; */
     background-color: @grey;
-    border-bottom: 3px solid @darkblue;
 }
 
 #workspaces button:hover {
@@ -77,7 +77,7 @@ button:hover {
 #window {
     color: @white;
     padding: 0px 20px 0px 20px;
-    background-color: @bg;
+    background-color: @black;
 }
 
 #clock.time {
