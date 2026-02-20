@@ -4,6 +4,11 @@ return {
     event = "BufReadPre",
     opts = {
 
+        user_default_options = {
+            names = false,
+            css = true,
+        },
+
         filetypes = {
             "*",
             "!oil",
