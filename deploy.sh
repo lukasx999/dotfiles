@@ -1,54 +1,34 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-PREFIX="$HOME/.config"
-FILES="nvim tmux kitty gdb clangd alacritty hypr waybar emacs mimeapps.list"
+remove=false
 
-file_list=$(echo $FILES | tr ' ' '\n')
+if [[ $# == 1 && $1 == "remove" ]]; then
+    remove=true
+fi
 
-function deploy {
+deploy() {
     file=$1
     path=$2
 
-    if [[ -e $path ]]; then
-        echo "$path already exists"
-    else
-        ln -srv $file $path
+    if $remove; then
+        rm -v $path
+        return
     fi
+
+    ln -srv $file $path
 }
 
-function deploy_special {
-    deploy "zsh/zshrc" "$HOME/.zshrc"
-    deploy "zsh/plugins" "$HOME/.zsh_plugins"
-    deploy "sqliterc" "$HOME/.sqliterc"
-    deploy "xinitrc" "$HOME/.xinitrc"
-}
-
-function deploy_all {
-    for file in $file_list; do
-        path=${PREFIX}/${file}
-        deploy $file $path
-    done
-
-    deploy_special
-}
-
-function remove {
-    echo "$file_list" | xargs -I{} rm -v ${PREFIX}/{}
-    rm -v "$HOME/.zshrc"       \
-          "$HOME/.zsh_plugins" \
-          "$HOME/.xinitrc"     \
-          "$HOME/.sqliterc"
-}
-
-if [[ $# == 0 ]]; then
-    deploy_all
-
-elif [[ $# == 1 && $1 == "remove" ]]; then
-    remove
-
-else
-    echo "Invalid number of arguments"
-    exit 1
-
-fi
+deploy "nvim"          ~/.config/nvim
+deploy "tmux"          ~/.config/tmux
+deploy "kitty"         ~/.config/kitty
+deploy "gdb"           ~/.config/gdb
+deploy "clangd"        ~/.config/clangd
+deploy "alacritty"     ~/.config/alacritty
+deploy "hypr"          ~/.config/hypr
+deploy "waybar"        ~/.config/waybar
+deploy "emacs"         ~/.config/emacs
+deploy "mimeapps.list" ~/.config/mimeapps.list
+deploy "zsh/zshrc"     ~/.zshrc
+deploy "zsh/plugins"   ~/.zsh_plugins
+deploy "sqliterc"      ~/.sqliterc
