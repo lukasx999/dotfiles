@@ -41,9 +41,8 @@ man-db
 less
 flameshot
 rlwrap
-
-# X11 Desktop
-gnome-shell
+sshfs
+tldr
 
 # Wayland Desktop
 rofi
@@ -69,3 +68,4 @@ ttf-font-awesome
 otf-font-awesome
 ttf-noto-nerd
 noto-fonts
+ttf-roboto
