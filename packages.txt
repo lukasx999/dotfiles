@@ -54,6 +54,8 @@ hyprlock
 wofi
 wl-clipboard
 waybar
+grim
+slurp
 
 # Demons
 bluez
