@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
+# BUG: creates another nested symlink if symlink already exists
+
 remove=false
 
 if [[ $# == 1 && $1 == "remove" ]]; then
