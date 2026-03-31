@@ -37,3 +37,6 @@ vim.keymap.set("n", "<C-b>", "<C-b>zz", { silent = true })
 vim.keymap.set("n", "n",     "nzzzv",   { silent = true })
 vim.keymap.set("n", "N",     "Nzzzv",   { silent = true })
 -- vim.keymap.set("i", "jk",    "<ESC>",   { silent = true })
+
+-- dont jump to next match
+vim.keymap.set("n", "*", "*N", { silent = true })
