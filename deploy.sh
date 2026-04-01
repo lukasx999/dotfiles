@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-# BUG: creates another nested symlink if symlink already exists
-
 remove=false
 
 if [[ $# == 1 && $1 == "remove" ]]; then
@@ -18,7 +16,9 @@ deploy() {
         return
     fi
 
-    ln -srv $file $path
+    if ! [[ -e $path ]]; then
+        ln -srv $file $path
+    fi
 }
 
 deploy "nvim"          ~/.config/nvim
