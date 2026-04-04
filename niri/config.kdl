@@ -1,5 +1,9 @@
 input {
     keyboard {
+
+        repeat-delay 300
+        repeat-rate 50
+
         xkb {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
@@ -145,13 +149,10 @@ layout {
     // Alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
 
-    // You can change how the focus ring looks.
     focus-ring {
-        // Uncomment this line to disable the focus ring.
         // off
 
-        // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -183,10 +184,7 @@ layout {
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can also add a border. It's similar to the focus ring, but always visible.
     border {
-        // The settings are the same as for the focus ring.
-        // If you enable the border, you probably want to disable the focus ring.
         off
 
         width 4
@@ -204,7 +202,6 @@ layout {
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
         // on
@@ -305,6 +302,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="open a terminal" { spawn "kitty"; }
     Mod+R hotkey-overlay-title="run an application" { spawn "fuzzel"; }
+    Mod+T hotkey-overlay-title="open a browser" { spawn "chromium"; }
 
     Mod+F { maximize-column; }
     Mod+Ctrl+F { fullscreen-window; }
