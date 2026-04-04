@@ -28,6 +28,7 @@ deploy "gdb"           ~/.config/gdb
 deploy "clangd"        ~/.config/clangd
 deploy "alacritty"     ~/.config/alacritty
 deploy "hypr"          ~/.config/hypr
+deploy "niri"          ~/.config/niri
 deploy "waybar"        ~/.config/waybar
 deploy "emacs"         ~/.config/emacs
 deploy "mimeapps.list" ~/.config/mimeapps.list
