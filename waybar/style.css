@@ -38,7 +38,6 @@ button:hover {
     border-bottom: 1px solid @black;
 }
 
-
 #workspaces button.active {
     /* font-weight: bold; */
     background-color: @grey;

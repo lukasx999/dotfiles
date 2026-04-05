@@ -50,6 +50,10 @@
         }
     },
 
+    "niri/workspaces": {
+        "format": "{value}",
+    },
+
     "wireplumber": {
         "format": "{icon} {volume}%",
         "format-muted": "󰝟 {volume}%",
