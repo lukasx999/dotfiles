@@ -10,11 +10,11 @@
         "cpu",
         "temperature",
         "memory",
-        "disk",
+        // "disk",
         "battery"
     ],
     "modules-center": [
-        "hyprland/workspaces"
+        "niri/workspaces"
     ],
     "modules-right": [
         "tray",
@@ -43,12 +43,12 @@
         "format": " {used:0.1f} GiB"
     },
 
-    "hyprland/workspaces": {
-        "format": "{id}",
-        "persistent-workspaces": {
-            "*": 5,
-        }
-    },
+    // "hyprland/workspaces": {
+    //     "format": "{id}",
+    //     "persistent-workspaces": {
+    //         "*": 5,
+    //     }
+    // },
 
     "niri/workspaces": {
         "format": "{value}",
@@ -75,7 +75,7 @@
 
     "clock#date": {
         "timezone": "Europe/Vienna",
-        "format": " {:%d.%m.%Y}"
+        "format": " {:%d.%m.%y}"
     },
 
     "clock#time": {
