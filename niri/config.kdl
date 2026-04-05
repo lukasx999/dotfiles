@@ -252,6 +252,8 @@ layout {
 }
 
 spawn-at-startup "waybar"
+spawn-at-startup "nm-applet"
+spawn-at-startup "awww-daemon"
 
 hotkey-overlay {
     skip-at-startup
