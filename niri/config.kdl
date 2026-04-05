@@ -264,7 +264,6 @@ prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
-    // Uncomment to turn off all animations.
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
@@ -336,7 +335,6 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
-
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
     Mod+Up    { focus-window-up; }
@@ -364,8 +362,8 @@ binds {
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End  { move-column-to-last; }
 
     // Mod+Shift+Left  { focus-monitor-left; }
     // Mod+Shift+Down  { focus-monitor-down; }
@@ -387,29 +385,26 @@ binds {
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
 
     // And you can also move a whole workspace to another monitor:
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
     Mod+U              { focus-workspace-down; }
     Mod+I              { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+    Mod+Shift+U         { move-column-to-workspace-down; }
+    Mod+Shift+I         { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    // Mod+Shift+Page_Down { move-workspace-down; }
+    // Mod+Shift+Page_Up   { move-workspace-up; }
+    // Mod+Shift+U         { move-workspace-down; }
+    // Mod+Shift+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -503,13 +498,12 @@ binds {
     // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
     Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Plus { set-column-width "+10%"; }
 
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+Plus { set-window-height "+10%"; }
 
-    // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
