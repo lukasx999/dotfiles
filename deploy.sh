@@ -27,6 +27,7 @@ deploy "kitty"         ~/.config/kitty
 deploy "gdb"           ~/.config/gdb
 deploy "clangd"        ~/.config/clangd
 deploy "alacritty"     ~/.config/alacritty
+deploy "swaylock"      ~/.config/swaylock
 deploy "hypr"          ~/.config/hypr
 deploy "niri"          ~/.config/niri
 deploy "waybar"        ~/.config/waybar

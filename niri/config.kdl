@@ -310,7 +310,7 @@ binds {
     Mod+O repeat=false { toggle-overview; }
     Mod+C repeat=false { close-window; }
 
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Ctrl+Shift+L hotkey-overlay-title="lock the screen" { spawn "swaylock"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
