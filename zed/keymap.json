@@ -113,5 +113,17 @@
     "bindings": {
       "space l s": "editor::SwitchSourceHeader"
     }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space l o": "outline::Toggle"
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space l d": "editor::GoToDefinition"
+    }
   }
 ]
