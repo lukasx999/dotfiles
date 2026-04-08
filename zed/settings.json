@@ -7,6 +7,91 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": true
+  },
+  "which_key": {
+    "enabled": true
+  },
+  "toolbar": {
+    "quick_actions": true
+  },
+  "disable_ai": true,
+  "ui_font_weight": 400.0,
+  "ensure_final_newline_on_save": false,
+  "outline_panel": {
+    "indent_guides": {
+      "show": "never"
+    },
+    "git_status": true,
+    "file_icons": true,
+    "dock": "right",
+    "button": true
+  },
+  "extend_comment_on_newline": false,
+  "show_whitespaces": "trailing",
+  "relative_line_numbers": "enabled",
+  "current_line_highlight": "all",
+  "rounded_selection": false,
+  "selection_highlight": true,
+  "ui_font_family": "Iosevka Nerd Font Mono",
+  "indent_guides": {
+    "enabled": false
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": true,
+    "indent_guides": {
+      "show": "never"
+    },
+    "show_diagnostics": "all",
+    "diagnostic_badges": false,
+    "bold_folder_labels": true,
+    "git_status": true,
+    "folder_icons": true,
+    "file_icons": true,
+    "entry_spacing": "standard",
+    "dock": "left",
+    "git_status_indicator": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": false
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": true,
+    "show": true
+  },
+  "title_bar": {
+    "button_layout": "platform_default",
+    "show_menus": false,
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_branch_icon": true,
+    "show_user_menu": true,
+    "show_sign_in": false,
+    "show_user_picture": true
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "use_auto_surround": false,
+  "use_autoclose": false,
+  "vim": {
+    "cursor_shape": {
+      "insert": "block"
+    },
+    "toggle_relative_line_numbers": false
+  },
   "cursor_blink": false,
   "buffer_font_family": "Iosevka Nerd Font Mono",
   "window_decorations": "server",
@@ -14,8 +99,12 @@
     "trust_all_worktrees": true,
   },
   "vim_mode": true,
-  "icon_theme": "Zed (Default)",
-  "ui_font_size": 22.0,
+  "icon_theme": {
+    "mode": "light",
+    "light": "Colored Zed Icons Theme Dark",
+    "dark": "Zed (Default)"
+  },
+  "ui_font_size": 26.0,
   "buffer_font_size": 26.0,
   "theme": {
     "mode": "dark",

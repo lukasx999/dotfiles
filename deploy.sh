@@ -23,6 +23,7 @@ deploy() {
 
 deploy "nvim"          ~/.config/nvim
 deploy "tmux"          ~/.config/tmux
+deploy "fuzzel"        ~/.config/fuzzel
 deploy "zed"           ~/.config/zed
 deploy "kitty"         ~/.config/kitty
 deploy "gdb"           ~/.config/gdb

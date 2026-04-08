@@ -20,8 +20,14 @@
   },
   {
     "context": "Editor && showing_completions",
-    "bindings": {
-      "ctrl-z": "editor::ConfirmCompletion"
+    "unbind": {
+      "enter": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "Editor && showing_completions",
+    "unbind": {
+      "enter": "editor::ConfirmCompletion"
     }
   },
   {
@@ -43,27 +49,63 @@
     }
   },
   {
-    "context": "Editor && showing_completions",
+    "context": "vim_mode == visual",
     "bindings": {
-      "ctrl-z": "editor::ConfirmCompletion"
+      "shift-k": "editor::MoveLineUp"
     }
   },
   {
-    "context": "Editor && showing_completions",
-    "unbind": {
-      "enter": "editor::ConfirmCompletion"
-    }
-  },
-  {
-    "context": "Editor && showing_completions",
+    "context": "vim_mode == visual",
     "bindings": {
-      "ctrl-z": "editor::ConfirmCompletion"
+      "shift-j": "editor::MoveLineDown"
     }
   },
   {
-    "context": "Editor && showing_completions",
+    "context": "vim_mode == visual",
     "unbind": {
-      "enter": "editor::ConfirmCompletion"
+      "shift-j": "vim::JoinLines"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "unbind": {
+      "shift-j": "vim::JoinLines"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "unbind": {
+      "shift-j": "vim::JoinLines"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "unbind": {
+      "shift-j": "vim::JoinLines"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "-": "vim::PreviousLineStart"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "+": "vim::NextLineStart"
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "alt-j": "editor::AddSelectionBelow"
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "alt-k": "editor::AddSelectionAbove"
     }
   }
 ]
