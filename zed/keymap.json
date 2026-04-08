@@ -107,5 +107,11 @@
     "bindings": {
       "alt-k": "editor::AddSelectionAbove"
     }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space l s": "editor::SwitchSourceHeader"
+    }
   }
 ]

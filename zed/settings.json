@@ -7,27 +7,40 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "lsp": {
+    "clangd": {
+      "binary": {
+        "arguments": ["--function-arg-placeholders=0"],
+      },
+    },
+  },
+  "completions": {
+    "lsp": true,
+    "lsp_insert_mode": "replace_suffix",
+  },
+  "use_system_prompts": false,
+  "use_system_path_prompts": false,
   "telemetry": {
     "diagnostics": false,
-    "metrics": true
+    "metrics": true,
   },
   "which_key": {
-    "enabled": true
+    "enabled": true,
   },
   "toolbar": {
-    "quick_actions": true
+    "quick_actions": true,
   },
   "disable_ai": true,
   "ui_font_weight": 400.0,
   "ensure_final_newline_on_save": false,
   "outline_panel": {
     "indent_guides": {
-      "show": "never"
+      "show": "never",
     },
     "git_status": true,
     "file_icons": true,
     "dock": "right",
-    "button": true
+    "button": true,
   },
   "extend_comment_on_newline": false,
   "show_whitespaces": "trailing",
@@ -37,18 +50,18 @@
   "selection_highlight": true,
   "ui_font_family": "Iosevka Nerd Font Mono",
   "indent_guides": {
-    "enabled": false
+    "enabled": false,
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "project_panel": {
     "hide_hidden": false,
     "hide_root": true,
     "indent_guides": {
-      "show": "never"
+      "show": "never",
     },
     "show_diagnostics": "all",
     "diagnostic_badges": false,
@@ -58,16 +71,16 @@
     "file_icons": true,
     "entry_spacing": "standard",
     "dock": "left",
-    "git_status_indicator": false
+    "git_status_indicator": false,
   },
   "tabs": {
     "file_icons": true,
-    "git_status": false
+    "git_status": false,
   },
   "tab_bar": {
     "show_nav_history_buttons": false,
     "show_tab_bar_buttons": true,
-    "show": true
+    "show": true,
   },
   "title_bar": {
     "button_layout": "platform_default",
@@ -77,20 +90,20 @@
     "show_branch_icon": true,
     "show_user_menu": true,
     "show_sign_in": false,
-    "show_user_picture": true
+    "show_user_picture": true,
   },
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "use_auto_surround": false,
   "use_autoclose": false,
   "vim": {
     "cursor_shape": {
-      "insert": "block"
+      "insert": "block",
     },
-    "toggle_relative_line_numbers": false
+    "toggle_relative_line_numbers": false,
   },
   "cursor_blink": false,
   "buffer_font_family": "Iosevka Nerd Font Mono",
@@ -102,7 +115,7 @@
   "icon_theme": {
     "mode": "light",
     "light": "Colored Zed Icons Theme Dark",
-    "dark": "Zed (Default)"
+    "dark": "Zed (Default)",
   },
   "ui_font_size": 26.0,
   "buffer_font_size": 26.0,
