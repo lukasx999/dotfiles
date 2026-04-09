@@ -1,3 +1,9 @@
+// environment {
+//     XDG_CURRENT_DESKTOP "gnome"
+//     QT_QPA_PLATFORM "wayland"
+//     ELECTRON_OZONE_PLATFORM_HINT "auto"
+// }
+
 input {
     keyboard {
 
