@@ -125,5 +125,11 @@
     "bindings": {
       "space l d": "editor::GoToDefinition"
     }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space l r": "editor::Rename"
+    }
   }
 ]

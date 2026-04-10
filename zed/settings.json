@@ -7,6 +7,27 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git_panel": {
+    "tree_view": false
+  },
+  "auto_install_extensions": {
+    "colored-zed-icons-theme": true,
+    "catppuccin": true,
+    "tokyo-night": true,
+    "kanagawa-night": true,
+    "nightfox": true,
+    "just": true,
+    "glsl": true,
+    "neocmake": true,
+    "latex": true,
+    "html": true,
+    "doxygen": true,
+  },
+  "show_signature_help_after_edits": false,
+  "auto_signature_help": true,
+  "document_symbols": "on",
+  "document_folding_ranges": "on",
+  "semantic_tokens": "off",
   "lsp": {
     "clangd": {
       "binary": {
@@ -28,6 +49,7 @@
     "enabled": true,
   },
   "toolbar": {
+    "code_actions": true,
     "quick_actions": true,
   },
   "disable_ai": true,
