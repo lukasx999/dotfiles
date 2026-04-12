@@ -131,5 +131,11 @@
     "bindings": {
       "space l r": "editor::Rename"
     }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space l a": "editor::ToggleCodeActions"
+    }
   }
 ]
