@@ -6,5 +6,4 @@ InlayHints:
   DeducedTypes: Yes
 
 CompileFlags:
-  Add: [-Wall, -Wextra, -pedantic]
-  Compiler: gcc
+  Add: [-Wall, -Wextra, -pedantic, -std=c++23]

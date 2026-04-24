@@ -8,7 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "git_panel": {
-    "tree_view": false
+    "tree_view": false,
   },
   "auto_install_extensions": {
     "colored-zed-icons-theme": true,
@@ -31,7 +31,11 @@
   "lsp": {
     "clangd": {
       "binary": {
-        "arguments": ["--function-arg-placeholders=0"],
+        "arguments": [
+          "--function-arg-placeholders=0",
+          "--header-insertion=never",
+          "--clang-tidy",
+        ],
       },
     },
   },
