@@ -259,11 +259,16 @@ window-rule {
     open-floating true
 }
 // Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
 /-window-rule {
 geometry-corner-radius 12
 clip-to-geometry true
 }
+
+window-rule {
+    match app-id="waypaper"
+    open-floating true
+}
+
 binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
@@ -278,6 +283,9 @@ binds {
     }
     Mod+T hotkey-overlay-title="open a browser" {
         spawn "chromium"
+    }
+    Mod+W hotkey-overlay-title="open waypaper" {
+        spawn "waypaper"
     }
     Mod+F {
         maximize-column
@@ -625,9 +633,9 @@ binds {
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+W {
-        toggle-column-tabbed-display
-    }
+    // Mod+W {
+    //     toggle-column-tabbed-display
+    // }
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
     // a matching layout switch hotkey configured in xkb options above.
