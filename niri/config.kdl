@@ -287,6 +287,9 @@ binds {
     Mod+W hotkey-overlay-title="open waypaper" {
         spawn "waypaper"
     }
+    Mod+E hotkey-overlay-title="open file explorer" {
+        spawn "nautilus"
+    }
     Mod+F {
         maximize-column
     }
