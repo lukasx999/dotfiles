@@ -58,6 +58,7 @@
         "format": "{icon} {volume}%",
         "format-muted": "󰝟 {volume}%",
         "format-icons": [ "", "", "" ],
+        "max-volume": 200.0,
         "scroll-step": 2.0,
         "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle"
     },
