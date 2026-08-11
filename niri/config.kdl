@@ -251,7 +251,7 @@ animations {
 
 
 // open games on TV
-window-rule {
+/-window-rule {
     match app-id="steam_app_.*"
     open-on-output "HDMI-A-1"
 }
